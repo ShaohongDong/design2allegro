@@ -4,37 +4,37 @@ rules:
 - id: DDR
   kind: ddr
   scope:
-  - U1
+  - fpga/endpoint/chip
   params:
     controller:
     - dq:
-      - U1.1
-      - U1.2
-      - U1.3
-      - U1.4
-      dqs_p: U1.5
-      dqs_n: U1.6
-      dm: U1.7
+      - fpga/endpoint/chip.D0
+      - fpga/endpoint/chip.D1
+      - fpga/endpoint/chip.D2
+      - fpga/endpoint/chip.D3
+      dqs_p: fpga/endpoint/chip.DQS_P
+      dqs_n: fpga/endpoint/chip.DQS_N
+      dm: fpga/endpoint/chip.DM
     memory:
     - dq:
-      - U2.1
-      - U2.2
-      - U2.3
-      - U2.4
-      dqs_p: U2.5
-      dqs_n: U2.6
-      dm: U2.7
+      - soc/endpoint/chip.D0
+      - soc/endpoint/chip.D1
+      - soc/endpoint/chip.D2
+      - soc/endpoint/chip.D3
+      dqs_p: soc/endpoint/chip.DQS_P
+      dqs_n: soc/endpoint/chip.DQS_N
+      dm: soc/endpoint/chip.DM
 - id: CLOCK
   kind: connected
   scope:
-  - U1.8
+  - fpga/endpoint/chip.CLK
   params:
     targets:
-    - U2.8
+    - soc/endpoint/chip.CLK
 - id: RESET
   kind: connected
   scope:
-  - U1.9
+  - fpga/endpoint/chip.RST
   params:
     targets:
-    - U2.9
+    - soc/endpoint/chip.RST

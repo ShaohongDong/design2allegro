@@ -4,7 +4,7 @@ from .compiler import compile_design
 from .loader import load_design
 from .model import CompiledDesign, ElectricalError
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 
 
 def check_design(compiled):
@@ -14,22 +14,30 @@ def check_design(compiled):
 def export_design(compiled, output_dir):
     import json
 
+    from .annotation import deliver
     from .telesis import export
 
-    mapping = {
-        "version": 1,
-        "parts": {
-            ref: {"package": part["footprint"]}
-            for ref, part in compiled.data["parts"].items()
-        },
-    }
-    return export(
-        compiled,
-        output_dir,
-        mapping,
-        rules=json.loads(compiled.rules_json),
-        waivers=json.loads(compiled.waivers_json),
-    )
+    report = compiled.check()
+    if not report.ok:
+        raise ElectricalError("electrical DRC blocked export: " + report.markdown())
+
+    def writer(annotated, destination):
+        mapping = {
+            "version": 1,
+            "parts": {
+                identity: {"package": part["footprint"]}
+                for identity, part in annotated.data["parts"].items()
+            },
+        }
+        return export(
+            annotated,
+            destination,
+            mapping,
+            rules=json.loads(annotated.rules_json),
+            waivers=json.loads(annotated.waivers_json),
+        )
+
+    return deliver(compiled, output_dir, writer)
 
 
 __all__ = [

@@ -52,7 +52,7 @@ def build():
         [sys.executable, "-m", "build", "--wheel", "--outdir", ROOT / "dist", stage],
         "build",
     )
-    wheel = ROOT / "dist" / "design2allegro-1.0.0-py3-none-any.whl"
+    wheel = ROOT / "dist" / "design2allegro-2.0.0-py3-none-any.whl"
     (ROOT / "dist" / "design2allegro-SHA256SUMS").write_text(
         hashlib.sha256(wheel.read_bytes()).hexdigest() + "  " + wheel.name + "\n"
     )
@@ -74,7 +74,7 @@ def verify():
     env.pop("PYTHONPATH", None)
     with tempfile.TemporaryDirectory(prefix="design2allegro-") as folder:
         work = Path(folder)
-        shutil.copytree(ROOT / "schematics" / "nucleo_l432kc", work / "project")
+        shutil.copytree(ROOT / "tests" / "fixtures" / "fpga_soc", work / "project")
         entry = dest / "bin" / "design2allegro"
         run(
             [
@@ -159,14 +159,14 @@ def main():
             env=environment(),
         )
     elif args.command == "example":
-        for name in ("nucleo_l432kc",):
+        for name in ("fpga_soc",):
             run(
                 [
                     sys.executable,
                     "-m",
                     "design2allegro",
                     "build",
-                    ROOT / f"schematics/{name}/board.yaml",
+                    ROOT / f"tests/fixtures/{name}/board.yaml",
                     "-o",
                     BUILD / name,
                     "--json",
@@ -186,6 +186,30 @@ def main():
                 "verify-" + name,
                 env=environment(),
             )
+        run(
+            [
+                sys.executable,
+                "-m",
+                "design2allegro",
+                "check",
+                ROOT / "schematics/nucleo_l432kc/board.yaml",
+                "--json",
+            ],
+            "nucleo-strict-attributes",
+            env=environment(),
+            expected=2,
+        )
+        report = json.loads((BUILD / "logs/nucleo-strict-attributes.log").read_text())
+        failures = [
+            d
+            for d in report["diagnostics"]
+            if d["severity"] == "ERROR" and d["status"] != "PASS"
+        ]
+        if not failures or any(d["rule"] != "PROPERTY.REQUIRED" for d in failures):
+            raise SystemExit("unexpected NUCLEO validation failure")
+        print(
+            f"NUCLEO: export blocked by {len(failures)} missing required attributes; connectivity checks passed."
+        )
     elif args.command == "benchmark":
         run(
             [sys.executable, ROOT / "tools/benchmark.py"],

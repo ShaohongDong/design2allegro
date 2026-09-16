@@ -4,7 +4,16 @@
 网表。包括 STM32L432KCU6U、ST-LINK/V2-1、Micro-B USB、双路供电、
 稳压器、晶体、复位、LED、Arduino Nano 排针及全部焊桥。仅支持 Allegro。
 
-## 构建
+## 新版迁移状态
+
+已迁移为 version 2：`board.yaml` 不含位号映射，器件使用稳定 ID 和功能名称；
+共享器件库随工具发布。官方位号仅用于下文资料说明，不参与设计输入和自动编号。
+
+**当前新版导出被必需属性缺失阻止。** 原 BOM 能确认的容值、耐压、介质、
+精度等已录入；不能确定的额定功率、电流等不猜测。运行上述设计的 `check --json` 可查看全部缺失字段和源码位置。
+旧构建目录里的网表属于历史产物，不表示新版构建成功。
+
+## 检查与构建
 
 在仓库根目录运行：
 
@@ -14,14 +23,14 @@
 .venv/bin/design2allegro verify build/parser/nucleo_l432kc
 ```
 
-网表为 `build/parser/nucleo_l432kc/nucleo_l432kc.tel`。导入时保留整个输出目录，
+补齐检查列出的所有必需属性后，成功构建的网表为 `build/parser/nucleo_l432kc/nucleo_l432kc.tel`。导入时保留整个输出目录，
 提供匹配的 Allegro 封装和 padstack；本项目不生成这些库文件。
 
 ## 内容与默认装配
 
 共 **89 个电气器件/焊桥、312 个物理焊盘、82 个 PCB 网络、16 个明确 NC**。
-DNP 的 C3、R13、CN2 保留焊盘和接线。装配状态见 [BOM](BOM.md)，
-完整引脚网络见 [PINOUT](PINOUT.md)，库约定见 [FOOTPRINTS](FOOTPRINTS.md)。
+DNP 的 C3、R13、CN2 保留焊盘和接线。装配状态、完整引脚网络及封装表分别由构建生成到输出目录的
+`BOM.md`、`PINOUT.md`、`FOOTPRINTS.md`，不再作为手写输入维护。
 
 - 目标 MCU U2 为 UFQFPN32，裸露焊盘 33 接地；U5 为 ST-LINK 的 STM32F103CBT6。
 - X1 为目标 MCU 的 32.768 kHz 晶体；X2 为 ST-LINK 的 8 MHz 晶体。

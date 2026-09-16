@@ -279,11 +279,11 @@ def test_attributes_resolve_scoped_entity(board, entity, obj):
     rules = rule(
         "attribute",
         [obj],
-        {"name": "assembly", "equals": "fitted"},
-        {entity: {obj: {"assembly": "fitted"}}},
+        {"name": "test_attribute", "equals": "fitted"},
+        {entity: {obj: {"test_attribute": "fitted"}}},
     )
     assert status(board, rules) == "PASS"
-    rules["models"][entity][obj]["assembly"] = "dnp"
+    rules["models"][entity][obj]["test_attribute"] = "dnp"
     assert status(board, rules) == "FAIL"
     rules["models"] = {}
     assert status(board, rules) == "UNKNOWN"

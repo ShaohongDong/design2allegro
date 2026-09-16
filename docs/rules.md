@@ -1,5 +1,10 @@
 # Electrical rule reference
 
+Version 2 designs address stable part identities and logical pin names, such as
+`target/mcu.PA13`, never generated `U1.23` references. The rule language itself
+retains `version: 1`. Procurement property errors are non-waivable and are
+reported separately from electrical operating-condition checks.
+
 Each rule uses `id`, `kind`, `scope` or `selector`, and `params`. Unknown
 parameters are rejected. Missing evidence for required checks blocks delivery.
 `models` supplies declared pin, part and net electrical properties; no datasheet

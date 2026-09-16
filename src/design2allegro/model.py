@@ -24,6 +24,7 @@ class CompiledDesign:
     _json: str
     rules_json: str = '{"version":1,"rules":[]}'
     waivers_json: str = "[]"
+    design_path: str = ""
 
     @property
     def data(self):
@@ -40,8 +41,33 @@ class CompiledDesign:
     def check(self, rules=None, waivers=None):
         from .rules import check
 
-        return check(
+        report = check(
             self,
             json.loads(self.rules_json) if rules is None else rules,
             json.loads(self.waivers_json) if waivers is None else waivers,
         )
+        from .rules import CheckReport
+
+        data = report.data
+        for identity, part in self.data["parts"].items():
+            for name in part.get("missing_properties", []):
+                data["diagnostics"].append(
+                    {
+                        "rule": "PROPERTY.REQUIRED",
+                        "object": identity,
+                        "status": "FAIL",
+                        "severity": "ERROR",
+                        "message": "missing required property: " + name,
+                        "required": True,
+                        "evidence": {},
+                        "source": part.get("source", []),
+                        "path": "/".join(part["hierarchy"]),
+                    }
+                )
+                data["ok"] = False
+        from collections import Counter
+
+        data["coverage"]["status_counts"] = dict(
+            Counter(d["status"] for d in data["diagnostics"])
+        )
+        return CheckReport(canonical(data))

@@ -99,7 +99,10 @@ def _verify_package(directory, expected=None):
     if any(p.is_symlink() for p in (root, *root.parents)):
         raise NetlistFormatError("symlink package path")
     manifest = json.loads((root / "manifest.json").read_text())
-    if manifest.get("producer") != "design2allegro" or manifest.get("version") != 1:
+    if manifest.get("producer") != "design2allegro" or manifest.get("version") not in (
+        1,
+        2,
+    ):
         raise NetlistFormatError("unsupported manifest")
     actual = {p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file()}
     if actual != set(manifest["files"]) | {"manifest.json"} or any(
@@ -139,7 +142,10 @@ def _verify_package(directory, expected=None):
     if len(tel) != 1:
         raise NetlistFormatError("expected one netlist")
     packages, nets = parse_netlist((root / tel[0]).read_text())
-    references = {ref: ref.upper() for ref in expected["parts"]}
+    references = {
+        key: part.get("reference", key).upper()
+        for key, part in expected["parts"].items()
+    }
     expected_pins = {
         key: references[pin["ref"]] + "." + pin["num"]
         for key, pin in expected["pins"].items()
@@ -204,6 +210,38 @@ def _verify_package(directory, expected=None):
         raise NetlistFormatError("hierarchy mismatch")
     if json.loads((root / "inputs.json").read_text()) != expected["inputs"]:
         raise NetlistFormatError("input provenance mismatch")
+    if manifest["version"] == 2:
+        from .artifacts import generate
+        from .properties import resolve
+
+        if expected.get("version") != 2 or expected.get("stage") != "annotated":
+            raise NetlistFormatError("invalid annotated circuit")
+        if (
+            len(set(references.values())) != len(references)
+            or expected["references"] != references
+        ):
+            raise NetlistFormatError("annotation mismatch")
+        for identity, part in expected["parts"].items():
+            _, normalized, missing = resolve(part["category"], {}, part["properties"])
+            if (
+                missing
+                or normalized != part["normalized_properties"]
+                or part["missing_properties"]
+            ):
+                raise NetlistFormatError(
+                    "incomplete or inconsistent device specifications"
+                )
+            if part["id"] != identity or not re.fullmatch(
+                part["prefix"] + "[1-9][0-9]*", part["reference"]
+            ):
+                raise NetlistFormatError("invalid annotated identity")
+        for name, text in generate(expected).items():
+            if name not in manifest["files"]:
+                raise NetlistFormatError("missing derived artifact: " + name)
+            if (root / name).read_text() != text:
+                raise NetlistFormatError(
+                    "derived artifact differs from circuit: " + name
+                )
     return statistics
 
 

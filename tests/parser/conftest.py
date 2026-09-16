@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -21,14 +22,21 @@ def make_board(tmp_path):
         components = {}
         for ref, functions in parts.items():
             components[ref] = {
-                "package": "PKG_" + ref,
-                "pins": {
-                    str(n): {"name": str(n), "type": kind}
-                    for n, kind in functions.items()
+                "category": "testpoint",
+                "prefix": "U",
+                "pins": {str(n): {"type": kind} for n, kind in functions.items()},
+                "packages": {
+                    "test": {
+                        "allegro": "PKG_" + ref,
+                        "pads": {str(n): str(n) for n in functions},
+                    }
                 },
             }
         module = {
-            "parts": {ref: {"component": ref} for ref in parts},
+            "parts": {
+                ref: {"id": ref, "device": ref, "package": "test", "assembly": "fitted"}
+                for ref in parts
+            },
             "nets": {
                 name: {
                     "endpoints": [{"part": ref, "pin": str(pin)} for ref, pin in ends]
@@ -38,16 +46,25 @@ def make_board(tmp_path):
             "nc": [{"part": ref, "pin": str(pin)} for ref, pin in nc],
         }
         doc = {
-            "version": 1,
-            "libraries": ["parts.yaml"],
+            "version": 2,
+            "id": "test-board",
+            "name": "test_board",
+            "library": {"name": "test", "version": "1"},
             "top": "board",
-            "references": {ref: ref for ref in parts},
             "modules": {"board": module},
         }
         if rules is not None:
             doc["rules"] = rules
-        write_yaml(tmp_path / "parts.yaml", {"version": 1, "components": components})
+        library_root = tmp_path / "catalogs"
+        (library_root / "test").mkdir(parents=True, exist_ok=True)
+        (library_root / "test/1.json").write_text(
+            json.dumps(
+                {"version": 2, "name": "test", "revision": "1", "devices": components}
+            )
+        )
         write_yaml(tmp_path / "board.yaml", doc)
-        return compile_design(load_design(tmp_path / "board.yaml"))
+        return compile_design(
+            load_design(tmp_path / "board.yaml", library_root=library_root)
+        )
 
     return make

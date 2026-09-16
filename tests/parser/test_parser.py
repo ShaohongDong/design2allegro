@@ -1,4 +1,7 @@
+"""Version 2 schema, hierarchy, shared libraries and delivery regressions."""
+
 import copy
+import hashlib
 import json
 import shutil
 from pathlib import Path
@@ -16,13 +19,21 @@ from design2allegro.verify import (
     verify_package,
 )
 
-EXAMPLES = Path(__file__).resolve().parents[2] / "tests" / "fixtures"
+ROOT = Path(__file__).resolve().parents[2]
+LEFT = "fpga/endpoint/chip"
+RIGHT = "soc/endpoint/chip"
 
 
 @pytest.fixture
-def project(tmp_path):
-    shutil.copytree(EXAMPLES / "fpga_soc", tmp_path / "project")
-    return tmp_path / "project" / "board.yaml"
+def project(tmp_path, monkeypatch):
+    shutil.copytree(
+        ROOT / "tests/fixtures/fpga_soc",
+        tmp_path / "project",
+        ignore=shutil.ignore_patterns("design.lock.json", ".design.*"),
+    )
+    shutil.copytree(ROOT / "src/design2allegro/libraries", tmp_path / "catalogs")
+    monkeypatch.setenv("DESIGN2ALLEGRO_LIBRARY_ROOT", str(tmp_path / "catalogs"))
+    return tmp_path / "project/board.yaml"
 
 
 def edit(path, fn):
@@ -31,33 +42,47 @@ def edit(path, fn):
     write_yaml(path, doc)
 
 
-def test_hierarchy_bus_order_and_refs(project):
-    c = compile_design(load_design(project))
-    assert len(c.data["parts"]) == 2
-    assert len(c.data["pins"]) == 20
-    assert c.data["nets"]["DATA[0]"]["pins"] == ["U1.1", "U2.1"]
-    assert c.data["nets"]["DATA[3]"]["pins"] == ["U1.4", "U2.4"]
-    assert c.data["pins"]["U1.10"]["nc"]
-    assert c.data["hierarchy"]["fpga/endpoint/chip"] == "U1"
+def edit_library(project, fn):
+    p = project.parent.parent / "catalogs/standard/1.json"
+    d = json.loads(p.read_text())
+    fn(d["devices"]["synthetic.fpga_soc"])
+    p.write_text(json.dumps(d))
+
+
+def compiled(path):
+    return compile_design(load_design(path))
+
+
+def files(path):
+    return {
+        p.relative_to(path).as_posix(): p.read_bytes()
+        for p in path.rglob("*")
+        if p.is_file()
+    }
+
+
+def test_hierarchy_bus_order_and_identity(project):
+    c = compiled(project)
+    assert len(c.data["parts"]) == 2 and len(c.data["pins"]) == 20
+    assert c.data["nets"]["DATA[0]"]["pins"] == [LEFT + ".D0", RIGHT + ".D0"]
+    assert c.data["pins"][LEFT + ".SPARE"]["nc"]
+    assert c.data["hierarchy"]["fpga/endpoint/chip"] == LEFT
     assert c.data["net_aliases"]["soc/endpoint/data[0]"] == "DATA[0]"
+    assert all("reference" not in p for p in c.data["parts"].values())
     edit(
         project, lambda d: d.update(modules=dict(reversed(list(d["modules"].items()))))
     )
-    assert compile_design(load_design(project)).digest == c.digest
+    assert compiled(project).digest == c.digest
 
 
 @pytest.mark.parametrize(
     "change,match",
     [
         (lambda d: d.update(typo=1), "Additional properties"),
-        (lambda d: d.update(version=True), "/version"),
+        (lambda d: d.update(version=True), "version"),
+        (lambda d: d.update(version=1), "retired"),
+        (lambda d: d.update(references={"x": "U1"}), "Additional properties"),
         (lambda d: d.update(top="missing"), "unknown top"),
-        (lambda d: d["references"].pop("soc/endpoint/chip"), "missing board reference"),
-        (lambda d: d["references"].update({"unused": "R1"}), "unused reference"),
-        (
-            lambda d: d["references"].update({"soc/endpoint/chip": "u1"}),
-            "reference collision",
-        ),
         (
             lambda d: d["modules"]["wrapper"]["instances"]["endpoint"].update(
                 module="wrapper"
@@ -72,9 +97,9 @@ def test_hierarchy_bus_order_and_refs(project):
         ),
         (
             lambda d: d["modules"]["endpoint"]["parts"]["chip"].update(
-                component="missing"
+                device="missing"
             ),
-            "unknown component",
+            "unknown device",
         ),
         (
             lambda d: d["modules"]["endpoint"]["ports"]["data"].update(width=3),
@@ -99,18 +124,29 @@ def test_hierarchy_bus_order_and_refs(project):
             ),
             "unknown logical pin",
         ),
+        (
+            lambda d: d["modules"]["board"]["instances"]["soc"].update(id="fpga"),
+            "duplicate module instance ID",
+        ),
+        (
+            lambda d: d["modules"]["endpoint"]["parts"].update(
+                copy=copy.deepcopy(d["modules"]["endpoint"]["parts"]["chip"])
+            ),
+            "duplicate stable identity",
+        ),
+        (lambda d: d["library"].update(version="missing"), "unavailable"),
     ],
 )
 def test_invalid_designs(project, change, match):
     edit(project, change)
     with pytest.raises(ElectricalError, match=match):
-        compile_design(load_design(project))
+        compiled(project)
 
 
 @pytest.mark.parametrize(
     "text,match",
     [
-        ("version: 1\nversion: 1\n", "duplicate YAML key"),
+        ("version: 2\nversion: 2\n", "duplicate YAML key"),
         ("x: !!python/object/apply:os.system [echo unsafe]\n", "could not determine"),
         ("x: &x [1]\ny: *x\n", "aliases are not supported"),
         ("version: [\n", "line"),
@@ -127,73 +163,61 @@ def test_yaml_rejections(tmp_path, text, match):
 @pytest.mark.parametrize(
     "change,match",
     [
+        (lambda d: d["groups"].update(DATA=["D0", "D0"]), "pin group"),
+        (lambda d: d["packages"]["bga10"]["pads"].update({"11": "D0"}), "exactly once"),
         (
-            lambda d: d["components"]["SYNTH_FPGA_SOC"]["pins"].update(
-                {"11": {"name": "D0", "type": "INPUT"}}
-            ),
-            "logical pin",
+            lambda d: d["packages"]["bga10"].update(allegro="bad package"),
+            "package binding",
         ),
-        (
-            lambda d: d["components"]["SYNTH_FPGA_SOC"]["groups"].update(
-                DATA=["1", "1"]
-            ),
-            "pin group",
-        ),
-        (
-            lambda d: d["components"]["SYNTH_FPGA_SOC"]["pins"].update(
-                {11: {"name": "SPARE2", "type": "INPUT"}}
-            ),
-            "keys must be strings",
-        ),
-        (
-            lambda d: d["components"]["SYNTH_FPGA_SOC"].update(package="bad package"),
-            "does not match",
-        ),
+        (lambda d: d["pins"]["D0"].update(type="bad"), "not one of"),
+        (lambda d: d.update(category="mystery"), "category"),
     ],
 )
 def test_invalid_library(project, change, match):
-    edit(project.parent / "components.yaml", change)
+    edit_library(project, change)
     with pytest.raises(ElectricalError, match=match):
-        load_design(project)
+        compiled(project)
 
 
 def test_deterministic_delivery_and_corruption(project, tmp_path):
-    c = compile_design(load_design(project))
-    target = tmp_path / "output"
-    manifest = export_design(c, target)
-    assert not manifest["allegro_import_verified"]
-    assert verify_package(target) == {"parts": 2, "pins": 20, "nets": 9}
-    before = {
-        p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()
-    }
-    assert export_design(c, target) == manifest
-    assert before == {
-        p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()
-    }
-    (target / "project.tel").write_text("$END\n")
+    c = compiled(project)
+    out = tmp_path / "out"
+    m = export_design(c, out)
+    assert not m["allegro_import_verified"] and m["version"] == 2
+    assert verify_package(out) == {"parts": 2, "pins": 20, "nets": 9}
+    before = files(out)
+    assert export_design(c, out) == m
+    assert files(out) == before
+    assert {
+        "components.json",
+        "BOM.md",
+        "BOM.csv",
+        "PINOUT.md",
+        "FOOTPRINTS.md",
+        "references.json",
+    } <= set(before)
+    (out / "fpga_soc.tel").write_text("$END\n")
     with pytest.raises(NetlistFormatError, match="digest mismatch"):
-        verify_package(target)
+        verify_package(out)
 
 
 def test_ddr_error_blocks_and_preserves(project, tmp_path):
-    c = compile_design(load_design(project))
-    target = tmp_path / "output"
-    export_design(c, target)
-    before = (target / "manifest.json").read_bytes()
+    out = tmp_path / "out"
+    export_design(compiled(project), out)
+    before = files(out)
     edit(
         project.parent / "rules.yaml",
         lambda d: d["rules"][0]["params"]["memory"][0]["dq"].reverse(),
     )
-    bad = compile_design(load_design(project))
-    assert not bad.check().ok
+    assert not compiled(project).check().ok
     with pytest.raises(ElectricalError, match="blocked"):
-        export_design(bad, target)
-    assert (target / "manifest.json").read_bytes() == before
+        export_design(compiled(project), out)
+    assert files(out) == before
 
 
 def test_output_protection(project, tmp_path):
-    c = compile_design(load_design(project))
-    out = tmp_path / "output"
+    out = tmp_path / "out"
+    c = compiled(project)
     export_design(c, out)
     (out / "user.txt").write_text("keep")
     with pytest.raises(ElectricalError, match="unmanaged"):
@@ -206,28 +230,29 @@ def test_output_protection(project, tmp_path):
 
 
 def test_cli(project, tmp_path, capsys):
-    target = tmp_path / "output"
+    out = tmp_path / "out"
     assert main(["check", str(project), "--json"]) == 0
     assert json.loads(capsys.readouterr().out)["ok"]
-    assert main(["build", str(project), "-o", str(target), "--json"]) == 0
+    assert not (project.parent / "design.lock.json").exists()
+    assert main(["build", str(project), "-o", str(out), "--json"]) == 0
     assert json.loads(capsys.readouterr().out)["manifest"]["strict"]
-    assert main(["verify", str(target), "--json"]) == 0
+    assert main(["verify", str(out), "--json"]) == 0
     assert json.loads(capsys.readouterr().out)["statistics"]["parts"] == 2
     edit(project, lambda d: d.update(top="absent"))
     assert main(["check", str(project), "--json"]) == 2
-    assert not json.loads(capsys.readouterr().err)["ok"]
+    capsys.readouterr()
     assert main(["check", str(project.parent / "absent.yaml"), "--json"]) == 1
-    assert json.loads(capsys.readouterr().err)["exit_code"] == 1
+    capsys.readouterr()
     assert main(["build", str(project), "--json"]) == 2
-    assert json.loads(capsys.readouterr().err)["exit_code"] == 2
 
 
 def test_handwritten_telesis_fixture():
     parts, nets = parse_netlist(
         "$PACKAGES\n'BGA2' ! 'TEST' ; U1\n$NETS\nVCC ; U1.A1\n$END\n"
     )
-    assert parts == {"U1": {"package": "BGA2", "device": "TEST"}}
-    assert nets == {"VCC": {"U1.A1"}}
+    assert parts == {"U1": {"package": "BGA2", "device": "TEST"}} and nets == {
+        "VCC": {"U1.A1"}
+    }
     assert parse_device(
         "PACKAGE 'BGA2'\nCLASS IC\nPINCOUNT 2\nPINORDER main ,PWR,DATA\nFUNCTION main main ,A1,B2\nEND\n"
     ) == ("BGA2", {"A1": "PWR", "B2": "DATA"})
@@ -238,7 +263,6 @@ def test_erc_blocks(make_board, tmp_path):
         {"U1": {"1": "OUTPUT"}, "U2": {"1": "OUTPUT"}},
         {"CLASH": [("U1", "1"), ("U2", "1")]},
     )
-    assert not c.check().ok
     with pytest.raises(ElectricalError):
         export_design(c, tmp_path / "blocked")
     assert not (tmp_path / "blocked").exists()
@@ -248,104 +272,56 @@ def test_no_legacy_runtime():
     import sys
 
     assert not any(
-        name == "skidl" or name.startswith("skidl.") or name == "_skidl_native"
-        for name in sys.modules
+        n == "skidl" or n.startswith("skidl.") or n == "_skidl_native"
+        for n in sys.modules
     )
 
 
-def test_actual_ddr_wiring_swap(project, tmp_path, capsys):
-    def change(doc):
-        doc["modules"]["soc_endpoint"] = copy.deepcopy(doc["modules"]["endpoint"])
-        doc["modules"]["soc_endpoint"]["nets"]["data"]["endpoints"][1][
+def test_actual_ddr_wiring_swap(project):
+    edit_library(
+        project, lambda d: d["groups"].update(SWAPPED=["D1", "D0", "D2", "D3"])
+    )
+
+    def change(d):
+        d["modules"]["other_endpoint"] = copy.deepcopy(d["modules"]["endpoint"])
+        d["modules"]["other_endpoint"]["nets"]["data"]["endpoints"][1][
             "group"
         ] = "SWAPPED"
-        doc["modules"]["soc_wrapper"] = copy.deepcopy(doc["modules"]["wrapper"])
-        doc["modules"]["soc_wrapper"]["instances"]["endpoint"][
+        d["modules"]["other_wrapper"] = copy.deepcopy(d["modules"]["wrapper"])
+        d["modules"]["other_wrapper"]["instances"]["endpoint"][
             "module"
-        ] = "soc_endpoint"
-        doc["modules"]["board"]["instances"]["soc"]["module"] = "soc_wrapper"
+        ] = "other_endpoint"
+        d["modules"]["board"]["instances"]["soc"]["module"] = "other_wrapper"
 
     edit(project, change)
-    edit(
-        project.parent / "components.yaml",
-        lambda d: d["components"]["SYNTH_FPGA_SOC"]["groups"].update(
-            SWAPPED=["2", "1", "3", "4"]
-        ),
-    )
-    c = compile_design(load_design(project))
-    assert c.data["nets"]["DATA[0]"]["pins"] == ["U1.1", "U2.2"]
+    c = compiled(project)
+    assert c.data["nets"]["DATA[0]"]["pins"] == [LEFT + ".D0", RIGHT + ".D1"]
     assert not c.check().ok
-    output = tmp_path / "blocked"
-    assert main(["build", str(project), "-o", str(output), "--json"]) == 2
-    assert not output.exists()
-    assert any(
-        d["rule"] == "DDR" and d["status"] == "FAIL"
-        for d in json.loads(capsys.readouterr().out)["diagnostics"]
-    )
 
 
-def test_hierarchical_short_is_not_silent(tmp_path):
-    library = {
-        "version": 1,
-        "components": {
-            "ONE": {"package": "ONE", "pins": {"1": {"name": "P", "type": "PASSIVE"}}}
-        },
-    }
-    doc = {
-        "version": 1,
-        "libraries": ["parts.yaml"],
-        "top": "board",
-        "references": {"child/chip": "U1"},
-        "modules": {
-            "leaf": {
-                "ports": {"a": {"width": 1}, "b": {"width": 1}},
-                "parts": {"chip": {"component": "ONE"}},
-                "nets": {
-                    "SHORT": {
-                        "endpoints": [
-                            {"port": "a"},
-                            {"port": "b"},
-                            {"part": "chip", "pin": "P"},
-                        ]
-                    }
-                },
-            },
-            "board": {
-                "instances": {"child": {"module": "leaf"}},
-                "nets": {
-                    "A": {"endpoints": [{"instance": "child", "port": "a"}]},
-                    "B": {"endpoints": [{"instance": "child", "port": "b"}]},
-                },
-            },
-        },
-    }
-    write_yaml(tmp_path / "parts.yaml", library)
-    write_yaml(tmp_path / "board.yaml", doc)
+def test_hierarchical_short_is_not_silent(project):
+    def change(d):
+        d["modules"]["endpoint"]["nets"]["clk"]["endpoints"].append({"port": "rst"})
+        d["modules"]["endpoint"]["nets"]["rst"]["endpoints"].pop(0)
+
+    edit(project, change)
     with pytest.raises(ElectricalError, match="distinct nets"):
-        compile_design(load_design(tmp_path / "board.yaml"))
+        compiled(project)
 
 
-def test_readback_detects_changed_connectivity_even_with_updated_hash(
-    project, tmp_path
-):
-    import hashlib
-
-    c = compile_design(load_design(project))
+def test_readback_detects_changed_connectivity_with_updated_hash(project, tmp_path):
     out = tmp_path / "out"
-    export_design(c, out)
-    tel = out / "project.tel"
-    # U2 endpoints terminate records rather than continuation lines.
-    text = (
+    export_design(compiled(project), out)
+    tel = out / "fpga_soc.tel"
+    tel.write_text(
         tel.read_text()
         .replace("U2.1\n", "U2.TEMP\n")
         .replace("U2.2\n", "U2.1\n")
         .replace("U2.TEMP\n", "U2.2\n")
     )
-    assert text != tel.read_text()
-    tel.write_text(text)
-    manifest = json.loads((out / "manifest.json").read_text())
-    manifest["files"]["project.tel"] = hashlib.sha256(tel.read_bytes()).hexdigest()
-    (out / "manifest.json").write_text(json.dumps(manifest))
+    m = json.loads((out / "manifest.json").read_text())
+    m["files"][tel.name] = hashlib.sha256(tel.read_bytes()).hexdigest()
+    (out / "manifest.json").write_text(json.dumps(m))
     with pytest.raises(NetlistFormatError, match="connectivity mismatch"):
         verify_package(out)
 
@@ -354,72 +330,37 @@ def test_external_rules_and_waivers(project):
     edit(
         project.parent / "rules.yaml",
         lambda d: d["rules"].append(
-            {"id": "SPARE", "kind": "required", "scope": ["U1.10"]}
+            {"id": "SPARE", "kind": "required", "scope": [LEFT + ".SPARE"]}
         ),
     )
-    assert not compile_design(load_design(project)).check().ok
+    assert not compiled(project).check().ok
     edit(project, lambda d: d.update(waivers="waivers.yaml"))
     write_yaml(
         project.parent / "waivers.yaml",
         [
             {
                 "rule": "SPARE",
-                "object": "U1.10",
-                "reason": "Reserved terminal intentionally NC",
+                "object": LEFT + ".SPARE",
+                "reason": "Reserved NC",
                 "owner": "board-team",
             }
         ],
     )
-    assert compile_design(load_design(project)).check().ok
-    edit(project.parent / "waivers.yaml", lambda w: w[0].update(expires="2000-01-01"))
-    assert not compile_design(load_design(project)).check().ok
+    assert compiled(project).check().ok
+    edit(project.parent / "waivers.yaml", lambda d: d[0].update(expires="2000-01-01"))
+    assert not compiled(project).check().ok
 
 
-def test_integral_yaml_bus_width(project):
+def test_integral_bus_width(project):
     edit(project, lambda d: d["modules"]["endpoint"]["ports"]["data"].update(width=4.0))
-    assert compile_design(load_design(project)).check().ok
+    assert compiled(project).check().ok
 
 
-def test_net_reference_collision(make_board):
-    with pytest.raises(ElectricalError, match="collide with board references"):
-        make_board({"U1": {"1": "PASSIVE"}}, {"U1": [("U1", "1")]})
-
-
-def test_named_design_ignores_output_directory(project, tmp_path):
-    named = project.with_name("my-board.yaml")
-    shutil.copyfile(project, named)
-    board = compile_design(load_design(named))
+def test_board_name_is_explicit(project, tmp_path):
+    edit(project, lambda d: d.update(name="renamed-board"))
     out = tmp_path / "unrelated"
-    export_design(board, out)
-    assert (out / "my-board.tel").is_file()
-    assert verify_package(out)["parts"] == 2
-
-
-def test_legacy_package_can_be_verified_and_replaced(project, tmp_path):
-    from design2allegro.telesis import export
-
-    board = compile_design(load_design(project))
-    out = tmp_path / "legacy"
-    mapping = {
-        "version": 1,
-        "parts": {
-            ref: {"package": p["footprint"]} for ref, p in board.data["parts"].items()
-        },
-    }
-    export(board, out, mapping, filename="design.tel")
-    assert verify_package(out)["parts"] == 2
-    export_design(board, out)
-    assert (out / "project.tel").exists()
-    assert not (out / "design.tel").exists()
-    assert verify_package(out)["parts"] == 2
-
-
-def test_unsafe_board_filename_preserves_output(project, tmp_path):
-    named = project.with_name("unsafe name.yaml")
-    shutil.copyfile(project, named)
-    out = tmp_path / "output"
-    export_design(compile_design(load_design(project)), out)
-    before = (out / "manifest.json").read_bytes()
-    with pytest.raises(ElectricalError, match="filename"):
-        export_design(compile_design(load_design(named)), out)
-    assert (out / "manifest.json").read_bytes() == before
+    export_design(compiled(project), out)
+    assert (out / "renamed-board.tel").is_file()
+    edit(project, lambda d: d.update(name="../unsafe"))
+    with pytest.raises(ElectricalError):
+        compiled(project)

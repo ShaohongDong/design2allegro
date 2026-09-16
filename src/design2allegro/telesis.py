@@ -89,6 +89,8 @@ def export(
         raise ElectricalError(
             "electrical DRC blocked export: " + canonical(report.data["coverage"])
         )
+    if data.get("version") == 2 and data.get("stage") != "annotated":
+        raise ElectricalError("automatic annotation required; use export_design")
     device_text = {}
     packages = []
     mapped_pins = {}
@@ -96,9 +98,9 @@ def export(
     device_info = {}
     package_names = {}
     for ref, part in sorted(data["parts"].items()):
-        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", ref):
+        outref = part.get("reference", ref).upper()
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*", outref):
             raise ElectricalError("illegal reference " + ref)
-        outref = ref.upper()
         if outref in refs.values():
             raise ElectricalError("case-insensitive reference collision")
         refs[ref] = outref
@@ -186,8 +188,12 @@ def export(
     content.update(
         {"devices/" + dev + ".txt": text for dev, text in device_text.items()}
     )
+    if data.get("version") == 2:
+        from .artifacts import generate
+
+        content.update(generate(data))
     manifest = {
-        "version": 1,
+        "version": data.get("version", 1),
         "producer": "design2allegro",
         "snapshot": snapshot.digest,
         "strict": True,

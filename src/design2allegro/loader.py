@@ -105,9 +105,11 @@ class LoadedDesign:
     waivers: list
     inputs: dict
     name: str = "design"
+    path: str = ""
+    catalog: dict | None = None
 
 
-def load_design(path):
+def load_design(path, *, library_root=None):
     path = Path(path).resolve()
     inputs = {}
 
@@ -122,36 +124,33 @@ def load_design(path):
             value = yaml.load(stream, Loader=Loader)
         except (yaml.YAMLError, UnicodeError) as exc:
             raise ElectricalError(f"{file}: {exc}") from exc
+        if kind == "design" and isinstance(value, dict) and value.get("version") == 1:
+            fail(
+                "version 1 input retired; migrate to version 2 shared library and stable IDs",
+                value,
+            )
         validate(value, kind)
         inputs[str(file)] = hashlib.sha256(raw).hexdigest()
         return value
 
     document = read(path, "design")
-    components = {}
-    packages = {}
-    for name in document["libraries"]:
-        library = read(path.parent / name, "library")
-        for key, value in library["components"].items():
-            if key in components:
-                fail(f"duplicate component {key}", value)
-            package = value["package"]
-            if package.upper() in packages and packages[package.upper()] != package:
-                fail(f"package case collision: {package}", value)
-            packages[package.upper()] = package
-            names = [p["name"] for p in value["pins"].values()]
-            if len(set(names)) != len(names):
-                fail(f"duplicate logical pin name in {key}", value)
-            if len({p.upper() for p in value["pins"]}) != len(value["pins"]):
-                fail(f"case-insensitive physical pin collision in {key}", value)
-            for group, pins in value.get("groups", {}).items():
-                if len(set(pins)) != len(pins) or not set(pins) <= set(value["pins"]):
-                    fail(f"invalid pin group {key}.{group}", value)
-            components[key] = value
+    from .catalog import load_catalog
+
+    catalog = load_catalog(document["library"], inputs, library_root)
+    components = catalog["devices"]
     rules = document.get("rules", {"version": 1, "rules": []})
     if isinstance(rules, str):
         rules = read(path.parent / rules, "rules")
     waivers = document.get("waivers", [])
     if isinstance(waivers, str):
         waivers = read(path.parent / waivers, "waivers")
-    name = path.parent.name if path.stem == "board" else path.stem
-    return LoadedDesign(document, components, rules, waivers, inputs, name)
+    return LoadedDesign(
+        document,
+        components,
+        rules,
+        waivers,
+        inputs,
+        document["name"],
+        str(path),
+        catalog,
+    )

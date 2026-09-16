@@ -1,152 +1,157 @@
-# Design format, version 1
+# Design format, version 2
 
-Inputs are UTF-8 YAML `.yaml` or `.yml` files. All keys must be strings. Quote
-physical numbers (`"1"`, `"08"`), values and numeric logical names. Only lowercase
-`true` and `false` are implicit booleans; dates remain strings. Duplicate keys,
-unknown structural fields, aliases, merge keys, custom tags, non-finite numbers
-and non-JSON metadata are rejected. YAML is never executed or interpolated.
+`board.yaml` is the design entrypoint. `components.json`, BOM, PINOUT and
+FOOTPRINTS are build outputs, never design inputs. The compiler resolves an
+offline shared device catalogue distributed with the wheel. Version 1 input is
+rejected with a migration message; existing version 1 delivery packages remain
+readable by `verify`.
 
-## Files and component libraries
-
-A design has `version: 1`, `libraries` (local paths relative to the design file),
-`modules`, `top`, and `references`. Optional `rules` and `waivers` are inline data
-or paths to YAML files relative to that same design. No network loading or Python
-callbacks are supported. Library files contain `version: 1` and `components`.
-Component names must be unique across the project's libraries.
+## Design and libraries
 
 ```yaml
-# components.yaml
-version: 1
-components:
-  RESISTOR:
-    package: R0805
-    value: "4.7k"
-    pins:
-      "1": {name: A, type: PASSIVE}
-      "2": {name: B, type: PASSIVE}
-    electrical: {role: resistor, resistance: "4.7 kohm"}
-```
-
-The package must match a supplied Allegro library symbol. Pins are keyed by
-physical terminal numbers (ASCII letters, digits, underscores), with unique
-logical `name` and a required `type`. Supported types are INPUT, OUTPUT, BIDIR,
-TRISTATE, PASSIVE, UNSPEC, PWRIN, PWROUT, OPENCOLL, OPENEMIT, PULLUP, PULLDN,
-NOCONNECT and FREE. Optional `electrical` maps may appear on components and pins.
-A component's `groups` maps each group name to an ordered, unique list of physical
-pin numbers, e.g. `DATA: ["A1", "A2", "A3", "A4"]`.
-
-## Modules, nets and endpoints
-
-```yaml
-version: 1
-libraries: [components.yaml]
+version: 2
+id: my-board
+name: my_board
+library: {name: standard, version: '1'}
 top: board
-references: {left: R1, right: R2}
 modules:
   board:
     parts:
-      left: {component: RESISTOR}
-      right: {component: RESISTOR, value: "10k"}
-    nets:
-      MID:
-        endpoints:
-          - {part: left, pin: B}
-          - {part: right, pin: A}
+      reset_pullup:
+        id: reset-pullup
+        identity_namespace: ''
+        device: generic.resistor
+        package: resistor_0603
+        assembly: fitted
+        properties:
+          resistance: '10 kohm'
+          tolerance: '1 %'
+          power_rating: '0.1 W'
     nc:
-      - {part: left, pin: A}
-      - {part: right, pin: B}
+      - {part: reset_pullup, pin: A}
+      - {part: reset_pullup, pin: B}
 ```
 
-Module names and local part, instance, port, group and net names use
-`[A-Za-z_][A-Za-z0-9_]*`. Part and child instance names cannot overlap.
-`parts` entries require `component` and optionally set `value` or `electrical`.
-Electrical declarations are combined by intersection, never silently overridden.
-To change a resistor value and its modeled resistance, define a matching component
-variant instead of conflicting electrical declarations.
+`id` identifies the board; `name` supplies `<name>.tel`, independently of input
+filename/output directory. No `references`, per-instance `ref`, `value` or local
+`components.yaml` inputs are accepted. UTF-8 YAML uses string keys, explicit
+units, lowercase booleans, and no aliases, merge keys or executable tags.
+Duplicate keys, unknown structural fields and nonfinite metadata are errors.
 
-A module may declare `ports: {data: {width: 4}}` and
-`instances: {child: {module: endpoint}}`. A net has `endpoints` and optional
-`electrical` metadata. Exactly four endpoint forms are accepted:
+The bundled catalogue is `libraries/<name>/<version>.json` within the installed
+package. `load_design(path, library_root=...)` or the explicit
+`DESIGN2ALLEGRO_LIBRARY_ROOT` environment variable selects another *shared*
+catalogue root with that layout. There is no project-directory fallback or
+network lookup. Catalogue versions and raw content hashes enter `inputs.json` and the reference
+lock. Modifying a previously built catalogue without changing its version fails;
+publish a new catalogue revision and update the design selection explicitly.
 
-| Form | Meaning |
-| --- | --- |
-| `{part: chip, pin: CLK}` | Unique logical pin name in the component library |
-| `{part: chip, group: DATA}` | Ordered physical pin group in the library |
-| `{port: data}` | Current module's port |
-| `{instance: child, port: data}` | Immediate child's port |
+Each catalogue device declares category, reference prefix, logical pins and
+their electrical types, allowed package bindings, optional pin groups, fixed
+properties and source information. Each package binds every distinct logical
+pin to exactly one physical pad; exposed pads must be explicit logical pins.
+Multiple power/ground pads therefore have distinct logical names. The package
+name identifies an externally supplied Allegro symbol, not generated geometry.
+A concrete model's fixed specifications cannot be overridden by instances.
+Generic models require instance specifications. Synthetic regression devices
+are explicitly identified in their catalogue source metadata.
 
-All endpoints of a net must have equal width. Scalar pins have width one. Bus
-position `i` connects to position `i`; buses do not broadcast or reverse
-implicitly. A width-N net becomes `NAME[0]` through `NAME[N-1]`; width one uses
-`NAME`. Use separate scalar ports when individual bit routing is needed.
+## Properties and assembly
 
-Every module port must be connected internally; every child port must be connected
-in its parent. Top-level ports may describe board boundaries but still require
-physical pins inside the design. Every physical pin must appear on a net or in
-`nc`; NC accepts only local part/pin or part/group endpoints. Repeated endpoints,
-including repeated NC, are errors. A one-pin net is legal with an ERC warning;
-a network containing no physical pins is invalid.
+All resolved properties appear in `components.json`. `normalized_properties`
+uses decimal SI values and explicit dimensions; BOM grouping compares these
+values, device, package and assembly status. Equivalent unit spellings group
+together; different tolerance, voltage rating or power rating do not.
 
-Module nesting is limited to 64 levels and expansion to 100,000 instances.
-Distinct nets in the same scope cannot become shorted through child ports.
-Canonical net names must not collide with board references.
+- Resistors require `resistance`, `tolerance`, `power_rating`.
+- Capacitors require `capacitance`, `voltage_rating`, `tolerance`, `dielectric`,
+  `polarized` (boolean). Absolute tolerance such as `0.25 pF` is supported.
+- Inductors require `inductance`, `current_rating`, `dc_resistance`; ferrites use
+  `impedance` and `impedance_frequency` instead of inductance.
+- Crystals require `frequency`, `load_capacitance`, `frequency_tolerance`.
+- Diodes/LEDs require `type`, `current_rating`, `voltage_rating`; LEDs add `color`.
+- Transistors require `type`, `current_rating`, `voltage_rating`, `power_rating`.
+- ICs require `manufacturer`, `mpn`, `supply_min`, `supply_max`; regulators add
+  `output_voltage`, `current_rating`.
+- Connectors require `positions`, `pitch`, `current_rating`, `voltage_rating`.
+- Switches require `initial_state`, `current_rating`, `voltage_rating`;
+  solder bridges/jumpers require `initial_state` (`open` or `closed`).
 
-The compiler merges parent/child nets through ports, keeping local nets isolated
-between instances. The canonical name is the shallowest participating network
-path, with lexical ordering breaking ties. `net_aliases` in `circuit.json` records
-all local-to-canonical mappings. There are no implicit global power nets.
+The authoritative profiles are in `properties.py`. Missing required properties
+produce non-waivable `PROPERTY.REQUIRED` errors, including DNP parts. No guessed
+ratings or `unknown` placeholders can pass. `electrical` remains the input for
+operating conditions and electrical rule models; it cannot conflict with a
+resolved resistance, assembly state or default switch state. Declaring ratings
+does not validate undeclared working voltage, dissipation or derating.
 
-## Board references and electrical rules
+`assembly` is required (`fitted` or `dnp`). DNP parts retain physical pads and
+connections. Board-level `accessories` contain `id`, `description`, positive
+`quantity`, and `assembly`; they appear in BOM without introducing PCB pads.
 
-References map complete instance/part paths (without the top module's name) to
-board references, e.g. `fpga/endpoint/chip: U1`. Every expanded physical part needs
-exactly one mapping. References match `[A-Za-z][A-Za-z0-9_]*`, are normalized to
-uppercase, and must be unique ignoring case. Pin numbers remain as declared.
+## Identity, hierarchy and connectivity
 
-Rules use `version: 1`, optional `description` and `models`, and a `rules` list:
+Part names express function; immutable `id` fields express identity. Module
+instances also require immutable IDs. By default an expanded part's identity is
+its ancestor instance IDs followed by its local ID, joined with `/`. This makes
+reusable modules independent. Renaming local names does not affect identity.
 
-```yaml
-version: 1
-rules:
-  - id: CLOCK
-    kind: connected
-    scope: [U1.8]
-    params: {targets: [U2.8]}
-```
+For a physical part that must move between module instances, specify a fixed
+`identity_namespace` (empty string means board-global). Keep that namespace and
+ID unchanged during moves. NUCLEO parts explicitly pin their namespaces. Do not
+pin one absolute namespace inside a multiply instantiated module: that would
+create duplicate identities, which the compiler rejects. Copying a physical
+part requires a new ID; editing/reparenting preserves its explicit namespace.
 
-A rule requires `id`, `kind` and either `scope` or
-`selector: {entity: pins, pattern: "U1.*"}`. Entities are pins, parts or nets.
-References in rules use board IDs (`U1.8`) or canonical net names (`DATA[0]`).
-Optional `required` defaults true, `severity` defaults ERROR, and `applicable`
-defaults true. `models` supplements electrical declarations by entity and ID.
-Use explicit units such as `"1.8 V"` or `"4.7 kohm"`.
-See [the rule reference](rules.md) for kinds and accepted parameters.
+Ports and buses retain the original explicit semantics: `ports: {data:
+{width: 4}}`, `instances: {left: {id: left, module: endpoint}}`. Net endpoints
+are `{part, pin}`, `{part, group}`, `{port}`, or `{instance, port}`. Group members
+are ordered logical names defined by the device library. All endpoint widths
+must match; no implicit broadcast, reversal or global power-net merging occurs.
+Every physical pin must be connected or explicitly `nc`. NC uses local part/pin
+or part/group endpoints. Duplicate use and connections conflicting with NC fail.
+Ports must connect on both sides; shorting distinct same-scope nets fails.
 
-Waivers are a list of exact `rule`, `object`, `reason`, and `owner` records, with
-optional ISO `expires`. Expired, duplicate, unmatched and wildcard waivers fail.
-Configuration errors cannot be waived. Optional rules omitted entirely do not
-block normal ERC-only designs; explicitly required rules with missing evidence do.
+The canonical net name is the shallowest participating path, then lexical order.
+Bus bits append `[i]`. `net_aliases` preserves other names. Hierarchy is bounded
+to 64 levels and 100,000 expanded instances.
 
-## Diagnostics and delivery
+Rules, supplemental models and waivers use stable part identities and logical
+pin IDs, for example `target/mcu.PA13`; net rules use canonical net names.
+`rules.yaml` remains optional (inline rules also work). Rule-set version remains
+1: the electrical rule language is unchanged, only its object IDs changed.
+See [rules.md](rules.md). Diagnostics retain source locations and functional
+paths; annotated delivery snapshots also contain allocated references.
 
-`check`, `build` and `verify` accept `--json`. Exit codes are 0 for success, 2 for
-invalid inputs or failed checks, and 1 for I/O or internal execution failure.
-Semantic errors include a source location and module path where available.
-Failed checking produces diagnostics and never replaces an existing package.
-Only directories managed by this tool, with no extra user files, can be replaced.
+## Annotation and delivery
 
-Python callers can use `load_design(path)`, `compile_design(loaded)`,
-`check_design(compiled)`, and `export_design(compiled, output_dir)`.
-The compiled electrical digest excludes source positions and input hashes;
-`inputs.json` preserves exact input hashes and `circuit.json` preserves provenance.
-Do not treat an offline PASS as proof of physical correctness or real Allegro import.
+`check` builds/checks a logical snapshot and does not write annotation state.
+`build` checks it, allocates references and publishes all artifacts together.
+`design.lock.json`, beside the entrypoint, is engine-owned history: commit it,
+restore it when missing, and do not manually renumber it.
 
-## Board names and netlist filenames
+First allocation sorts stable identities and numbers each library-defined prefix
+from one. Subsequent builds keep assignments; additions use the historical
+maximum plus one. Deleted assignments remain reserved. Prefix changes retire
+old references and allocate in the new prefix. Other property changes do not
+renumber components. Conflicting, malformed or foreign-board locks are errors.
 
-For `board.yaml` or `board.yml`, the enclosing directory is the board name.
-For other design filenames, use the filename stem. The compiled snapshot records
-this as `name`; export produces `<name>.tel`, independently of the output directory.
-Use ASCII letters, digits, `_`, `-` and `.`, starting with a letter, digit or `_`.
-Unsafe names fail export without replacing existing output. Existing packages
-containing `design.tel` remain readable; rebuilding replaces managed old output
-with the board-named netlist. The YAML schema and CLI arguments are unchanged.
+Builds serialize with a nonblocking directory lock. A persistent build marker
+and existing v2 output detect lost annotation history. Copy the lock when moving
+or cloning a design; deleting all history cannot be detected as an earlier build.
+A transaction journal permits recovery if publication is interrupted. Normal
+pre-commit failures restore the previous package; a crash after package publication
+is recovered forward by verifying the package and committing its pending lock.
+
+Outputs include `.tel`, `devices/*.txt`, `components.json`, `BOM.md`, `BOM.csv`,
+`PINOUT.md`, `FOOTPRINTS.md`, `references.json`, circuit/hierarchy/inputs snapshots,
+DRC reports, electrical rules, import instructions and a hashed manifest.
+Documentation is generated from the same immutable annotated circuit. Verification
+independently parses the netlist and device files, checks all physical connectivity,
+and checks derived files against the circuit. Unmanaged output files prevent
+replacement. Version 2 snapshots retain stable IDs as keys and store physical
+references separately; public `compile_design()` does not allocate references.
+
+Exit codes: 0 success, 2 invalid/blocked design, 1 I/O/internal failure. Python
+entrypoints remain `load_design`, `compile_design`, `check_design`, `export_design`.
+A successful package verification is offline acceptance, not actual Allegro import
+or hardware validation.

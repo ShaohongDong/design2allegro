@@ -219,6 +219,7 @@ class Engine:
                 message=message,
                 evidence=evidence,
                 hierarchy=part.get("hierarchy", []),
+                reference=part.get("reference"),
                 source=part.get("source", []),
             )
         )

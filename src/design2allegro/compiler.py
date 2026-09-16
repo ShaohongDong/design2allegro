@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 
+from .catalog import bind_device
 from .loader import fail
 from .model import CompiledDesign, canonical
 from .pin_data import conflict_matrix, pin_info, pin_types
@@ -38,9 +39,9 @@ class UnionFind:
 def compile_design(design):
     doc = design.document
     modules = doc["modules"]
-    references = doc["references"]
-    if len({v.upper() for v in references.values()}) != len(references):
-        fail("case-insensitive reference collision", doc)
+    accessory_ids = [a["id"] for a in doc.get("accessories", [])]
+    if len(set(accessory_ids)) != len(accessory_ids):
+        fail("duplicate accessory identity", doc)
     visiting, visited = set(), set()
 
     def graph(name):
@@ -65,14 +66,14 @@ def compile_design(design):
         graph(name)
     if doc["top"] not in modules:
         fail("unknown top module", doc)
-    parts, pins, used_refs, hierarchy = {}, {}, set(), {}
+    parts, pins, hierarchy = {}, {}, {}
     uf = UnionFind()
     records = []
     physical_nodes = {}
     max_instances = 100000
     instances_seen = 0
 
-    def expand(name, path):
+    def expand(name, path, namespace):
         nonlocal instances_seen
         instances_seen += 1
         if instances_seen > max_instances:
@@ -80,30 +81,48 @@ def compile_design(design):
         if path.count("/") >= 64:
             fail("module depth limit (64) exceeded", doc)
         module = modules[name]
+        ids = [c["id"] for c in module.get("instances", {}).values()]
+        if len(set(ids)) != len(ids):
+            fail("duplicate module instance ID", module)
         local_parts, child_ports, ports = {}, {}, {}
         for port, config in sorted(module.get("ports", {}).items()):
             ports[port] = [("port", path, port, i) for i in range(int(config["width"]))]
             for node in ports[port]:
                 uf.find(node)
         for local, config in sorted(module.get("parts", {}).items()):
-            component = design.components.get(config["component"])
-            if component is None:
-                fail(f'unknown component {config["component"]}', config, path)
+            component = bind_device(design.catalog, config)
             full = "/".join(filter(None, [path, local]))
-            if full not in references:
-                fail(f"missing board reference for {full}", config)
-            ref = references[full].upper()
-            used_refs.add(full)
+            ref = "/".join(
+                filter(
+                    None, [config.get("identity_namespace", namespace), config["id"]]
+                )
+            )
+            if ref in parts:
+                fail("duplicate stable identity " + ref, config)
             hierarchy[full] = ref
             parts[ref] = {
                 "ref": ref,
-                "name": config["component"],
-                "value": config.get("value", component.get("value", "")),
+                "id": ref,
+                "name": config["device"],
+                **{
+                    k: component[k]
+                    for k in (
+                        "category",
+                        "prefix",
+                        "properties",
+                        "normalized_properties",
+                        "missing_properties",
+                        "device",
+                        "package_id",
+                    )
+                },
+                "library_source": component["source"],
+                "assembly": config["assembly"],
+                "description": config.get("description", ""),
+                "value": component["value"],
                 "footprint": component["package"],
                 "hierarchy": full.split("/"),
-                "electrical": intersect(
-                    component.get("electrical", {}), config.get("electrical", {})
-                ),
+                "electrical": component["electrical"],
                 "pins": [],
                 "source": [list(getattr(config, "source", ("<memory>", 0, 0)))],
             }
@@ -113,7 +132,7 @@ def compile_design(design):
                 {p["name"]: n for n, p in component["pins"].items()},
             )
             for number, pin in sorted(component["pins"].items()):
-                key = ref + "." + number
+                key = ref + "." + pin["name"]
                 function = pin_types[pin["type"]]
                 pins[key] = {
                     "id": key,
@@ -134,7 +153,8 @@ def compile_design(design):
                 uf.find(node)
         for local, config in sorted(module.get("instances", {}).items()):
             child_path = "/".join(filter(None, [path, local]))
-            child_ports[local] = expand(config["module"], child_path)
+            child_namespace = "/".join(filter(None, [namespace, config["id"]]))
+            child_ports[local] = expand(config["module"], child_path, child_namespace)
 
         def endpoint(ep):
             if "part" in ep:
@@ -150,7 +170,9 @@ def compile_design(design):
                     if ep["pin"] not in names:
                         fail("unknown logical pin", ep, path)
                     numbers = [names[ep["pin"]]]
-                return [("pin", ref + "." + n) for n in numbers]
+                return [
+                    ("pin", ref + "." + component["pins"][n]["name"]) for n in numbers
+                ]
             selected = ports
             if "instance" in ep:
                 if ep["instance"] not in child_ports:
@@ -213,9 +235,7 @@ def compile_design(design):
             )
         return ports
 
-    expand(doc["top"], "")
-    if used_refs != set(references):
-        fail(f"unused reference paths: {sorted(set(references) - used_refs)}", doc)
+    expand(doc["top"], "", "")
     grouped_records, grouped_pins = defaultdict(list), defaultdict(list)
     for node, name, metadata in records:
         grouped_records[uf.find(node)].append((name, metadata))
@@ -257,7 +277,11 @@ def compile_design(design):
         )
     count = max(int(t) for t in pin_types) + 1
     data = {
-        "version": 1,
+        "version": 2,
+        "stage": "logical",
+        "board_id": doc["id"],
+        "library": doc["library"],
+        "accessories": doc.get("accessories", []),
         "name": design.name,
         "parts": parts,
         "pins": pins,
@@ -274,5 +298,5 @@ def compile_design(design):
         "inputs": design.inputs,
     }
     return CompiledDesign(
-        canonical(data), canonical(design.rules), canonical(design.waivers)
+        canonical(data), canonical(design.rules), canonical(design.waivers), design.path
     )

@@ -13,37 +13,38 @@ from design2allegro.verify import verify_package
 root = Path(__file__).resolve().parents[1] / "build/parser/benchmark"
 root.mkdir(parents=True, exist_ok=True)
 count = 10000
-parts = {f"R{i}": {"component": "RESISTOR"} for i in range(count // 2)}
+parts = {
+    f"resistor_{i}": {
+        "id": f"resistor-{i}",
+        "device": "generic.resistor",
+        "package": "resistor_0603",
+        "assembly": "fitted",
+        "properties": {
+            "resistance": "10 kohm",
+            "tolerance": "1 %",
+            "power_rating": "0.1 W",
+        },
+    }
+    for i in range(count // 2)
+}
 nets = {
     "N"
     + str(i): {
         "endpoints": [
-            {"part": "R" + str(i), "pin": "B"},
-            {"part": "R" + str((i + 1) % (count // 2)), "pin": "A"},
+            {"part": "resistor_" + str(i), "pin": "B"},
+            {"part": "resistor_" + str((i + 1) % (count // 2)), "pin": "A"},
         ]
     }
     for i in range(count // 2)
 }
-library = {
-    "version": 1,
-    "components": {
-        "RESISTOR": {
-            "package": "R0805",
-            "pins": {
-                "1": {"name": "A", "type": "PASSIVE"},
-                "2": {"name": "B", "type": "PASSIVE"},
-            },
-        }
-    },
-}
 document = {
-    "version": 1,
-    "libraries": ["parts.yaml"],
+    "version": 2,
+    "id": "benchmark",
+    "name": "benchmark",
+    "library": {"name": "standard", "version": "1"},
     "top": "board",
-    "references": {k: k for k in parts},
     "modules": {"board": {"parts": parts, "nets": nets}},
 }
-(root / "parts.yaml").write_text(yaml.safe_dump(library))
 (root / "board.yaml").write_text(yaml.safe_dump(document))
 t0 = time.perf_counter()
 loaded = load_design(root / "board.yaml")

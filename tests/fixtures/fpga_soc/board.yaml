@@ -1,10 +1,5 @@
-version: 1
-libraries:
-- components.yaml
+version: 2
 top: board
-references:
-  fpga/endpoint/chip: U1
-  soc/endpoint/chip: U2
 rules: rules.yaml
 modules:
   endpoint:
@@ -23,7 +18,10 @@ modules:
         width: 1
     parts:
       chip:
-        component: SYNTH_FPGA_SOC
+        id: chip
+        device: synthetic.fpga_soc
+        package: bga10
+        assembly: fitted
     nets:
       data:
         endpoints:
@@ -75,6 +73,7 @@ modules:
     instances:
       endpoint:
         module: endpoint
+        id: endpoint
     nets:
       data:
         endpoints:
@@ -110,8 +109,10 @@ modules:
     instances:
       fpga:
         module: wrapper
+        id: fpga
       soc:
         module: wrapper
+        id: soc
     nets:
       DATA:
         endpoints:
@@ -149,3 +150,8 @@ modules:
           port: rst
         - instance: soc
           port: rst
+id: synthetic-fpga-soc
+name: fpga_soc
+library:
+  name: standard
+  version: '1'

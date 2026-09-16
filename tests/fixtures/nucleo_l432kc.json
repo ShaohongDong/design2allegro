@@ -1,487 +1,487 @@
 {
-  "source": "Official MB1180.PcbDoc pads independently decoded and compared with both SchDoc sheets; L432 exposed pad added from datasheet.",
+  "source": "Official MB1180.PcbDoc pads independently decoded and compared with both SchDoc sheets; L432 exposed pad added from datasheet. Endpoints use functional instance paths and physical pad numbers.",
   "nets": {
     "NetSB13_1": [
-      "SB13.1",
-      "U2.32"
+      "target/jumper_link_3.1",
+      "target/target_mcu.32"
     ],
     "NetSB12_1": [
-      "SB12.1",
-      "U2.31"
+      "target/jumper_boot0.1",
+      "target/target_mcu.31"
     ],
     "PB7": [
-      "CN3.7",
-      "SB18.2",
-      "U2.30"
+      "interfaces/arduino_right.7",
+      "target/jumper_pa5_pb7.2",
+      "target/target_mcu.30"
     ],
     "PB6": [
-      "CN3.8",
-      "SB16.2",
-      "U2.29"
+      "interfaces/arduino_right.8",
+      "target/jumper_pa6_pb6.2",
+      "target/target_mcu.29"
     ],
     "PB5": [
-      "CN3.14",
-      "U2.28"
+      "interfaces/arduino_right.14",
+      "target/target_mcu.28"
     ],
     "PB4": [
-      "CN3.15",
-      "U2.27"
+      "interfaces/arduino_right.15",
+      "target/target_mcu.27"
     ],
     "PB3": [
-      "CN4.15",
-      "SB15.2",
-      "U2.26"
+      "interfaces/arduino_left.15",
+      "target/jumper_pb3.2",
+      "target/target_mcu.26"
     ],
     "PA15": [
-      "SB3.1",
-      "U2.25"
+      "stlink/jumper_pa15_stlink_tx.1",
+      "target/target_mcu.25"
     ],
     "PA14": [
-      "U2.24",
-      "U5.15",
-      "U5.26"
+      "stlink/debug_mcu.15",
+      "stlink/debug_mcu.26",
+      "target/target_mcu.24"
     ],
     "PA13": [
-      "R20.2",
-      "U2.23",
-      "U5.27"
+      "stlink/debug_mcu.27",
+      "stlink/resistor_pa13_t_swdio_in.2",
+      "target/target_mcu.23"
     ],
     "PA12": [
-      "CN3.5",
-      "U2.22"
+      "interfaces/arduino_right.5",
+      "target/target_mcu.22"
     ],
     "PA11": [
-      "CN3.13",
-      "U2.21"
+      "interfaces/arduino_right.13",
+      "target/target_mcu.21"
     ],
     "PA10": [
-      "CN3.2",
-      "U2.20"
+      "interfaces/arduino_right.2",
+      "target/target_mcu.20"
     ],
     "PA9": [
-      "CN3.1",
-      "U2.19"
+      "interfaces/arduino_right.1",
+      "target/target_mcu.19"
     ],
     "PA8": [
-      "CN3.12",
-      "U2.18"
+      "interfaces/arduino_right.12",
+      "target/target_mcu.18"
     ],
     "VDD": [
-      "C23.1",
-      "C7.1",
-      "JP1.2",
-      "SB10.2",
-      "U2.1",
-      "U2.17"
+      "power/current_measurement_jumper.2",
+      "target/capacitor_vdd.1",
+      "target/capacitor_vdd_2.1",
+      "target/jumper_vdd.2",
+      "target/target_mcu.1",
+      "target/target_mcu.17"
     ],
     "NetSB11_1": [
-      "SB11.1",
-      "U2.16"
+      "target/jumper_link_4.1",
+      "target/target_mcu.16"
     ],
     "PB1": [
-      "CN3.9",
-      "U2.15"
+      "interfaces/arduino_right.9",
+      "target/target_mcu.15"
     ],
     "PB0": [
-      "CN3.6",
-      "U2.14"
+      "interfaces/arduino_right.6",
+      "target/target_mcu.14"
     ],
     "PA7": [
-      "CN4.6",
-      "U2.13"
+      "interfaces/arduino_left.6",
+      "target/target_mcu.13"
     ],
     "PA6": [
-      "CN4.7",
-      "SB16.1",
-      "U2.12"
+      "interfaces/arduino_left.7",
+      "target/jumper_pa6_pb6.1",
+      "target/target_mcu.12"
     ],
     "PA5": [
-      "CN4.8",
-      "SB18.1",
-      "U2.11"
+      "interfaces/arduino_left.8",
+      "target/jumper_pa5_pb7.1",
+      "target/target_mcu.11"
     ],
     "PA4": [
-      "CN4.9",
-      "U2.10"
+      "interfaces/arduino_left.9",
+      "target/target_mcu.10"
     ],
     "PA3": [
-      "CN4.10",
-      "U2.9"
+      "interfaces/arduino_left.10",
+      "target/target_mcu.9"
     ],
     "PA2": [
-      "CN4.5",
-      "SB2.1",
-      "U2.8"
+      "interfaces/arduino_left.5",
+      "stlink/jumper_pa2_stlink_rx.1",
+      "target/target_mcu.8"
     ],
     "PA1": [
-      "CN4.11",
-      "U2.7"
+      "interfaces/arduino_left.11",
+      "target/target_mcu.7"
     ],
     "PA0": [
-      "CN4.12",
-      "SB17.2",
-      "U2.6"
+      "interfaces/arduino_left.12",
+      "target/jumper_mco_pa0.2",
+      "target/target_mcu.6"
     ],
     "AVDD": [
-      "C24.1",
-      "CN4.13",
-      "L1.1",
-      "U2.5"
+      "interfaces/arduino_left.13",
+      "target/analog_supply_bead.1",
+      "target/capacitor_avdd.1",
+      "target/target_mcu.5"
     ],
     "NRST": [
-      "B1.1",
-      "C11.2",
-      "CN3.3",
-      "CN4.3",
-      "SB9.2",
-      "U2.4"
+      "interfaces/arduino_left.3",
+      "interfaces/arduino_right.3",
+      "stlink/jumper_nrst_t_nrst.2",
+      "target/capacitor_nrst.2",
+      "target/reset_button.1",
+      "target/target_mcu.4"
     ],
     "NetSB7_2": [
-      "SB7.2",
-      "SB8.2",
-      "U2.3"
+      "target/jumper_link_2.2",
+      "target/jumper_pf1.2",
+      "target/target_mcu.3"
     ],
     "NetSB4_2": [
-      "SB4.2",
-      "SB5.2",
-      "SB6.2",
-      "U2.2"
+      "target/jumper_link.2",
+      "target/jumper_mco.2",
+      "target/jumper_pf0.2",
+      "target/target_mcu.2"
     ],
     "GND": [
-      "B1.2",
-      "C1.1",
-      "C10.1",
-      "C11.1",
-      "C12.2",
-      "C13.2",
-      "C14.2",
-      "C15.1",
-      "C16.2",
-      "C17.1",
-      "C18.1",
-      "C19.1",
-      "C2.1",
-      "C20.2",
-      "C21.2",
-      "C22.2",
-      "C23.2",
-      "C24.2",
-      "C25.2",
-      "C3.2",
-      "C4.1",
-      "C5.1",
-      "C6.1",
-      "C7.2",
-      "C8.1",
-      "C9.2",
-      "CN1.10",
-      "CN1.11",
-      "CN1.5",
-      "CN1.6",
-      "CN1.7",
-      "CN1.8",
-      "CN1.9",
-      "CN2.2",
-      "CN3.4",
-      "CN4.2",
-      "LD1.1",
-      "LD2.2",
-      "LD3.2",
-      "R10.2",
-      "R12.1",
-      "R13.1",
-      "R16.1",
-      "R2.2",
-      "R21.2",
-      "R3.1",
-      "R6.1",
-      "R7.2",
-      "SB11.2",
-      "SB13.2",
-      "U1.4",
-      "U2.33",
-      "U3.0",
-      "U3.2",
-      "U4.2",
-      "U5.20",
-      "U5.23",
-      "U5.35",
-      "U5.47",
-      "U5.8",
-      "U6.1"
+      "interfaces/arduino_left.2",
+      "interfaces/arduino_right.4",
+      "interfaces/debug_programming_header.2",
+      "interfaces/usb_connector.10",
+      "interfaces/usb_connector.11",
+      "interfaces/usb_connector.5",
+      "interfaces/usb_connector.6",
+      "interfaces/usb_connector.7",
+      "interfaces/usb_connector.8",
+      "interfaces/usb_connector.9",
+      "power/capacitor_e5v.2",
+      "power/capacitor_link.1",
+      "power/capacitor_link_2.1",
+      "power/capacitor_link_3.1",
+      "power/capacitor_u5v.1",
+      "power/capacitor_u5v_st_link.1",
+      "power/capacitor_v3v3_st_link.2",
+      "power/capacitor_v3v3_st_link_2.1",
+      "power/capacitor_v5.1",
+      "power/capacitor_v5_2.2",
+      "power/capacitor_vin.2",
+      "power/capacitor_vo.2",
+      "power/capacitor_vo_2.1",
+      "power/debug_regulator.2",
+      "power/power_led.2",
+      "power/resistor_link.2",
+      "power/target_regulator.0",
+      "power/target_regulator.2",
+      "power/usb_power_switch.4",
+      "power/vin_regulator.1",
+      "stlink/capacitor_mco.2",
+      "stlink/capacitor_osc_in.2",
+      "stlink/capacitor_osc_out.2",
+      "stlink/capacitor_stm_rst.1",
+      "stlink/capacitor_v3v3_st_link.1",
+      "stlink/capacitor_v3v3_st_link_2.1",
+      "stlink/debug_mcu.20",
+      "stlink/debug_mcu.23",
+      "stlink/debug_mcu.35",
+      "stlink/debug_mcu.47",
+      "stlink/debug_mcu.8",
+      "stlink/debug_status_led.1",
+      "stlink/resistor_ain_1.1",
+      "stlink/resistor_link.2",
+      "stlink/resistor_link_2.1",
+      "stlink/resistor_link_3.1",
+      "stlink/resistor_link_4.1",
+      "stlink/resistor_link_5.2",
+      "stlink/resistor_link_6.1",
+      "target/capacitor_avdd.2",
+      "target/capacitor_link.2",
+      "target/capacitor_link_2.2",
+      "target/capacitor_nrst.1",
+      "target/capacitor_vdd.2",
+      "target/capacitor_vdd_2.2",
+      "target/jumper_link_3.2",
+      "target/jumper_link_4.2",
+      "target/reset_button.2",
+      "target/resistor_boot0.2",
+      "target/target_mcu.33",
+      "target/user_led.2"
     ],
     "NetLD2_1": [
-      "LD2.1",
-      "R22.1"
+      "power/power_led.1",
+      "power/resistor_v5.1"
     ],
     "NetLD3_1": [
-      "LD3.1",
-      "R23.1"
+      "target/resistor_link.1",
+      "target/user_led.1"
     ],
     "V5": [
-      "C14.1",
-      "C8.2",
-      "CN4.4",
-      "D3.2",
-      "D4.2",
-      "R22.2",
-      "U3.1",
-      "U3.6"
+      "interfaces/arduino_left.4",
+      "power/capacitor_v5.2",
+      "power/capacitor_v5_2.1",
+      "power/diode_e5v_v5.2",
+      "power/diode_u5v_st_link_v5.2",
+      "power/resistor_v5.2",
+      "power/target_regulator.1",
+      "power/target_regulator.6"
     ],
     "VO": [
-      "C10.2",
-      "C9.1",
-      "R14.1",
-      "SB14.1",
-      "U3.4"
+      "power/capacitor_vo.1",
+      "power/capacitor_vo_2.2",
+      "power/jumper_v3v3_vo.1",
+      "power/target_regulator.4",
+      "stlink/resistor_ain_1_vo.1"
     ],
     "U5V_ST_LINK": [
-      "C1.2",
-      "D4.1",
-      "U1.6",
-      "U1.7"
+      "power/capacitor_u5v_st_link.2",
+      "power/diode_u5v_st_link_v5.1",
+      "power/usb_power_switch.6",
+      "power/usb_power_switch.7"
     ],
     "NetC15_2": [
-      "C15.2",
-      "C18.2",
-      "D1.2",
-      "D2.2",
-      "U4.1",
-      "U4.3"
+      "power/capacitor_link.2",
+      "power/capacitor_link_3.2",
+      "power/debug_regulator.1",
+      "power/debug_regulator.3",
+      "power/diode_e5v.2",
+      "power/diode_u5v.2"
     ],
     "E5V": [
-      "C25.1",
-      "D2.1",
-      "D3.1",
-      "R11.1",
-      "U6.2",
-      "U6.4"
+      "power/capacitor_e5v.1",
+      "power/diode_e5v.1",
+      "power/diode_e5v_v5.1",
+      "power/vin_regulator.2",
+      "power/vin_regulator.4",
+      "stlink/resistor_e5v.1"
     ],
     "NetLD1_2": [
-      "LD1.2",
-      "R18.2"
+      "stlink/debug_status_led.2",
+      "stlink/resistor_led_stlink.2"
     ],
     "NetLD1_3": [
-      "LD1.3",
-      "R19.2"
+      "stlink/debug_status_led.3",
+      "stlink/resistor_led_stlink_2.2"
     ],
     "NetLD1_4": [
-      "LD1.4",
-      "R17.1"
+      "stlink/debug_status_led.4",
+      "stlink/resistor_v3v3_st_link.1"
     ],
     "NetR7_1": [
-      "R7.1",
-      "U1.5"
+      "power/resistor_link.1",
+      "power/usb_power_switch.5"
     ],
     "PF0": [
-      "CN3.10",
-      "SB6.1"
+      "interfaces/arduino_right.10",
+      "target/jumper_pf0.1"
     ],
     "U5V": [
-      "C6.2",
-      "CN1.1",
-      "D1.1",
-      "R15.1",
-      "R4.2",
-      "U1.1",
-      "U1.2"
+      "interfaces/usb_connector.1",
+      "power/capacitor_u5v.2",
+      "power/diode_u5v.1",
+      "power/resistor_pwr_enn_u5v.1",
+      "power/usb_power_switch.1",
+      "power/usb_power_switch.2",
+      "stlink/resistor_u5v.2"
     ],
     "PWR_ENN": [
-      "R15.2",
-      "U1.3",
-      "U5.28"
+      "power/resistor_pwr_enn_u5v.2",
+      "power/usb_power_switch.3",
+      "stlink/debug_mcu.28"
     ],
     "NetC12_1": [
-      "C12.1",
-      "SB5.1",
-      "X1.1"
+      "target/capacitor_link_2.1",
+      "target/jumper_link.1",
+      "target/rtc_crystal.1"
     ],
     "NetC13_1": [
-      "C13.1",
-      "SB7.1",
-      "X1.2"
+      "target/capacitor_link.1",
+      "target/jumper_link_2.1",
+      "target/rtc_crystal.2"
     ],
     "NetR3_2": [
-      "R3.2",
-      "R4.1",
-      "R8.1",
-      "T1.2"
+      "stlink/reset_transistor.2",
+      "stlink/resistor_link_6.2",
+      "stlink/resistor_u5v.1",
+      "stlink/resistor_usb_renumn.1"
     ],
     "NetR1_2": [
-      "R1.2",
-      "T1.1"
+      "stlink/reset_transistor.1",
+      "stlink/resistor_usb_dp.2"
     ],
     "V3V3_ST_LINK": [
-      "C16.1",
-      "C19.2",
-      "C2.2",
-      "C5.2",
-      "CN2.4",
-      "R17.2",
-      "R9.2",
-      "SB1.1",
-      "T1.3",
-      "U4.5",
-      "U5.1",
-      "U5.24",
-      "U5.36",
-      "U5.48",
-      "U5.9"
+      "interfaces/debug_programming_header.4",
+      "power/capacitor_v3v3_st_link.1",
+      "power/capacitor_v3v3_st_link_2.2",
+      "power/debug_regulator.5",
+      "stlink/capacitor_v3v3_st_link.2",
+      "stlink/capacitor_v3v3_st_link_2.2",
+      "stlink/debug_mcu.1",
+      "stlink/debug_mcu.24",
+      "stlink/debug_mcu.36",
+      "stlink/debug_mcu.48",
+      "stlink/debug_mcu.9",
+      "stlink/jumper_v3v3_st_link.1",
+      "stlink/reset_transistor.3",
+      "stlink/resistor_stm_rst_v3v3_st_link.2",
+      "stlink/resistor_v3v3_st_link.2"
     ],
     "USB_DM": [
-      "CN1.2",
-      "U5.32"
+      "interfaces/usb_connector.2",
+      "stlink/debug_mcu.32"
     ],
     "USB_DP": [
-      "CN1.3",
-      "R1.1",
-      "U5.33"
+      "interfaces/usb_connector.3",
+      "stlink/debug_mcu.33",
+      "stlink/resistor_usb_dp.1"
     ],
     "NetCN1_4": [
-      "CN1.4",
-      "R2.1"
+      "interfaces/usb_connector.4",
+      "stlink/resistor_link.1"
     ],
     "AIN_1": [
-      "R12.2",
-      "R14.2",
-      "U5.10"
+      "stlink/debug_mcu.10",
+      "stlink/resistor_ain_1.2",
+      "stlink/resistor_ain_1_vo.2"
     ],
     "NetR10_1": [
-      "R10.1",
-      "R11.2",
-      "SB1.2",
-      "U5.39"
+      "stlink/debug_mcu.39",
+      "stlink/jumper_v3v3_st_link.2",
+      "stlink/resistor_e5v.2",
+      "stlink/resistor_link_5.1"
     ],
     "PF1": [
-      "CN3.11",
-      "SB8.1"
+      "interfaces/arduino_right.11",
+      "target/jumper_pf1.1"
     ],
     "STM_RST": [
-      "C4.2",
-      "R9.1",
-      "U5.7"
+      "stlink/capacitor_stm_rst.2",
+      "stlink/debug_mcu.7",
+      "stlink/resistor_stm_rst_v3v3_st_link.1"
     ],
     "NetR16_2": [
-      "R16.2",
-      "U5.2"
+      "stlink/debug_mcu.2",
+      "stlink/resistor_link_4.2"
     ],
     "NetR13_2": [
-      "R13.2",
-      "U5.3"
+      "stlink/debug_mcu.3",
+      "stlink/resistor_link_2.2"
     ],
     "STLINK_RX": [
-      "SB2.2",
-      "U5.13"
+      "stlink/debug_mcu.13",
+      "stlink/jumper_pa2_stlink_rx.2"
     ],
     "MCO": [
-      "C3.1",
-      "R5.2",
-      "SB17.1",
-      "SB4.1"
+      "stlink/capacitor_mco.1",
+      "stlink/resistor_mco.2",
+      "target/jumper_mco.1",
+      "target/jumper_mco_pa0.1"
     ],
     "NetR5_1": [
-      "R5.1",
-      "U5.29"
+      "stlink/debug_mcu.29",
+      "stlink/resistor_mco.1"
     ],
     "NetR6_2": [
-      "R6.2",
-      "U5.44"
+      "stlink/debug_mcu.44",
+      "stlink/resistor_link_3.2"
     ],
     "USB_RENUMN": [
-      "R8.2",
-      "U5.38"
+      "stlink/debug_mcu.38",
+      "stlink/resistor_usb_renumn.2"
     ],
     "STLINK_TX": [
-      "SB3.2",
-      "U5.12"
+      "stlink/debug_mcu.12",
+      "stlink/jumper_pa15_stlink_tx.2"
     ],
     "VIN": [
-      "C22.1",
-      "CN4.1",
-      "U6.3"
+      "interfaces/arduino_left.1",
+      "power/capacitor_vin.1",
+      "power/vin_regulator.3"
     ],
     "V3V3": [
-      "CN4.14",
-      "JP1.1",
-      "SB14.2"
+      "interfaces/arduino_left.14",
+      "power/current_measurement_jumper.1",
+      "power/jumper_v3v3_vo.2"
     ],
     "STM_JTMS": [
-      "CN2.1",
-      "U5.34"
+      "interfaces/debug_programming_header.1",
+      "stlink/debug_mcu.34"
     ],
     "STM_JTCK": [
-      "CN2.3",
-      "U5.37"
+      "interfaces/debug_programming_header.3",
+      "stlink/debug_mcu.37"
     ],
     "OSC_OUT": [
-      "C20.1",
-      "U5.6",
-      "X2.1"
+      "stlink/capacitor_osc_out.1",
+      "stlink/debug_crystal.1",
+      "stlink/debug_mcu.6"
     ],
     "OSC_IN": [
-      "C21.1",
-      "U5.5",
-      "X2.2"
+      "stlink/capacitor_osc_in.1",
+      "stlink/debug_crystal.2",
+      "stlink/debug_mcu.5"
     ],
     "LED_STLINK": [
-      "R18.1",
-      "R19.1",
-      "U5.30"
+      "stlink/debug_mcu.30",
+      "stlink/resistor_led_stlink.1",
+      "stlink/resistor_led_stlink_2.1"
     ],
     "T_JTDI": [
-      "U5.17"
+      "stlink/debug_mcu.17"
     ],
     "T_JTDO": [
-      "U5.16"
+      "stlink/debug_mcu.16"
     ],
     "T_SWDIO_IN": [
-      "R20.1",
-      "U5.25"
+      "stlink/debug_mcu.25",
+      "stlink/resistor_pa13_t_swdio_in.1"
     ],
     "T_NRST": [
-      "SB9.1",
-      "U5.18"
+      "stlink/debug_mcu.18",
+      "stlink/jumper_nrst_t_nrst.1"
     ],
     "T_SWO": [
-      "U5.31"
+      "stlink/debug_mcu.31"
     ],
     "NetR23_2": [
-      "R23.2",
-      "SB15.1"
+      "target/jumper_pb3.1",
+      "target/resistor_link.2"
     ],
     "NetL1_2": [
-      "L1.2",
-      "SB10.1"
+      "target/analog_supply_bead.2",
+      "target/jumper_vdd.1"
     ],
     "NetC17_2": [
-      "C17.2",
-      "U4.4"
+      "power/capacitor_link_2.2",
+      "power/debug_regulator.4"
     ],
     "BOOT0": [
-      "R21.1",
-      "SB12.2"
+      "target/jumper_boot0.2",
+      "target/resistor_boot0.1"
     ]
   },
   "nc": [
-    "CN2.5",
-    "U1.8",
-    "U3.3",
-    "U3.5",
-    "U5.11",
-    "U5.14",
-    "U5.19",
-    "U5.21",
-    "U5.22",
-    "U5.4",
-    "U5.40",
-    "U5.41",
-    "U5.42",
-    "U5.43",
-    "U5.45",
-    "U5.46"
+    "interfaces/debug_programming_header.5",
+    "power/target_regulator.3",
+    "power/target_regulator.5",
+    "power/usb_power_switch.8",
+    "stlink/debug_mcu.11",
+    "stlink/debug_mcu.14",
+    "stlink/debug_mcu.19",
+    "stlink/debug_mcu.21",
+    "stlink/debug_mcu.22",
+    "stlink/debug_mcu.4",
+    "stlink/debug_mcu.40",
+    "stlink/debug_mcu.41",
+    "stlink/debug_mcu.42",
+    "stlink/debug_mcu.43",
+    "stlink/debug_mcu.45",
+    "stlink/debug_mcu.46"
   ],
   "parts": {
-    "B1": {
+    "target/reset_button": {
       "pins": [
         "1",
         "2"
@@ -489,7 +489,7 @@
       "value": "KSS221G",
       "package": "SW2_5R6_5R5x3R1"
     },
-    "C1": {
+    "power/capacitor_u5v_st_link": {
       "pins": [
         "1",
         "2"
@@ -497,7 +497,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C10": {
+    "power/capacitor_vo_2": {
       "pins": [
         "1",
         "2"
@@ -505,7 +505,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C11": {
+    "target/capacitor_nrst": {
       "pins": [
         "1",
         "2"
@@ -513,7 +513,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C12": {
+    "target/capacitor_link_2": {
       "pins": [
         "1",
         "2"
@@ -521,7 +521,7 @@
       "value": "4.3pF",
       "package": "0603C"
     },
-    "C13": {
+    "target/capacitor_link": {
       "pins": [
         "1",
         "2"
@@ -529,7 +529,7 @@
       "value": "4.3pF",
       "package": "0603C"
     },
-    "C14": {
+    "power/capacitor_v5_2": {
       "pins": [
         "1",
         "2"
@@ -537,7 +537,7 @@
       "value": "1uF_X5R_0603",
       "package": "0603C"
     },
-    "C15": {
+    "power/capacitor_link_3": {
       "pins": [
         "1",
         "2"
@@ -545,7 +545,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C16": {
+    "power/capacitor_v3v3_st_link": {
       "pins": [
         "1",
         "2"
@@ -553,7 +553,7 @@
       "value": "1uF_X5R_0603",
       "package": "0603C"
     },
-    "C17": {
+    "power/capacitor_link_2": {
       "pins": [
         "1",
         "2"
@@ -561,7 +561,7 @@
       "value": "10nF_X7R_0603",
       "package": "0603C"
     },
-    "C18": {
+    "power/capacitor_link": {
       "pins": [
         "1",
         "2"
@@ -569,7 +569,7 @@
       "value": "1uF_X5R_0603",
       "package": "0603C"
     },
-    "C19": {
+    "power/capacitor_v3v3_st_link_2": {
       "pins": [
         "1",
         "2"
@@ -577,7 +577,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C2": {
+    "stlink/capacitor_v3v3_st_link": {
       "pins": [
         "1",
         "2"
@@ -585,7 +585,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C20": {
+    "stlink/capacitor_osc_out": {
       "pins": [
         "1",
         "2"
@@ -593,7 +593,7 @@
       "value": "10pF",
       "package": "0603C"
     },
-    "C21": {
+    "stlink/capacitor_osc_in": {
       "pins": [
         "1",
         "2"
@@ -601,7 +601,7 @@
       "value": "10pF",
       "package": "0603C"
     },
-    "C22": {
+    "power/capacitor_vin": {
       "pins": [
         "1",
         "2"
@@ -609,7 +609,7 @@
       "value": "10uF(25V)",
       "package": "TAN_B"
     },
-    "C23": {
+    "target/capacitor_vdd": {
       "pins": [
         "1",
         "2"
@@ -617,7 +617,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C24": {
+    "target/capacitor_avdd": {
       "pins": [
         "1",
         "2"
@@ -625,7 +625,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C25": {
+    "power/capacitor_e5v": {
       "pins": [
         "1",
         "2"
@@ -633,7 +633,7 @@
       "value": "10uF",
       "package": "TAN_A"
     },
-    "C3": {
+    "stlink/capacitor_mco": {
       "pins": [
         "1",
         "2"
@@ -641,7 +641,7 @@
       "value": "20pF[N/A]",
       "package": "0603C"
     },
-    "C4": {
+    "stlink/capacitor_stm_rst": {
       "pins": [
         "1",
         "2"
@@ -649,7 +649,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C5": {
+    "stlink/capacitor_v3v3_st_link_2": {
       "pins": [
         "1",
         "2"
@@ -657,7 +657,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C6": {
+    "power/capacitor_u5v": {
       "pins": [
         "1",
         "2"
@@ -665,7 +665,7 @@
       "value": "4.7uF",
       "package": "0603C"
     },
-    "C7": {
+    "target/capacitor_vdd_2": {
       "pins": [
         "1",
         "2"
@@ -673,7 +673,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C8": {
+    "power/capacitor_v5": {
       "pins": [
         "1",
         "2"
@@ -681,7 +681,7 @@
       "value": "100nF",
       "package": "0603C"
     },
-    "C9": {
+    "power/capacitor_vo": {
       "pins": [
         "1",
         "2"
@@ -689,7 +689,7 @@
       "value": "1uF_X5R_0603",
       "package": "0603C"
     },
-    "CN1": {
+    "interfaces/usb_connector": {
       "pins": [
         "1",
         "10",
@@ -706,7 +706,7 @@
       "value": "1050170001",
       "package": "Molex_1050170001"
     },
-    "CN2": {
+    "interfaces/debug_programming_header": {
       "pins": [
         "1",
         "2",
@@ -717,7 +717,7 @@
       "value": "[N/A]",
       "package": "HDR_1x5_2R54_V_M"
     },
-    "CN3": {
+    "interfaces/arduino_right": {
       "pins": [
         "1",
         "10",
@@ -738,7 +738,7 @@
       "value": "Header 15X1_male",
       "package": "HDR_1x15_2R54_V_F"
     },
-    "CN4": {
+    "interfaces/arduino_left": {
       "pins": [
         "1",
         "10",
@@ -759,7 +759,7 @@
       "value": "Header 15X1_male",
       "package": "HDR_1x15_2R54_V_F"
     },
-    "D1": {
+    "power/diode_u5v": {
       "pins": [
         "1",
         "2"
@@ -767,7 +767,7 @@
       "value": "BAT60JFILM",
       "package": "SOD-323"
     },
-    "D2": {
+    "power/diode_e5v": {
       "pins": [
         "1",
         "2"
@@ -775,7 +775,7 @@
       "value": "BAT60JFILM",
       "package": "SOD-323"
     },
-    "D3": {
+    "power/diode_e5v_v5": {
       "pins": [
         "1",
         "2"
@@ -783,7 +783,7 @@
       "value": "STPS2L30A",
       "package": "SMA"
     },
-    "D4": {
+    "power/diode_u5v_st_link_v5": {
       "pins": [
         "1",
         "2"
@@ -791,7 +791,7 @@
       "value": "BAT60JFILM",
       "package": "SOD-323"
     },
-    "JP1": {
+    "power/current_measurement_jumper": {
       "pins": [
         "1",
         "2"
@@ -799,7 +799,7 @@
       "value": "PH127H10102JNG-2/3/1.5",
       "package": "HDR_1x2_1R27_R_M"
     },
-    "L1": {
+    "target/analog_supply_bead": {
       "pins": [
         "1",
         "2"
@@ -807,7 +807,7 @@
       "value": "BEAD",
       "package": "0603L"
     },
-    "LD1": {
+    "stlink/debug_status_led": {
       "pins": [
         "1",
         "2",
@@ -817,7 +817,7 @@
       "value": "LD_BICOLOR_CMS",
       "package": "HSMF-A201"
     },
-    "LD2": {
+    "power/power_led": {
       "pins": [
         "1",
         "2"
@@ -825,7 +825,7 @@
       "value": "RED",
       "package": "0603D_R"
     },
-    "LD3": {
+    "target/user_led": {
       "pins": [
         "1",
         "2"
@@ -833,7 +833,7 @@
       "value": "Green",
       "package": "0603D_G"
     },
-    "R1": {
+    "stlink/resistor_usb_dp": {
       "pins": [
         "1",
         "2"
@@ -841,7 +841,7 @@
       "value": "1500 ohm",
       "package": "0603R"
     },
-    "R10": {
+    "stlink/resistor_link_5": {
       "pins": [
         "1",
         "2"
@@ -849,7 +849,7 @@
       "value": "4700 ohm",
       "package": "0603R"
     },
-    "R11": {
+    "stlink/resistor_e5v": {
       "pins": [
         "1",
         "2"
@@ -857,7 +857,7 @@
       "value": "2700 ohm",
       "package": "0603R"
     },
-    "R12": {
+    "stlink/resistor_ain_1": {
       "pins": [
         "1",
         "2"
@@ -865,7 +865,7 @@
       "value": "4700 ohm",
       "package": "0603R"
     },
-    "R13": {
+    "stlink/resistor_link_2": {
       "pins": [
         "1",
         "2"
@@ -873,7 +873,7 @@
       "value": "10000 ohm",
       "package": "0603R"
     },
-    "R14": {
+    "stlink/resistor_ain_1_vo": {
       "pins": [
         "1",
         "2"
@@ -881,7 +881,7 @@
       "value": "4700 ohm",
       "package": "0603R"
     },
-    "R15": {
+    "power/resistor_pwr_enn_u5v": {
       "pins": [
         "1",
         "2"
@@ -889,7 +889,7 @@
       "value": "10000 ohm",
       "package": "0603R"
     },
-    "R16": {
+    "stlink/resistor_link_4": {
       "pins": [
         "1",
         "2"
@@ -897,7 +897,7 @@
       "value": "10000 ohm",
       "package": "0603R"
     },
-    "R17": {
+    "stlink/resistor_v3v3_st_link": {
       "pins": [
         "1",
         "2"
@@ -905,7 +905,7 @@
       "value": "0 ohm",
       "package": "0603R"
     },
-    "R18": {
+    "stlink/resistor_led_stlink": {
       "pins": [
         "1",
         "2"
@@ -913,7 +913,7 @@
       "value": "100 ohm",
       "package": "0603R"
     },
-    "R19": {
+    "stlink/resistor_led_stlink_2": {
       "pins": [
         "1",
         "2"
@@ -921,7 +921,7 @@
       "value": "100 ohm",
       "package": "0603R"
     },
-    "R2": {
+    "stlink/resistor_link": {
       "pins": [
         "1",
         "2"
@@ -929,7 +929,7 @@
       "value": "100000 ohm",
       "package": "0603R"
     },
-    "R20": {
+    "stlink/resistor_pa13_t_swdio_in": {
       "pins": [
         "1",
         "2"
@@ -937,7 +937,7 @@
       "value": "100 ohm",
       "package": "0603R"
     },
-    "R21": {
+    "target/resistor_boot0": {
       "pins": [
         "1",
         "2"
@@ -945,7 +945,7 @@
       "value": "10000 ohm",
       "package": "0603R"
     },
-    "R22": {
+    "power/resistor_v5": {
       "pins": [
         "1",
         "2"
@@ -953,7 +953,7 @@
       "value": "1000 ohm",
       "package": "0603R"
     },
-    "R23": {
+    "target/resistor_link": {
       "pins": [
         "1",
         "2"
@@ -961,7 +961,7 @@
       "value": "510 ohm",
       "package": "0603R"
     },
-    "R3": {
+    "stlink/resistor_link_6": {
       "pins": [
         "1",
         "2"
@@ -969,7 +969,7 @@
       "value": "36000 ohm",
       "package": "0603R"
     },
-    "R4": {
+    "stlink/resistor_u5v": {
       "pins": [
         "1",
         "2"
@@ -977,7 +977,7 @@
       "value": "10000 ohm",
       "package": "0603R"
     },
-    "R5": {
+    "stlink/resistor_mco": {
       "pins": [
         "1",
         "2"
@@ -985,7 +985,7 @@
       "value": "100 ohm",
       "package": "0603R"
     },
-    "R6": {
+    "stlink/resistor_link_3": {
       "pins": [
         "1",
         "2"
@@ -993,7 +993,7 @@
       "value": "100000 ohm",
       "package": "0603R"
     },
-    "R7": {
+    "power/resistor_link": {
       "pins": [
         "1",
         "2"
@@ -1001,7 +1001,7 @@
       "value": "2700 ohm",
       "package": "0603R"
     },
-    "R8": {
+    "stlink/resistor_usb_renumn": {
       "pins": [
         "1",
         "2"
@@ -1009,7 +1009,7 @@
       "value": "100 ohm",
       "package": "0603R"
     },
-    "R9": {
+    "stlink/resistor_stm_rst_v3v3_st_link": {
       "pins": [
         "1",
         "2"
@@ -1017,7 +1017,7 @@
       "value": "100000 ohm",
       "package": "0603R"
     },
-    "SB1": {
+    "stlink/jumper_v3v3_st_link": {
       "pins": [
         "1",
         "2"
@@ -1025,7 +1025,7 @@
       "value": "OPEN",
       "package": "SB_0603"
     },
-    "SB10": {
+    "target/jumper_vdd": {
       "pins": [
         "1",
         "2"
@@ -1033,7 +1033,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB11": {
+    "target/jumper_link_4": {
       "pins": [
         "1",
         "2"
@@ -1041,7 +1041,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB12": {
+    "target/jumper_boot0": {
       "pins": [
         "1",
         "2"
@@ -1049,7 +1049,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB13": {
+    "target/jumper_link_3": {
       "pins": [
         "1",
         "2"
@@ -1057,7 +1057,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB14": {
+    "power/jumper_v3v3_vo": {
       "pins": [
         "1",
         "2"
@@ -1065,7 +1065,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB15": {
+    "target/jumper_pb3": {
       "pins": [
         "1",
         "2"
@@ -1073,7 +1073,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB16": {
+    "target/jumper_pa6_pb6": {
       "pins": [
         "1",
         "2"
@@ -1081,7 +1081,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB17": {
+    "target/jumper_mco_pa0": {
       "pins": [
         "1",
         "2"
@@ -1089,7 +1089,7 @@
       "value": "OPEN",
       "package": "SB_0603"
     },
-    "SB18": {
+    "target/jumper_pa5_pb7": {
       "pins": [
         "1",
         "2"
@@ -1097,7 +1097,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB2": {
+    "stlink/jumper_pa2_stlink_rx": {
       "pins": [
         "1",
         "2"
@@ -1105,7 +1105,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB3": {
+    "stlink/jumper_pa15_stlink_tx": {
       "pins": [
         "1",
         "2"
@@ -1113,7 +1113,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB4": {
+    "target/jumper_mco": {
       "pins": [
         "1",
         "2"
@@ -1121,7 +1121,7 @@
       "value": "OPEN",
       "package": "SB_0603"
     },
-    "SB5": {
+    "target/jumper_link": {
       "pins": [
         "1",
         "2"
@@ -1129,7 +1129,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB6": {
+    "target/jumper_pf0": {
       "pins": [
         "1",
         "2"
@@ -1137,7 +1137,7 @@
       "value": "OPEN",
       "package": "SB_0603"
     },
-    "SB7": {
+    "target/jumper_link_2": {
       "pins": [
         "1",
         "2"
@@ -1145,7 +1145,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "SB8": {
+    "target/jumper_pf1": {
       "pins": [
         "1",
         "2"
@@ -1153,7 +1153,7 @@
       "value": "OPEN",
       "package": "SB_0603"
     },
-    "SB9": {
+    "stlink/jumper_nrst_t_nrst": {
       "pins": [
         "1",
         "2"
@@ -1161,7 +1161,7 @@
       "value": "0 ohm",
       "package": "SB_0603"
     },
-    "T1": {
+    "stlink/reset_transistor": {
       "pins": [
         "1",
         "2",
@@ -1170,7 +1170,7 @@
       "value": "9013",
       "package": "SOT23-3"
     },
-    "U1": {
+    "power/usb_power_switch": {
       "pins": [
         "1",
         "2",
@@ -1184,7 +1184,7 @@
       "value": "ST890CDR",
       "package": "SO-8"
     },
-    "U2": {
+    "target/target_mcu": {
       "pins": [
         "1",
         "10",
@@ -1223,7 +1223,7 @@
       "value": "STM32L432KCU6U",
       "package": "UFQFPN32_5X5_P05_EP33"
     },
-    "U3": {
+    "power/target_regulator": {
       "pins": [
         "0",
         "1",
@@ -1236,7 +1236,7 @@
       "value": "LD39050PU33R",
       "package": "DFN6_0R95_3x3_TP"
     },
-    "U4": {
+    "power/debug_regulator": {
       "pins": [
         "1",
         "2",
@@ -1247,7 +1247,7 @@
       "value": "LD3985M33R",
       "package": "SOT23-5L"
     },
-    "U5": {
+    "stlink/debug_mcu": {
       "pins": [
         "1",
         "10",
@@ -1301,7 +1301,7 @@
       "value": "STM32F103CBT6",
       "package": "LQFP48_0R5_7x7"
     },
-    "U6": {
+    "power/vin_regulator": {
       "pins": [
         "1",
         "2",
@@ -1311,7 +1311,7 @@
       "value": "LD1117S50TR",
       "package": "SOT-223"
     },
-    "X1": {
+    "target/rtc_crystal": {
       "pins": [
         "1",
         "2"
@@ -1319,7 +1319,7 @@
       "value": "NX3215SA-32.768K-EXS00A-MU00525",
       "package": "XTAL_2SM_3R2X1R5"
     },
-    "X2": {
+    "stlink/debug_crystal": {
       "pins": [
         "1",
         "2"
@@ -1329,95 +1329,95 @@
     }
   },
   "assembly": {
-    "B1": "fitted",
-    "C1": "fitted",
-    "C10": "fitted",
-    "C11": "fitted",
-    "C12": "fitted",
-    "C13": "fitted",
-    "C14": "fitted",
-    "C15": "fitted",
-    "C16": "fitted",
-    "C17": "fitted",
-    "C18": "fitted",
-    "C19": "fitted",
-    "C2": "fitted",
-    "C20": "fitted",
-    "C21": "fitted",
-    "C22": "fitted",
-    "C23": "fitted",
-    "C24": "fitted",
-    "C25": "fitted",
-    "C3": "dnp",
-    "C4": "fitted",
-    "C5": "fitted",
-    "C6": "fitted",
-    "C7": "fitted",
-    "C8": "fitted",
-    "C9": "fitted",
-    "CN1": "fitted",
-    "CN2": "dnp",
-    "CN3": "fitted",
-    "CN4": "fitted",
-    "D1": "fitted",
-    "D2": "fitted",
-    "D3": "fitted",
-    "D4": "fitted",
-    "JP1": "fitted",
-    "L1": "fitted",
-    "LD1": "fitted",
-    "LD2": "fitted",
-    "LD3": "fitted",
-    "R1": "fitted",
-    "R10": "fitted",
-    "R11": "fitted",
-    "R12": "fitted",
-    "R13": "dnp",
-    "R14": "fitted",
-    "R15": "fitted",
-    "R16": "fitted",
-    "R17": "fitted",
-    "R18": "fitted",
-    "R19": "fitted",
-    "R2": "fitted",
-    "R20": "fitted",
-    "R21": "fitted",
-    "R22": "fitted",
-    "R23": "fitted",
-    "R3": "fitted",
-    "R4": "fitted",
-    "R5": "fitted",
-    "R6": "fitted",
-    "R7": "fitted",
-    "R8": "fitted",
-    "R9": "fitted",
-    "SB1": "open",
-    "SB10": "closed",
-    "SB11": "closed",
-    "SB12": "closed",
-    "SB13": "closed",
-    "SB14": "closed",
-    "SB15": "closed",
-    "SB16": "closed",
-    "SB17": "open",
-    "SB18": "closed",
-    "SB2": "closed",
-    "SB3": "closed",
-    "SB4": "open",
-    "SB5": "closed",
-    "SB6": "open",
-    "SB7": "closed",
-    "SB8": "open",
-    "SB9": "closed",
-    "T1": "fitted",
-    "U1": "fitted",
-    "U2": "fitted",
-    "U3": "fitted",
-    "U4": "fitted",
-    "U5": "fitted",
-    "U6": "fitted",
-    "X1": "fitted",
-    "X2": "fitted"
+    "target/reset_button": "fitted",
+    "power/capacitor_u5v_st_link": "fitted",
+    "power/capacitor_vo_2": "fitted",
+    "target/capacitor_nrst": "fitted",
+    "target/capacitor_link_2": "fitted",
+    "target/capacitor_link": "fitted",
+    "power/capacitor_v5_2": "fitted",
+    "power/capacitor_link_3": "fitted",
+    "power/capacitor_v3v3_st_link": "fitted",
+    "power/capacitor_link_2": "fitted",
+    "power/capacitor_link": "fitted",
+    "power/capacitor_v3v3_st_link_2": "fitted",
+    "stlink/capacitor_v3v3_st_link": "fitted",
+    "stlink/capacitor_osc_out": "fitted",
+    "stlink/capacitor_osc_in": "fitted",
+    "power/capacitor_vin": "fitted",
+    "target/capacitor_vdd": "fitted",
+    "target/capacitor_avdd": "fitted",
+    "power/capacitor_e5v": "fitted",
+    "stlink/capacitor_mco": "dnp",
+    "stlink/capacitor_stm_rst": "fitted",
+    "stlink/capacitor_v3v3_st_link_2": "fitted",
+    "power/capacitor_u5v": "fitted",
+    "target/capacitor_vdd_2": "fitted",
+    "power/capacitor_v5": "fitted",
+    "power/capacitor_vo": "fitted",
+    "interfaces/usb_connector": "fitted",
+    "interfaces/debug_programming_header": "dnp",
+    "interfaces/arduino_right": "fitted",
+    "interfaces/arduino_left": "fitted",
+    "power/diode_u5v": "fitted",
+    "power/diode_e5v": "fitted",
+    "power/diode_e5v_v5": "fitted",
+    "power/diode_u5v_st_link_v5": "fitted",
+    "power/current_measurement_jumper": "fitted",
+    "target/analog_supply_bead": "fitted",
+    "stlink/debug_status_led": "fitted",
+    "power/power_led": "fitted",
+    "target/user_led": "fitted",
+    "stlink/resistor_usb_dp": "fitted",
+    "stlink/resistor_link_5": "fitted",
+    "stlink/resistor_e5v": "fitted",
+    "stlink/resistor_ain_1": "fitted",
+    "stlink/resistor_link_2": "dnp",
+    "stlink/resistor_ain_1_vo": "fitted",
+    "power/resistor_pwr_enn_u5v": "fitted",
+    "stlink/resistor_link_4": "fitted",
+    "stlink/resistor_v3v3_st_link": "fitted",
+    "stlink/resistor_led_stlink": "fitted",
+    "stlink/resistor_led_stlink_2": "fitted",
+    "stlink/resistor_link": "fitted",
+    "stlink/resistor_pa13_t_swdio_in": "fitted",
+    "target/resistor_boot0": "fitted",
+    "power/resistor_v5": "fitted",
+    "target/resistor_link": "fitted",
+    "stlink/resistor_link_6": "fitted",
+    "stlink/resistor_u5v": "fitted",
+    "stlink/resistor_mco": "fitted",
+    "stlink/resistor_link_3": "fitted",
+    "power/resistor_link": "fitted",
+    "stlink/resistor_usb_renumn": "fitted",
+    "stlink/resistor_stm_rst_v3v3_st_link": "fitted",
+    "stlink/jumper_v3v3_st_link": "open",
+    "target/jumper_vdd": "closed",
+    "target/jumper_link_4": "closed",
+    "target/jumper_boot0": "closed",
+    "target/jumper_link_3": "closed",
+    "power/jumper_v3v3_vo": "closed",
+    "target/jumper_pb3": "closed",
+    "target/jumper_pa6_pb6": "closed",
+    "target/jumper_mco_pa0": "open",
+    "target/jumper_pa5_pb7": "closed",
+    "stlink/jumper_pa2_stlink_rx": "closed",
+    "stlink/jumper_pa15_stlink_tx": "closed",
+    "target/jumper_mco": "open",
+    "target/jumper_link": "closed",
+    "target/jumper_pf0": "open",
+    "target/jumper_link_2": "closed",
+    "target/jumper_pf1": "open",
+    "stlink/jumper_nrst_t_nrst": "closed",
+    "stlink/reset_transistor": "fitted",
+    "power/usb_power_switch": "fitted",
+    "target/target_mcu": "fitted",
+    "power/target_regulator": "fitted",
+    "power/debug_regulator": "fitted",
+    "stlink/debug_mcu": "fitted",
+    "power/vin_regulator": "fitted",
+    "target/rtc_crystal": "fitted",
+    "stlink/debug_crystal": "fitted"
   },
   "target_pinout": {
     "1": "VDD_1",

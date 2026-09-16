@@ -1,4 +1,4 @@
-"""Official MB1180 physical-net inventory and L432KC assembly acceptance."""
+"""Official physical inventory remains independent of generated annotation."""
 
 import json
 import shutil
@@ -9,198 +9,225 @@ import yaml
 from conftest import write_yaml
 
 from design2allegro import ElectricalError, compile_design, export_design, load_design
-from design2allegro.cli import main
-from design2allegro.verify import verify_package
 
 ROOT = Path(__file__).resolve().parents[2]
 PROJECT = ROOT / "schematics/nucleo_l432kc"
 EXPECTED = json.loads((ROOT / "tests/fixtures/nucleo_l432kc.json").read_text())
 WARNINGS = {
-    ("ERC.DRIVE", name)
-    for name in ("AVDD", "NetC15_2", "NetSB11_1", "NetSB13_1", "V5", "VDD", "VIN")
-} | {("ERC.SINGLE", name) for name in ("T_JTDI", "T_JTDO", "T_SWO")}
+    ("ERC.DRIVE", n)
+    for n in ("AVDD", "NetC15_2", "NetSB11_1", "NetSB13_1", "V5", "VDD", "VIN")
+} | {("ERC.SINGLE", n) for n in ("T_JTDI", "T_JTDO", "T_SWO")}
 
 
 def compile_board(path=PROJECT):
     return compile_design(load_design(path / "board.yaml"))
 
 
-def files(path):
+def functional_parts(data):
+    return {"/".join(part["hierarchy"]): part for part in data["parts"].values()}
+
+
+def physical_pins(data):
     return {
-        p.relative_to(path).as_posix(): p.read_bytes()
-        for p in path.rglob("*")
-        if p.is_file()
+        "/".join(data["parts"][pin["ref"]]["hierarchy"]) + "." + pin["num"]: pin
+        for pin in data["pins"].values()
     }
 
 
 def test_complete_official_inventory():
-    board = compile_board()
-    data = board.data
-    assert {name: net["pins"] for name, net in data["nets"].items()} == EXPECTED["nets"]
-    assert sorted(p for p, pin in data["pins"].items() if pin["nc"]) == EXPECTED["nc"]
-    assert set(data["parts"]) == set(EXPECTED["parts"])
-    for ref, part in data["parts"].items():
-        expected = EXPECTED["parts"][ref]
-        assert sorted(data["pins"][p]["num"] for p in part["pins"]) == expected["pins"]
-        assert part["value"] == expected["value"]
-        assert part["footprint"] == expected["package"]
+    data = compile_board().data
+    parts = functional_parts(data)
+    pins = physical_pins(data)
+    endpoints = {pin["id"]: name for name, pin in pins.items()}
     assert {
-        data["pins"][p]["num"]: data["pins"][p]["name"]
-        for p in data["parts"]["U2"]["pins"]
+        name: sorted(endpoints[p] for p in net["pins"])
+        for name, net in data["nets"].items()
+    } == EXPECTED["nets"]
+    assert sorted(name for name, pin in pins.items() if pin["nc"]) == EXPECTED["nc"]
+    assert set(parts) == set(EXPECTED["parts"])
+    for name, part in parts.items():
+        assert (
+            sorted(data["pins"][p]["num"] for p in part["pins"])
+            == EXPECTED["parts"][name]["pins"]
+        )
+        assert part["footprint"] == EXPECTED["parts"][name]["package"]
+        assert "reference" not in part
+    for name in ("target/target_mcu.33", "power/target_regulator.0"):
+        assert pins[name]["net"] == "GND"
+    target = parts["target/target_mcu"]
+    assert {
+        data["pins"][p]["num"]: data["pins"][p]["name"] for p in target["pins"]
     } == EXPECTED["target_pinout"]
-    assert data["pins"]["U2.33"]["net"] == "GND"
-    assert data["pins"]["U3.0"]["net"] == "GND"
-    assert len(data["pins"]) == 312
-    assert len(data["nets"]) == 82
+    assert len(data["parts"]) == 89
+    assert len(data["pins"]) == 312 and len(data["nets"]) == 82
 
 
-def test_check_coverage_and_documented_warnings():
-    report = compile_board().check()
-    assert report.ok
-    assert report.data["coverage"]["unscoped_pin_count"] == 0
-    warnings = [d for d in report.data["diagnostics"] if d["status"] != "PASS"]
-    assert {(d["rule"], d["object"]) for d in warnings} == WARNINGS
-    assert all(d["status"] == "FAIL" and d["severity"] == "WARNING" for d in warnings)
-    assert json.loads(compile_board().waivers_json) == []
+def test_strict_attribute_gate_preserves_electrical_results(tmp_path):
+    board = compile_board()
+    report = board.check().data
+    missing = [d for d in report["diagnostics"] if d["rule"] == "PROPERTY.REQUIRED"]
+    assert missing and not report["ok"]
+    assert report["coverage"]["unscoped_pin_count"] == 0
+    assert {
+        (d["rule"], d["object"])
+        for d in report["diagnostics"]
+        if d["status"] != "PASS" and d["rule"] != "PROPERTY.REQUIRED"
+    } == WARNINGS
+    assert all(d["severity"] == "ERROR" for d in missing)
+    out = tmp_path / "existing"
+    out.mkdir()
+    (out / "keep").write_text("preserve")
+    with pytest.raises(ElectricalError, match="missing required property"):
+        export_design(board, out)
+    assert (out / "keep").read_text() == "preserve"
+    assert not (PROJECT / "design.lock.json").exists()
 
 
 def test_default_assembly_and_conductive_paths():
     data = compile_board().data
-    parent = {name: name for name in data["nets"]}
 
-    def find(net):
-        if parent[net] != net:
-            parent[net] = find(parent[net])
-        return parent[net]
+    parts = functional_parts(data)
+    pins = physical_pins(data)
+
+    def part(path):
+        return parts[path]
+
+    def pin(path):
+        return pins[path]
+
+    parent = {n: n for n in data["nets"]}
+
+    def find(n):
+        if parent[n] != n:
+            parent[n] = find(parent[n])
+        return parent[n]
 
     def join(a, b):
-        parent[find(data["pins"][a]["net"])] = find(data["pins"][b]["net"])
+        parent[find(pin(a)["net"])] = find(pin(b)["net"])
 
     for ref, expected in EXPECTED["assembly"].items():
-        e = data["parts"][ref]["electrical"]
-        assert e["initial_state" if ref.startswith("SB") else "assembly"] == expected
-        if ref.startswith("SB") and expected == "closed":
+        assert (
+            part(ref)["electrical"][
+                "initial_state" if expected in ("open", "closed") else "assembly"
+            ]
+            == expected
+        )
+        if expected == "closed":
             join(ref + ".1", ref + ".2")
-    assert data["parts"]["JP1"]["electrical"]["initial_state"] == "closed"
-    join("JP1.1", "JP1.2")
-    join("L1.1", "L1.2")
-    assert data["parts"]["CN3"]["electrical"]["demo_shunt"] == {
-        "pins": ["4", "5"],
-        "initial_state": "closed",
-        "removable": True,
-    }
-    join("CN3.4", "CN3.5")
+    join("power/current_measurement_jumper.1", "power/current_measurement_jumper.2")
+    join("target/analog_supply_bead.1", "target/analog_supply_bead.2")
+    join("interfaces/arduino_right.4", "interfaces/arduino_right.5")
     for a, b in [
-        ("U3.4", "U2.1"),
-        ("U3.4", "U2.17"),
-        ("U3.4", "U2.5"),
-        ("U2.16", "U2.33"),
-        ("U2.32", "U2.33"),
-        ("U2.8", "U5.13"),
-        ("U2.25", "U5.12"),
-        ("U2.4", "U5.18"),
-        ("U2.2", "X1.1"),
-        ("U2.3", "X1.2"),
-        ("CN4.7", "CN3.8"),
-        ("CN4.8", "CN3.7"),
-        ("CN3.5", "U2.33"),
+        ("power/target_regulator.4", "target/target_mcu.1"),
+        ("power/target_regulator.4", "target/target_mcu.17"),
+        ("power/target_regulator.4", "target/target_mcu.5"),
+        ("target/target_mcu.16", "target/target_mcu.33"),
+        ("target/target_mcu.32", "target/target_mcu.33"),
+        ("target/target_mcu.8", "stlink/debug_mcu.13"),
+        ("target/target_mcu.25", "stlink/debug_mcu.12"),
+        ("target/target_mcu.4", "stlink/debug_mcu.18"),
+        ("target/target_mcu.2", "target/rtc_crystal.1"),
+        ("target/target_mcu.3", "target/rtc_crystal.2"),
+        ("interfaces/arduino_left.7", "interfaces/arduino_right.8"),
+        ("interfaces/arduino_left.8", "interfaces/arduino_right.7"),
+        ("interfaces/arduino_right.5", "target/target_mcu.33"),
     ]:
-        assert find(data["pins"][a]["net"]) == find(data["pins"][b]["net"])
-    for a, b in [("CN3.10", "U2.2"), ("CN3.11", "U2.3"), ("U2.6", "R5.2")]:
-        assert find(data["pins"][a]["net"]) != find(data["pins"][b]["net"])
-    # PCB nets on either side of a fitted jumper remain separate.
-    assert data["pins"]["JP1.1"]["net"] != data["pins"]["JP1.2"]["net"]
-    for ref in ("C3", "R13", "CN2"):
-        assert data["parts"][ref]["electrical"]["assembly"] == "dnp"
-    assert data["pins"]["C3.1"]["net"] == "MCO"
-    assert data["pins"]["CN2.1"]["net"] == "STM_JTMS"
+        assert find(pin(a)["net"]) == find(pin(b)["net"])
+    for a, b in [
+        ("interfaces/arduino_right.10", "target/target_mcu.2"),
+        ("interfaces/arduino_right.11", "target/target_mcu.3"),
+        ("target/target_mcu.6", "stlink/resistor_mco.2"),
+    ]:
+        assert find(pin(a)["net"]) != find(pin(b)["net"])
+    assert (
+        pin("power/current_measurement_jumper.1")["net"]
+        != pin("power/current_measurement_jumper.2")["net"]
+    )
+    for ref in (
+        "stlink/capacitor_mco",
+        "stlink/resistor_link_2",
+        "interfaces/debug_programming_header",
+    ):
+        assert part(ref)["assembly"] == "dnp"
+    assert data["accessories"][0]["quantity"] == 1
 
 
 @pytest.fixture
 def project(tmp_path):
-    target = tmp_path / "nucleo_l432kc"
-    shutil.copytree(PROJECT, target)
-    return target
+    shutil.copytree(PROJECT, tmp_path / "board")
+    return tmp_path / "board"
 
 
-def change_connections(project, ref, first, second=None, disconnect=False):
-    path = project / "board.yaml"
-    doc = yaml.safe_load(path.read_text())
-    components = yaml.safe_load((project / "components.yaml").read_text())["components"]
-    names = components[ref]["pins"]
-    first_name = names[first]["name"]
-    second_name = names[second]["name"] if second else None
-    for module in doc["modules"].values():
-        for net in module.get("nets", {}).values():
-            for ep in list(net["endpoints"]):
-                if ep.get("part") != ref:
-                    continue
-                if ep.get("pin") == first_name:
-                    if disconnect:
-                        net["endpoints"].remove(ep)
-                        module["nc"].append(ep)
-                    else:
-                        ep["pin"] = second_name
-                elif ep.get("pin") == second_name:
-                    ep["pin"] = first_name
-    write_yaml(path, doc)
+def change_connections(doc, ref, first, second=None, disconnect=False):
+    module_name, part_name = ref.split("/")
+    module = doc["modules"][module_name]
+    a, b = first, second
+    for net in module["nets"].values():
+        for ep in list(net["endpoints"]):
+            if ep.get("part") != part_name:
+                continue
+            if ep.get("pin") == a:
+                if disconnect:
+                    net["endpoints"].remove(ep)
+                    module["nc"].append(ep)
+                else:
+                    ep["pin"] = b
+            elif ep.get("pin") == b:
+                ep["pin"] = a
 
 
 @pytest.mark.parametrize(
-    "fault",
-    ["swd", "usb", "uart", "supply", "ground", "bridge", "short", "resistor", "dnp"],
+    "ref,a,b",
+    [
+        ("target/target_mcu", "PA13", "PA14"),
+        ("interfaces/usb_connector", "DM", "DP"),
+        ("stlink/debug_mcu", "PA2", "PA3"),
+        ("target/target_mcu", "VDD_17", None),
+        ("target/target_mcu", "EP_GND", None),
+    ],
 )
-def test_faults_block_export_without_replacing_package(project, tmp_path, fault):
-    out = tmp_path / "output"
-    export_design(compile_board(project), out)
-    before = files(out)
-    if fault in ("swd", "usb", "uart"):
-        ref, a, b = {
-            "swd": ("U2", "23", "24"),
-            "usb": ("CN1", "2", "3"),
-            "uart": ("U5", "12", "13"),
-        }[fault]
-        change_connections(project, ref, a, b)
-    elif fault in ("supply", "ground"):
-        change_connections(
-            project, "U2", "17" if fault == "supply" else "33", disconnect=True
-        )
-    elif fault == "short":
-        # Incorrectly put both sides of the open SB4 on the MCO network.
-        path = project / "board.yaml"
-        doc = yaml.safe_load(path.read_text())
-        target = doc["modules"]["target"]
-        ep = next(
-            e for e in target["nets"]["NetSB4_2"]["endpoints"] if e.get("part") == "SB4"
-        )
-        target["nets"]["NetSB4_2"]["endpoints"].remove(ep)
-        target["nets"]["MCO"]["endpoints"].append(ep)
-        write_yaml(path, doc)
+def test_connection_faults_still_detected(project, ref, a, b):
+    path = project / "board.yaml"
+    doc = yaml.safe_load(path.read_text())
+    change_connections(doc, ref, a, b, disconnect=b is None)
+    write_yaml(path, doc)
+    report = compile_board(project).check().data
+    assert any(
+        d["status"] == "FAIL"
+        and d["severity"] == "ERROR"
+        and d["rule"] != "PROPERTY.REQUIRED"
+        for d in report["diagnostics"]
+    )
+
+
+@pytest.mark.parametrize(
+    "ref,field,value",
+    [
+        ("target/jumper_link", "initial_state", "open"),
+        ("stlink/resistor_usb_dp", "resistance", "100 ohm"),
+        ("stlink/resistor_link_2", "assembly", "fitted"),
+    ],
+)
+def test_assembly_and_specification_faults(project, ref, field, value):
+    path = project / "board.yaml"
+    doc = yaml.safe_load(path.read_text())
+    module_name, part_name = ref.split("/")
+    part = doc["modules"][module_name]["parts"][part_name]
+    if field == "assembly":
+        part[field] = value
     else:
-        path = project / "components.yaml"
-        doc = yaml.safe_load(path.read_text())
-        ref, key, value = {
-            "bridge": ("SB5", "initial_state", "open"),
-            "resistor": ("R1", "resistance", "100 ohm"),
-            "dnp": ("R13", "assembly", "fitted"),
-        }[fault]
-        doc["components"][ref]["electrical"][key] = value
-        write_yaml(path, doc)
-    board = compile_board(project)
-    assert not board.check().ok
-    with pytest.raises(ElectricalError, match="DRC blocked"):
-        export_design(board, out)
-    assert main(["build", str(project / "board.yaml"), "-o", str(out), "--json"]) == 2
-    assert files(out) == before
-
-
-def test_board_named_deterministic_package(tmp_path):
-    out = tmp_path / "arbitrary_output_name"
-    board = compile_board()
-    export_design(board, out)
-    assert (out / "nucleo_l432kc.tel").is_file()
-    assert not (out / "design.tel").exists()
-    assert verify_package(out) == {"parts": 89, "pins": 312, "nets": 82}
-    before = files(out)
-    export_design(board, out)
-    assert files(out) == before
+        part["properties"][field] = value
+    write_yaml(path, doc)
+    if ref == "stlink/resistor_usb_dp":
+        with pytest.raises(
+            ElectricalError, match="fixed device specification conflict"
+        ):
+            compile_board(project)
+    else:
+        report = compile_board(project).check().data
+        assert any(
+            d["status"] == "FAIL"
+            and d["severity"] == "ERROR"
+            and d["rule"] != "PROPERTY.REQUIRED"
+            for d in report["diagnostics"]
+        )

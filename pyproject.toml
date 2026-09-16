@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "design2allegro"
-version = "1.0.0"
+version = "2.0.0"
 description = "Compile declarative YAML circuits into offline-verified Allegro Telesis packages"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -22,7 +22,7 @@ where = ["src"]
 include = ["design2allegro*"]
 
 [tool.setuptools.package-data]
-design2allegro = ["schema.json"]
+design2allegro = ["schema.json", "libraries/*/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/parser"]
