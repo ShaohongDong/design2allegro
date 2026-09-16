@@ -63,6 +63,14 @@ preserved unchanged. Checks pass with the 10 documented ERC warnings.
 
 The generated netlist is `build/parser/nucleo_l432kc/nucleo_l432kc.tel`.
 
+## Human review
+
+Run `design2allegro review <output-directory>` to inspect a verified v2 delivery
+in a local browser. The full-board topology links components, nets and physical
+pins to specifications and diagnostics. Human statuses and notes autosave outside
+the package, with version isolation, import/export and concurrent-edit detection.
+See the [review guide](docs/review.md) for controls and record storage.
+
 ## Delivery and acceptance
 
 Outputs include `<name>.tel`, `devices/`, `components.json`, `BOM.md`, `BOM.csv`,
@@ -79,6 +87,7 @@ packages remain available for read-only verification.
 
 ```sh
 make test            # schema, rules, annotation, transactions and delivery
+make test-ui         # synthetic review browser tests (Playwright Chromium)
 make example         # build and verify the regression fixture and NUCLEO
 make benchmark       # 10,000 pins through loading, checking and export
 make build           # version 3 wheel, including the shared catalogue

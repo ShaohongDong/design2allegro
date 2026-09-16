@@ -2,13 +2,16 @@
 
 import argparse
 import hashlib
+import json
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import venv
 from pathlib import Path
+from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
 BUILD = ROOT / "build" / "parser"
@@ -51,11 +54,93 @@ def build():
         [sys.executable, "-m", "build", "--wheel", "--outdir", ROOT / "dist", stage],
         "build",
     )
-    wheel = ROOT / "dist" / "design2allegro-3.1.0-py3-none-any.whl"
+    wheel = ROOT / "dist" / "design2allegro-3.2.0-py3-none-any.whl"
     (ROOT / "dist" / "design2allegro-SHA256SUMS").write_text(
         hashlib.sha256(wheel.read_bytes()).hexdigest() + "  " + wheel.name + "\n"
     )
     return wheel
+
+
+def verify_review(entry, package, work, env):
+    """Exercise the installed CLI and bundled assets outside the checkout."""
+    log = work / "review-server.log"
+    with log.open("w") as stream:
+        process = subprocess.Popen(
+            [
+                str(entry),
+                "review",
+                str(package),
+                "--no-browser",
+                "--state-dir",
+                str(work / "review-state"),
+            ],
+            cwd=work,
+            env=env,
+            stdout=stream,
+            stderr=subprocess.STDOUT,
+        )
+        try:
+            deadline = time.monotonic() + 20
+            url = None
+            while time.monotonic() < deadline:
+                lines = log.read_text().splitlines()
+                url = next(
+                    (
+                        line.removeprefix("Review: ")
+                        for line in lines
+                        if line.startswith("Review: ")
+                    ),
+                    None,
+                )
+                if url:
+                    break
+                if process.poll() is not None:
+                    raise RuntimeError(log.read_text())
+                time.sleep(0.05)
+            if not url:
+                raise RuntimeError("review server startup timed out")
+            with urlopen(url + "/api/package", timeout=5) as response:
+                package_data = json.load(response)
+            for resource in (
+                "/",
+                "/app.js",
+                "/style.css",
+                "/vendor/cytoscape.min.js",
+                "/vendor/LICENSE.cytoscape",
+            ):
+                with urlopen(url + resource, timeout=5) as response:
+                    assert response.status == 200 and response.read()
+            key = next(iter(package_data["objects"]))
+            request = Request(
+                url + "/api/review",
+                method="PATCH",
+                data=json.dumps(
+                    {
+                        "revision": 0,
+                        "changes": {key: {"status": "approved", "note": "wheel smoke"}},
+                    }
+                ).encode(),
+                headers={
+                    "Content-Type": "application/json",
+                    "X-Review-Token": package_data["token"],
+                },
+            )
+            with urlopen(request, timeout=5) as response:
+                saved = json.load(response)
+                assert (
+                    saved["revision"] == 1
+                    and saved["entries"][key]["note"] == "wheel smoke"
+                )
+            print(
+                "Installed review CLI: assets, frozen package API and saved annotation passed."
+            )
+        finally:
+            process.terminate()
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait()
 
 
 def verify():
@@ -130,6 +215,7 @@ def verify():
             env=env,
             cwd=work,
         )
+        verify_review(entry, work / "parameterized-output", work, env)
         bad = work / "bad.circuit"
         bad.write_text('circuit 1;\nboard x { id = "x"; id = "x"; }\n')
         run(
@@ -145,7 +231,15 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument(
         "command",
-        choices=["build", "test", "example", "benchmark", "verify-package", "clean"],
+        choices=[
+            "build",
+            "test",
+            "test-ui",
+            "example",
+            "benchmark",
+            "verify-package",
+            "clean",
+        ],
     )
     p.add_argument("--dry-run", action="store_true")
     args = p.parse_args()
@@ -163,18 +257,19 @@ def main():
         build()
     elif args.command == "verify-package":
         verify()
-    elif args.command == "test":
+    elif args.command in ("test", "test-ui"):
         run(
             [
                 sys.executable,
                 "-m",
                 "pytest",
-                ROOT / "tests/parser",
+                ROOT
+                / ("tests/review_ui" if args.command == "test-ui" else "tests/parser"),
                 "-q",
                 "--basetemp",
-                BUILD / "test-tmp",
+                BUILD / ("review-ui-tmp" if args.command == "test-ui" else "test-tmp"),
             ],
-            "test",
+            args.command,
             env=environment(),
         )
     elif args.command == "example":

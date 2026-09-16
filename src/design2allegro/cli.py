@@ -28,8 +28,24 @@ def main(argv=None):
         )
         if command == "build":
             item.add_argument("-o", "--output", required=True)
+    review = sub.add_parser(
+        "review", help="inspect a delivered package in a local browser"
+    )
+    review.add_argument("input")
+    review.add_argument("--port", type=int, default=0)
+    review.add_argument("--state-dir")
+    review.add_argument("--no-browser", action="store_true")
     try:
         args = parser.parse_args(argv)
+        if args.command == "review":
+            from .review import serve_review
+
+            return serve_review(
+                args.input,
+                port=args.port,
+                state_dir=args.state_dir,
+                open_browser=not args.no_browser,
+            )
         if args.command == "verify":
             result = dict(ok=True, statistics=verify_package(args.input))
         else:

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>网表人工审查</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script defer src="/vendor/cytoscape.min.js"></script>
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <span class="brand-icon">⊞</span>
+        <div>
+          <strong>网表审查</strong><small>DESIGN2ALLEGRO · LOCAL REVIEW</small>
+        </div>
+      </div>
+      <div id="board-name">正在载入交付包…</div>
+      <div class="header-actions">
+        <span class="readonly">设计只读</span
+        ><button id="export">导出记录</button
+        ><button id="import">导入记录</button
+        ><input
+          type="file"
+          id="import-file"
+          accept=".json,application/json"
+          hidden
+        />
+      </div>
+    </header>
+    <section class="overview">
+      <span id="inventory"></span><span class="divider"></span
+      ><span id="progress"></span
+      ><span class="save-state" id="save-state" role="status">正在连接…</span
+      ><button id="retry" hidden>重试保存</button
+      ><button id="reload">刷新审查记录</button>
+    </section>
+    <div id="error" role="alert" hidden></div>
+    <main>
+      <aside class="navigator">
+        <div class="search-wrap">
+          <label for="search">查找对象</label
+          ><input
+            id="search"
+            type="search"
+            placeholder="位号、型号、网络、引脚…"
+            autocomplete="off"
+          />
+        </div>
+        <nav class="tabs" aria-label="对象列表">
+          <button data-tab="parts" class="active">元件</button
+          ><button data-tab="nets">网络</button
+          ><button data-tab="diagnostics">检查结果</button>
+        </nav>
+        <div class="filters">
+          <select id="status-filter" aria-label="人工状态筛选">
+            <option value="all">全部审查状态</option>
+            <option value="pending">待审</option>
+            <option value="approved">通过</option>
+            <option value="issue">有问题</option></select
+          ><select id="assembly-filter" aria-label="装配筛选">
+            <option value="all">全部装配</option>
+            <option value="fitted">已装配</option>
+            <option value="dnp">DNP</option></select
+          ><select id="diagnostic-filter" aria-label="检查结果筛选">
+            <option value="attention">需关注的检查</option>
+            <option value="all">全部检查</option>
+          </select>
+        </div>
+        <div class="list-heading">
+          <span id="list-count"></span
+          ><button id="select-page">选择本页</button>
+        </div>
+        <div id="object-list" class="object-list"></div>
+        <div class="pager">
+          <button id="previous">上一页</button><span id="page-number"></span
+          ><button id="next">下一页</button>
+        </div>
+        <div class="batch">
+          <span id="selection-count">未选择对象</span
+          ><button id="clear-selection">清空</button
+          ><select id="batch-status" aria-label="批量审查状态">
+            <option value="approved">通过</option>
+            <option value="issue">有问题</option>
+            <option value="pending">待审</option></select
+          ><button id="batch-apply" class="primary">标记选中项</button>
+        </div>
+      </aside>
+      <section class="graph-panel" aria-label="全板连接拓扑">
+        <div class="graph-toolbar">
+          <strong>全板连接</strong><button id="fit">适应视图</button
+          ><button id="layout">重新布局</button
+          ><button id="collapse">按模块折叠</button
+          ><button id="restore">恢复全部</button
+          ><label><input id="labels" type="checkbox" />连线标签</label>
+        </div>
+        <div class="graph-stage">
+          <div id="graph"></div>
+          <div id="graph-loading" hidden>正在布局…</div>
+          <div class="legend">
+            <span class="legend-part"></span>元件
+            <span class="legend-net"></span>网络
+            <span class="legend-dnp"></span>DNP <span>Shift + 拖动框选</span>
+          </div>
+        </div>
+        <div class="graph-footer">
+          <span id="graph-count"></span
+          ><button id="hide-selected">隐藏选中图元</button
+          ><button id="focus">仅看关联</button>
+        </div>
+      </section>
+      <aside class="inspector">
+        <div class="inspector-heading">
+          <span>对象详情</span><span class="verified">交付包已验证</span>
+        </div>
+        <div id="detail">
+          <div class="empty">
+            <div class="empty-icon">⌖</div>
+            <h2>从连接开始审查</h2>
+            <p>选择一个元件或网络，查看完整引脚映射、规格与关联检查。</p>
+            <p>点击网络端点可在表格和全板拓扑间定位。</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+    <footer>
+      <span>人工结论独立于 ERC / DRC，不改变设计与网表。</span
+      ><span id="version-label"></span>
+    </footer>
+    <dialog id="import-dialog">
+      <h2>导入审查记录</h2>
+      <p id="import-summary"></p>
+      <p>确认后替换本版本的全部人工记录；未包含的记录将恢复为待审。</p>
+      <div id="import-preview"></div>
+      <div class="dialog-actions">
+        <button id="cancel-import">取消</button
+        ><button id="confirm-import" class="primary">确认替换记录</button>
+      </div>
+    </dialog>
+  </body>
+</html>

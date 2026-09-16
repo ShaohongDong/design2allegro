@@ -13,6 +13,11 @@ Board expectations belong in the design's Circuit rules and source documentation
 `make verify-package` follows the same boundary, using the synthetic `fpga_soc`
 and `parameterized` fixtures. Board validation is an explicit `check`, `build`
 and `verify` workflow, separate from kernel regression tests.
+`make test-ui` runs the review browser tests on synthetic exported packages.
+Install the dev extra and run `.venv/bin/python -m playwright install chromium`
+once before running it. The local review server, persistence and HTTP API are
+covered by `make test`; browser interactions and large graph rendering are separate.
+
 `make example` builds/verifies the existing FPGA/SoC regression fixture and the multifile
 NUCLEO design with complete specifications and documented selections.
 `make benchmark` measures a 10,000-pin Circuit 2 design with an included parameterized module from actual Circuit parsing through
@@ -23,6 +28,8 @@ No timing threshold is implied by that measurement.
 `make verify-package` installs it in a fresh virtual environment and runs all
 three commands outside the repository, including Circuit 1, multifile Circuit 2 and negative input checks. It checks
 that neither SKiDL nor the old native extension is installed in that environment.
+It also starts the installed review CLI and checks its bundled static assets,
+package API and independent review-record persistence.
 
 Logs and disposable outputs are confined to `build/parser/`. `make clean-preview`
 shows the cleanup target; `make clean` removes only that directory, preserving

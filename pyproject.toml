@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "design2allegro"
-version = "3.1.0"
+version = "3.2.0"
 description = "Compile Circuit design files into offline-verified Allegro Telesis packages"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -12,7 +12,7 @@ license = "MIT"
 dependencies = ["jsonschema>=4,<5"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8,<10", "build>=1,<2", "black>=24", "isort>=5"]
+dev = ["pytest>=8,<10", "build>=1,<2", "black>=24", "isort>=5", "playwright>=1.50,<2"]
 
 [project.scripts]
 design2allegro = "design2allegro.cli:main"
@@ -22,7 +22,7 @@ where = ["src"]
 include = ["design2allegro*"]
 
 [tool.setuptools.package-data]
-design2allegro = ["schema.json", "libraries/*/*.json"]
+design2allegro = ["schema.json", "libraries/*/*.json", "review_static/*", "review_static/vendor/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/parser"]
