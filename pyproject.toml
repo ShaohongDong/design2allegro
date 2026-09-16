@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "design2allegro"
+version = "1.0.0"
+description = "Compile declarative YAML circuits into offline-verified Allegro Telesis packages"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = ["PyYAML>=6,<7", "jsonschema>=4,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "build>=1,<2", "black>=24", "isort>=5"]
+
+[project.scripts]
+design2allegro = "design2allegro.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["design2allegro*"]
+
+[tool.setuptools.package-data]
+design2allegro = ["schema.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/parser"]
+addopts = "--tb=short"
+cache_dir = "build/parser/pytest-cache"
+
+[tool.black]
+target-version = ["py312"]
+line-length = 88
+
+[tool.isort]
+profile = "black"

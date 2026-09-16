@@ -1,0 +1,41 @@
+version: 1
+components:
+  SYNTH_FPGA_SOC:
+    package: SYNTH_BGA10
+    pins:
+      '1':
+        name: D0
+        type: BIDIR
+      '2':
+        name: D1
+        type: BIDIR
+      '3':
+        name: D2
+        type: BIDIR
+      '4':
+        name: D3
+        type: BIDIR
+      '5':
+        name: DQS_P
+        type: BIDIR
+      '6':
+        name: DQS_N
+        type: BIDIR
+      '7':
+        name: DM
+        type: BIDIR
+      '8':
+        name: CLK
+        type: INPUT
+      '9':
+        name: RST
+        type: INPUT
+      '10':
+        name: SPARE
+        type: PASSIVE
+    groups:
+      DATA:
+      - '1'
+      - '2'
+      - '3'
+      - '4'

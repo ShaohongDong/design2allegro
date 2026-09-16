@@ -1,0 +1,151 @@
+version: 1
+libraries:
+- components.yaml
+top: board
+references:
+  fpga/endpoint/chip: U1
+  soc/endpoint/chip: U2
+rules: rules.yaml
+modules:
+  endpoint:
+    ports:
+      data:
+        width: 4
+      dqs_p:
+        width: 1
+      dqs_n:
+        width: 1
+      dm:
+        width: 1
+      clk:
+        width: 1
+      rst:
+        width: 1
+    parts:
+      chip:
+        component: SYNTH_FPGA_SOC
+    nets:
+      data:
+        endpoints:
+        - port: data
+        - part: chip
+          group: DATA
+      dqs_p:
+        endpoints:
+        - port: dqs_p
+        - part: chip
+          pin: DQS_P
+      dqs_n:
+        endpoints:
+        - port: dqs_n
+        - part: chip
+          pin: DQS_N
+      dm:
+        endpoints:
+        - port: dm
+        - part: chip
+          pin: DM
+      clk:
+        endpoints:
+        - port: clk
+        - part: chip
+          pin: CLK
+      rst:
+        endpoints:
+        - port: rst
+        - part: chip
+          pin: RST
+    nc:
+    - part: chip
+      pin: SPARE
+  wrapper:
+    ports:
+      data:
+        width: 4
+      dqs_p:
+        width: 1
+      dqs_n:
+        width: 1
+      dm:
+        width: 1
+      clk:
+        width: 1
+      rst:
+        width: 1
+    instances:
+      endpoint:
+        module: endpoint
+    nets:
+      data:
+        endpoints:
+        - port: data
+        - instance: endpoint
+          port: data
+      dqs_p:
+        endpoints:
+        - port: dqs_p
+        - instance: endpoint
+          port: dqs_p
+      dqs_n:
+        endpoints:
+        - port: dqs_n
+        - instance: endpoint
+          port: dqs_n
+      dm:
+        endpoints:
+        - port: dm
+        - instance: endpoint
+          port: dm
+      clk:
+        endpoints:
+        - port: clk
+        - instance: endpoint
+          port: clk
+      rst:
+        endpoints:
+        - port: rst
+        - instance: endpoint
+          port: rst
+  board:
+    instances:
+      fpga:
+        module: wrapper
+      soc:
+        module: wrapper
+    nets:
+      DATA:
+        endpoints:
+        - instance: fpga
+          port: data
+        - instance: soc
+          port: data
+      DQS_P:
+        endpoints:
+        - instance: fpga
+          port: dqs_p
+        - instance: soc
+          port: dqs_p
+      DQS_N:
+        endpoints:
+        - instance: fpga
+          port: dqs_n
+        - instance: soc
+          port: dqs_n
+      DM:
+        endpoints:
+        - instance: fpga
+          port: dm
+        - instance: soc
+          port: dm
+      CLK:
+        endpoints:
+        - instance: fpga
+          port: clk
+        - instance: soc
+          port: clk
+      RST:
+        endpoints:
+        - instance: fpga
+          port: rst
+        - instance: soc
+          port: rst

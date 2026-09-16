@@ -1,0 +1,15 @@
+version: 1
+components:
+  RESISTOR:
+    package: R0805
+    value: 4.7k
+    pins:
+      '1':
+        name: A
+        type: PASSIVE
+      '2':
+        name: B
+        type: PASSIVE
+    electrical:
+      role: resistor
+      resistance: 4.7 kohm
