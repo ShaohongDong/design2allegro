@@ -9,3 +9,6 @@
 *_sklib.py
 *.pkl
 __pycache__
+
+# Source-controlled board connectivity reference, required by pytest.
+!/fixtures/nucleo_l432kc.json

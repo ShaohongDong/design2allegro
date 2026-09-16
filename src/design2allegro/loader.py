@@ -104,6 +104,7 @@ class LoadedDesign:
     rules: dict
     waivers: list
     inputs: dict
+    name: str = "design"
 
 
 def load_design(path):
@@ -152,4 +153,5 @@ def load_design(path):
     waivers = document.get("waivers", [])
     if isinstance(waivers, str):
         waivers = read(path.parent / waivers, "waivers")
-    return LoadedDesign(document, components, rules, waivers, inputs)
+    name = path.parent.name if path.stem == "board" else path.stem
+    return LoadedDesign(document, components, rules, waivers, inputs, name)

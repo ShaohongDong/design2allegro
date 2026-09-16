@@ -27,7 +27,7 @@ values are inferred. Units are mandatory for physical quantities.
 Interface protocols are UART, SPI, I2C and JTAG (lowercase values).
 DDR rules use ordered `dq` lists, `dqs_p`, `dqs_n` and optional `dm` in each
 controller/memory group; swapping data bits requires an explicit allowed map.
-See `examples/fpga_soc/rules.yaml` and `tests/parser/test_interfaces.py` for
+See `tests/fixtures/fpga_soc/rules.yaml` and `tests/parser/test_interfaces.py` for
 complete declarations, and `tests/parser/test_rules.py` for voltage, power,
 differential and bank examples.
 
@@ -35,3 +35,6 @@ ERC always evaluates pin-type contention and drive. A declared rule FAIL with
 ERROR severity or a required UNKNOWN blocks export. Warnings remain visible.
 No rules means ERC-only validation, not complete device-specific coverage.
 The report lists unmodeled and unscoped pins explicitly.
+
+`attribute` resolves metadata on pins, parts or nets according to the scoped object.
+Assembly states are checked as attributes; they do not merge physical PCB nets.

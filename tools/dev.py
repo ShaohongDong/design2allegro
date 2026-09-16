@@ -74,7 +74,7 @@ def verify():
     env.pop("PYTHONPATH", None)
     with tempfile.TemporaryDirectory(prefix="design2allegro-") as folder:
         work = Path(folder)
-        shutil.copytree(ROOT / "examples" / "fpga_soc", work / "project")
+        shutil.copytree(ROOT / "schematics" / "nucleo_l432kc", work / "project")
         entry = dest / "bin" / "design2allegro"
         run(
             [
@@ -159,14 +159,14 @@ def main():
             env=environment(),
         )
     elif args.command == "example":
-        for name in ("simple", "fpga_soc"):
+        for name in ("nucleo_l432kc",):
             run(
                 [
                     sys.executable,
                     "-m",
                     "design2allegro",
                     "build",
-                    ROOT / f"examples/{name}/board.yaml",
+                    ROOT / f"schematics/{name}/board.yaml",
                     "-o",
                     BUILD / name,
                     "--json",

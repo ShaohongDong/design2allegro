@@ -258,6 +258,7 @@ def compile_design(design):
     count = max(int(t) for t in pin_types) + 1
     data = {
         "version": 1,
+        "name": design.name,
         "parts": parts,
         "pins": pins,
         "nets": nets,

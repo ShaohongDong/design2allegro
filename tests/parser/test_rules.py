@@ -272,3 +272,18 @@ def test_large_conflict_summary(make_board):
     assert error["evidence"]["count"] == 49995000
     assert len(error["evidence"]["examples"]) == 20
     assert not report.ok
+
+
+@pytest.mark.parametrize("entity,obj", [("parts", "U1"), ("nets", "N1")])
+def test_attributes_resolve_scoped_entity(board, entity, obj):
+    rules = rule(
+        "attribute",
+        [obj],
+        {"name": "assembly", "equals": "fitted"},
+        {entity: {obj: {"assembly": "fitted"}}},
+    )
+    assert status(board, rules) == "PASS"
+    rules["models"][entity][obj]["assembly"] = "dnp"
+    assert status(board, rules) == "FAIL"
+    rules["models"] = {}
+    assert status(board, rules) == "UNKNOWN"

@@ -362,7 +362,9 @@ class Engine:
         return {"resistors": candidates}
 
     def evaluate(self, kind, obj, p):
-        model = self.models["pins"].get(obj, {})
+        model = next(
+            (models[obj] for models in self.models.values() if obj in models), {}
+        )
         if kind == "required":
             pin = self.pin(obj)
             require(pin["net"] is not None, "required pin is floating or NC")

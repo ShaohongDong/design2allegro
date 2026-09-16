@@ -1,0 +1,5991 @@
+version: 1
+description: MB1180 schematic C.1 connectivity, BOM C-09 evaluated for L432KC; static
+  checks only.
+rules:
+- id: PRESENT_AIN_1
+  kind: required
+  scope:
+  - R12.2
+  - R14.2
+  - U5.10
+  params: {}
+- id: NET_AIN_1
+  kind: connected
+  scope:
+  - R12.2
+  params:
+    targets:
+    - R14.2
+    - U5.10
+- id: PRESENT_AVDD
+  kind: required
+  scope:
+  - C24.1
+  - CN4.13
+  - L1.1
+  - U2.5
+  params: {}
+- id: NET_AVDD
+  kind: connected
+  scope:
+  - C24.1
+  params:
+    targets:
+    - CN4.13
+    - L1.1
+    - U2.5
+- id: PRESENT_BOOT0
+  kind: required
+  scope:
+  - R21.1
+  - SB12.2
+  params: {}
+- id: NET_BOOT0
+  kind: connected
+  scope:
+  - R21.1
+  params:
+    targets:
+    - SB12.2
+- id: PRESENT_E5V
+  kind: required
+  scope:
+  - C25.1
+  - D2.1
+  - D3.1
+  - R11.1
+  - U6.2
+  - U6.4
+  params: {}
+- id: NET_E5V
+  kind: connected
+  scope:
+  - C25.1
+  params:
+    targets:
+    - D2.1
+    - D3.1
+    - R11.1
+    - U6.2
+    - U6.4
+- id: PRESENT_GND
+  kind: required
+  scope:
+  - B1.2
+  - C1.1
+  - C10.1
+  - C11.1
+  - C12.2
+  - C13.2
+  - C14.2
+  - C15.1
+  - C16.2
+  - C17.1
+  - C18.1
+  - C19.1
+  - C2.1
+  - C20.2
+  - C21.2
+  - C22.2
+  - C23.2
+  - C24.2
+  - C25.2
+  - C3.2
+  - C4.1
+  - C5.1
+  - C6.1
+  - C7.2
+  - C8.1
+  - C9.2
+  - CN1.10
+  - CN1.11
+  - CN1.5
+  - CN1.6
+  - CN1.7
+  - CN1.8
+  - CN1.9
+  - CN2.2
+  - CN3.4
+  - CN4.2
+  - LD1.1
+  - LD2.2
+  - LD3.2
+  - R10.2
+  - R12.1
+  - R13.1
+  - R16.1
+  - R2.2
+  - R21.2
+  - R3.1
+  - R6.1
+  - R7.2
+  - SB11.2
+  - SB13.2
+  - U1.4
+  - U2.33
+  - U3.0
+  - U3.2
+  - U4.2
+  - U5.20
+  - U5.23
+  - U5.35
+  - U5.47
+  - U5.8
+  - U6.1
+  params: {}
+- id: NET_GND
+  kind: connected
+  scope:
+  - B1.2
+  params:
+    targets:
+    - C1.1
+    - C10.1
+    - C11.1
+    - C12.2
+    - C13.2
+    - C14.2
+    - C15.1
+    - C16.2
+    - C17.1
+    - C18.1
+    - C19.1
+    - C2.1
+    - C20.2
+    - C21.2
+    - C22.2
+    - C23.2
+    - C24.2
+    - C25.2
+    - C3.2
+    - C4.1
+    - C5.1
+    - C6.1
+    - C7.2
+    - C8.1
+    - C9.2
+    - CN1.10
+    - CN1.11
+    - CN1.5
+    - CN1.6
+    - CN1.7
+    - CN1.8
+    - CN1.9
+    - CN2.2
+    - CN3.4
+    - CN4.2
+    - LD1.1
+    - LD2.2
+    - LD3.2
+    - R10.2
+    - R12.1
+    - R13.1
+    - R16.1
+    - R2.2
+    - R21.2
+    - R3.1
+    - R6.1
+    - R7.2
+    - SB11.2
+    - SB13.2
+    - U1.4
+    - U2.33
+    - U3.0
+    - U3.2
+    - U4.2
+    - U5.20
+    - U5.23
+    - U5.35
+    - U5.47
+    - U5.8
+    - U6.1
+- id: PRESENT_LED_STLINK
+  kind: required
+  scope:
+  - R18.1
+  - R19.1
+  - U5.30
+  params: {}
+- id: NET_LED_STLINK
+  kind: connected
+  scope:
+  - R18.1
+  params:
+    targets:
+    - R19.1
+    - U5.30
+- id: PRESENT_MCO
+  kind: required
+  scope:
+  - C3.1
+  - R5.2
+  - SB17.1
+  - SB4.1
+  params: {}
+- id: NET_MCO
+  kind: connected
+  scope:
+  - C3.1
+  params:
+    targets:
+    - R5.2
+    - SB17.1
+    - SB4.1
+- id: PRESENT_NRST
+  kind: required
+  scope:
+  - B1.1
+  - C11.2
+  - CN3.3
+  - CN4.3
+  - SB9.2
+  - U2.4
+  params: {}
+- id: NET_NRST
+  kind: connected
+  scope:
+  - B1.1
+  params:
+    targets:
+    - C11.2
+    - CN3.3
+    - CN4.3
+    - SB9.2
+    - U2.4
+- id: PRESENT_NetC12_1
+  kind: required
+  scope:
+  - C12.1
+  - SB5.1
+  - X1.1
+  params: {}
+- id: NET_NetC12_1
+  kind: connected
+  scope:
+  - C12.1
+  params:
+    targets:
+    - SB5.1
+    - X1.1
+- id: PRESENT_NetC13_1
+  kind: required
+  scope:
+  - C13.1
+  - SB7.1
+  - X1.2
+  params: {}
+- id: NET_NetC13_1
+  kind: connected
+  scope:
+  - C13.1
+  params:
+    targets:
+    - SB7.1
+    - X1.2
+- id: PRESENT_NetC15_2
+  kind: required
+  scope:
+  - C15.2
+  - C18.2
+  - D1.2
+  - D2.2
+  - U4.1
+  - U4.3
+  params: {}
+- id: NET_NetC15_2
+  kind: connected
+  scope:
+  - C15.2
+  params:
+    targets:
+    - C18.2
+    - D1.2
+    - D2.2
+    - U4.1
+    - U4.3
+- id: PRESENT_NetC17_2
+  kind: required
+  scope:
+  - C17.2
+  - U4.4
+  params: {}
+- id: NET_NetC17_2
+  kind: connected
+  scope:
+  - C17.2
+  params:
+    targets:
+    - U4.4
+- id: PRESENT_NetCN1_4
+  kind: required
+  scope:
+  - CN1.4
+  - R2.1
+  params: {}
+- id: NET_NetCN1_4
+  kind: connected
+  scope:
+  - CN1.4
+  params:
+    targets:
+    - R2.1
+- id: PRESENT_NetL1_2
+  kind: required
+  scope:
+  - L1.2
+  - SB10.1
+  params: {}
+- id: NET_NetL1_2
+  kind: connected
+  scope:
+  - L1.2
+  params:
+    targets:
+    - SB10.1
+- id: PRESENT_NetLD1_2
+  kind: required
+  scope:
+  - LD1.2
+  - R18.2
+  params: {}
+- id: NET_NetLD1_2
+  kind: connected
+  scope:
+  - LD1.2
+  params:
+    targets:
+    - R18.2
+- id: PRESENT_NetLD1_3
+  kind: required
+  scope:
+  - LD1.3
+  - R19.2
+  params: {}
+- id: NET_NetLD1_3
+  kind: connected
+  scope:
+  - LD1.3
+  params:
+    targets:
+    - R19.2
+- id: PRESENT_NetLD1_4
+  kind: required
+  scope:
+  - LD1.4
+  - R17.1
+  params: {}
+- id: NET_NetLD1_4
+  kind: connected
+  scope:
+  - LD1.4
+  params:
+    targets:
+    - R17.1
+- id: PRESENT_NetLD2_1
+  kind: required
+  scope:
+  - LD2.1
+  - R22.1
+  params: {}
+- id: NET_NetLD2_1
+  kind: connected
+  scope:
+  - LD2.1
+  params:
+    targets:
+    - R22.1
+- id: PRESENT_NetLD3_1
+  kind: required
+  scope:
+  - LD3.1
+  - R23.1
+  params: {}
+- id: NET_NetLD3_1
+  kind: connected
+  scope:
+  - LD3.1
+  params:
+    targets:
+    - R23.1
+- id: PRESENT_NetR10_1
+  kind: required
+  scope:
+  - R10.1
+  - R11.2
+  - SB1.2
+  - U5.39
+  params: {}
+- id: NET_NetR10_1
+  kind: connected
+  scope:
+  - R10.1
+  params:
+    targets:
+    - R11.2
+    - SB1.2
+    - U5.39
+- id: PRESENT_NetR13_2
+  kind: required
+  scope:
+  - R13.2
+  - U5.3
+  params: {}
+- id: NET_NetR13_2
+  kind: connected
+  scope:
+  - R13.2
+  params:
+    targets:
+    - U5.3
+- id: PRESENT_NetR16_2
+  kind: required
+  scope:
+  - R16.2
+  - U5.2
+  params: {}
+- id: NET_NetR16_2
+  kind: connected
+  scope:
+  - R16.2
+  params:
+    targets:
+    - U5.2
+- id: PRESENT_NetR1_2
+  kind: required
+  scope:
+  - R1.2
+  - T1.1
+  params: {}
+- id: NET_NetR1_2
+  kind: connected
+  scope:
+  - R1.2
+  params:
+    targets:
+    - T1.1
+- id: PRESENT_NetR23_2
+  kind: required
+  scope:
+  - R23.2
+  - SB15.1
+  params: {}
+- id: NET_NetR23_2
+  kind: connected
+  scope:
+  - R23.2
+  params:
+    targets:
+    - SB15.1
+- id: PRESENT_NetR3_2
+  kind: required
+  scope:
+  - R3.2
+  - R4.1
+  - R8.1
+  - T1.2
+  params: {}
+- id: NET_NetR3_2
+  kind: connected
+  scope:
+  - R3.2
+  params:
+    targets:
+    - R4.1
+    - R8.1
+    - T1.2
+- id: PRESENT_NetR5_1
+  kind: required
+  scope:
+  - R5.1
+  - U5.29
+  params: {}
+- id: NET_NetR5_1
+  kind: connected
+  scope:
+  - R5.1
+  params:
+    targets:
+    - U5.29
+- id: PRESENT_NetR6_2
+  kind: required
+  scope:
+  - R6.2
+  - U5.44
+  params: {}
+- id: NET_NetR6_2
+  kind: connected
+  scope:
+  - R6.2
+  params:
+    targets:
+    - U5.44
+- id: PRESENT_NetR7_1
+  kind: required
+  scope:
+  - R7.1
+  - U1.5
+  params: {}
+- id: NET_NetR7_1
+  kind: connected
+  scope:
+  - R7.1
+  params:
+    targets:
+    - U1.5
+- id: PRESENT_NetSB11_1
+  kind: required
+  scope:
+  - SB11.1
+  - U2.16
+  params: {}
+- id: NET_NetSB11_1
+  kind: connected
+  scope:
+  - SB11.1
+  params:
+    targets:
+    - U2.16
+- id: PRESENT_NetSB12_1
+  kind: required
+  scope:
+  - SB12.1
+  - U2.31
+  params: {}
+- id: NET_NetSB12_1
+  kind: connected
+  scope:
+  - SB12.1
+  params:
+    targets:
+    - U2.31
+- id: PRESENT_NetSB13_1
+  kind: required
+  scope:
+  - SB13.1
+  - U2.32
+  params: {}
+- id: NET_NetSB13_1
+  kind: connected
+  scope:
+  - SB13.1
+  params:
+    targets:
+    - U2.32
+- id: PRESENT_NetSB4_2
+  kind: required
+  scope:
+  - SB4.2
+  - SB5.2
+  - SB6.2
+  - U2.2
+  params: {}
+- id: NET_NetSB4_2
+  kind: connected
+  scope:
+  - SB4.2
+  params:
+    targets:
+    - SB5.2
+    - SB6.2
+    - U2.2
+- id: PRESENT_NetSB7_2
+  kind: required
+  scope:
+  - SB7.2
+  - SB8.2
+  - U2.3
+  params: {}
+- id: NET_NetSB7_2
+  kind: connected
+  scope:
+  - SB7.2
+  params:
+    targets:
+    - SB8.2
+    - U2.3
+- id: PRESENT_OSC_IN
+  kind: required
+  scope:
+  - C21.1
+  - U5.5
+  - X2.2
+  params: {}
+- id: NET_OSC_IN
+  kind: connected
+  scope:
+  - C21.1
+  params:
+    targets:
+    - U5.5
+    - X2.2
+- id: PRESENT_OSC_OUT
+  kind: required
+  scope:
+  - C20.1
+  - U5.6
+  - X2.1
+  params: {}
+- id: NET_OSC_OUT
+  kind: connected
+  scope:
+  - C20.1
+  params:
+    targets:
+    - U5.6
+    - X2.1
+- id: PRESENT_PA0
+  kind: required
+  scope:
+  - CN4.12
+  - SB17.2
+  - U2.6
+  params: {}
+- id: NET_PA0
+  kind: connected
+  scope:
+  - CN4.12
+  params:
+    targets:
+    - SB17.2
+    - U2.6
+- id: PRESENT_PA1
+  kind: required
+  scope:
+  - CN4.11
+  - U2.7
+  params: {}
+- id: NET_PA1
+  kind: connected
+  scope:
+  - CN4.11
+  params:
+    targets:
+    - U2.7
+- id: PRESENT_PA10
+  kind: required
+  scope:
+  - CN3.2
+  - U2.20
+  params: {}
+- id: NET_PA10
+  kind: connected
+  scope:
+  - CN3.2
+  params:
+    targets:
+    - U2.20
+- id: PRESENT_PA11
+  kind: required
+  scope:
+  - CN3.13
+  - U2.21
+  params: {}
+- id: NET_PA11
+  kind: connected
+  scope:
+  - CN3.13
+  params:
+    targets:
+    - U2.21
+- id: PRESENT_PA12
+  kind: required
+  scope:
+  - CN3.5
+  - U2.22
+  params: {}
+- id: NET_PA12
+  kind: connected
+  scope:
+  - CN3.5
+  params:
+    targets:
+    - U2.22
+- id: PRESENT_PA13
+  kind: required
+  scope:
+  - R20.2
+  - U2.23
+  - U5.27
+  params: {}
+- id: NET_PA13
+  kind: connected
+  scope:
+  - R20.2
+  params:
+    targets:
+    - U2.23
+    - U5.27
+- id: PRESENT_PA14
+  kind: required
+  scope:
+  - U2.24
+  - U5.15
+  - U5.26
+  params: {}
+- id: NET_PA14
+  kind: connected
+  scope:
+  - U2.24
+  params:
+    targets:
+    - U5.15
+    - U5.26
+- id: PRESENT_PA15
+  kind: required
+  scope:
+  - SB3.1
+  - U2.25
+  params: {}
+- id: NET_PA15
+  kind: connected
+  scope:
+  - SB3.1
+  params:
+    targets:
+    - U2.25
+- id: PRESENT_PA2
+  kind: required
+  scope:
+  - CN4.5
+  - SB2.1
+  - U2.8
+  params: {}
+- id: NET_PA2
+  kind: connected
+  scope:
+  - CN4.5
+  params:
+    targets:
+    - SB2.1
+    - U2.8
+- id: PRESENT_PA3
+  kind: required
+  scope:
+  - CN4.10
+  - U2.9
+  params: {}
+- id: NET_PA3
+  kind: connected
+  scope:
+  - CN4.10
+  params:
+    targets:
+    - U2.9
+- id: PRESENT_PA4
+  kind: required
+  scope:
+  - CN4.9
+  - U2.10
+  params: {}
+- id: NET_PA4
+  kind: connected
+  scope:
+  - CN4.9
+  params:
+    targets:
+    - U2.10
+- id: PRESENT_PA5
+  kind: required
+  scope:
+  - CN4.8
+  - SB18.1
+  - U2.11
+  params: {}
+- id: NET_PA5
+  kind: connected
+  scope:
+  - CN4.8
+  params:
+    targets:
+    - SB18.1
+    - U2.11
+- id: PRESENT_PA6
+  kind: required
+  scope:
+  - CN4.7
+  - SB16.1
+  - U2.12
+  params: {}
+- id: NET_PA6
+  kind: connected
+  scope:
+  - CN4.7
+  params:
+    targets:
+    - SB16.1
+    - U2.12
+- id: PRESENT_PA7
+  kind: required
+  scope:
+  - CN4.6
+  - U2.13
+  params: {}
+- id: NET_PA7
+  kind: connected
+  scope:
+  - CN4.6
+  params:
+    targets:
+    - U2.13
+- id: PRESENT_PA8
+  kind: required
+  scope:
+  - CN3.12
+  - U2.18
+  params: {}
+- id: NET_PA8
+  kind: connected
+  scope:
+  - CN3.12
+  params:
+    targets:
+    - U2.18
+- id: PRESENT_PA9
+  kind: required
+  scope:
+  - CN3.1
+  - U2.19
+  params: {}
+- id: NET_PA9
+  kind: connected
+  scope:
+  - CN3.1
+  params:
+    targets:
+    - U2.19
+- id: PRESENT_PB0
+  kind: required
+  scope:
+  - CN3.6
+  - U2.14
+  params: {}
+- id: NET_PB0
+  kind: connected
+  scope:
+  - CN3.6
+  params:
+    targets:
+    - U2.14
+- id: PRESENT_PB1
+  kind: required
+  scope:
+  - CN3.9
+  - U2.15
+  params: {}
+- id: NET_PB1
+  kind: connected
+  scope:
+  - CN3.9
+  params:
+    targets:
+    - U2.15
+- id: PRESENT_PB3
+  kind: required
+  scope:
+  - CN4.15
+  - SB15.2
+  - U2.26
+  params: {}
+- id: NET_PB3
+  kind: connected
+  scope:
+  - CN4.15
+  params:
+    targets:
+    - SB15.2
+    - U2.26
+- id: PRESENT_PB4
+  kind: required
+  scope:
+  - CN3.15
+  - U2.27
+  params: {}
+- id: NET_PB4
+  kind: connected
+  scope:
+  - CN3.15
+  params:
+    targets:
+    - U2.27
+- id: PRESENT_PB5
+  kind: required
+  scope:
+  - CN3.14
+  - U2.28
+  params: {}
+- id: NET_PB5
+  kind: connected
+  scope:
+  - CN3.14
+  params:
+    targets:
+    - U2.28
+- id: PRESENT_PB6
+  kind: required
+  scope:
+  - CN3.8
+  - SB16.2
+  - U2.29
+  params: {}
+- id: NET_PB6
+  kind: connected
+  scope:
+  - CN3.8
+  params:
+    targets:
+    - SB16.2
+    - U2.29
+- id: PRESENT_PB7
+  kind: required
+  scope:
+  - CN3.7
+  - SB18.2
+  - U2.30
+  params: {}
+- id: NET_PB7
+  kind: connected
+  scope:
+  - CN3.7
+  params:
+    targets:
+    - SB18.2
+    - U2.30
+- id: PRESENT_PF0
+  kind: required
+  scope:
+  - CN3.10
+  - SB6.1
+  params: {}
+- id: NET_PF0
+  kind: connected
+  scope:
+  - CN3.10
+  params:
+    targets:
+    - SB6.1
+- id: PRESENT_PF1
+  kind: required
+  scope:
+  - CN3.11
+  - SB8.1
+  params: {}
+- id: NET_PF1
+  kind: connected
+  scope:
+  - CN3.11
+  params:
+    targets:
+    - SB8.1
+- id: PRESENT_PWR_ENN
+  kind: required
+  scope:
+  - R15.2
+  - U1.3
+  - U5.28
+  params: {}
+- id: NET_PWR_ENN
+  kind: connected
+  scope:
+  - R15.2
+  params:
+    targets:
+    - U1.3
+    - U5.28
+- id: PRESENT_STLINK_RX
+  kind: required
+  scope:
+  - SB2.2
+  - U5.13
+  params: {}
+- id: NET_STLINK_RX
+  kind: connected
+  scope:
+  - SB2.2
+  params:
+    targets:
+    - U5.13
+- id: PRESENT_STLINK_TX
+  kind: required
+  scope:
+  - SB3.2
+  - U5.12
+  params: {}
+- id: NET_STLINK_TX
+  kind: connected
+  scope:
+  - SB3.2
+  params:
+    targets:
+    - U5.12
+- id: PRESENT_STM_JTCK
+  kind: required
+  scope:
+  - CN2.3
+  - U5.37
+  params: {}
+- id: NET_STM_JTCK
+  kind: connected
+  scope:
+  - CN2.3
+  params:
+    targets:
+    - U5.37
+- id: PRESENT_STM_JTMS
+  kind: required
+  scope:
+  - CN2.1
+  - U5.34
+  params: {}
+- id: NET_STM_JTMS
+  kind: connected
+  scope:
+  - CN2.1
+  params:
+    targets:
+    - U5.34
+- id: PRESENT_STM_RST
+  kind: required
+  scope:
+  - C4.2
+  - R9.1
+  - U5.7
+  params: {}
+- id: NET_STM_RST
+  kind: connected
+  scope:
+  - C4.2
+  params:
+    targets:
+    - R9.1
+    - U5.7
+- id: PRESENT_T_JTDI
+  kind: required
+  scope:
+  - U5.17
+  params: {}
+- id: PRESENT_T_JTDO
+  kind: required
+  scope:
+  - U5.16
+  params: {}
+- id: PRESENT_T_NRST
+  kind: required
+  scope:
+  - SB9.1
+  - U5.18
+  params: {}
+- id: NET_T_NRST
+  kind: connected
+  scope:
+  - SB9.1
+  params:
+    targets:
+    - U5.18
+- id: PRESENT_T_SWDIO_IN
+  kind: required
+  scope:
+  - R20.1
+  - U5.25
+  params: {}
+- id: NET_T_SWDIO_IN
+  kind: connected
+  scope:
+  - R20.1
+  params:
+    targets:
+    - U5.25
+- id: PRESENT_T_SWO
+  kind: required
+  scope:
+  - U5.31
+  params: {}
+- id: PRESENT_U5V
+  kind: required
+  scope:
+  - C6.2
+  - CN1.1
+  - D1.1
+  - R15.1
+  - R4.2
+  - U1.1
+  - U1.2
+  params: {}
+- id: NET_U5V
+  kind: connected
+  scope:
+  - C6.2
+  params:
+    targets:
+    - CN1.1
+    - D1.1
+    - R15.1
+    - R4.2
+    - U1.1
+    - U1.2
+- id: PRESENT_U5V_ST_LINK
+  kind: required
+  scope:
+  - C1.2
+  - D4.1
+  - U1.6
+  - U1.7
+  params: {}
+- id: NET_U5V_ST_LINK
+  kind: connected
+  scope:
+  - C1.2
+  params:
+    targets:
+    - D4.1
+    - U1.6
+    - U1.7
+- id: PRESENT_USB_DM
+  kind: required
+  scope:
+  - CN1.2
+  - U5.32
+  params: {}
+- id: NET_USB_DM
+  kind: connected
+  scope:
+  - CN1.2
+  params:
+    targets:
+    - U5.32
+- id: PRESENT_USB_DP
+  kind: required
+  scope:
+  - CN1.3
+  - R1.1
+  - U5.33
+  params: {}
+- id: NET_USB_DP
+  kind: connected
+  scope:
+  - CN1.3
+  params:
+    targets:
+    - R1.1
+    - U5.33
+- id: PRESENT_USB_RENUMN
+  kind: required
+  scope:
+  - R8.2
+  - U5.38
+  params: {}
+- id: NET_USB_RENUMN
+  kind: connected
+  scope:
+  - R8.2
+  params:
+    targets:
+    - U5.38
+- id: PRESENT_V3V3
+  kind: required
+  scope:
+  - CN4.14
+  - JP1.1
+  - SB14.2
+  params: {}
+- id: NET_V3V3
+  kind: connected
+  scope:
+  - CN4.14
+  params:
+    targets:
+    - JP1.1
+    - SB14.2
+- id: PRESENT_V3V3_ST_LINK
+  kind: required
+  scope:
+  - C16.1
+  - C19.2
+  - C2.2
+  - C5.2
+  - CN2.4
+  - R17.2
+  - R9.2
+  - SB1.1
+  - T1.3
+  - U4.5
+  - U5.1
+  - U5.24
+  - U5.36
+  - U5.48
+  - U5.9
+  params: {}
+- id: NET_V3V3_ST_LINK
+  kind: connected
+  scope:
+  - C16.1
+  params:
+    targets:
+    - C19.2
+    - C2.2
+    - C5.2
+    - CN2.4
+    - R17.2
+    - R9.2
+    - SB1.1
+    - T1.3
+    - U4.5
+    - U5.1
+    - U5.24
+    - U5.36
+    - U5.48
+    - U5.9
+- id: PRESENT_V5
+  kind: required
+  scope:
+  - C14.1
+  - C8.2
+  - CN4.4
+  - D3.2
+  - D4.2
+  - R22.2
+  - U3.1
+  - U3.6
+  params: {}
+- id: NET_V5
+  kind: connected
+  scope:
+  - C14.1
+  params:
+    targets:
+    - C8.2
+    - CN4.4
+    - D3.2
+    - D4.2
+    - R22.2
+    - U3.1
+    - U3.6
+- id: PRESENT_VDD
+  kind: required
+  scope:
+  - C23.1
+  - C7.1
+  - JP1.2
+  - SB10.2
+  - U2.1
+  - U2.17
+  params: {}
+- id: NET_VDD
+  kind: connected
+  scope:
+  - C23.1
+  params:
+    targets:
+    - C7.1
+    - JP1.2
+    - SB10.2
+    - U2.1
+    - U2.17
+- id: PRESENT_VIN
+  kind: required
+  scope:
+  - C22.1
+  - CN4.1
+  - U6.3
+  params: {}
+- id: NET_VIN
+  kind: connected
+  scope:
+  - C22.1
+  params:
+    targets:
+    - CN4.1
+    - U6.3
+- id: PRESENT_VO
+  kind: required
+  scope:
+  - C10.2
+  - C9.1
+  - R14.1
+  - SB14.1
+  - U3.4
+  params: {}
+- id: NET_VO
+  kind: connected
+  scope:
+  - C10.2
+  params:
+    targets:
+    - C9.1
+    - R14.1
+    - SB14.1
+    - U3.4
+- id: NC
+  kind: no_connect
+  scope:
+  - CN2.5
+  - U1.8
+  - U3.3
+  - U3.5
+  - U5.11
+  - U5.14
+  - U5.19
+  - U5.21
+  - U5.22
+  - U5.4
+  - U5.40
+  - U5.41
+  - U5.42
+  - U5.43
+  - U5.45
+  - U5.46
+  params: {}
+- id: ASSEMBLY_B1
+  kind: attribute
+  scope:
+  - B1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C1
+  kind: attribute
+  scope:
+  - C1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C10
+  kind: attribute
+  scope:
+  - C10
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C11
+  kind: attribute
+  scope:
+  - C11
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C12
+  kind: attribute
+  scope:
+  - C12
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C13
+  kind: attribute
+  scope:
+  - C13
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C14
+  kind: attribute
+  scope:
+  - C14
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C15
+  kind: attribute
+  scope:
+  - C15
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C16
+  kind: attribute
+  scope:
+  - C16
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C17
+  kind: attribute
+  scope:
+  - C17
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C18
+  kind: attribute
+  scope:
+  - C18
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C19
+  kind: attribute
+  scope:
+  - C19
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C2
+  kind: attribute
+  scope:
+  - C2
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C20
+  kind: attribute
+  scope:
+  - C20
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C21
+  kind: attribute
+  scope:
+  - C21
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C22
+  kind: attribute
+  scope:
+  - C22
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C23
+  kind: attribute
+  scope:
+  - C23
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C24
+  kind: attribute
+  scope:
+  - C24
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C25
+  kind: attribute
+  scope:
+  - C25
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C3
+  kind: attribute
+  scope:
+  - C3
+  params:
+    name: assembly
+    equals: dnp
+- id: ASSEMBLY_C4
+  kind: attribute
+  scope:
+  - C4
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C5
+  kind: attribute
+  scope:
+  - C5
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C6
+  kind: attribute
+  scope:
+  - C6
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C7
+  kind: attribute
+  scope:
+  - C7
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C8
+  kind: attribute
+  scope:
+  - C8
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_C9
+  kind: attribute
+  scope:
+  - C9
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_CN1
+  kind: attribute
+  scope:
+  - CN1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_CN2
+  kind: attribute
+  scope:
+  - CN2
+  params:
+    name: assembly
+    equals: dnp
+- id: ASSEMBLY_CN3
+  kind: attribute
+  scope:
+  - CN3
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_CN4
+  kind: attribute
+  scope:
+  - CN4
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_D1
+  kind: attribute
+  scope:
+  - D1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_D2
+  kind: attribute
+  scope:
+  - D2
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_D3
+  kind: attribute
+  scope:
+  - D3
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_D4
+  kind: attribute
+  scope:
+  - D4
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_JP1
+  kind: attribute
+  scope:
+  - JP1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_L1
+  kind: attribute
+  scope:
+  - L1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_LD1
+  kind: attribute
+  scope:
+  - LD1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_LD2
+  kind: attribute
+  scope:
+  - LD2
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_LD3
+  kind: attribute
+  scope:
+  - LD3
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R1
+  kind: attribute
+  scope:
+  - R1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R10
+  kind: attribute
+  scope:
+  - R10
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R11
+  kind: attribute
+  scope:
+  - R11
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R12
+  kind: attribute
+  scope:
+  - R12
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R13
+  kind: attribute
+  scope:
+  - R13
+  params:
+    name: assembly
+    equals: dnp
+- id: ASSEMBLY_R14
+  kind: attribute
+  scope:
+  - R14
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R15
+  kind: attribute
+  scope:
+  - R15
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R16
+  kind: attribute
+  scope:
+  - R16
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R17
+  kind: attribute
+  scope:
+  - R17
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R18
+  kind: attribute
+  scope:
+  - R18
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R19
+  kind: attribute
+  scope:
+  - R19
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R2
+  kind: attribute
+  scope:
+  - R2
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R20
+  kind: attribute
+  scope:
+  - R20
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R21
+  kind: attribute
+  scope:
+  - R21
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R22
+  kind: attribute
+  scope:
+  - R22
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R23
+  kind: attribute
+  scope:
+  - R23
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R3
+  kind: attribute
+  scope:
+  - R3
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R4
+  kind: attribute
+  scope:
+  - R4
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R5
+  kind: attribute
+  scope:
+  - R5
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R6
+  kind: attribute
+  scope:
+  - R6
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R7
+  kind: attribute
+  scope:
+  - R7
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R8
+  kind: attribute
+  scope:
+  - R8
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_R9
+  kind: attribute
+  scope:
+  - R9
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_SB1
+  kind: attribute
+  scope:
+  - SB1
+  params:
+    name: initial_state
+    equals: open
+- id: ASSEMBLY_SB10
+  kind: attribute
+  scope:
+  - SB10
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB11
+  kind: attribute
+  scope:
+  - SB11
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB12
+  kind: attribute
+  scope:
+  - SB12
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB13
+  kind: attribute
+  scope:
+  - SB13
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB14
+  kind: attribute
+  scope:
+  - SB14
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB15
+  kind: attribute
+  scope:
+  - SB15
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB16
+  kind: attribute
+  scope:
+  - SB16
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB17
+  kind: attribute
+  scope:
+  - SB17
+  params:
+    name: initial_state
+    equals: open
+- id: ASSEMBLY_SB18
+  kind: attribute
+  scope:
+  - SB18
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB2
+  kind: attribute
+  scope:
+  - SB2
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB3
+  kind: attribute
+  scope:
+  - SB3
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB4
+  kind: attribute
+  scope:
+  - SB4
+  params:
+    name: initial_state
+    equals: open
+- id: ASSEMBLY_SB5
+  kind: attribute
+  scope:
+  - SB5
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB6
+  kind: attribute
+  scope:
+  - SB6
+  params:
+    name: initial_state
+    equals: open
+- id: ASSEMBLY_SB7
+  kind: attribute
+  scope:
+  - SB7
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_SB8
+  kind: attribute
+  scope:
+  - SB8
+  params:
+    name: initial_state
+    equals: open
+- id: ASSEMBLY_SB9
+  kind: attribute
+  scope:
+  - SB9
+  params:
+    name: initial_state
+    equals: closed
+- id: ASSEMBLY_T1
+  kind: attribute
+  scope:
+  - T1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_U1
+  kind: attribute
+  scope:
+  - U1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_U2
+  kind: attribute
+  scope:
+  - U2
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_U3
+  kind: attribute
+  scope:
+  - U3
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_U4
+  kind: attribute
+  scope:
+  - U4
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_U5
+  kind: attribute
+  scope:
+  - U5
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_U6
+  kind: attribute
+  scope:
+  - U6
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_X1
+  kind: attribute
+  scope:
+  - X1
+  params:
+    name: assembly
+    equals: fitted
+- id: ASSEMBLY_X2
+  kind: attribute
+  scope:
+  - X2
+  params:
+    name: assembly
+    equals: fitted
+- id: JP1_SHUNT
+  kind: attribute
+  scope:
+  - JP1
+  params:
+    name: initial_state
+    equals: closed
+- id: DEMO_SHUNT
+  kind: attribute
+  scope:
+  - CN3
+  params:
+    name: demo_shunt
+    equals:
+      pins:
+      - '4'
+      - '5'
+      initial_state: closed
+      removable: true
+- id: NO_SHORT_AIN_1
+  kind: isolated
+  scope:
+  - R12.2
+  params:
+    targets:
+    - C24.1
+    - R21.1
+    - C25.1
+    - B1.2
+    - R18.1
+    - C3.1
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_AVDD
+  kind: isolated
+  scope:
+  - C24.1
+  params:
+    targets:
+    - R21.1
+    - C25.1
+    - B1.2
+    - R18.1
+    - C3.1
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_BOOT0
+  kind: isolated
+  scope:
+  - R21.1
+  params:
+    targets:
+    - C25.1
+    - B1.2
+    - R18.1
+    - C3.1
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_E5V
+  kind: isolated
+  scope:
+  - C25.1
+  params:
+    targets:
+    - B1.2
+    - R18.1
+    - C3.1
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_GND
+  kind: isolated
+  scope:
+  - B1.2
+  params:
+    targets:
+    - R18.1
+    - C3.1
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_LED_STLINK
+  kind: isolated
+  scope:
+  - R18.1
+  params:
+    targets:
+    - C3.1
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_MCO
+  kind: isolated
+  scope:
+  - C3.1
+  params:
+    targets:
+    - B1.1
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NRST
+  kind: isolated
+  scope:
+  - B1.1
+  params:
+    targets:
+    - C12.1
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetC12_1
+  kind: isolated
+  scope:
+  - C12.1
+  params:
+    targets:
+    - C13.1
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetC13_1
+  kind: isolated
+  scope:
+  - C13.1
+  params:
+    targets:
+    - C15.2
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetC15_2
+  kind: isolated
+  scope:
+  - C15.2
+  params:
+    targets:
+    - C17.2
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetC17_2
+  kind: isolated
+  scope:
+  - C17.2
+  params:
+    targets:
+    - CN1.4
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetCN1_4
+  kind: isolated
+  scope:
+  - CN1.4
+  params:
+    targets:
+    - L1.2
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetL1_2
+  kind: isolated
+  scope:
+  - L1.2
+  params:
+    targets:
+    - LD1.2
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetLD1_2
+  kind: isolated
+  scope:
+  - LD1.2
+  params:
+    targets:
+    - LD1.3
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetLD1_3
+  kind: isolated
+  scope:
+  - LD1.3
+  params:
+    targets:
+    - LD1.4
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetLD1_4
+  kind: isolated
+  scope:
+  - LD1.4
+  params:
+    targets:
+    - LD2.1
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetLD2_1
+  kind: isolated
+  scope:
+  - LD2.1
+  params:
+    targets:
+    - LD3.1
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetLD3_1
+  kind: isolated
+  scope:
+  - LD3.1
+  params:
+    targets:
+    - R10.1
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR10_1
+  kind: isolated
+  scope:
+  - R10.1
+  params:
+    targets:
+    - R13.2
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR13_2
+  kind: isolated
+  scope:
+  - R13.2
+  params:
+    targets:
+    - R16.2
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR16_2
+  kind: isolated
+  scope:
+  - R16.2
+  params:
+    targets:
+    - R1.2
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR1_2
+  kind: isolated
+  scope:
+  - R1.2
+  params:
+    targets:
+    - R23.2
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR23_2
+  kind: isolated
+  scope:
+  - R23.2
+  params:
+    targets:
+    - R3.2
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR3_2
+  kind: isolated
+  scope:
+  - R3.2
+  params:
+    targets:
+    - R5.1
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR5_1
+  kind: isolated
+  scope:
+  - R5.1
+  params:
+    targets:
+    - R6.2
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR6_2
+  kind: isolated
+  scope:
+  - R6.2
+  params:
+    targets:
+    - R7.1
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetR7_1
+  kind: isolated
+  scope:
+  - R7.1
+  params:
+    targets:
+    - SB11.1
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetSB11_1
+  kind: isolated
+  scope:
+  - SB11.1
+  params:
+    targets:
+    - SB12.1
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetSB12_1
+  kind: isolated
+  scope:
+  - SB12.1
+  params:
+    targets:
+    - SB13.1
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetSB13_1
+  kind: isolated
+  scope:
+  - SB13.1
+  params:
+    targets:
+    - SB4.2
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetSB4_2
+  kind: isolated
+  scope:
+  - SB4.2
+  params:
+    targets:
+    - SB7.2
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_NetSB7_2
+  kind: isolated
+  scope:
+  - SB7.2
+  params:
+    targets:
+    - C21.1
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_OSC_IN
+  kind: isolated
+  scope:
+  - C21.1
+  params:
+    targets:
+    - C20.1
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_OSC_OUT
+  kind: isolated
+  scope:
+  - C20.1
+  params:
+    targets:
+    - CN4.12
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA0
+  kind: isolated
+  scope:
+  - CN4.12
+  params:
+    targets:
+    - CN4.11
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA1
+  kind: isolated
+  scope:
+  - CN4.11
+  params:
+    targets:
+    - CN3.2
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA10
+  kind: isolated
+  scope:
+  - CN3.2
+  params:
+    targets:
+    - CN3.13
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA11
+  kind: isolated
+  scope:
+  - CN3.13
+  params:
+    targets:
+    - CN3.5
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA12
+  kind: isolated
+  scope:
+  - CN3.5
+  params:
+    targets:
+    - R20.2
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA13
+  kind: isolated
+  scope:
+  - R20.2
+  params:
+    targets:
+    - U2.24
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA14
+  kind: isolated
+  scope:
+  - U2.24
+  params:
+    targets:
+    - SB3.1
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA15
+  kind: isolated
+  scope:
+  - SB3.1
+  params:
+    targets:
+    - CN4.5
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA2
+  kind: isolated
+  scope:
+  - CN4.5
+  params:
+    targets:
+    - CN4.10
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA3
+  kind: isolated
+  scope:
+  - CN4.10
+  params:
+    targets:
+    - CN4.9
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA4
+  kind: isolated
+  scope:
+  - CN4.9
+  params:
+    targets:
+    - CN4.8
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA5
+  kind: isolated
+  scope:
+  - CN4.8
+  params:
+    targets:
+    - CN4.7
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA6
+  kind: isolated
+  scope:
+  - CN4.7
+  params:
+    targets:
+    - CN4.6
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA7
+  kind: isolated
+  scope:
+  - CN4.6
+  params:
+    targets:
+    - CN3.12
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA8
+  kind: isolated
+  scope:
+  - CN3.12
+  params:
+    targets:
+    - CN3.1
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PA9
+  kind: isolated
+  scope:
+  - CN3.1
+  params:
+    targets:
+    - CN3.6
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB0
+  kind: isolated
+  scope:
+  - CN3.6
+  params:
+    targets:
+    - CN3.9
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB1
+  kind: isolated
+  scope:
+  - CN3.9
+  params:
+    targets:
+    - CN4.15
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB3
+  kind: isolated
+  scope:
+  - CN4.15
+  params:
+    targets:
+    - CN3.15
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB4
+  kind: isolated
+  scope:
+  - CN3.15
+  params:
+    targets:
+    - CN3.14
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB5
+  kind: isolated
+  scope:
+  - CN3.14
+  params:
+    targets:
+    - CN3.8
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB6
+  kind: isolated
+  scope:
+  - CN3.8
+  params:
+    targets:
+    - CN3.7
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PB7
+  kind: isolated
+  scope:
+  - CN3.7
+  params:
+    targets:
+    - CN3.10
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PF0
+  kind: isolated
+  scope:
+  - CN3.10
+  params:
+    targets:
+    - CN3.11
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PF1
+  kind: isolated
+  scope:
+  - CN3.11
+  params:
+    targets:
+    - R15.2
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_PWR_ENN
+  kind: isolated
+  scope:
+  - R15.2
+  params:
+    targets:
+    - SB2.2
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_STLINK_RX
+  kind: isolated
+  scope:
+  - SB2.2
+  params:
+    targets:
+    - SB3.2
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_STLINK_TX
+  kind: isolated
+  scope:
+  - SB3.2
+  params:
+    targets:
+    - CN2.3
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_STM_JTCK
+  kind: isolated
+  scope:
+  - CN2.3
+  params:
+    targets:
+    - CN2.1
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_STM_JTMS
+  kind: isolated
+  scope:
+  - CN2.1
+  params:
+    targets:
+    - C4.2
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_STM_RST
+  kind: isolated
+  scope:
+  - C4.2
+  params:
+    targets:
+    - U5.17
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_T_JTDI
+  kind: isolated
+  scope:
+  - U5.17
+  params:
+    targets:
+    - U5.16
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_T_JTDO
+  kind: isolated
+  scope:
+  - U5.16
+  params:
+    targets:
+    - SB9.1
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_T_NRST
+  kind: isolated
+  scope:
+  - SB9.1
+  params:
+    targets:
+    - R20.1
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_T_SWDIO_IN
+  kind: isolated
+  scope:
+  - R20.1
+  params:
+    targets:
+    - U5.31
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_T_SWO
+  kind: isolated
+  scope:
+  - U5.31
+  params:
+    targets:
+    - C6.2
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_U5V
+  kind: isolated
+  scope:
+  - C6.2
+  params:
+    targets:
+    - C1.2
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_U5V_ST_LINK
+  kind: isolated
+  scope:
+  - C1.2
+  params:
+    targets:
+    - CN1.2
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_USB_DM
+  kind: isolated
+  scope:
+  - CN1.2
+  params:
+    targets:
+    - CN1.3
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_USB_DP
+  kind: isolated
+  scope:
+  - CN1.3
+  params:
+    targets:
+    - R8.2
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_USB_RENUMN
+  kind: isolated
+  scope:
+  - R8.2
+  params:
+    targets:
+    - CN4.14
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_V3V3
+  kind: isolated
+  scope:
+  - CN4.14
+  params:
+    targets:
+    - C16.1
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_V3V3_ST_LINK
+  kind: isolated
+  scope:
+  - C16.1
+  params:
+    targets:
+    - C14.1
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_V5
+  kind: isolated
+  scope:
+  - C14.1
+  params:
+    targets:
+    - C23.1
+    - C22.1
+    - C10.2
+- id: NO_SHORT_VDD
+  kind: isolated
+  scope:
+  - C23.1
+  params:
+    targets:
+    - C22.1
+    - C10.2
+- id: NO_SHORT_VIN
+  kind: isolated
+  scope:
+  - C22.1
+  params:
+    targets:
+    - C10.2
+- id: TARGET_SWDIO
+  kind: capability
+  scope:
+  - U2.23
+  params:
+    capability: SWDIO
+- id: TARGET_SWCLK
+  kind: capability
+  scope:
+  - U2.24
+  params:
+    capability: SWCLK
+- id: VCP_TX
+  kind: path
+  scope:
+  - U2.8
+  params:
+    target: U5.13
+    via:
+    - pins:
+      - SB2.1
+      - SB2.2
+      role: jumper
+- id: VCP_RX
+  kind: path
+  scope:
+  - U2.25
+  params:
+    target: U5.12
+    via:
+    - pins:
+      - SB3.1
+      - SB3.2
+      role: jumper
+- id: TARGET_RESET
+  kind: path
+  scope:
+  - U5.18
+  params:
+    target: U2.4
+    via:
+    - pins:
+      - SB9.1
+      - SB9.2
+      role: jumper
+- id: VALUE_R1
+  kind: attribute
+  scope:
+  - R1
+  params:
+    name: resistance
+    equals: 1500 ohm
+- id: VALUE_R10
+  kind: attribute
+  scope:
+  - R10
+  params:
+    name: resistance
+    equals: 4700 ohm
+- id: VALUE_R11
+  kind: attribute
+  scope:
+  - R11
+  params:
+    name: resistance
+    equals: 2700 ohm
+- id: VALUE_R12
+  kind: attribute
+  scope:
+  - R12
+  params:
+    name: resistance
+    equals: 4700 ohm
+- id: VALUE_R13
+  kind: attribute
+  scope:
+  - R13
+  params:
+    name: resistance
+    equals: 10000 ohm
+- id: VALUE_R14
+  kind: attribute
+  scope:
+  - R14
+  params:
+    name: resistance
+    equals: 4700 ohm
+- id: VALUE_R15
+  kind: attribute
+  scope:
+  - R15
+  params:
+    name: resistance
+    equals: 10000 ohm
+- id: VALUE_R16
+  kind: attribute
+  scope:
+  - R16
+  params:
+    name: resistance
+    equals: 10000 ohm
+- id: VALUE_R17
+  kind: attribute
+  scope:
+  - R17
+  params:
+    name: resistance
+    equals: 0 ohm
+- id: VALUE_R18
+  kind: attribute
+  scope:
+  - R18
+  params:
+    name: resistance
+    equals: 100 ohm
+- id: VALUE_R19
+  kind: attribute
+  scope:
+  - R19
+  params:
+    name: resistance
+    equals: 100 ohm
+- id: VALUE_R2
+  kind: attribute
+  scope:
+  - R2
+  params:
+    name: resistance
+    equals: 100000 ohm
+- id: VALUE_R20
+  kind: attribute
+  scope:
+  - R20
+  params:
+    name: resistance
+    equals: 100 ohm
+- id: VALUE_R21
+  kind: attribute
+  scope:
+  - R21
+  params:
+    name: resistance
+    equals: 10000 ohm
+- id: VALUE_R22
+  kind: attribute
+  scope:
+  - R22
+  params:
+    name: resistance
+    equals: 1000 ohm
+- id: VALUE_R23
+  kind: attribute
+  scope:
+  - R23
+  params:
+    name: resistance
+    equals: 510 ohm
+- id: VALUE_R3
+  kind: attribute
+  scope:
+  - R3
+  params:
+    name: resistance
+    equals: 36000 ohm
+- id: VALUE_R4
+  kind: attribute
+  scope:
+  - R4
+  params:
+    name: resistance
+    equals: 10000 ohm
+- id: VALUE_R5
+  kind: attribute
+  scope:
+  - R5
+  params:
+    name: resistance
+    equals: 100 ohm
+- id: VALUE_R6
+  kind: attribute
+  scope:
+  - R6
+  params:
+    name: resistance
+    equals: 100000 ohm
+- id: VALUE_R7
+  kind: attribute
+  scope:
+  - R7
+  params:
+    name: resistance
+    equals: 2700 ohm
+- id: VALUE_R8
+  kind: attribute
+  scope:
+  - R8
+  params:
+    name: resistance
+    equals: 100 ohm
+- id: VALUE_R9
+  kind: attribute
+  scope:
+  - R9
+  params:
+    name: resistance
+    equals: 100000 ohm

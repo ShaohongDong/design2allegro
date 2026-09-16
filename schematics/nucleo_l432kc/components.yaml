@@ -1,0 +1,1604 @@
+version: 1
+components:
+  B1:
+    package: SW2_5R6_5R5x3R1
+    value: KSS221G
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: switch
+      initial_state: open
+  C1:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C10:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C11:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C12:
+    package: 0603C
+    value: 4.3pF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C13:
+    package: 0603C
+    value: 4.3pF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C14:
+    package: 0603C
+    value: 1uF_X5R_0603
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C15:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C16:
+    package: 0603C
+    value: 1uF_X5R_0603
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C17:
+    package: 0603C
+    value: 10nF_X7R_0603
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C18:
+    package: 0603C
+    value: 1uF_X5R_0603
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C19:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C2:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C20:
+    package: 0603C
+    value: 10pF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C21:
+    package: 0603C
+    value: 10pF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C22:
+    package: TAN_B
+    value: 10uF(25V)
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C23:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C24:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C25:
+    package: TAN_A
+    value: 10uF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C3:
+    package: 0603C
+    value: 20pF[N/A]
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: dnp
+      role: capacitor
+  C4:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C5:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C6:
+    package: 0603C
+    value: 4.7uF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C7:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C8:
+    package: 0603C
+    value: 100nF
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  C9:
+    package: 0603C
+    value: 1uF_X5R_0603
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: capacitor
+  CN1:
+    package: Molex_1050170001
+    value: '1050170001'
+    pins:
+      '1':
+        name: VBUS
+        type: PWROUT
+        electrical:
+          power_role: source
+          boundary: external USB host
+      '2':
+        name: DM
+        type: PASSIVE
+      '3':
+        name: DP
+        type: PASSIVE
+      '4':
+        name: ID
+        type: PASSIVE
+      '5':
+        name: GND
+        type: PWROUT
+        electrical:
+          power_role: source
+          boundary: external USB host
+      '6':
+        name: Shield
+        type: PASSIVE
+      '7':
+        name: Shield_7
+        type: PASSIVE
+      '8':
+        name: Shield_8
+        type: PASSIVE
+      '9':
+        name: Shield_9
+        type: PASSIVE
+      '10':
+        name: EXP
+        type: PASSIVE
+      '11':
+        name: EXP_11
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  CN2:
+    package: HDR_1x5_2R54_V_M
+    value: '[N/A]'
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+      '3':
+        name: P3
+        type: PASSIVE
+      '4':
+        name: P4
+        type: PASSIVE
+      '5':
+        name: P5
+        type: PASSIVE
+    electrical:
+      assembly: dnp
+  CN3:
+    package: HDR_1x15_2R54_V_F
+    value: Header 15X1_male
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+      '3':
+        name: P3
+        type: PASSIVE
+      '4':
+        name: P4
+        type: PASSIVE
+      '5':
+        name: P5
+        type: PASSIVE
+      '6':
+        name: P6
+        type: PASSIVE
+      '7':
+        name: P7
+        type: PASSIVE
+      '8':
+        name: P8
+        type: PASSIVE
+      '9':
+        name: P9
+        type: PASSIVE
+      '10':
+        name: P10
+        type: PASSIVE
+      '11':
+        name: P11
+        type: PASSIVE
+      '12':
+        name: P12
+        type: PASSIVE
+      '13':
+        name: P13
+        type: PASSIVE
+      '14':
+        name: P14
+        type: PASSIVE
+      '15':
+        name: P15
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      demo_shunt:
+        pins:
+        - '4'
+        - '5'
+        initial_state: closed
+        removable: true
+  CN4:
+    package: HDR_1x15_2R54_V_F
+    value: Header 15X1_male
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+      '3':
+        name: P3
+        type: PASSIVE
+      '4':
+        name: P4
+        type: PASSIVE
+      '5':
+        name: P5
+        type: PASSIVE
+      '6':
+        name: P6
+        type: PASSIVE
+      '7':
+        name: P7
+        type: PASSIVE
+      '8':
+        name: P8
+        type: PASSIVE
+      '9':
+        name: P9
+        type: PASSIVE
+      '10':
+        name: P10
+        type: PASSIVE
+      '11':
+        name: P11
+        type: PASSIVE
+      '12':
+        name: P12
+        type: PASSIVE
+      '13':
+        name: P13
+        type: PASSIVE
+      '14':
+        name: P14
+        type: PASSIVE
+      '15':
+        name: P15
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  D1:
+    package: SOD-323
+    value: BAT60JFILM
+    pins:
+      '1':
+        name: A
+        type: PASSIVE
+      '2':
+        name: K
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  D2:
+    package: SOD-323
+    value: BAT60JFILM
+    pins:
+      '1':
+        name: A
+        type: PASSIVE
+      '2':
+        name: K
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  D3:
+    package: SMA
+    value: STPS2L30A
+    pins:
+      '1':
+        name: A
+        type: PASSIVE
+      '2':
+        name: K
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  D4:
+    package: SOD-323
+    value: BAT60JFILM
+    pins:
+      '1':
+        name: A
+        type: PASSIVE
+      '2':
+        name: K
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  JP1:
+    package: HDR_1x2_1R27_R_M
+    value: PH127H10102JNG-2/3/1.5
+    pins:
+      '1':
+        name: COMMON
+        type: PASSIVE
+      '2':
+        name: 'NO'
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: jumper
+      initial_state: closed
+  L1:
+    package: 0603L
+    value: BEAD
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  LD1:
+    package: HSMF-A201
+    value: LD_BICOLOR_CMS
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+      '3':
+        name: P3
+        type: PASSIVE
+      '4':
+        name: P4
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  LD2:
+    package: 0603D_R
+    value: RED
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  LD3:
+    package: 0603D_G
+    value: Green
+    pins:
+      '1':
+        name: A
+        type: PASSIVE
+      '2':
+        name: K
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  R1:
+    package: 0603R
+    value: 1500 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 1500 ohm
+  R10:
+    package: 0603R
+    value: 4700 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 4700 ohm
+  R11:
+    package: 0603R
+    value: 2700 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 2700 ohm
+  R12:
+    package: 0603R
+    value: 4700 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 4700 ohm
+  R13:
+    package: 0603R
+    value: 10000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: dnp
+      role: resistor
+      resistance: 10000 ohm
+  R14:
+    package: 0603R
+    value: 4700 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 4700 ohm
+  R15:
+    package: 0603R
+    value: 10000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 10000 ohm
+  R16:
+    package: 0603R
+    value: 10000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 10000 ohm
+  R17:
+    package: 0603R
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 0 ohm
+  R18:
+    package: 0603R
+    value: 100 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100 ohm
+  R19:
+    package: 0603R
+    value: 100 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100 ohm
+  R2:
+    package: 0603R
+    value: 100000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100000 ohm
+  R20:
+    package: 0603R
+    value: 100 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100 ohm
+  R21:
+    package: 0603R
+    value: 10000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 10000 ohm
+  R22:
+    package: 0603R
+    value: 1000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 1000 ohm
+  R23:
+    package: 0603R
+    value: 510 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 510 ohm
+  R3:
+    package: 0603R
+    value: 36000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 36000 ohm
+  R4:
+    package: 0603R
+    value: 10000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 10000 ohm
+  R5:
+    package: 0603R
+    value: 100 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100 ohm
+  R6:
+    package: 0603R
+    value: 100000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100000 ohm
+  R7:
+    package: 0603R
+    value: 2700 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 2700 ohm
+  R8:
+    package: 0603R
+    value: 100 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100 ohm
+  R9:
+    package: 0603R
+    value: 100000 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+      role: resistor
+      resistance: 100000 ohm
+  SB1:
+    package: SB_0603
+    value: OPEN
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: open
+  SB10:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB11:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB12:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB13:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB14:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB15:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB16:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB17:
+    package: SB_0603
+    value: OPEN
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: open
+  SB18:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB2:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB3:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB4:
+    package: SB_0603
+    value: OPEN
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: open
+  SB5:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB6:
+    package: SB_0603
+    value: OPEN
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: open
+  SB7:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  SB8:
+    package: SB_0603
+    value: OPEN
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: open
+  SB9:
+    package: SB_0603
+    value: 0 ohm
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      role: jumper
+      initial_state: closed
+  T1:
+    package: SOT23-3
+    value: '9013'
+    pins:
+      '1':
+        name: E
+        type: PASSIVE
+      '2':
+        name: B
+        type: PASSIVE
+      '3':
+        name: C
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  U1:
+    package: SO-8
+    value: ST890CDR
+    pins:
+      '1':
+        name: IN
+        type: PWRIN
+      '2':
+        name: IN_2
+        type: PWRIN
+      '3':
+        name: O_N_
+        type: INPUT
+      '4':
+        name: GND
+        type: PWRIN
+      '5':
+        name: SET
+        type: PASSIVE
+      '6':
+        name: OUT
+        type: PWROUT
+      '7':
+        name: OUT_7
+        type: PASSIVE
+      '8':
+        name: F_A_U_L_T_
+        type: OPENCOLL
+    electrical:
+      assembly: fitted
+  U2:
+    package: UFQFPN32_5X5_P05_EP33
+    value: STM32L432KCU6U
+    pins:
+      '1':
+        name: VDD_1
+        type: PWRIN
+        electrical:
+          input_min: 1.71 V
+          input_max: 3.6 V
+          reference: GND
+          power_role: load
+      '2':
+        name: PC14
+        type: BIDIR
+      '3':
+        name: PC15
+        type: BIDIR
+      '4':
+        name: NRST
+        type: BIDIR
+      '5':
+        name: VDDA
+        type: PWRIN
+        electrical:
+          input_min: 1.62 V
+          input_max: 3.6 V
+          reference: GND
+          power_role: load
+      '6':
+        name: PA0
+        type: BIDIR
+      '7':
+        name: PA1
+        type: BIDIR
+      '8':
+        name: PA2
+        type: BIDIR
+      '9':
+        name: PA3
+        type: BIDIR
+      '10':
+        name: PA4
+        type: BIDIR
+      '11':
+        name: PA5
+        type: BIDIR
+      '12':
+        name: PA6
+        type: BIDIR
+      '13':
+        name: PA7
+        type: BIDIR
+      '14':
+        name: PB0
+        type: BIDIR
+      '15':
+        name: PB1
+        type: BIDIR
+      '16':
+        name: VSS_16
+        type: PWRIN
+      '17':
+        name: VDD_17
+        type: PWRIN
+        electrical:
+          input_min: 1.71 V
+          input_max: 3.6 V
+          reference: GND
+          power_role: load
+      '18':
+        name: PA8
+        type: BIDIR
+      '19':
+        name: PA9
+        type: BIDIR
+      '20':
+        name: PA10
+        type: BIDIR
+      '21':
+        name: PA11
+        type: BIDIR
+      '22':
+        name: PA12
+        type: BIDIR
+      '23':
+        name: PA13
+        type: BIDIR
+        electrical:
+          capabilities:
+          - SWDIO
+      '24':
+        name: PA14
+        type: INPUT
+        electrical:
+          capabilities:
+          - SWCLK
+      '25':
+        name: PA15
+        type: BIDIR
+      '26':
+        name: PB3
+        type: BIDIR
+      '27':
+        name: PB4
+        type: BIDIR
+      '28':
+        name: PB5
+        type: BIDIR
+      '29':
+        name: PB6
+        type: BIDIR
+      '30':
+        name: PB7
+        type: BIDIR
+      '31':
+        name: PH3_BOOT0
+        type: BIDIR
+      '32':
+        name: VSS_32
+        type: PWRIN
+      '33':
+        name: EP_GND
+        type: PWRIN
+    electrical:
+      assembly: fitted
+  U3:
+    package: DFN6_0R95_3x3_TP
+    value: LD39050PU33R
+    pins:
+      '0':
+        name: GND
+        type: PWRIN
+      '1':
+        name: EN
+        type: INPUT
+      '2':
+        name: GND_2
+        type: PWRIN
+      '3':
+        name: PG
+        type: OPENCOLL
+      '4':
+        name: VO
+        type: PWROUT
+        electrical:
+          nominal_voltage: 3.3 V
+          power_role: source
+      '5':
+        name: NC
+        type: NOCONNECT
+      '6':
+        name: VI
+        type: PWRIN
+    electrical:
+      assembly: fitted
+  U4:
+    package: SOT23-5L
+    value: LD3985M33R
+    pins:
+      '1':
+        name: Vin
+        type: PWRIN
+      '2':
+        name: GND
+        type: PWRIN
+      '3':
+        name: CE
+        type: INPUT
+      '4':
+        name: BYPASS
+        type: PASSIVE
+      '5':
+        name: Vout
+        type: PWROUT
+        electrical:
+          nominal_voltage: 3.3 V
+          power_role: source
+    electrical:
+      assembly: fitted
+  U5:
+    package: LQFP48_0R5_7x7
+    value: STM32F103CBT6
+    pins:
+      '1':
+        name: VBAT
+        type: PWRIN
+      '2':
+        name: PC13
+        type: BIDIR
+      '3':
+        name: PC14
+        type: BIDIR
+      '4':
+        name: PC15
+        type: BIDIR
+      '5':
+        name: OSCIN
+        type: INPUT
+      '6':
+        name: OSCOUT
+        type: OUTPUT
+      '7':
+        name: NRST
+        type: INPUT
+      '8':
+        name: VSSA
+        type: PWRIN
+      '9':
+        name: VDDA
+        type: PWRIN
+      '10':
+        name: PA0
+        type: INPUT
+      '11':
+        name: PA1
+        type: BIDIR
+      '12':
+        name: PA2
+        type: OUTPUT
+      '13':
+        name: PA3
+        type: INPUT
+      '14':
+        name: PA4
+        type: BIDIR
+      '15':
+        name: PA5
+        type: INPUT
+      '16':
+        name: PA6
+        type: BIDIR
+      '17':
+        name: PA7
+        type: BIDIR
+      '18':
+        name: PB0
+        type: OPENCOLL
+      '19':
+        name: PB1
+        type: BIDIR
+      '20':
+        name: PB2_BOOT1
+        type: INPUT
+      '21':
+        name: PB10
+        type: BIDIR
+      '22':
+        name: PB11
+        type: BIDIR
+      '23':
+        name: VSS_1
+        type: PWRIN
+      '24':
+        name: VDD_1
+        type: PWRIN
+      '25':
+        name: PB12
+        type: INPUT
+      '26':
+        name: PB13
+        type: OUTPUT
+      '27':
+        name: PB14
+        type: BIDIR
+      '28':
+        name: PB15
+        type: OUTPUT
+      '29':
+        name: PA8
+        type: OUTPUT
+      '30':
+        name: PA9
+        type: OUTPUT
+      '31':
+        name: PA10
+        type: BIDIR
+      '32':
+        name: PA11
+        type: BIDIR
+      '33':
+        name: PA12
+        type: BIDIR
+      '34':
+        name: JTMS_SWDIO
+        type: BIDIR
+      '35':
+        name: VSS_2
+        type: PWRIN
+      '36':
+        name: VDD_2
+        type: PWRIN
+      '37':
+        name: JTCK_SWCLK
+        type: BIDIR
+      '38':
+        name: PA15_JTDI
+        type: OUTPUT
+      '39':
+        name: PB3_JTDO
+        type: INPUT
+      '40':
+        name: PB4_JNTRST
+        type: BIDIR
+      '41':
+        name: PB5
+        type: BIDIR
+      '42':
+        name: PB6
+        type: BIDIR
+      '43':
+        name: PB7
+        type: BIDIR
+      '44':
+        name: BOOT0
+        type: INPUT
+      '45':
+        name: PB8
+        type: BIDIR
+      '46':
+        name: PB9
+        type: BIDIR
+      '47':
+        name: VSS_3
+        type: PWRIN
+      '48':
+        name: VDD_3
+        type: PWRIN
+    electrical:
+      assembly: fitted
+  U6:
+    package: SOT-223
+    value: LD1117S50TR
+    pins:
+      '1':
+        name: P1
+        type: PWRIN
+      '2':
+        name: Vout
+        type: PWROUT
+      '3':
+        name: Vin
+        type: PWRIN
+      '4':
+        name: Tab
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  X1:
+    package: XTAL_2SM_3R2X1R5
+    value: NX3215SA-32.768K-EXS00A-MU00525
+    pins:
+      '1':
+        name: P1
+        type: PASSIVE
+      '2':
+        name: P2
+        type: PASSIVE
+    electrical:
+      assembly: fitted
+  X2:
+    package: XTAL_2SM_3R2x2R5
+    value: NX3225GD 8MHz EXS00A-CG04874
+    pins:
+      '1':
+        name: OSC1
+        type: PASSIVE
+      '2':
+        name: OSC2
+        type: PASSIVE
+    electrical:
+      assembly: fitted

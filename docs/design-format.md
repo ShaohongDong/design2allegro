@@ -140,3 +140,13 @@ Python callers can use `load_design(path)`, `compile_design(loaded)`,
 The compiled electrical digest excludes source positions and input hashes;
 `inputs.json` preserves exact input hashes and `circuit.json` preserves provenance.
 Do not treat an offline PASS as proof of physical correctness or real Allegro import.
+
+## Board names and netlist filenames
+
+For `board.yaml` or `board.yml`, the enclosing directory is the board name.
+For other design filenames, use the filename stem. The compiled snapshot records
+this as `name`; export produces `<name>.tel`, independently of the output directory.
+Use ASCII letters, digits, `_`, `-` and `.`, starting with a letter, digit or `_`.
+Unsafe names fail export without replacing existing output. Existing packages
+containing `design.tel` remain readable; rebuilding replaces managed old output
+with the board-named netlist. The YAML schema and CLI arguments are unchanged.

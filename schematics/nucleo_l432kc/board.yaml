@@ -1,0 +1,2012 @@
+version: 1
+libraries:
+- components.yaml
+rules: rules.yaml
+top: board
+references:
+  target/B1: B1
+  power/C1: C1
+  power/C10: C10
+  target/C11: C11
+  target/C12: C12
+  target/C13: C13
+  power/C14: C14
+  power/C15: C15
+  power/C16: C16
+  power/C17: C17
+  power/C18: C18
+  power/C19: C19
+  stlink/C2: C2
+  stlink/C20: C20
+  stlink/C21: C21
+  power/C22: C22
+  target/C23: C23
+  target/C24: C24
+  power/C25: C25
+  stlink/C3: C3
+  stlink/C4: C4
+  stlink/C5: C5
+  power/C6: C6
+  target/C7: C7
+  power/C8: C8
+  power/C9: C9
+  interfaces/CN1: CN1
+  interfaces/CN2: CN2
+  interfaces/CN3: CN3
+  interfaces/CN4: CN4
+  power/D1: D1
+  power/D2: D2
+  power/D3: D3
+  power/D4: D4
+  power/JP1: JP1
+  target/L1: L1
+  stlink/LD1: LD1
+  power/LD2: LD2
+  target/LD3: LD3
+  stlink/R1: R1
+  stlink/R10: R10
+  stlink/R11: R11
+  stlink/R12: R12
+  stlink/R13: R13
+  stlink/R14: R14
+  power/R15: R15
+  stlink/R16: R16
+  stlink/R17: R17
+  stlink/R18: R18
+  stlink/R19: R19
+  stlink/R2: R2
+  stlink/R20: R20
+  target/R21: R21
+  power/R22: R22
+  target/R23: R23
+  stlink/R3: R3
+  stlink/R4: R4
+  stlink/R5: R5
+  stlink/R6: R6
+  power/R7: R7
+  stlink/R8: R8
+  stlink/R9: R9
+  stlink/SB1: SB1
+  target/SB10: SB10
+  target/SB11: SB11
+  target/SB12: SB12
+  target/SB13: SB13
+  power/SB14: SB14
+  target/SB15: SB15
+  target/SB16: SB16
+  target/SB17: SB17
+  target/SB18: SB18
+  stlink/SB2: SB2
+  stlink/SB3: SB3
+  target/SB4: SB4
+  target/SB5: SB5
+  target/SB6: SB6
+  target/SB7: SB7
+  target/SB8: SB8
+  stlink/SB9: SB9
+  stlink/T1: T1
+  power/U1: U1
+  target/U2: U2
+  power/U3: U3
+  power/U4: U4
+  stlink/U5: U5
+  power/U6: U6
+  target/X1: X1
+  stlink/X2: X2
+modules:
+  interfaces:
+    ports:
+      AVDD:
+        width: 1
+      GND:
+        width: 1
+      NRST:
+        width: 1
+      NetCN1_4:
+        width: 1
+      PA0:
+        width: 1
+      PA1:
+        width: 1
+      PA10:
+        width: 1
+      PA11:
+        width: 1
+      PA12:
+        width: 1
+      PA2:
+        width: 1
+      PA3:
+        width: 1
+      PA4:
+        width: 1
+      PA5:
+        width: 1
+      PA6:
+        width: 1
+      PA7:
+        width: 1
+      PA8:
+        width: 1
+      PA9:
+        width: 1
+      PB0:
+        width: 1
+      PB1:
+        width: 1
+      PB3:
+        width: 1
+      PB4:
+        width: 1
+      PB5:
+        width: 1
+      PB6:
+        width: 1
+      PB7:
+        width: 1
+      PF0:
+        width: 1
+      PF1:
+        width: 1
+      STM_JTCK:
+        width: 1
+      STM_JTMS:
+        width: 1
+      U5V:
+        width: 1
+      USB_DM:
+        width: 1
+      USB_DP:
+        width: 1
+      V3V3:
+        width: 1
+      V3V3_ST_LINK:
+        width: 1
+      V5:
+        width: 1
+      VIN:
+        width: 1
+    parts:
+      CN3:
+        component: CN3
+      CN4:
+        component: CN4
+      CN2:
+        component: CN2
+      CN1:
+        component: CN1
+    nets:
+      AVDD:
+        endpoints:
+        - part: CN4
+          pin: P13
+        - port: AVDD
+      GND:
+        endpoints:
+        - part: CN1
+          pin: EXP
+        - part: CN1
+          pin: EXP_11
+        - part: CN1
+          pin: GND
+        - part: CN1
+          pin: Shield
+        - part: CN1
+          pin: Shield_7
+        - part: CN1
+          pin: Shield_8
+        - part: CN1
+          pin: Shield_9
+        - part: CN2
+          pin: P2
+        - part: CN3
+          pin: P4
+        - part: CN4
+          pin: P2
+        - port: GND
+      NRST:
+        endpoints:
+        - part: CN3
+          pin: P3
+        - part: CN4
+          pin: P3
+        - port: NRST
+      NetCN1_4:
+        endpoints:
+        - part: CN1
+          pin: ID
+        - port: NetCN1_4
+      PA0:
+        endpoints:
+        - part: CN4
+          pin: P12
+        - port: PA0
+      PA1:
+        endpoints:
+        - part: CN4
+          pin: P11
+        - port: PA1
+      PA10:
+        endpoints:
+        - part: CN3
+          pin: P2
+        - port: PA10
+      PA11:
+        endpoints:
+        - part: CN3
+          pin: P13
+        - port: PA11
+      PA12:
+        endpoints:
+        - part: CN3
+          pin: P5
+        - port: PA12
+      PA2:
+        endpoints:
+        - part: CN4
+          pin: P5
+        - port: PA2
+      PA3:
+        endpoints:
+        - part: CN4
+          pin: P10
+        - port: PA3
+      PA4:
+        endpoints:
+        - part: CN4
+          pin: P9
+        - port: PA4
+      PA5:
+        endpoints:
+        - part: CN4
+          pin: P8
+        - port: PA5
+      PA6:
+        endpoints:
+        - part: CN4
+          pin: P7
+        - port: PA6
+      PA7:
+        endpoints:
+        - part: CN4
+          pin: P6
+        - port: PA7
+      PA8:
+        endpoints:
+        - part: CN3
+          pin: P12
+        - port: PA8
+      PA9:
+        endpoints:
+        - part: CN3
+          pin: P1
+        - port: PA9
+      PB0:
+        endpoints:
+        - part: CN3
+          pin: P6
+        - port: PB0
+      PB1:
+        endpoints:
+        - part: CN3
+          pin: P9
+        - port: PB1
+      PB3:
+        endpoints:
+        - part: CN4
+          pin: P15
+        - port: PB3
+      PB4:
+        endpoints:
+        - part: CN3
+          pin: P15
+        - port: PB4
+      PB5:
+        endpoints:
+        - part: CN3
+          pin: P14
+        - port: PB5
+      PB6:
+        endpoints:
+        - part: CN3
+          pin: P8
+        - port: PB6
+      PB7:
+        endpoints:
+        - part: CN3
+          pin: P7
+        - port: PB7
+      PF0:
+        endpoints:
+        - part: CN3
+          pin: P10
+        - port: PF0
+      PF1:
+        endpoints:
+        - part: CN3
+          pin: P11
+        - port: PF1
+      STM_JTCK:
+        endpoints:
+        - part: CN2
+          pin: P3
+        - port: STM_JTCK
+      STM_JTMS:
+        endpoints:
+        - part: CN2
+          pin: P1
+        - port: STM_JTMS
+      U5V:
+        endpoints:
+        - part: CN1
+          pin: VBUS
+        - port: U5V
+      USB_DM:
+        endpoints:
+        - part: CN1
+          pin: DM
+        - port: USB_DM
+      USB_DP:
+        endpoints:
+        - part: CN1
+          pin: DP
+        - port: USB_DP
+      V3V3:
+        endpoints:
+        - part: CN4
+          pin: P14
+        - port: V3V3
+      V3V3_ST_LINK:
+        endpoints:
+        - part: CN2
+          pin: P4
+        - port: V3V3_ST_LINK
+      V5:
+        endpoints:
+        - part: CN4
+          pin: P4
+        - port: V5
+      VIN:
+        endpoints:
+        - part: CN4
+          pin: P1
+        - port: VIN
+    nc:
+    - part: CN2
+      pin: P5
+  power:
+    ports:
+      E5V:
+        width: 1
+      GND:
+        width: 1
+      NetC15_2:
+        width: 1
+      NetC17_2:
+        width: 1
+      NetLD2_1:
+        width: 1
+      NetR7_1:
+        width: 1
+      PWR_ENN:
+        width: 1
+      U5V:
+        width: 1
+      U5V_ST_LINK:
+        width: 1
+      V3V3:
+        width: 1
+      V3V3_ST_LINK:
+        width: 1
+      V5:
+        width: 1
+      VDD:
+        width: 1
+      VIN:
+        width: 1
+      VO:
+        width: 1
+    parts:
+      C22:
+        component: C22
+      C25:
+        component: C25
+      D3:
+        component: D3
+      C9:
+        component: C9
+      C8:
+        component: C8
+      C10:
+        component: C10
+      LD2:
+        component: LD2
+      R22:
+        component: R22
+      C14:
+        component: C14
+      D4:
+        component: D4
+      SB14:
+        component: SB14
+      U6:
+        component: U6
+      U3:
+        component: U3
+      JP1:
+        component: JP1
+      D1:
+        component: D1
+      D2:
+        component: D2
+      C18:
+        component: C18
+      C17:
+        component: C17
+      C16:
+        component: C16
+      U4:
+        component: U4
+      C15:
+        component: C15
+      C19:
+        component: C19
+      R15:
+        component: R15
+      R7:
+        component: R7
+      C6:
+        component: C6
+      C1:
+        component: C1
+      U1:
+        component: U1
+    nets:
+      E5V:
+        endpoints:
+        - part: C25
+          pin: P1
+        - part: D2
+          pin: A
+        - part: D3
+          pin: A
+        - part: U6
+          pin: Vout
+        - part: U6
+          pin: Tab
+        - port: E5V
+      GND:
+        endpoints:
+        - part: C1
+          pin: P1
+        - part: C10
+          pin: P1
+        - part: C14
+          pin: P2
+        - part: C15
+          pin: P1
+        - part: C16
+          pin: P2
+        - part: C17
+          pin: P1
+        - part: C18
+          pin: P1
+        - part: C19
+          pin: P1
+        - part: C22
+          pin: P2
+        - part: C25
+          pin: P2
+        - part: C6
+          pin: P1
+        - part: C8
+          pin: P1
+        - part: C9
+          pin: P2
+        - part: LD2
+          pin: P2
+        - part: R7
+          pin: P2
+        - part: U1
+          pin: GND
+        - part: U3
+          pin: GND
+        - part: U3
+          pin: GND_2
+        - part: U4
+          pin: GND
+        - part: U6
+          pin: P1
+        - port: GND
+      NetC15_2:
+        endpoints:
+        - part: C15
+          pin: P2
+        - part: C18
+          pin: P2
+        - part: D1
+          pin: K
+        - part: D2
+          pin: K
+        - part: U4
+          pin: Vin
+        - part: U4
+          pin: CE
+        - port: NetC15_2
+      NetC17_2:
+        endpoints:
+        - part: C17
+          pin: P2
+        - part: U4
+          pin: BYPASS
+        - port: NetC17_2
+      NetLD2_1:
+        endpoints:
+        - part: LD2
+          pin: P1
+        - part: R22
+          pin: P1
+        - port: NetLD2_1
+      NetR7_1:
+        endpoints:
+        - part: R7
+          pin: P1
+        - part: U1
+          pin: SET
+        - port: NetR7_1
+      PWR_ENN:
+        endpoints:
+        - part: R15
+          pin: P2
+        - part: U1
+          pin: O_N_
+        - port: PWR_ENN
+      U5V:
+        endpoints:
+        - part: C6
+          pin: P2
+        - part: D1
+          pin: A
+        - part: R15
+          pin: P1
+        - part: U1
+          pin: IN
+        - part: U1
+          pin: IN_2
+        - port: U5V
+      U5V_ST_LINK:
+        endpoints:
+        - part: C1
+          pin: P2
+        - part: D4
+          pin: A
+        - part: U1
+          pin: OUT
+        - part: U1
+          pin: OUT_7
+        - port: U5V_ST_LINK
+      V3V3:
+        endpoints:
+        - part: JP1
+          pin: COMMON
+        - part: SB14
+          pin: P2
+        - port: V3V3
+      V3V3_ST_LINK:
+        endpoints:
+        - part: C16
+          pin: P1
+        - part: C19
+          pin: P2
+        - part: U4
+          pin: Vout
+        - port: V3V3_ST_LINK
+      V5:
+        endpoints:
+        - part: C14
+          pin: P1
+        - part: C8
+          pin: P2
+        - part: D3
+          pin: K
+        - part: D4
+          pin: K
+        - part: R22
+          pin: P2
+        - part: U3
+          pin: EN
+        - part: U3
+          pin: VI
+        - port: V5
+      VDD:
+        endpoints:
+        - part: JP1
+          pin: 'NO'
+        - port: VDD
+      VIN:
+        endpoints:
+        - part: C22
+          pin: P1
+        - part: U6
+          pin: Vin
+        - port: VIN
+      VO:
+        endpoints:
+        - part: C10
+          pin: P2
+        - part: C9
+          pin: P1
+        - part: SB14
+          pin: P1
+        - part: U3
+          pin: VO
+        - port: VO
+    nc:
+    - part: U1
+      pin: F_A_U_L_T_
+    - part: U3
+      pin: PG
+    - part: U3
+      pin: NC
+  stlink:
+    ports:
+      AIN_1:
+        width: 1
+      E5V:
+        width: 1
+      GND:
+        width: 1
+      LED_STLINK:
+        width: 1
+      MCO:
+        width: 1
+      NRST:
+        width: 1
+      NetCN1_4:
+        width: 1
+      NetLD1_2:
+        width: 1
+      NetLD1_3:
+        width: 1
+      NetLD1_4:
+        width: 1
+      NetR10_1:
+        width: 1
+      NetR13_2:
+        width: 1
+      NetR16_2:
+        width: 1
+      NetR1_2:
+        width: 1
+      NetR3_2:
+        width: 1
+      NetR5_1:
+        width: 1
+      NetR6_2:
+        width: 1
+      OSC_IN:
+        width: 1
+      OSC_OUT:
+        width: 1
+      PA13:
+        width: 1
+      PA14:
+        width: 1
+      PA15:
+        width: 1
+      PA2:
+        width: 1
+      PWR_ENN:
+        width: 1
+      STLINK_RX:
+        width: 1
+      STLINK_TX:
+        width: 1
+      STM_JTCK:
+        width: 1
+      STM_JTMS:
+        width: 1
+      STM_RST:
+        width: 1
+      T_JTDI:
+        width: 1
+      T_JTDO:
+        width: 1
+      T_NRST:
+        width: 1
+      T_SWDIO_IN:
+        width: 1
+      T_SWO:
+        width: 1
+      U5V:
+        width: 1
+      USB_DM:
+        width: 1
+      USB_DP:
+        width: 1
+      USB_RENUMN:
+        width: 1
+      V3V3_ST_LINK:
+        width: 1
+      VO:
+        width: 1
+    parts:
+      X2:
+        component: X2
+      SB3:
+        component: SB3
+      SB2:
+        component: SB2
+      LD1:
+        component: LD1
+      R1:
+        component: R1
+      R2:
+        component: R2
+      R18:
+        component: R18
+      R19:
+        component: R19
+      R17:
+        component: R17
+      R5:
+        component: R5
+      R20:
+        component: R20
+      R13:
+        component: R13
+      R9:
+        component: R9
+      R6:
+        component: R6
+      R16:
+        component: R16
+      R14:
+        component: R14
+      R12:
+        component: R12
+      C2:
+        component: C2
+      C5:
+        component: C5
+      C3:
+        component: C3
+      C21:
+        component: C21
+      C20:
+        component: C20
+      C4:
+        component: C4
+      R11:
+        component: R11
+      R10:
+        component: R10
+      T1:
+        component: T1
+      R4:
+        component: R4
+      R3:
+        component: R3
+      R8:
+        component: R8
+      U5:
+        component: U5
+      SB1:
+        component: SB1
+      SB9:
+        component: SB9
+    nets:
+      AIN_1:
+        endpoints:
+        - part: R12
+          pin: P2
+        - part: R14
+          pin: P2
+        - part: U5
+          pin: PA0
+        - port: AIN_1
+      E5V:
+        endpoints:
+        - part: R11
+          pin: P1
+        - port: E5V
+      GND:
+        endpoints:
+        - part: C2
+          pin: P1
+        - part: C20
+          pin: P2
+        - part: C21
+          pin: P2
+        - part: C3
+          pin: P2
+        - part: C4
+          pin: P1
+        - part: C5
+          pin: P1
+        - part: LD1
+          pin: P1
+        - part: R10
+          pin: P2
+        - part: R12
+          pin: P1
+        - part: R13
+          pin: P1
+        - part: R16
+          pin: P1
+        - part: R2
+          pin: P2
+        - part: R3
+          pin: P1
+        - part: R6
+          pin: P1
+        - part: U5
+          pin: PB2_BOOT1
+        - part: U5
+          pin: VSS_1
+        - part: U5
+          pin: VSS_2
+        - part: U5
+          pin: VSS_3
+        - part: U5
+          pin: VSSA
+        - port: GND
+      LED_STLINK:
+        endpoints:
+        - part: R18
+          pin: P1
+        - part: R19
+          pin: P1
+        - part: U5
+          pin: PA9
+        - port: LED_STLINK
+      MCO:
+        endpoints:
+        - part: C3
+          pin: P1
+        - part: R5
+          pin: P2
+        - port: MCO
+      NRST:
+        endpoints:
+        - part: SB9
+          pin: P2
+        - port: NRST
+      NetCN1_4:
+        endpoints:
+        - part: R2
+          pin: P1
+        - port: NetCN1_4
+      NetLD1_2:
+        endpoints:
+        - part: LD1
+          pin: P2
+        - part: R18
+          pin: P2
+        - port: NetLD1_2
+      NetLD1_3:
+        endpoints:
+        - part: LD1
+          pin: P3
+        - part: R19
+          pin: P2
+        - port: NetLD1_3
+      NetLD1_4:
+        endpoints:
+        - part: LD1
+          pin: P4
+        - part: R17
+          pin: P1
+        - port: NetLD1_4
+      NetR10_1:
+        endpoints:
+        - part: R10
+          pin: P1
+        - part: R11
+          pin: P2
+        - part: SB1
+          pin: P2
+        - part: U5
+          pin: PB3_JTDO
+        - port: NetR10_1
+      NetR13_2:
+        endpoints:
+        - part: R13
+          pin: P2
+        - part: U5
+          pin: PC14
+        - port: NetR13_2
+      NetR16_2:
+        endpoints:
+        - part: R16
+          pin: P2
+        - part: U5
+          pin: PC13
+        - port: NetR16_2
+      NetR1_2:
+        endpoints:
+        - part: R1
+          pin: P2
+        - part: T1
+          pin: E
+        - port: NetR1_2
+      NetR3_2:
+        endpoints:
+        - part: R3
+          pin: P2
+        - part: R4
+          pin: P1
+        - part: R8
+          pin: P1
+        - part: T1
+          pin: B
+        - port: NetR3_2
+      NetR5_1:
+        endpoints:
+        - part: R5
+          pin: P1
+        - part: U5
+          pin: PA8
+        - port: NetR5_1
+      NetR6_2:
+        endpoints:
+        - part: R6
+          pin: P2
+        - part: U5
+          pin: BOOT0
+        - port: NetR6_2
+      OSC_IN:
+        endpoints:
+        - part: C21
+          pin: P1
+        - part: U5
+          pin: OSCIN
+        - part: X2
+          pin: OSC2
+        - port: OSC_IN
+      OSC_OUT:
+        endpoints:
+        - part: C20
+          pin: P1
+        - part: U5
+          pin: OSCOUT
+        - part: X2
+          pin: OSC1
+        - port: OSC_OUT
+      PA13:
+        endpoints:
+        - part: R20
+          pin: P2
+        - part: U5
+          pin: PB14
+        - port: PA13
+      PA14:
+        endpoints:
+        - part: U5
+          pin: PA5
+        - part: U5
+          pin: PB13
+        - port: PA14
+      PA15:
+        endpoints:
+        - part: SB3
+          pin: P1
+        - port: PA15
+      PA2:
+        endpoints:
+        - part: SB2
+          pin: P1
+        - port: PA2
+      PWR_ENN:
+        endpoints:
+        - part: U5
+          pin: PB15
+        - port: PWR_ENN
+      STLINK_RX:
+        endpoints:
+        - part: SB2
+          pin: P2
+        - part: U5
+          pin: PA3
+        - port: STLINK_RX
+      STLINK_TX:
+        endpoints:
+        - part: SB3
+          pin: P2
+        - part: U5
+          pin: PA2
+        - port: STLINK_TX
+      STM_JTCK:
+        endpoints:
+        - part: U5
+          pin: JTCK_SWCLK
+        - port: STM_JTCK
+      STM_JTMS:
+        endpoints:
+        - part: U5
+          pin: JTMS_SWDIO
+        - port: STM_JTMS
+      STM_RST:
+        endpoints:
+        - part: C4
+          pin: P2
+        - part: R9
+          pin: P1
+        - part: U5
+          pin: NRST
+        - port: STM_RST
+      T_JTDI:
+        endpoints:
+        - part: U5
+          pin: PA7
+        - port: T_JTDI
+      T_JTDO:
+        endpoints:
+        - part: U5
+          pin: PA6
+        - port: T_JTDO
+      T_NRST:
+        endpoints:
+        - part: SB9
+          pin: P1
+        - part: U5
+          pin: PB0
+        - port: T_NRST
+      T_SWDIO_IN:
+        endpoints:
+        - part: R20
+          pin: P1
+        - part: U5
+          pin: PB12
+        - port: T_SWDIO_IN
+      T_SWO:
+        endpoints:
+        - part: U5
+          pin: PA10
+        - port: T_SWO
+      U5V:
+        endpoints:
+        - part: R4
+          pin: P2
+        - port: U5V
+      USB_DM:
+        endpoints:
+        - part: U5
+          pin: PA11
+        - port: USB_DM
+      USB_DP:
+        endpoints:
+        - part: R1
+          pin: P1
+        - part: U5
+          pin: PA12
+        - port: USB_DP
+      USB_RENUMN:
+        endpoints:
+        - part: R8
+          pin: P2
+        - part: U5
+          pin: PA15_JTDI
+        - port: USB_RENUMN
+      V3V3_ST_LINK:
+        endpoints:
+        - part: C2
+          pin: P2
+        - part: C5
+          pin: P2
+        - part: R17
+          pin: P2
+        - part: R9
+          pin: P2
+        - part: SB1
+          pin: P1
+        - part: T1
+          pin: C
+        - part: U5
+          pin: VBAT
+        - part: U5
+          pin: VDD_1
+        - part: U5
+          pin: VDD_2
+        - part: U5
+          pin: VDD_3
+        - part: U5
+          pin: VDDA
+        - port: V3V3_ST_LINK
+      VO:
+        endpoints:
+        - part: R14
+          pin: P1
+        - port: VO
+    nc:
+    - part: U5
+      pin: PA1
+    - part: U5
+      pin: PA4
+    - part: U5
+      pin: PB1
+    - part: U5
+      pin: PB10
+    - part: U5
+      pin: PB11
+    - part: U5
+      pin: PC15
+    - part: U5
+      pin: PB4_JNTRST
+    - part: U5
+      pin: PB5
+    - part: U5
+      pin: PB6
+    - part: U5
+      pin: PB7
+    - part: U5
+      pin: PB8
+    - part: U5
+      pin: PB9
+  target:
+    ports:
+      AVDD:
+        width: 1
+      BOOT0:
+        width: 1
+      GND:
+        width: 1
+      MCO:
+        width: 1
+      NRST:
+        width: 1
+      NetC12_1:
+        width: 1
+      NetC13_1:
+        width: 1
+      NetL1_2:
+        width: 1
+      NetLD3_1:
+        width: 1
+      NetR23_2:
+        width: 1
+      NetSB11_1:
+        width: 1
+      NetSB12_1:
+        width: 1
+      NetSB13_1:
+        width: 1
+      NetSB4_2:
+        width: 1
+      NetSB7_2:
+        width: 1
+      PA0:
+        width: 1
+      PA1:
+        width: 1
+      PA10:
+        width: 1
+      PA11:
+        width: 1
+      PA12:
+        width: 1
+      PA13:
+        width: 1
+      PA14:
+        width: 1
+      PA15:
+        width: 1
+      PA2:
+        width: 1
+      PA3:
+        width: 1
+      PA4:
+        width: 1
+      PA5:
+        width: 1
+      PA6:
+        width: 1
+      PA7:
+        width: 1
+      PA8:
+        width: 1
+      PA9:
+        width: 1
+      PB0:
+        width: 1
+      PB1:
+        width: 1
+      PB3:
+        width: 1
+      PB4:
+        width: 1
+      PB5:
+        width: 1
+      PB6:
+        width: 1
+      PB7:
+        width: 1
+      PF0:
+        width: 1
+      PF1:
+        width: 1
+      VDD:
+        width: 1
+    parts:
+      C23:
+        component: C23
+      C13:
+        component: C13
+      C12:
+        component: C12
+      C7:
+        component: C7
+      C11:
+        component: C11
+      R21:
+        component: R21
+      L1:
+        component: L1
+      C24:
+        component: C24
+      SB5:
+        component: SB5
+      SB7:
+        component: SB7
+      SB13:
+        component: SB13
+      SB8:
+        component: SB8
+      SB10:
+        component: SB10
+      SB6:
+        component: SB6
+      SB11:
+        component: SB11
+      U2:
+        component: U2
+      SB12:
+        component: SB12
+      LD3:
+        component: LD3
+      R23:
+        component: R23
+      SB15:
+        component: SB15
+      B1:
+        component: B1
+      X1:
+        component: X1
+      SB4:
+        component: SB4
+      SB17:
+        component: SB17
+      SB16:
+        component: SB16
+      SB18:
+        component: SB18
+    nets:
+      AVDD:
+        endpoints:
+        - part: C24
+          pin: P1
+        - part: L1
+          pin: P1
+        - part: U2
+          pin: VDDA
+        - port: AVDD
+      BOOT0:
+        endpoints:
+        - part: R21
+          pin: P1
+        - part: SB12
+          pin: P2
+        - port: BOOT0
+      GND:
+        endpoints:
+        - part: B1
+          pin: P2
+        - part: C11
+          pin: P1
+        - part: C12
+          pin: P2
+        - part: C13
+          pin: P2
+        - part: C23
+          pin: P2
+        - part: C24
+          pin: P2
+        - part: C7
+          pin: P2
+        - part: LD3
+          pin: K
+        - part: R21
+          pin: P2
+        - part: SB11
+          pin: P2
+        - part: SB13
+          pin: P2
+        - part: U2
+          pin: EP_GND
+        - port: GND
+      MCO:
+        endpoints:
+        - part: SB17
+          pin: P1
+        - part: SB4
+          pin: P1
+        - port: MCO
+      NRST:
+        endpoints:
+        - part: B1
+          pin: P1
+        - part: C11
+          pin: P2
+        - part: U2
+          pin: NRST
+        - port: NRST
+      NetC12_1:
+        endpoints:
+        - part: C12
+          pin: P1
+        - part: SB5
+          pin: P1
+        - part: X1
+          pin: P1
+        - port: NetC12_1
+      NetC13_1:
+        endpoints:
+        - part: C13
+          pin: P1
+        - part: SB7
+          pin: P1
+        - part: X1
+          pin: P2
+        - port: NetC13_1
+      NetL1_2:
+        endpoints:
+        - part: L1
+          pin: P2
+        - part: SB10
+          pin: P1
+        - port: NetL1_2
+      NetLD3_1:
+        endpoints:
+        - part: LD3
+          pin: A
+        - part: R23
+          pin: P1
+        - port: NetLD3_1
+      NetR23_2:
+        endpoints:
+        - part: R23
+          pin: P2
+        - part: SB15
+          pin: P1
+        - port: NetR23_2
+      NetSB11_1:
+        endpoints:
+        - part: SB11
+          pin: P1
+        - part: U2
+          pin: VSS_16
+        - port: NetSB11_1
+      NetSB12_1:
+        endpoints:
+        - part: SB12
+          pin: P1
+        - part: U2
+          pin: PH3_BOOT0
+        - port: NetSB12_1
+      NetSB13_1:
+        endpoints:
+        - part: SB13
+          pin: P1
+        - part: U2
+          pin: VSS_32
+        - port: NetSB13_1
+      NetSB4_2:
+        endpoints:
+        - part: SB4
+          pin: P2
+        - part: SB5
+          pin: P2
+        - part: SB6
+          pin: P2
+        - part: U2
+          pin: PC14
+        - port: NetSB4_2
+      NetSB7_2:
+        endpoints:
+        - part: SB7
+          pin: P2
+        - part: SB8
+          pin: P2
+        - part: U2
+          pin: PC15
+        - port: NetSB7_2
+      PA0:
+        endpoints:
+        - part: SB17
+          pin: P2
+        - part: U2
+          pin: PA0
+        - port: PA0
+      PA1:
+        endpoints:
+        - part: U2
+          pin: PA1
+        - port: PA1
+      PA10:
+        endpoints:
+        - part: U2
+          pin: PA10
+        - port: PA10
+      PA11:
+        endpoints:
+        - part: U2
+          pin: PA11
+        - port: PA11
+      PA12:
+        endpoints:
+        - part: U2
+          pin: PA12
+        - port: PA12
+      PA13:
+        endpoints:
+        - part: U2
+          pin: PA13
+        - port: PA13
+      PA14:
+        endpoints:
+        - part: U2
+          pin: PA14
+        - port: PA14
+      PA15:
+        endpoints:
+        - part: U2
+          pin: PA15
+        - port: PA15
+      PA2:
+        endpoints:
+        - part: U2
+          pin: PA2
+        - port: PA2
+      PA3:
+        endpoints:
+        - part: U2
+          pin: PA3
+        - port: PA3
+      PA4:
+        endpoints:
+        - part: U2
+          pin: PA4
+        - port: PA4
+      PA5:
+        endpoints:
+        - part: SB18
+          pin: P1
+        - part: U2
+          pin: PA5
+        - port: PA5
+      PA6:
+        endpoints:
+        - part: SB16
+          pin: P1
+        - part: U2
+          pin: PA6
+        - port: PA6
+      PA7:
+        endpoints:
+        - part: U2
+          pin: PA7
+        - port: PA7
+      PA8:
+        endpoints:
+        - part: U2
+          pin: PA8
+        - port: PA8
+      PA9:
+        endpoints:
+        - part: U2
+          pin: PA9
+        - port: PA9
+      PB0:
+        endpoints:
+        - part: U2
+          pin: PB0
+        - port: PB0
+      PB1:
+        endpoints:
+        - part: U2
+          pin: PB1
+        - port: PB1
+      PB3:
+        endpoints:
+        - part: SB15
+          pin: P2
+        - part: U2
+          pin: PB3
+        - port: PB3
+      PB4:
+        endpoints:
+        - part: U2
+          pin: PB4
+        - port: PB4
+      PB5:
+        endpoints:
+        - part: U2
+          pin: PB5
+        - port: PB5
+      PB6:
+        endpoints:
+        - part: SB16
+          pin: P2
+        - part: U2
+          pin: PB6
+        - port: PB6
+      PB7:
+        endpoints:
+        - part: SB18
+          pin: P2
+        - part: U2
+          pin: PB7
+        - port: PB7
+      PF0:
+        endpoints:
+        - part: SB6
+          pin: P1
+        - port: PF0
+      PF1:
+        endpoints:
+        - part: SB8
+          pin: P1
+        - port: PF1
+      VDD:
+        endpoints:
+        - part: C23
+          pin: P1
+        - part: C7
+          pin: P1
+        - part: SB10
+          pin: P2
+        - part: U2
+          pin: VDD_1
+        - part: U2
+          pin: VDD_17
+        - port: VDD
+    nc: []
+  board:
+    instances:
+      interfaces:
+        module: interfaces
+      power:
+        module: power
+      stlink:
+        module: stlink
+      target:
+        module: target
+    nets:
+      AIN_1:
+        endpoints:
+        - instance: stlink
+          port: AIN_1
+      AVDD:
+        endpoints:
+        - instance: interfaces
+          port: AVDD
+        - instance: target
+          port: AVDD
+      BOOT0:
+        endpoints:
+        - instance: target
+          port: BOOT0
+      E5V:
+        endpoints:
+        - instance: power
+          port: E5V
+        - instance: stlink
+          port: E5V
+      GND:
+        endpoints:
+        - instance: interfaces
+          port: GND
+        - instance: power
+          port: GND
+        - instance: stlink
+          port: GND
+        - instance: target
+          port: GND
+        electrical:
+          role: ground
+      LED_STLINK:
+        endpoints:
+        - instance: stlink
+          port: LED_STLINK
+      MCO:
+        endpoints:
+        - instance: stlink
+          port: MCO
+        - instance: target
+          port: MCO
+      NRST:
+        endpoints:
+        - instance: interfaces
+          port: NRST
+        - instance: stlink
+          port: NRST
+        - instance: target
+          port: NRST
+      NetC12_1:
+        endpoints:
+        - instance: target
+          port: NetC12_1
+      NetC13_1:
+        endpoints:
+        - instance: target
+          port: NetC13_1
+      NetC15_2:
+        endpoints:
+        - instance: power
+          port: NetC15_2
+      NetC17_2:
+        endpoints:
+        - instance: power
+          port: NetC17_2
+      NetCN1_4:
+        endpoints:
+        - instance: interfaces
+          port: NetCN1_4
+        - instance: stlink
+          port: NetCN1_4
+      NetL1_2:
+        endpoints:
+        - instance: target
+          port: NetL1_2
+      NetLD1_2:
+        endpoints:
+        - instance: stlink
+          port: NetLD1_2
+      NetLD1_3:
+        endpoints:
+        - instance: stlink
+          port: NetLD1_3
+      NetLD1_4:
+        endpoints:
+        - instance: stlink
+          port: NetLD1_4
+      NetLD2_1:
+        endpoints:
+        - instance: power
+          port: NetLD2_1
+      NetLD3_1:
+        endpoints:
+        - instance: target
+          port: NetLD3_1
+      NetR10_1:
+        endpoints:
+        - instance: stlink
+          port: NetR10_1
+      NetR13_2:
+        endpoints:
+        - instance: stlink
+          port: NetR13_2
+      NetR16_2:
+        endpoints:
+        - instance: stlink
+          port: NetR16_2
+      NetR1_2:
+        endpoints:
+        - instance: stlink
+          port: NetR1_2
+      NetR23_2:
+        endpoints:
+        - instance: target
+          port: NetR23_2
+      NetR3_2:
+        endpoints:
+        - instance: stlink
+          port: NetR3_2
+      NetR5_1:
+        endpoints:
+        - instance: stlink
+          port: NetR5_1
+      NetR6_2:
+        endpoints:
+        - instance: stlink
+          port: NetR6_2
+      NetR7_1:
+        endpoints:
+        - instance: power
+          port: NetR7_1
+      NetSB11_1:
+        endpoints:
+        - instance: target
+          port: NetSB11_1
+      NetSB12_1:
+        endpoints:
+        - instance: target
+          port: NetSB12_1
+      NetSB13_1:
+        endpoints:
+        - instance: target
+          port: NetSB13_1
+      NetSB4_2:
+        endpoints:
+        - instance: target
+          port: NetSB4_2
+      NetSB7_2:
+        endpoints:
+        - instance: target
+          port: NetSB7_2
+      OSC_IN:
+        endpoints:
+        - instance: stlink
+          port: OSC_IN
+      OSC_OUT:
+        endpoints:
+        - instance: stlink
+          port: OSC_OUT
+      PA0:
+        endpoints:
+        - instance: interfaces
+          port: PA0
+        - instance: target
+          port: PA0
+      PA1:
+        endpoints:
+        - instance: interfaces
+          port: PA1
+        - instance: target
+          port: PA1
+      PA10:
+        endpoints:
+        - instance: interfaces
+          port: PA10
+        - instance: target
+          port: PA10
+      PA11:
+        endpoints:
+        - instance: interfaces
+          port: PA11
+        - instance: target
+          port: PA11
+      PA12:
+        endpoints:
+        - instance: interfaces
+          port: PA12
+        - instance: target
+          port: PA12
+      PA13:
+        endpoints:
+        - instance: stlink
+          port: PA13
+        - instance: target
+          port: PA13
+      PA14:
+        endpoints:
+        - instance: stlink
+          port: PA14
+        - instance: target
+          port: PA14
+      PA15:
+        endpoints:
+        - instance: stlink
+          port: PA15
+        - instance: target
+          port: PA15
+      PA2:
+        endpoints:
+        - instance: interfaces
+          port: PA2
+        - instance: stlink
+          port: PA2
+        - instance: target
+          port: PA2
+      PA3:
+        endpoints:
+        - instance: interfaces
+          port: PA3
+        - instance: target
+          port: PA3
+      PA4:
+        endpoints:
+        - instance: interfaces
+          port: PA4
+        - instance: target
+          port: PA4
+      PA5:
+        endpoints:
+        - instance: interfaces
+          port: PA5
+        - instance: target
+          port: PA5
+      PA6:
+        endpoints:
+        - instance: interfaces
+          port: PA6
+        - instance: target
+          port: PA6
+      PA7:
+        endpoints:
+        - instance: interfaces
+          port: PA7
+        - instance: target
+          port: PA7
+      PA8:
+        endpoints:
+        - instance: interfaces
+          port: PA8
+        - instance: target
+          port: PA8
+      PA9:
+        endpoints:
+        - instance: interfaces
+          port: PA9
+        - instance: target
+          port: PA9
+      PB0:
+        endpoints:
+        - instance: interfaces
+          port: PB0
+        - instance: target
+          port: PB0
+      PB1:
+        endpoints:
+        - instance: interfaces
+          port: PB1
+        - instance: target
+          port: PB1
+      PB3:
+        endpoints:
+        - instance: interfaces
+          port: PB3
+        - instance: target
+          port: PB3
+      PB4:
+        endpoints:
+        - instance: interfaces
+          port: PB4
+        - instance: target
+          port: PB4
+      PB5:
+        endpoints:
+        - instance: interfaces
+          port: PB5
+        - instance: target
+          port: PB5
+      PB6:
+        endpoints:
+        - instance: interfaces
+          port: PB6
+        - instance: target
+          port: PB6
+      PB7:
+        endpoints:
+        - instance: interfaces
+          port: PB7
+        - instance: target
+          port: PB7
+      PF0:
+        endpoints:
+        - instance: interfaces
+          port: PF0
+        - instance: target
+          port: PF0
+      PF1:
+        endpoints:
+        - instance: interfaces
+          port: PF1
+        - instance: target
+          port: PF1
+      PWR_ENN:
+        endpoints:
+        - instance: power
+          port: PWR_ENN
+        - instance: stlink
+          port: PWR_ENN
+      STLINK_RX:
+        endpoints:
+        - instance: stlink
+          port: STLINK_RX
+      STLINK_TX:
+        endpoints:
+        - instance: stlink
+          port: STLINK_TX
+      STM_JTCK:
+        endpoints:
+        - instance: interfaces
+          port: STM_JTCK
+        - instance: stlink
+          port: STM_JTCK
+      STM_JTMS:
+        endpoints:
+        - instance: interfaces
+          port: STM_JTMS
+        - instance: stlink
+          port: STM_JTMS
+      STM_RST:
+        endpoints:
+        - instance: stlink
+          port: STM_RST
+      T_JTDI:
+        endpoints:
+        - instance: stlink
+          port: T_JTDI
+      T_JTDO:
+        endpoints:
+        - instance: stlink
+          port: T_JTDO
+      T_NRST:
+        endpoints:
+        - instance: stlink
+          port: T_NRST
+      T_SWDIO_IN:
+        endpoints:
+        - instance: stlink
+          port: T_SWDIO_IN
+      T_SWO:
+        endpoints:
+        - instance: stlink
+          port: T_SWO
+      U5V:
+        endpoints:
+        - instance: interfaces
+          port: U5V
+        - instance: power
+          port: U5V
+        - instance: stlink
+          port: U5V
+      U5V_ST_LINK:
+        endpoints:
+        - instance: power
+          port: U5V_ST_LINK
+      USB_DM:
+        endpoints:
+        - instance: interfaces
+          port: USB_DM
+        - instance: stlink
+          port: USB_DM
+      USB_DP:
+        endpoints:
+        - instance: interfaces
+          port: USB_DP
+        - instance: stlink
+          port: USB_DP
+      USB_RENUMN:
+        endpoints:
+        - instance: stlink
+          port: USB_RENUMN
+      V3V3:
+        endpoints:
+        - instance: interfaces
+          port: V3V3
+        - instance: power
+          port: V3V3
+      V3V3_ST_LINK:
+        endpoints:
+        - instance: interfaces
+          port: V3V3_ST_LINK
+        - instance: power
+          port: V3V3_ST_LINK
+        - instance: stlink
+          port: V3V3_ST_LINK
+      V5:
+        endpoints:
+        - instance: interfaces
+          port: V5
+        - instance: power
+          port: V5
+      VDD:
+        endpoints:
+        - instance: power
+          port: VDD
+        - instance: target
+          port: VDD
+      VIN:
+        endpoints:
+        - instance: interfaces
+          port: VIN
+        - instance: power
+          port: VIN
+      VO:
+        endpoints:
+        - instance: power
+          port: VO
+        - instance: stlink
+          port: VO

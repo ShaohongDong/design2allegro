@@ -7,7 +7,9 @@ Allegro-oriented Telesis packages. Runtime code lives in `src/design2allegro/`:
 loading/schema validation, hierarchy expansion, immutable circuit models,
 electrical checks, export and independent readback verification. The bundled
 `schema.json` defines version 1 inputs. Tests live in `tests/parser/`; complete
-YAML projects live in `examples/simple/` and `examples/fpga_soc/`.
+YAML projects live in `schematics/nucleo_l432kc/`.
+Historical synthetic designs live in `tests/fixtures/` for regression only.
+Allegro Telesis is the only supported export format.
 See `docs/design-format.md` for input semantics and `docs/rules.md` for rules.
 
 ## Build, Test, and Development Commands
@@ -16,7 +18,7 @@ Use Python 3.12+ and install `.venv/bin/python -m pip install -e '.[dev]'`.
 Make defaults to `.venv/bin/python`; override `PYTHON` when necessary.
 
 - `make test`: run parser, electrical-rule, CLI and output regressions.
-- `make example`: compile and verify both example projects.
+- `make example`: compile and verify all example projects.
 - `make benchmark`: process 10,000 physical pins and record time/memory.
 - `make build`: build one pure-Python wheel in `dist/`.
 - `make verify-package`: test wheel-only installation in a fresh environment.

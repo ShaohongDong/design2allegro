@@ -16,7 +16,7 @@ from design2allegro.verify import (
     verify_package,
 )
 
-EXAMPLES = Path(__file__).resolve().parents[2] / "examples"
+EXAMPLES = Path(__file__).resolve().parents[2] / "tests" / "fixtures"
 
 
 @pytest.fixture
@@ -170,7 +170,7 @@ def test_deterministic_delivery_and_corruption(project, tmp_path):
     assert before == {
         p.relative_to(target): p.read_bytes() for p in target.rglob("*") if p.is_file()
     }
-    (target / "design.tel").write_text("$END\n")
+    (target / "project.tel").write_text("$END\n")
     with pytest.raises(NetlistFormatError, match="digest mismatch"):
         verify_package(target)
 
@@ -333,7 +333,7 @@ def test_readback_detects_changed_connectivity_even_with_updated_hash(
     c = compile_design(load_design(project))
     out = tmp_path / "out"
     export_design(c, out)
-    tel = out / "design.tel"
+    tel = out / "project.tel"
     # U2 endpoints terminate records rather than continuation lines.
     text = (
         tel.read_text()
@@ -344,7 +344,7 @@ def test_readback_detects_changed_connectivity_even_with_updated_hash(
     assert text != tel.read_text()
     tel.write_text(text)
     manifest = json.loads((out / "manifest.json").read_text())
-    manifest["files"]["design.tel"] = hashlib.sha256(tel.read_bytes()).hexdigest()
+    manifest["files"]["project.tel"] = hashlib.sha256(tel.read_bytes()).hexdigest()
     (out / "manifest.json").write_text(json.dumps(manifest))
     with pytest.raises(NetlistFormatError, match="connectivity mismatch"):
         verify_package(out)
@@ -383,3 +383,43 @@ def test_integral_yaml_bus_width(project):
 def test_net_reference_collision(make_board):
     with pytest.raises(ElectricalError, match="collide with board references"):
         make_board({"U1": {"1": "PASSIVE"}}, {"U1": [("U1", "1")]})
+
+
+def test_named_design_ignores_output_directory(project, tmp_path):
+    named = project.with_name("my-board.yaml")
+    shutil.copyfile(project, named)
+    board = compile_design(load_design(named))
+    out = tmp_path / "unrelated"
+    export_design(board, out)
+    assert (out / "my-board.tel").is_file()
+    assert verify_package(out)["parts"] == 2
+
+
+def test_legacy_package_can_be_verified_and_replaced(project, tmp_path):
+    from design2allegro.telesis import export
+
+    board = compile_design(load_design(project))
+    out = tmp_path / "legacy"
+    mapping = {
+        "version": 1,
+        "parts": {
+            ref: {"package": p["footprint"]} for ref, p in board.data["parts"].items()
+        },
+    }
+    export(board, out, mapping, filename="design.tel")
+    assert verify_package(out)["parts"] == 2
+    export_design(board, out)
+    assert (out / "project.tel").exists()
+    assert not (out / "design.tel").exists()
+    assert verify_package(out)["parts"] == 2
+
+
+def test_unsafe_board_filename_preserves_output(project, tmp_path):
+    named = project.with_name("unsafe name.yaml")
+    shutil.copyfile(project, named)
+    out = tmp_path / "output"
+    export_design(compile_design(load_design(project)), out)
+    before = (out / "manifest.json").read_bytes()
+    with pytest.raises(ElectricalError, match="filename"):
+        export_design(compile_design(load_design(named)), out)
+    assert (out / "manifest.json").read_bytes() == before

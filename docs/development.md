@@ -3,10 +3,10 @@
 Use Python 3.12+ and `.venv`; install `pip install -e '.[dev]'`. Make targets use
 `.venv/bin/python` unless `PYTHON=/path/to/python` is supplied. The runtime package
 is `src/design2allegro/`; schemas ship inside its wheel. Tests live in
-`tests/parser/`. Examples are YAML projects under `examples/`.
+`tests/parser/`. Examples are YAML projects under `schematics/`.
 
 `make test` runs parser, hierarchy/bus, electrical-rule, CLI and delivery tests.
-`make example` compiles and independently verifies both examples.
+`make example` compiles and independently verifies the board designs under `schematics/`.
 `make benchmark` measures a 10,000-pin design from actual YAML loading through
 export, recording timings and peak process RSS in `build/parser/benchmark/result.json`.
 No timing threshold is implied by that measurement.

@@ -63,9 +63,13 @@ def export(
     mapping,
     rules=None,
     waivers=None,
-    filename="design.tel",
+    filename=None,
 ):
-    if Path(filename).name != filename or not filename.endswith(".tel"):
+    if filename is None:
+        filename = snapshot.data.get("name", "design") + ".tel"
+    if Path(filename).name != filename or not re.fullmatch(
+        r"[A-Za-z0-9_][A-Za-z0-9_.-]*\.tel", filename
+    ):
         raise ElectricalError("filename must be a .tel basename")
     if not isinstance(mapping, dict) or mapping.get("version") != 1:
         raise ElectricalError("mapping requires version 1")
