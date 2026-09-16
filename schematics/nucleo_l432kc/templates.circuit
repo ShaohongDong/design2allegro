@@ -1,0 +1,93 @@
+circuit 2;
+
+template connector_15 {
+    assembly = "fitted";
+    device = "wuerth.61301511121";
+    package = "HDR_1x15_2R54_V_F";
+    properties = { pitch = 2.54 mm; positions = 15; current_rating = 3 A; voltage_rating = 250 V; rating_conditions = "Working voltage AC; connector rating is not the board rail rating."; };
+}
+
+template capacitor_1_uf {
+    assembly = "fitted";
+    device = "CC0603KRX5R7BB105.9db21403";
+    package = "0603C";
+    properties = { dielectric = "X5R"; polarized = false; tolerance = 10 %; voltage_rating = 16 V; };
+}
+
+template capacitor_100_nf {
+    assembly = "fitted";
+    device = "CC0603KRX7R7BB104.9db21403";
+    package = "0603C";
+    properties = { dielectric = "X7R"; polarized = false; tolerance = 10 %; voltage_rating = 16 V; };
+}
+
+template diode_bat60jfilm {
+    assembly = "fitted";
+    device = "BAT60JFILM.0d63fc0e";
+    package = "SOD-323";
+    properties = { type = "Schottky"; current_rating = 3 A; voltage_rating = 10 V; rating_conditions = "3 A repetitive peak at duty factor 0.11, not continuous current; VRRM 10 V; thermal derating per BAT60 datasheet."; };
+
+}
+
+template jumper_closed {
+    assembly = "fitted";
+    device = "jumper.0f95cdef";
+    package = "SB_0603";
+    properties = { initial_state = "closed"; };
+}
+
+template resistor_10000_ohm {
+    assembly = "fitted";
+    device = "RC0603FR-0710KL.f4611e61";
+    package = "0603R";
+    properties = { tolerance = 1 %; power_rating = 0.1 W; };
+}
+
+template resistor_2700_ohm {
+    assembly = "fitted";
+    device = "RC0603FR-072K7L.f4611e61";
+    package = "0603R";
+    properties = { tolerance = 1 %; power_rating = 0.1 W; };
+}
+
+template resistor_100000_ohm {
+    assembly = "fitted";
+    device = "RC0603FR-07100KL.f4611e61";
+    package = "0603R";
+    properties = { tolerance = 1 %; power_rating = 0.1 W; };
+}
+
+template resistor_100_ohm {
+    assembly = "fitted";
+    device = "RC0603FR-07100RL.f4611e61";
+    package = "0603R";
+    properties = { tolerance = 1 %; power_rating = 0.1 W; };
+}
+
+template resistor_4700_ohm {
+    assembly = "fitted";
+    device = "RC0603FR-074K7L.f4611e61";
+    package = "0603R";
+    properties = { tolerance = 1 %; power_rating = 0.1 W; };
+}
+
+template capacitor_10_pf {
+    assembly = "fitted";
+    device = "CC0603JRNPO9BN100.9db21403";
+    package = "0603C";
+    properties = { dielectric = "NPO"; polarized = false; tolerance = 5 %; voltage_rating = 50 V; };
+}
+
+template jumper_open {
+    assembly = "fitted";
+    device = "jumper.0f95cdef";
+    package = "SB_0603";
+    properties = { initial_state = "open"; };
+}
+
+template capacitor_4_3_pf {
+    assembly = "fitted";
+    device = "0603CG4R3C500NT.9db21403";
+    package = "0603C";
+    properties = { dielectric = "COG"; polarized = false; tolerance = 0.25 pF; voltage_rating = 50 V; };
+}

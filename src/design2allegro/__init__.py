@@ -1,10 +1,10 @@
-"""Compile YAML circuit designs to offline-verified Allegro Telesis packages."""
+"""Compile Circuit language designs to offline-verified Allegro Telesis packages."""
 
 from .compiler import compile_design
 from .loader import load_design
 from .model import CompiledDesign, ElectricalError
 
-__version__ = "2.0.0"
+__version__ = "3.1.0"
 
 
 def check_design(compiled):

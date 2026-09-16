@@ -1,42 +1,133 @@
-# Design format, version 2
+# Circuit language, versions 1 and 2
 
-`board.yaml` is the design entrypoint. `components.json`, BOM, PINOUT and
-FOOTPRINTS are build outputs, never design inputs. The compiler resolves an
-offline shared device catalogue distributed with the wheel. Version 1 input is
-rejected with a migration message; existing version 1 delivery packages remain
+`board.circuit` is the single design entrypoint for design2allegro 3.x. It contains
+board configuration and may include reusable Circuit 2 fragments containing
+templates, modules, constants, accessories, rules and waivers. Circuit 1 remains
+supported without the new declarations. YAML
+inputs are retired. The shared device catalogue remains JSON; internal circuit
+and delivery schemas remain version 2. Existing version 1 packages remain
 readable by `verify`.
 
-## Design and libraries
+## Declarations and values
 
-```yaml
-version: 2
-id: my-board
-name: my_board
-library: {name: standard, version: '1'}
-top: board
-modules:
-  board:
-    parts:
-      reset_pullup:
-        id: reset-pullup
-        identity_namespace: ''
-        device: generic.resistor
-        package: resistor_0603
-        assembly: fitted
-        properties:
-          resistance: '10 kohm'
-          tolerance: '1 %'
-          power_rating: '0.1 W'
-    nc:
-      - {part: reset_pullup, pin: A}
-      - {part: reset_pullup, pin: B}
+```text
+circuit 1;
+board my_board {
+    id = "my-board";
+    library = "standard@1";
+    top = board;
+}
+template resistor_0603 {
+    device = "generic.resistor";
+    package = "resistor_0603";
+    assembly = fitted;
+    properties { tolerance = 1 %; power_rating = 0.1 W; }
+}
+module board {
+    part reset_pullup using resistor_0603 {
+        id = "reset-pullup";
+        identity_namespace = "";
+        properties { resistance = 10 kohm; }
+    }
+    nc reset_pullup.A, reset_pullup.B;
+}
 ```
 
-`id` identifies the board; `name` supplies `<name>.tel`, independently of input
-filename/output directory. No `references`, per-instance `ref`, `value` or local
-`components.yaml` inputs are accepted. UTF-8 YAML uses string keys, explicit
-units, lowercase booleans, and no aliases, merge keys or executable tags.
-Duplicate keys, unknown structural fields and nonfinite metadata are errors.
+The name after `board` supplies `<name>.tel`; `id` identifies the board independently
+of filenames. Generated `components.json`, BOM, PINOUT and FOOTPRINTS are outputs,
+not inputs. Neither assigned references nor project-local component definitions
+are accepted.
+
+Source is UTF-8, with `//` comments and insignificant whitespace. Braces delimit
+blocks; assignments and connections end with `;`. Double-quoted strings use JSON
+escapes. Bare words are strings, except `true`, `false` and `null`. Numbers may use
+scientific notation; quantities need an explicit unit (`10 kohm`, `0.25 pF`,
+`1 %`). Compound or unusual strings can always be quoted. Lists use commas:
+`[pin(mcu.PA0), pin(mcu.PA1)]`. Property blocks accept `key = value;`; `properties
+{ ... }` and `properties = { ... };` are equivalent. Duplicate declarations,
+unknown structural fields, nonfinite numbers and nesting beyond 64 levels fail.
+There is no executable code or implicit connectivity. Blocks and declarations may
+refer forward to templates/modules. Circuit 2 adds bounded expressions and explicit
+file dependencies, described below. Quote names containing hyphens or slashes in
+Circuit 2; those characters are arithmetic operators outside strings.
+
+Templates are file-level, single-layer declarations selected explicitly with
+`part name using template_name`. They may supply device, package, assembly,
+properties, electrical models and description, but never identity. Instances
+replace scalar fields and override individual top-level property/electrical keys;
+nested values replace as a whole. Library-fixed specifications still cannot be
+overridden. Diagnostics include instance and template locations. There are no
+module-wide defaults or template inheritance.
+
+## Circuit 2 reuse and expressions
+
+Use `circuit 2;` in the entrypoint and every included fragment. A fragment cannot
+contain a `board` declaration. Includes are explicit, quoted, relative `.circuit`
+paths, resolved beside the including file; `../` is allowed. There is no search
+path, wildcard, network fetch or conditional inclusion.
+
+```text
+circuit 2;
+include "common.circuit";           // import exported names directly
+include "analog/divider.circuit" as analog;
+const PULLUP: resistance = 10 kohm;
+const CURRENT: current = 3.3 V / $PULLUP;
+group DEBUG = [pin(target.mcu.PA13), pin(target.mcu.PA14)];
+```
+
+An alias prefixes exported constants/templates/modules/groups (`$analog.R`,
+`analog.divider`). Definitions keep their own lexical environment: importing a
+module never redirects its internal template or constant names to the caller.
+Files load once per real path; declarations/rules mount once per namespace, so
+shared diamond dependencies are safe. Different declarations with the same
+exported name are errors. Include cycles, missing files and parse failures report
+the include chain. Every dependency's raw SHA-256 enters the build inputs.
+Includes and constant dependencies are limited to 64 levels.
+
+Constants and module parameters have explicit types: `number`, `integer`,
+`boolean`, `string`, `group`, `ratio`, `resistance`, `capacitance`, `inductance`,
+`voltage`, `current`, `power`, `frequency`, `length`. `$name` references a binding.
+`group NAME = [...]` is shorthand for a typed, ordered list of unique references
+of one kind. Groups select rule objects; they never create electrical connections.
+Global groups use board-relative paths; module groups use instance-relative paths.
+
+```text
+module divider(upper: resistance = 10 kohm,
+               lower: resistance = $upper / 2) {
+    ports IN, OUT, GND;
+    part hi using resistor { id = "upper"; properties { resistance = $upper; } }
+    part lo using resistor { id = "lower"; properties { resistance = $lower; } }
+    net IN = hi.A, port.IN;
+    net OUT = hi.B, lo.A, port.OUT;
+    net GND = lo.B, port.GND;
+    group ROOTS = [pin(hi.A), pin(hi.B), pin(lo.B)];
+    rules { rule SEPARATE isolated_all $ROOTS; }
+}
+// In a parent module, with all three ports connected:
+// instance sense: divider(upper = 20 kohm) { id = "sense-stable"; }
+```
+
+Arguments are named, validated and evaluated in the caller; defaults may refer
+to other parameters or lexical constants. Missing required arguments, unknown
+arguments, type mismatches and dependency cycles fail. Parameters may supply
+specifications, device/package/assembly values and positive integer bus widths.
+They cannot generate names, IDs, instance counts, connection lists or conditional
+parts. No loops, functions, interpolation, implicit nets or external code run.
+
+Arithmetic uses 28-digit Decimal values with `+ - * /`, unary signs and parentheses;
+multiplication/division precede addition/subtraction. Units are checked dimensionally:
+`10 V / 2 mA` yields resistance, `2 V * 10 mA` yields power, and adding resistance
+to voltage fails. Ratios accept `%` and `ppm`; `integer` rejects fractional values.
+Division by zero, unsupported final compound dimensions and excessive expression
+depth fail with source locations. Expressions are calculated before schema validation.
+
+A module may contain one `rules` block with local models and groups. Typed references
+and selector patterns bind relative to each instance. Rule IDs use immutable
+instance ID paths, so repeated modules get independent diagnostics and a renamed
+functional instance preserves its rule IDs. File-global rules in aliases are
+prefixed by the alias. Keep stable IDs unchanged when splitting files.
+
+## Shared libraries
 
 The bundled catalogue is `libraries/<name>/<version>.json` within the installed
 package. `load_design(path, library_root=...)` or the explicit
@@ -77,6 +168,10 @@ together; different tolerance, voltage rating or power rating do not.
 - Switches require `initial_state`, `current_rating`, `voltage_rating`;
   solder bridges/jumpers require `initial_state` (`open` or `closed`).
 
+Optional `rating_conditions` describes AC/DC, pulse duty, temperature and
+thermal limits; it is carried into the component inventory and BOM. A scalar
+rating alone does not encode these conditions.
+
 The authoritative profiles are in `properties.py`. Missing required properties
 produce non-waivable `PROPERTY.REQUIRED` errors, including DNP parts. No guessed
 ratings or `unknown` placeholders can pass. `electrical` remains the input for
@@ -85,7 +180,7 @@ resolved resistance, assembly state or default switch state. Declaring ratings
 does not validate undeclared working voltage, dissipation or derating.
 
 `assembly` is required (`fitted` or `dnp`). DNP parts retain physical pads and
-connections. Board-level `accessories` contain `id`, `description`, positive
+connections. Board-level `accessory` declarations contain an ID, `description`, positive
 `quantity`, and `assembly`; they appear in BOM without introducing PCB pads.
 
 ## Identity, hierarchy and connectivity
@@ -102,25 +197,45 @@ pin one absolute namespace inside a multiply instantiated module: that would
 create duplicate identities, which the compiler rejects. Copying a physical
 part requires a new ID; editing/reparenting preserves its explicit namespace.
 
-Ports and buses retain the original explicit semantics: `ports: {data:
-{width: 4}}`, `instances: {left: {id: left, module: endpoint}}`. Net endpoints
-are `{part, pin}`, `{part, group}`, `{port}`, or `{instance, port}`. Group members
-are ordered logical names defined by the device library. All endpoint widths
-must match; no implicit broadcast, reversal or global power-net merging occurs.
-Every physical pin must be connected or explicitly `nc`. NC uses local part/pin
-or part/group endpoints. Duplicate use and connections conflicting with NC fail.
-Ports must connect on both sides; shorting distinct same-scope nets fails.
+Declare scalar ports with `ports GND, RESET;`, buses with `ports DATA[4];`, and
+children with `instance left: endpoint { id = "left"; }`. A connection is
+`net DATA = port.DATA, chip.group(DATA);`. Endpoints are `part.pin`,
+`part.group(group_name)`, `port.name`, or `instance.port`. Part and instance
+names must be distinct; `port` is reserved for the local port namespace.
+Group members are ordered logical names defined by the catalogue. All endpoint
+widths must match; no implicit broadcast, reversal or global power-net merging
+occurs. Use `nc chip.SPARE;` (or a local pin group) for unconnected physical pins.
+Every physical pin must be connected or explicitly NC; duplicates and NC conflicts
+fail. Ports connect on both sides; distinct same-scope nets cannot be shorted.
+Optional net models follow the endpoints:
+`net VDD = chip.VDD, port.VDD { electrical { role = power; } };`.
 
 The canonical net name is the shallowest participating path, then lexical order.
 Bus bits append `[i]`. `net_aliases` preserves other names. Hierarchy is bounded
 to 64 levels and 100,000 expanded instances.
 
-Rules, supplemental models and waivers use stable part identities and logical
-pin IDs, for example `target/mcu.PA13`; net rules use canonical net names.
-`rules.yaml` remains optional (inline rules also work). Rule-set version remains
-1: the electrical rule language is unchanged, only its object IDs changed.
-See [rules.md](rules.md). Diagnostics retain source locations and functional
-paths; annotated delivery snapshots also contain allocated references.
+Rules, supplemental models and waivers live in the entrypoint or included fragments. Typed functional
+references such as `pin(target.mcu.PA13)`, `part(target.mcu)` and `net(VDD)` resolve
+after hierarchy expansion. Slash-separated instance paths are also accepted.
+A renamed functional path must be updated in its rule references; stale references
+fail with source positions. Ordinary strings are never interpreted as references.
+See [rules.md](rules.md) for rules, selectors and waivers.
+
+Use `accessory demo_shunt { description = "removable shunt"; quantity = 1;
+assembly = fitted; }` for a BOM-only item without physical pads.
+
+## Migrating existing designs
+
+Merge the former board/rules/waiver input into one `.circuit` file. Preserve board
+ID, part and instance IDs, explicit identity namespaces, library revision and
+`design.lock.json`. Replace rule identity strings with typed functional references;
+retain independent expected connections rather than deriving rules from actual
+nets. Extract only genuinely shared known attributes into templates. Missing
+specifications remain errors. The bundled NUCLEO migration retains 89 parts,
+312 pads, 82 nets and 16 NC pins. Circuit 2 combines its pairwise isolation checks
+into one aggregate rule: 511 passing results and 10 warnings. Required specifications
+are now complete using documented project selections; see the board README for
+official BOM differences.
 
 ## Annotation and delivery
 

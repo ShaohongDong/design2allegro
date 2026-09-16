@@ -1,0 +1,280 @@
+circuit 2;
+
+include "templates.circuit";
+
+module power {
+    ports
+        E5V, GND, NetC15_2, NetC17_2, NetLD2_1, NetR7_1, PWR_ENN, U5V, U5V_ST_LINK, V3V3,
+        V3V3_ST_LINK, V5, VDD, VIN, VO;
+    part capacitor_vin {
+        id = "p777ae6d98bf45bf98d3c9aa3edf72f32";
+        device = "TAJB106K025RNJ.b69c0b37";
+        package = "TAN_B";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "AVX";
+            mpn = "TAJB106K025RNJ";
+            capacitance = 10 uF;
+            voltage_rating = 25 V;
+            tolerance = 10 %;
+            dielectric = "tantalum";
+            polarized = true;
+        };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_e5v {
+        id = "pd0598ce562bf5dd7b77fa69c05299f46";
+        device = "TAJA106K016R.4a32238b";
+        package = "TAN_A";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "AVX";
+            mpn = "TAJA106K016R";
+            capacitance = 10 uF;
+            voltage_rating = 16 V;
+            tolerance = 10 %;
+            dielectric = "tantalum";
+            polarized = true;
+        };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part diode_e5v_v5 {
+        id = "p3add8f1440d25ff4a6b169b62f186b1a";
+        device = "STPS2L30A.3cbb9c28";
+        package = "SMA";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "STM";
+            mpn = "STPS2L30A";
+            type = "Schottky";
+            current_rating = 2 A;
+            voltage_rating = 30 V;
+        };
+        electrical = {  };
+        identity_namespace = "power";
+    }
+    part capacitor_vo using capacitor_1_uf {
+        id = "p155a256c4617593da09a87834fc789b5";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX5R7BB105"; capacitance = 1 uF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_v5 using capacitor_100_nf {
+        id = "p455727422d085317b742e51b83cfac6e";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_vo_2 using capacitor_100_nf {
+        id = "p17e5fae1cfe95ca188b2d17adaa41f4b";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part power_led {
+        id = "p39cee27e6f1258da8bc1400fb34be599";
+        device = "everlight.19-217-R6C-P1Q2-3T";
+        package = "0603D_R";
+        assembly = "fitted";
+        properties = { manufacturer = "Everlight"; mpn = "19-217/R6C-P1Q2/3T"; type = "LED"; color = "red"; current_rating = 25 mA; voltage_rating = 5 V; rating_conditions = "Absolute maxima at 25 C: DC forward current 25 mA, reverse voltage 5 V (not forward operating voltage)."; };
+        electrical = {  };
+        identity_namespace = "power";
+    }
+    part resistor_v5 {
+        id = "pc30d863b13f555c99872834668947738";
+        device = "RC0603FR-071KL.f4611e61";
+        package = "0603R";
+        assembly = "fitted";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-071KL"; resistance = 1000 ohm; tolerance = 1 %; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_v5_2 using capacitor_1_uf {
+        id = "p7871a68ea66f57bfbd4d5838529c8718";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX5R7BB105"; capacitance = 1 uF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part diode_u5v_st_link_v5 using diode_bat60jfilm {
+        id = "p5c6ca9f9a6885ead9d1ebac47cb61abb";
+        properties = { manufacturer = "STM"; mpn = "BAT60JFILM"; };
+        identity_namespace = "power";
+    }
+    part jumper_v3v3_vo using jumper_closed {
+        id = "p480853a0200e51bbb35eaee12cd12e06";
+        electrical = { role = "jumper"; };
+        identity_namespace = "power";
+    }
+    part vin_regulator {
+        id = "p9895ad002f9f5fb891c80adea9298919";
+        device = "LD1117S50TR.5fe80655";
+        package = "SOT-223";
+        assembly = "fitted";
+        properties = { manufacturer = "STM"; mpn = "LD1117S50TR"; output_voltage = 5 V; supply_min = 6.5 V; supply_max = 15 V; current_rating = 800 mA; rating_conditions = "LD1117 5 V version Table 7 regulation range; 800 mA subject to dropout, power dissipation and thermal limits."; };
+        electrical = {  };
+        identity_namespace = "power";
+    }
+    part target_regulator {
+        id = "pd339431099ca51c1a322aa08bcd83928";
+        device = "LD39050PU33R.a02c16ae";
+        package = "DFN6_0R95_3x3_TP";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "STM";
+            mpn = "LD39050PU33R";
+            output_voltage = 3.3 V;
+            current_rating = 0.5 A; supply_min = 1.5 V; supply_max = 5.5 V; rating_conditions = "Device input operating range; regulated 3.3 V output requires additional dropout headroom."; };
+        electrical = {  };
+        identity_namespace = "power";
+    }
+    part current_measurement_jumper {
+        id = "p7f44d7013aed5adc9545269616973ec6";
+        device = "jumper.c4b2412b";
+        package = "HDR_1x2_1R27_R_M";
+        assembly = "fitted";
+        properties = { initial_state = "closed"; };
+        electrical = { role = "jumper"; };
+        identity_namespace = "power";
+    }
+    part diode_u5v using diode_bat60jfilm {
+        id = "p7f27778d139f5b10a07497aee65e58c9";
+        properties = { manufacturer = "STM"; mpn = "BAT60JFILM"; };
+        identity_namespace = "power";
+    }
+    part diode_e5v using diode_bat60jfilm {
+        id = "pba060347b21a5036b6e254ce07d5d30c";
+        properties = { manufacturer = "STM"; mpn = "BAT60JFILM"; };
+        identity_namespace = "power";
+    }
+    part capacitor_link using capacitor_1_uf {
+        id = "pe54d5c6b84dd5b8fbbc2a60d54f56bd2";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX5R7BB105"; capacitance = 1 uF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_link_2 {
+        id = "p41d009bff9d65b2eabe85114b86bec68";
+        device = "CC0603KRX7R9BB103.9db21403";
+        package = "0603C";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "YAGEO";
+            mpn = "CC0603KRX7R9BB103";
+            capacitance = 10 nF;
+            voltage_rating = 50 V;
+            tolerance = 10 %;
+            dielectric = "X7R";
+            polarized = false;
+        };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_v3v3_st_link using capacitor_1_uf {
+        id = "p94afa4f91d3c5518bd94f36f9ad64bf1";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX5R7BB105"; capacitance = 1 uF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part debug_regulator {
+        id = "p6a96d4df1f0759dda2d30dd5d2c0b7b3";
+        device = "LD3985M33R.76397cc1";
+        package = "SOT23-5L";
+        assembly = "fitted";
+        properties = { manufacturer = "STM"; mpn = "LD3985M33R"; output_voltage = 3.3 V; supply_min = 2.5 V; supply_max = 6 V; current_rating = 150 mA; rating_conditions = "Device input operating range; regulated 3.3 V output requires additional dropout headroom."; };
+        electrical = {  };
+        identity_namespace = "power";
+    }
+    part capacitor_link_3 using capacitor_100_nf {
+        id = "pc099a3d13bd3553f8b0507dba09c4f97";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_v3v3_st_link_2 using capacitor_100_nf {
+        id = "pe412dde57828549eaad8733b7875776a";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part resistor_pwr_enn_u5v using resistor_10000_ohm {
+        id = "p30885dbdd1f356b4857cde0ba9226f91";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-0710KL"; resistance = 10000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "power";
+    }
+    part resistor_link using resistor_2700_ohm {
+        id = "p1e89be9e3e9352bbbb71d34c35594fe1";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-072K7L"; resistance = 2700 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_u5v {
+        id = "p17e33d7e25395bc596c2b88d3fdd7b0c";
+        device = "CC0603KRX5R7BB475.9db21403";
+        package = "0603C";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "YAGEO";
+            mpn = "CC0603KRX5R7BB475";
+            capacitance = 4.7 uF;
+            voltage_rating = 16 V;
+            tolerance = 10 %;
+            dielectric = "X5R";
+            polarized = false;
+        };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part capacitor_u5v_st_link using capacitor_100_nf {
+        id = "p885943f8513959de8ab4815166d350aa";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "power";
+    }
+    part usb_power_switch {
+        id = "p92c55aa3ce8b59a2a51d6a4016626165";
+        device = "ST890CDR.87fa4a2a";
+        package = "SO-8";
+        assembly = "fitted";
+        properties = { manufacturer = "STM"; mpn = "ST890CDR"; supply_min = 2.7 V; supply_max = 5.5 V; };
+        electrical = {  };
+        identity_namespace = "power";
+    }
+    net E5V =
+        capacitor_e5v.P1, diode_e5v.A, diode_e5v_v5.A, vin_regulator.Vout, vin_regulator.Tab,
+        port.E5V;
+    net GND =
+        capacitor_u5v_st_link.P1, capacitor_vo_2.P1, capacitor_v5_2.P2, capacitor_link_3.P1,
+        capacitor_v3v3_st_link.P2, capacitor_link_2.P1, capacitor_link.P1,
+        capacitor_v3v3_st_link_2.P1, capacitor_vin.P2, capacitor_e5v.P2, capacitor_u5v.P1,
+        capacitor_v5.P1, capacitor_vo.P2, power_led.P2, resistor_link.P2, usb_power_switch.GND,
+        target_regulator.GND, target_regulator.GND_2, debug_regulator.GND, vin_regulator.P1,
+        port.GND;
+    net NetC15_2 =
+        capacitor_link_3.P2, capacitor_link.P2, diode_u5v.K, diode_e5v.K, debug_regulator.Vin,
+        debug_regulator.CE, port.NetC15_2;
+    net NetC17_2 = capacitor_link_2.P2, debug_regulator.BYPASS, port.NetC17_2;
+    net NetLD2_1 = power_led.P1, resistor_v5.P1, port.NetLD2_1;
+    net NetR7_1 = resistor_link.P1, usb_power_switch.SET, port.NetR7_1;
+    net PWR_ENN = resistor_pwr_enn_u5v.P2, usb_power_switch.O_N_, port.PWR_ENN;
+    net U5V =
+        capacitor_u5v.P2, diode_u5v.A, resistor_pwr_enn_u5v.P1, usb_power_switch.IN,
+        usb_power_switch.IN_2, port.U5V;
+    net U5V_ST_LINK =
+        capacitor_u5v_st_link.P2, diode_u5v_st_link_v5.A, usb_power_switch.OUT,
+        usb_power_switch.OUT_7, port.U5V_ST_LINK;
+    net V3V3 = current_measurement_jumper.COMMON, jumper_v3v3_vo.P2, port.V3V3;
+    net V3V3_ST_LINK =
+        capacitor_v3v3_st_link.P1, capacitor_v3v3_st_link_2.P2, debug_regulator.Vout,
+        port.V3V3_ST_LINK;
+    net V5 =
+        capacitor_v5_2.P1, capacitor_v5.P2, diode_e5v_v5.K, diode_u5v_st_link_v5.K, resistor_v5.P2,
+        target_regulator.EN, target_regulator.VI, port.V5;
+    net VDD = current_measurement_jumper.NO, port.VDD;
+    net VIN = capacitor_vin.P1, vin_regulator.Vin, port.VIN;
+    net VO = capacitor_vo_2.P2, capacitor_vo.P1, jumper_v3v3_vo.P1, target_regulator.VO, port.VO;
+    nc
+        usb_power_switch.F_A_U_L_T_, target_regulator.PG, target_regulator.NC;
+}

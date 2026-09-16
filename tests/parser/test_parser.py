@@ -7,11 +7,11 @@ import shutil
 from pathlib import Path
 
 import pytest
-import yaml
-from conftest import write_yaml
+from conftest import write_circuit
 
 from design2allegro import ElectricalError, compile_design, export_design, load_design
 from design2allegro.cli import main
+from design2allegro.syntax import parse
 from design2allegro.verify import (
     NetlistFormatError,
     parse_device,
@@ -33,13 +33,13 @@ def project(tmp_path, monkeypatch):
     )
     shutil.copytree(ROOT / "src/design2allegro/libraries", tmp_path / "catalogs")
     monkeypatch.setenv("DESIGN2ALLEGRO_LIBRARY_ROOT", str(tmp_path / "catalogs"))
-    return tmp_path / "project/board.yaml"
+    return tmp_path / "project/board.circuit"
 
 
 def edit(path, fn):
-    doc = yaml.safe_load(path.read_text())
+    doc = parse(path.read_text(), str(path))
     fn(doc)
-    write_yaml(path, doc)
+    write_circuit(path, doc)
 
 
 def edit_library(project, fn):
@@ -79,8 +79,6 @@ def test_hierarchy_bus_order_and_identity(project):
     "change,match",
     [
         (lambda d: d.update(typo=1), "Additional properties"),
-        (lambda d: d.update(version=True), "version"),
-        (lambda d: d.update(version=1), "retired"),
         (lambda d: d.update(references={"x": "U1"}), "Additional properties"),
         (lambda d: d.update(top="missing"), "unknown top"),
         (
@@ -146,14 +144,16 @@ def test_invalid_designs(project, change, match):
 @pytest.mark.parametrize(
     "text,match",
     [
-        ("version: 2\nversion: 2\n", "duplicate YAML key"),
-        ("x: !!python/object/apply:os.system [echo unsafe]\n", "could not determine"),
-        ("x: &x [1]\ny: *x\n", "aliases are not supported"),
-        ("version: [\n", "line"),
+        ('circuit 1; board x { id = "x"; id = "y"; }', "duplicate declaration"),
+        ("circuit 1; board x { id = !!python/object/apply; }", "unexpected character"),
+        ("circuit 1; board x { id = &x; }", "unexpected character"),
+        ("circuit 1; board x {", "expected name"),
+        ("circuit 99;", "unsupported circuit language version"),
+        ("circuit true;", "unsupported circuit language version"),
     ],
 )
-def test_yaml_rejections(tmp_path, text, match):
-    p = tmp_path / "bad.yaml"
+def test_syntax_rejections(tmp_path, text, match):
+    p = tmp_path / "bad.circuit"
     p.write_text(text)
     with pytest.raises(ElectricalError, match=match) as exc:
         load_design(p)
@@ -206,8 +206,8 @@ def test_ddr_error_blocks_and_preserves(project, tmp_path):
     export_design(compiled(project), out)
     before = files(out)
     edit(
-        project.parent / "rules.yaml",
-        lambda d: d["rules"][0]["params"]["memory"][0]["dq"].reverse(),
+        project,
+        lambda d: d["rules"]["rules"][0]["params"]["memory"][0]["dq"].reverse(),
     )
     assert not compiled(project).check().ok
     with pytest.raises(ElectricalError, match="blocked"):
@@ -241,7 +241,7 @@ def test_cli(project, tmp_path, capsys):
     edit(project, lambda d: d.update(top="absent"))
     assert main(["check", str(project), "--json"]) == 2
     capsys.readouterr()
-    assert main(["check", str(project.parent / "absent.yaml"), "--json"]) == 1
+    assert main(["check", str(project.parent / "absent.circuit"), "--json"]) == 1
     capsys.readouterr()
     assert main(["build", str(project), "--json"]) == 2
 
@@ -326,28 +326,29 @@ def test_readback_detects_changed_connectivity_with_updated_hash(project, tmp_pa
         verify_package(out)
 
 
-def test_external_rules_and_waivers(project):
+def test_inline_rules_and_waivers(project):
     edit(
-        project.parent / "rules.yaml",
-        lambda d: d["rules"].append(
+        project,
+        lambda d: d["rules"]["rules"].append(
             {"id": "SPARE", "kind": "required", "scope": [LEFT + ".SPARE"]}
         ),
     )
     assert not compiled(project).check().ok
-    edit(project, lambda d: d.update(waivers="waivers.yaml"))
-    write_yaml(
-        project.parent / "waivers.yaml",
-        [
-            {
-                "rule": "SPARE",
-                "object": LEFT + ".SPARE",
-                "reason": "Reserved NC",
-                "owner": "board-team",
-            }
-        ],
+    edit(
+        project,
+        lambda d: d.update(
+            waivers=[
+                {
+                    "rule": "SPARE",
+                    "object": LEFT + ".SPARE",
+                    "reason": "Reserved NC",
+                    "owner": "board-team",
+                }
+            ]
+        ),
     )
     assert compiled(project).check().ok
-    edit(project.parent / "waivers.yaml", lambda d: d[0].update(expires="2000-01-01"))
+    edit(project, lambda d: d["waivers"][0].update(expires="2000-01-01"))
     assert not compiled(project).check().ok
 
 

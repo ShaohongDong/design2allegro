@@ -1,8 +1,7 @@
-"""Isolated development tasks for the YAML compiler."""
+"""Isolated development tasks for the Circuit compiler."""
 
 import argparse
 import hashlib
-import json
 import os
 import shutil
 import subprocess
@@ -52,7 +51,7 @@ def build():
         [sys.executable, "-m", "build", "--wheel", "--outdir", ROOT / "dist", stage],
         "build",
     )
-    wheel = ROOT / "dist" / "design2allegro-2.0.0-py3-none-any.whl"
+    wheel = ROOT / "dist" / "design2allegro-3.1.0-py3-none-any.whl"
     (ROOT / "dist" / "design2allegro-SHA256SUMS").write_text(
         hashlib.sha256(wheel.read_bytes()).hexdigest() + "  " + wheel.name + "\n"
     )
@@ -80,14 +79,14 @@ def verify():
             [
                 python,
                 "-c",
-                "import importlib.util; assert importlib.util.find_spec('skidl') is None; assert importlib.util.find_spec('_skidl_native') is None",
+                "import importlib.util; assert importlib.util.find_spec('skidl') is None; assert importlib.util.find_spec('_skidl_native') is None; assert importlib.util.find_spec('yaml') is None",
             ],
             "package-independent",
             env=env,
             cwd=work,
         )
         run(
-            [entry, "check", work / "project/board.yaml", "--json"],
+            [entry, "check", work / "project/board.circuit", "--json"],
             "package-check",
             env=env,
             cwd=work,
@@ -96,7 +95,7 @@ def verify():
             [
                 entry,
                 "build",
-                work / "project/board.yaml",
+                work / "project/board.circuit",
                 "-o",
                 work / "output",
                 "--json",
@@ -111,8 +110,28 @@ def verify():
             env=env,
             cwd=work,
         )
-        bad = work / "bad.yaml"
-        bad.write_text("version: 1\nversion: 1\n")
+        shutil.copytree(ROOT / "tests/fixtures/parameterized", work / "parameterized")
+        run(
+            [
+                entry,
+                "build",
+                work / "parameterized/board.circuit",
+                "-o",
+                work / "parameterized-output",
+                "--json",
+            ],
+            "package-circuit2-build",
+            env=env,
+            cwd=work,
+        )
+        run(
+            [entry, "verify", work / "parameterized-output", "--json"],
+            "package-circuit2-verify",
+            env=env,
+            cwd=work,
+        )
+        bad = work / "bad.circuit"
+        bad.write_text('circuit 1;\nboard x { id = "x"; id = "x"; }\n')
         run(
             [entry, "check", bad, "--json"],
             "package-negative",
@@ -159,14 +178,17 @@ def main():
             env=environment(),
         )
     elif args.command == "example":
-        for name in ("fpga_soc",):
+        for name, project in (
+            ("fpga_soc", ROOT / "tests/fixtures/fpga_soc"),
+            ("nucleo_l432kc", ROOT / "schematics/nucleo_l432kc"),
+        ):
             run(
                 [
                     sys.executable,
                     "-m",
                     "design2allegro",
                     "build",
-                    ROOT / f"tests/fixtures/{name}/board.yaml",
+                    project / "board.circuit",
                     "-o",
                     BUILD / name,
                     "--json",
@@ -186,30 +208,6 @@ def main():
                 "verify-" + name,
                 env=environment(),
             )
-        run(
-            [
-                sys.executable,
-                "-m",
-                "design2allegro",
-                "check",
-                ROOT / "schematics/nucleo_l432kc/board.yaml",
-                "--json",
-            ],
-            "nucleo-strict-attributes",
-            env=environment(),
-            expected=2,
-        )
-        report = json.loads((BUILD / "logs/nucleo-strict-attributes.log").read_text())
-        failures = [
-            d
-            for d in report["diagnostics"]
-            if d["severity"] == "ERROR" and d["status"] != "PASS"
-        ]
-        if not failures or any(d["rule"] != "PROPERTY.REQUIRED" for d in failures):
-            raise SystemExit("unexpected NUCLEO validation failure")
-        print(
-            f"NUCLEO: export blocked by {len(failures)} missing required attributes; connectivity checks passed."
-        )
     elif args.command == "benchmark":
         run(
             [sys.executable, ROOT / "tools/benchmark.py"],

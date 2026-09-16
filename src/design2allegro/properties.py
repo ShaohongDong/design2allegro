@@ -23,6 +23,7 @@ FIELDS = {
     "load_capacitance": "capacitance",
     "frequency_tolerance": "ratio",
     "type": None,
+    "rating_conditions": None,
     "color": None,
     "manufacturer": None,
     "mpn": None,

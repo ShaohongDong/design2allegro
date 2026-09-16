@@ -2,18 +2,13 @@ import json
 from pathlib import Path
 
 import pytest
-import yaml
 
 from design2allegro import compile_design, load_design
+from design2allegro.formatting import dumps
 
 
-class Dumper(yaml.SafeDumper):
-    def ignore_aliases(self, data):
-        return True
-
-
-def write_yaml(path, data):
-    path.write_text(yaml.dump(data, Dumper=Dumper, sort_keys=False))
+def write_circuit(path, data):
+    path.write_text(dumps(data))
 
 
 @pytest.fixture
@@ -62,9 +57,9 @@ def make_board(tmp_path):
                 {"version": 2, "name": "test", "revision": "1", "devices": components}
             )
         )
-        write_yaml(tmp_path / "board.yaml", doc)
+        write_circuit(tmp_path / "board.circuit", doc)
         return compile_design(
-            load_design(tmp_path / "board.yaml", library_root=library_root)
+            load_design(tmp_path / "board.circuit", library_root=library_root)
         )
 
     return make

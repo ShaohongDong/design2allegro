@@ -164,6 +164,7 @@ def need(obj, key):
 
 
 PARAMS = {
+    "isolated_all": set(),
     "required": set(),
     "no_connect": set(),
     "drive": {"arbitration", "pull"},
@@ -827,6 +828,10 @@ class Engine:
                 raise ElectricalError("unknown rule fields " + rid)
             scope = rule.get("scope")
             if scope is None:
+                if rule["kind"] == "isolated_all":
+                    raise ElectricalError(
+                        "isolated_all requires an explicit scope or group"
+                    )
                 selector = need(rule, "selector")
                 kind = selector.get("entity", "pins")
                 if kind not in self.models:
@@ -838,6 +843,44 @@ class Engine:
                 )
             if not isinstance(scope, list) or len(scope) != len(set(scope)):
                 raise ElectricalError("scope must be a unique list")
+            if rule["kind"] == "isolated_all":
+                if len(scope) < 2:
+                    raise ElectricalError(
+                        "isolated_all needs at least two unique connected pins"
+                    )
+                groups = defaultdict(list)
+                for pin in scope:
+                    net = self.net(pin)
+                    if net is None:
+                        raise ElectricalError(
+                            "isolated_all cannot include NC pins: " + pin
+                        )
+                    self.covered.add(pin)
+                    groups[net].append(pin)
+                conflicts = {net: pins for net, pins in groups.items() if len(pins) > 1}
+                self.emit(
+                    rid,
+                    "<group>",
+                    (
+                        "NOT_APPLICABLE"
+                        if rule.get("applicable") is False
+                        else "FAIL" if conflicts else "PASS"
+                    ),
+                    (
+                        "explicitly not applicable"
+                        if rule.get("applicable") is False
+                        else (
+                            "networks must be distinct"
+                            if conflicts
+                            else "all networks distinct"
+                        )
+                    ),
+                    severity,
+                    required,
+                    conflicts=conflicts,
+                    members=scope,
+                )
+                continue
             if not scope:
                 self.emit(
                     rid,

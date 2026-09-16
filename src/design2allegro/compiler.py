@@ -7,6 +7,7 @@ from .loader import fail
 from .model import CompiledDesign, canonical
 from .pin_data import conflict_matrix, pin_info, pin_types
 from .rules import intersect
+from .syntax import resolve_references, resolve_rules
 
 
 class UnionFind:
@@ -124,7 +125,12 @@ def compile_design(design):
                 "hierarchy": full.split("/"),
                 "electrical": component["electrical"],
                 "pins": [],
-                "source": [list(getattr(config, "source", ("<memory>", 0, 0)))],
+                "source": [list(getattr(config, "source", ("<memory>", 0, 0)))]
+                + (
+                    [list(config.template_source)]
+                    if hasattr(config, "template_source")
+                    else []
+                ),
             }
             local_parts[local] = (
                 ref,
@@ -298,5 +304,8 @@ def compile_design(design):
         "inputs": design.inputs,
     }
     return CompiledDesign(
-        canonical(data), canonical(design.rules), canonical(design.waivers), design.path
+        canonical(data),
+        canonical(resolve_rules(design.rules, data)),
+        canonical(resolve_references(design.waivers, data)),
+        design.path,
     )

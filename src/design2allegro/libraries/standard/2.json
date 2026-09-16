@@ -1,0 +1,2272 @@
+{
+  "version": 2,
+  "name": "standard",
+  "revision": "2",
+  "devices": {
+    "generic.resistor": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "resistor_0603": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Specifications must be supplied by design"
+      }
+    },
+    "generic.capacitor": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "capacitor_0603": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Specifications must be supplied by design"
+      }
+    },
+    "generic.jumper": {
+      "category": "jumper",
+      "prefix": "SB",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "jumper_0603": {
+          "allegro": "SB_0603",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Specifications must be supplied by design"
+      }
+    },
+    "PH254015B-09303.c47470bb": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        },
+        "P5": {
+          "type": "PASSIVE"
+        },
+        "P6": {
+          "type": "PASSIVE"
+        },
+        "P7": {
+          "type": "PASSIVE"
+        },
+        "P8": {
+          "type": "PASSIVE"
+        },
+        "P9": {
+          "type": "PASSIVE"
+        },
+        "P10": {
+          "type": "PASSIVE"
+        },
+        "P11": {
+          "type": "PASSIVE"
+        },
+        "P12": {
+          "type": "PASSIVE"
+        },
+        "P13": {
+          "type": "PASSIVE"
+        },
+        "P14": {
+          "type": "PASSIVE"
+        },
+        "P15": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_1x15_2R54_V_F": {
+          "allegro": "HDR_1x15_2R54_V_F",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4",
+            "5": "P5",
+            "6": "P6",
+            "7": "P7",
+            "8": "P8",
+            "9": "P9",
+            "10": "P10",
+            "11": "P11",
+            "12": "P12",
+            "13": "P13",
+            "14": "P14",
+            "15": "P15"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "ATOM",
+        "mpn": "PH254015B-09303",
+        "positions": 15,
+        "pitch": "2.54 mm"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "36"
+      }
+    },
+    "connector.da8493c1": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        },
+        "P5": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_1x5_2R54_V_M": {
+          "allegro": "HDR_1x5_2R54_V_M",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4",
+            "5": "P5"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "35"
+      }
+    },
+    "1050170001.8dc511f7": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "VBUS": {
+          "type": "PWROUT",
+          "electrical": {
+            "power_role": "source",
+            "boundary": "external USB host"
+          }
+        },
+        "DM": {
+          "type": "PASSIVE"
+        },
+        "DP": {
+          "type": "PASSIVE"
+        },
+        "ID": {
+          "type": "PASSIVE"
+        },
+        "GND": {
+          "type": "PWROUT",
+          "electrical": {
+            "power_role": "source",
+            "boundary": "external USB host"
+          }
+        },
+        "Shield": {
+          "type": "PASSIVE"
+        },
+        "Shield_7": {
+          "type": "PASSIVE"
+        },
+        "Shield_8": {
+          "type": "PASSIVE"
+        },
+        "Shield_9": {
+          "type": "PASSIVE"
+        },
+        "EXP": {
+          "type": "PASSIVE"
+        },
+        "EXP_11": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "Molex_1050170001": {
+          "allegro": "Molex_1050170001",
+          "pads": {
+            "1": "VBUS",
+            "2": "DM",
+            "3": "DP",
+            "4": "ID",
+            "5": "GND",
+            "6": "Shield",
+            "7": "Shield_7",
+            "8": "Shield_8",
+            "9": "Shield_9",
+            "10": "EXP",
+            "11": "EXP_11"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "MOLEX",
+        "mpn": "1050170001"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "34"
+      }
+    },
+    "TAJB106K025RNJ.b69c0b37": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "TAN_B": {
+          "allegro": "TAN_B",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "AVX",
+        "mpn": "TAJB106K025RNJ",
+        "capacitance": "10 uF",
+        "voltage_rating": "25 V",
+        "tolerance": "10 %",
+        "dielectric": "tantalum",
+        "polarized": true
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "32"
+      }
+    },
+    "TAJA106K016R.4a32238b": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "TAN_A": {
+          "allegro": "TAN_A",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "AVX",
+        "mpn": "TAJA106K016R",
+        "capacitance": "10 uF",
+        "voltage_rating": "16 V",
+        "tolerance": "10 %",
+        "dielectric": "tantalum",
+        "polarized": true
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "33"
+      }
+    },
+    "STPS2L30A.3cbb9c28": {
+      "category": "diode",
+      "prefix": "D",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "K": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SMA": {
+          "allegro": "SMA",
+          "pads": {
+            "1": "A",
+            "2": "K"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "STPS2L30A",
+        "type": "Schottky",
+        "current_rating": "2 A",
+        "voltage_rating": "30 V"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "38"
+      }
+    },
+    "CC0603KRX5R7BB105.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "CC0603KRX5R7BB105",
+        "capacitance": "1 uF",
+        "voltage_rating": "16 V",
+        "tolerance": "10 %",
+        "dielectric": "X5R",
+        "polarized": false
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "28"
+      }
+    },
+    "CC0603KRX7R7BB104.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "CC0603KRX7R7BB104",
+        "capacitance": "100 nF",
+        "voltage_rating": "16 V",
+        "tolerance": "10 %",
+        "dielectric": "X7R",
+        "polarized": false
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "25"
+      }
+    },
+    "19-217/R6C-AL1M2VY/3T.97c0a86b": {
+      "category": "led",
+      "prefix": "D",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603D_R": {
+          "allegro": "0603D_R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "everlight",
+        "mpn": "19-217/R6C-AL1M2VY/3T",
+        "type": "LED",
+        "color": "red"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "42"
+      }
+    },
+    "RC0603FR-071KL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-071KL",
+        "resistance": "1000 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "54"
+      }
+    },
+    "BAT60JFILM.0d63fc0e": {
+      "category": "diode",
+      "prefix": "D",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "K": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SOD-323": {
+          "allegro": "SOD-323",
+          "pads": {
+            "1": "A",
+            "2": "K"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "BAT60JFILM"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "37"
+      }
+    },
+    "jumper.0f95cdef": {
+      "category": "jumper",
+      "prefix": "SB",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SB_0603": {
+          "allegro": "SB_0603",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "57"
+      }
+    },
+    "LD1117S50TR.5fe80655": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "P1": {
+          "type": "PWRIN"
+        },
+        "Vout": {
+          "type": "PWROUT"
+        },
+        "Vin": {
+          "type": "PWRIN"
+        },
+        "Tab": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SOT-223": {
+          "allegro": "SOT-223",
+          "pads": {
+            "1": "P1",
+            "2": "Vout",
+            "3": "Vin",
+            "4": "Tab"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "LD1117S50TR",
+        "output_voltage": "5 V"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "66"
+      }
+    },
+    "LD39050PU33R.a02c16ae": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "GND": {
+          "type": "PWRIN"
+        },
+        "EN": {
+          "type": "INPUT"
+        },
+        "GND_2": {
+          "type": "PWRIN"
+        },
+        "PG": {
+          "type": "OPENCOLL"
+        },
+        "VO": {
+          "type": "PWROUT",
+          "electrical": {
+            "nominal_voltage": "3.3 V",
+            "power_role": "source"
+          }
+        },
+        "NC": {
+          "type": "NOCONNECT"
+        },
+        "VI": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "DFN6_0R95_3x3_TP": {
+          "allegro": "DFN6_0R95_3x3_TP",
+          "pads": {
+            "0": "GND",
+            "1": "EN",
+            "2": "GND_2",
+            "3": "PG",
+            "4": "VO",
+            "5": "NC",
+            "6": "VI"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "LD39050PU33R",
+        "output_voltage": "3.3 V",
+        "current_rating": "0.5 A"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "63"
+      }
+    },
+    "jumper.c4b2412b": {
+      "category": "jumper",
+      "prefix": "JP",
+      "pins": {
+        "COMMON": {
+          "type": "PASSIVE"
+        },
+        "NO": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_1x2_1R27_R_M": {
+          "allegro": "HDR_1x2_1R27_R_M",
+          "pads": {
+            "1": "COMMON",
+            "2": "NO"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "39"
+      }
+    },
+    "CC0603KRX7R9BB103.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "CC0603KRX7R9BB103",
+        "capacitance": "10 nF",
+        "voltage_rating": "50 V",
+        "tolerance": "10 %",
+        "dielectric": "X7R",
+        "polarized": false
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "30"
+      }
+    },
+    "LD3985M33R.76397cc1": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "Vin": {
+          "type": "PWRIN"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "CE": {
+          "type": "INPUT"
+        },
+        "BYPASS": {
+          "type": "PASSIVE"
+        },
+        "Vout": {
+          "type": "PWROUT",
+          "electrical": {
+            "nominal_voltage": "3.3 V",
+            "power_role": "source"
+          }
+        }
+      },
+      "packages": {
+        "SOT23-5L": {
+          "allegro": "SOT23-5L",
+          "pads": {
+            "1": "Vin",
+            "2": "GND",
+            "3": "CE",
+            "4": "BYPASS",
+            "5": "Vout"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "LD3985M33R",
+        "output_voltage": "3.3 V"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "64"
+      }
+    },
+    "RC0603FR-0710KL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-0710KL",
+        "resistance": "10000 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "47"
+      }
+    },
+    "RC0603FR-072K7L.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-072K7L",
+        "resistance": "2700 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "49"
+      }
+    },
+    "CC0603KRX5R7BB475.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "CC0603KRX5R7BB475",
+        "capacitance": "4.7 uF",
+        "voltage_rating": "16 V",
+        "tolerance": "10 %",
+        "dielectric": "X5R",
+        "polarized": false
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "27"
+      }
+    },
+    "ST890CDR.87fa4a2a": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "IN": {
+          "type": "PWRIN"
+        },
+        "IN_2": {
+          "type": "PWRIN"
+        },
+        "O_N_": {
+          "type": "INPUT"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "SET": {
+          "type": "PASSIVE"
+        },
+        "OUT": {
+          "type": "PWROUT"
+        },
+        "OUT_7": {
+          "type": "PASSIVE"
+        },
+        "F_A_U_L_T_": {
+          "type": "OPENCOLL"
+        }
+      },
+      "packages": {
+        "SO-8": {
+          "allegro": "SO-8",
+          "pads": {
+            "1": "IN",
+            "2": "IN_2",
+            "3": "O_N_",
+            "4": "GND",
+            "5": "SET",
+            "6": "OUT",
+            "7": "OUT_7",
+            "8": "F_A_U_L_T_"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "ST890CDR"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "61"
+      }
+    },
+    "NX3225GD-8MHz-EXS00A-CG04874.0e291baf": {
+      "category": "crystal",
+      "prefix": "Y",
+      "pins": {
+        "OSC1": {
+          "type": "PASSIVE"
+        },
+        "OSC2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "XTAL_2SM_3R2x2R5": {
+          "allegro": "XTAL_2SM_3R2x2R5",
+          "pads": {
+            "1": "OSC1",
+            "2": "OSC2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "NDK",
+        "mpn": "NX3225GD-8MHz-EXS00A-CG04874",
+        "frequency": "8 MHz",
+        "load_capacitance": "8 pF"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "68"
+      }
+    },
+    "LE-RGW35280.1a1a83de": {
+      "category": "led",
+      "prefix": "D",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HSMF-A201": {
+          "allegro": "HSMF-A201",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "everluck",
+        "mpn": "LE-RGW35280",
+        "type": "LED",
+        "color": "red-green"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "41"
+      }
+    },
+    "RC0603FR-071K5L.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-071K5L",
+        "resistance": "1500 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "44"
+      }
+    },
+    "RC0603FR-07100KL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-07100KL",
+        "resistance": "100000 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "45"
+      }
+    },
+    "RC0603FR-07100RL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-07100RL",
+        "resistance": "100 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "48"
+      }
+    },
+    "RC0603JR-070RL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603JR-070RL",
+        "resistance": "0 ohm",
+        "tolerance": "5 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "53"
+      }
+    },
+    "resistor.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "52"
+      }
+    },
+    "RC0603FR-074K7L.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-074K7L",
+        "resistance": "4700 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "50"
+      }
+    },
+    "capacitor.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "26"
+      }
+    },
+    "CC0603JRNPO9BN100.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "CC0603JRNPO9BN100",
+        "capacitance": "10 pF",
+        "voltage_rating": "50 V",
+        "tolerance": "5 %",
+        "dielectric": "NPO",
+        "polarized": false
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "31"
+      }
+    },
+    "MMBT9013.1e8f3bf1": {
+      "category": "transistor",
+      "prefix": "Q",
+      "pins": {
+        "E": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        },
+        "C": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SOT23-3": {
+          "allegro": "SOT23-3",
+          "pads": {
+            "1": "E",
+            "2": "B",
+            "3": "C"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "ST",
+        "mpn": "MMBT9013"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "60"
+      }
+    },
+    "RC0603FR-0736KL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-0736KL",
+        "resistance": "36000 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "46"
+      }
+    },
+    "STM32F103CBT6.d13446b6": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "VBAT": {
+          "type": "PWRIN"
+        },
+        "PC13": {
+          "type": "BIDIR"
+        },
+        "PC14": {
+          "type": "BIDIR"
+        },
+        "PC15": {
+          "type": "BIDIR"
+        },
+        "OSCIN": {
+          "type": "INPUT"
+        },
+        "OSCOUT": {
+          "type": "OUTPUT"
+        },
+        "NRST": {
+          "type": "INPUT"
+        },
+        "VSSA": {
+          "type": "PWRIN"
+        },
+        "VDDA": {
+          "type": "PWRIN"
+        },
+        "PA0": {
+          "type": "INPUT"
+        },
+        "PA1": {
+          "type": "BIDIR"
+        },
+        "PA2": {
+          "type": "OUTPUT"
+        },
+        "PA3": {
+          "type": "INPUT"
+        },
+        "PA4": {
+          "type": "BIDIR"
+        },
+        "PA5": {
+          "type": "INPUT"
+        },
+        "PA6": {
+          "type": "BIDIR"
+        },
+        "PA7": {
+          "type": "BIDIR"
+        },
+        "PB0": {
+          "type": "OPENCOLL"
+        },
+        "PB1": {
+          "type": "BIDIR"
+        },
+        "PB2_BOOT1": {
+          "type": "INPUT"
+        },
+        "PB10": {
+          "type": "BIDIR"
+        },
+        "PB11": {
+          "type": "BIDIR"
+        },
+        "VSS_1": {
+          "type": "PWRIN"
+        },
+        "VDD_1": {
+          "type": "PWRIN"
+        },
+        "PB12": {
+          "type": "INPUT"
+        },
+        "PB13": {
+          "type": "OUTPUT"
+        },
+        "PB14": {
+          "type": "BIDIR"
+        },
+        "PB15": {
+          "type": "OUTPUT"
+        },
+        "PA8": {
+          "type": "OUTPUT"
+        },
+        "PA9": {
+          "type": "OUTPUT"
+        },
+        "PA10": {
+          "type": "BIDIR"
+        },
+        "PA11": {
+          "type": "BIDIR"
+        },
+        "PA12": {
+          "type": "BIDIR"
+        },
+        "JTMS_SWDIO": {
+          "type": "BIDIR"
+        },
+        "VSS_2": {
+          "type": "PWRIN"
+        },
+        "VDD_2": {
+          "type": "PWRIN"
+        },
+        "JTCK_SWCLK": {
+          "type": "BIDIR"
+        },
+        "PA15_JTDI": {
+          "type": "OUTPUT"
+        },
+        "PB3_JTDO": {
+          "type": "INPUT"
+        },
+        "PB4_JNTRST": {
+          "type": "BIDIR"
+        },
+        "PB5": {
+          "type": "BIDIR"
+        },
+        "PB6": {
+          "type": "BIDIR"
+        },
+        "PB7": {
+          "type": "BIDIR"
+        },
+        "BOOT0": {
+          "type": "INPUT"
+        },
+        "PB8": {
+          "type": "BIDIR"
+        },
+        "PB9": {
+          "type": "BIDIR"
+        },
+        "VSS_3": {
+          "type": "PWRIN"
+        },
+        "VDD_3": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "LQFP48_0R5_7x7": {
+          "allegro": "LQFP48_0R5_7x7",
+          "pads": {
+            "1": "VBAT",
+            "2": "PC13",
+            "3": "PC14",
+            "4": "PC15",
+            "5": "OSCIN",
+            "6": "OSCOUT",
+            "7": "NRST",
+            "8": "VSSA",
+            "9": "VDDA",
+            "10": "PA0",
+            "11": "PA1",
+            "12": "PA2",
+            "13": "PA3",
+            "14": "PA4",
+            "15": "PA5",
+            "16": "PA6",
+            "17": "PA7",
+            "18": "PB0",
+            "19": "PB1",
+            "20": "PB2_BOOT1",
+            "21": "PB10",
+            "22": "PB11",
+            "23": "VSS_1",
+            "24": "VDD_1",
+            "25": "PB12",
+            "26": "PB13",
+            "27": "PB14",
+            "28": "PB15",
+            "29": "PA8",
+            "30": "PA9",
+            "31": "PA10",
+            "32": "PA11",
+            "33": "PA12",
+            "34": "JTMS_SWDIO",
+            "35": "VSS_2",
+            "36": "VDD_2",
+            "37": "JTCK_SWCLK",
+            "38": "PA15_JTDI",
+            "39": "PB3_JTDO",
+            "40": "PB4_JNTRST",
+            "41": "PB5",
+            "42": "PB6",
+            "43": "PB7",
+            "44": "BOOT0",
+            "45": "PB8",
+            "46": "PB9",
+            "47": "VSS_3",
+            "48": "VDD_3"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STM",
+        "mpn": "STM32F103CBT6"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "65"
+      }
+    },
+    "0603CG4R3C500NT.9db21403": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "0603CG4R3C500NT",
+        "capacitance": "4.3 pF",
+        "voltage_rating": "50 V",
+        "tolerance": "0.25 pF",
+        "dielectric": "COG",
+        "polarized": false
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "29"
+      }
+    },
+    "FCM1608KF-601T05.163c0081": {
+      "category": "ferrite",
+      "prefix": "L",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603L": {
+          "allegro": "0603L",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Tai-tech",
+        "mpn": "FCM1608KF-601T05",
+        "impedance": "600 ohm",
+        "current_rating": "500 mA"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "40",
+        "correction": "TBM01-150600456: -601T05 is 500 mA (BOM said 350 mA); see sources.json."
+      }
+    },
+    "STM32L432KCU6U.1c2be81d": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "VDD_1": {
+          "type": "PWRIN",
+          "electrical": {
+            "input_min": "1.71 V",
+            "input_max": "3.6 V",
+            "reference": "GND",
+            "power_role": "load"
+          }
+        },
+        "PC14": {
+          "type": "BIDIR"
+        },
+        "PC15": {
+          "type": "BIDIR"
+        },
+        "NRST": {
+          "type": "BIDIR"
+        },
+        "VDDA": {
+          "type": "PWRIN",
+          "electrical": {
+            "input_min": "1.62 V",
+            "input_max": "3.6 V",
+            "reference": "GND",
+            "power_role": "load"
+          }
+        },
+        "PA0": {
+          "type": "BIDIR"
+        },
+        "PA1": {
+          "type": "BIDIR"
+        },
+        "PA2": {
+          "type": "BIDIR"
+        },
+        "PA3": {
+          "type": "BIDIR"
+        },
+        "PA4": {
+          "type": "BIDIR"
+        },
+        "PA5": {
+          "type": "BIDIR"
+        },
+        "PA6": {
+          "type": "BIDIR"
+        },
+        "PA7": {
+          "type": "BIDIR"
+        },
+        "PB0": {
+          "type": "BIDIR"
+        },
+        "PB1": {
+          "type": "BIDIR"
+        },
+        "VSS_16": {
+          "type": "PWRIN"
+        },
+        "VDD_17": {
+          "type": "PWRIN",
+          "electrical": {
+            "input_min": "1.71 V",
+            "input_max": "3.6 V",
+            "reference": "GND",
+            "power_role": "load"
+          }
+        },
+        "PA8": {
+          "type": "BIDIR"
+        },
+        "PA9": {
+          "type": "BIDIR"
+        },
+        "PA10": {
+          "type": "BIDIR"
+        },
+        "PA11": {
+          "type": "BIDIR"
+        },
+        "PA12": {
+          "type": "BIDIR"
+        },
+        "PA13": {
+          "type": "BIDIR",
+          "electrical": {
+            "capabilities": [
+              "SWDIO"
+            ]
+          }
+        },
+        "PA14": {
+          "type": "INPUT",
+          "electrical": {
+            "capabilities": [
+              "SWCLK"
+            ]
+          }
+        },
+        "PA15": {
+          "type": "BIDIR"
+        },
+        "PB3": {
+          "type": "BIDIR"
+        },
+        "PB4": {
+          "type": "BIDIR"
+        },
+        "PB5": {
+          "type": "BIDIR"
+        },
+        "PB6": {
+          "type": "BIDIR"
+        },
+        "PB7": {
+          "type": "BIDIR"
+        },
+        "PH3_BOOT0": {
+          "type": "BIDIR"
+        },
+        "VSS_32": {
+          "type": "PWRIN"
+        },
+        "EP_GND": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "UFQFPN32_5X5_P05_EP33": {
+          "allegro": "UFQFPN32_5X5_P05_EP33",
+          "pads": {
+            "1": "VDD_1",
+            "2": "PC14",
+            "3": "PC15",
+            "4": "NRST",
+            "5": "VDDA",
+            "6": "PA0",
+            "7": "PA1",
+            "8": "PA2",
+            "9": "PA3",
+            "10": "PA4",
+            "11": "PA5",
+            "12": "PA6",
+            "13": "PA7",
+            "14": "PB0",
+            "15": "PB1",
+            "16": "VSS_16",
+            "17": "VDD_17",
+            "18": "PA8",
+            "19": "PA9",
+            "20": "PA10",
+            "21": "PA11",
+            "22": "PA12",
+            "23": "PA13",
+            "24": "PA14",
+            "25": "PA15",
+            "26": "PB3",
+            "27": "PB4",
+            "28": "PB5",
+            "29": "PB6",
+            "30": "PB7",
+            "31": "PH3_BOOT0",
+            "32": "VSS_32",
+            "33": "EP_GND"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "STMicroelectronics",
+        "mpn": "STM32L432KCU6U"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "62"
+      }
+    },
+    "19-213SY6C/S530-E2/TR8LED.80976274": {
+      "category": "led",
+      "prefix": "D",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "K": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603D_G": {
+          "allegro": "0603D_G",
+          "pads": {
+            "1": "A",
+            "2": "K"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "everlight",
+        "mpn": "19-213SY6C/S530-E2/TR8LED",
+        "type": "LED",
+        "color": "green"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "43"
+      }
+    },
+    "RC0603FR-07510RL.f4611e61": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603R": {
+          "allegro": "0603R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "RC0603FR-07510RL",
+        "resistance": "510 ohm",
+        "tolerance": "1 %"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "55"
+      }
+    },
+    "switch.913a899f": {
+      "category": "switch",
+      "prefix": "SW",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SW2_5R6_5R5x3R1": {
+          "allegro": "SW2_5R6_5R5x3R1",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "24"
+      }
+    },
+    "NX3215SA-32.768KHZ-EXS00A-MU00525.31eef493": {
+      "category": "crystal",
+      "prefix": "Y",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "XTAL_2SM_3R2X1R5": {
+          "allegro": "XTAL_2SM_3R2X1R5",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "NDK",
+        "mpn": "NX3215SA-32.768KHZ-EXS00A-MU00525",
+        "frequency": "32.768 kHz",
+        "load_capacitance": "6 pF",
+        "frequency_tolerance": "20 ppm"
+      },
+      "source": {
+        "document": "MB1180 C.1 schematic / C-09 BOM, L432KC variant",
+        "bom_row": "67"
+      }
+    },
+    "synthetic.fpga_soc": {
+      "category": "testpoint",
+      "prefix": "U",
+      "pins": {
+        "D0": {
+          "type": "BIDIR"
+        },
+        "D1": {
+          "type": "BIDIR"
+        },
+        "D2": {
+          "type": "BIDIR"
+        },
+        "D3": {
+          "type": "BIDIR"
+        },
+        "DQS_P": {
+          "type": "BIDIR"
+        },
+        "DQS_N": {
+          "type": "BIDIR"
+        },
+        "DM": {
+          "type": "BIDIR"
+        },
+        "CLK": {
+          "type": "INPUT"
+        },
+        "RST": {
+          "type": "INPUT"
+        },
+        "SPARE": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "bga10": {
+          "allegro": "SYNTH_BGA10",
+          "pads": {
+            "1": "D0",
+            "2": "D1",
+            "3": "D2",
+            "4": "D3",
+            "5": "DQS_P",
+            "6": "DQS_N",
+            "7": "DM",
+            "8": "CLK",
+            "9": "RST",
+            "10": "SPARE"
+          }
+        }
+      },
+      "groups": {
+        "DATA": [
+          "D0",
+          "D1",
+          "D2",
+          "D3"
+        ]
+      },
+      "source": {
+        "kind": "synthetic",
+        "description": "ERC regression only; no purchasable component"
+      }
+    },
+    "wuerth.61301511121": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        },
+        "P5": {
+          "type": "PASSIVE"
+        },
+        "P6": {
+          "type": "PASSIVE"
+        },
+        "P7": {
+          "type": "PASSIVE"
+        },
+        "P8": {
+          "type": "PASSIVE"
+        },
+        "P9": {
+          "type": "PASSIVE"
+        },
+        "P10": {
+          "type": "PASSIVE"
+        },
+        "P11": {
+          "type": "PASSIVE"
+        },
+        "P12": {
+          "type": "PASSIVE"
+        },
+        "P13": {
+          "type": "PASSIVE"
+        },
+        "P14": {
+          "type": "PASSIVE"
+        },
+        "P15": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_1x15_2R54_V_F": {
+          "allegro": "HDR_1x15_2R54_V_F",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4",
+            "5": "P5",
+            "6": "P6",
+            "7": "P7",
+            "8": "P8",
+            "9": "P9",
+            "10": "P10",
+            "11": "P11",
+            "12": "P12",
+            "13": "P13",
+            "14": "P14",
+            "15": "P15"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Wuerth Elektronik",
+        "mpn": "61301511121",
+        "positions": 15,
+        "pitch": "2.54 mm"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "PH254015B-09303.c47470bb",
+        "description": "Project substitute for undocumented ATOM header; male interface follows the original schematic comment and PCB footprint description.",
+        "compatibility": "15 positions, 2.54 mm pitch, 0.64 mm square posts fit original 1.02 mm holes; 6 mm mating post, 3 mm solder tail; retain original pad numbering and footprint name (historical _F suffix is misleading).",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "wuerth.61300511121": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        },
+        "P5": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_1x5_2R54_V_M": {
+          "allegro": "HDR_1x5_2R54_V_M",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4",
+            "5": "P5"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Wuerth Elektronik",
+        "mpn": "61300511121"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "connector.da8493c1",
+        "description": "Explicit procurement choice for generic DNP header; remains DNP.",
+        "compatibility": "Single row 5-pin 2.54 mm vertical male header, 0.64 mm square posts; sequential original pad numbering.",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "everlight.19-217-R6C-P1Q2-3T": {
+      "category": "led",
+      "prefix": "D",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603D_R": {
+          "allegro": "0603D_R",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Everlight",
+        "mpn": "19-217/R6C-P1Q2/3T",
+        "type": "LED",
+        "color": "red"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "19-217/R6C-AL1M2VY/3T.97c0a86b",
+        "description": "Project red LED selection with published datasheet; brightness bin differs from original BOM.",
+        "compatibility": "0603 1.6 x 0.8 mm, two-terminal red LED; retain cathode/anode binding and polarity orientation in original footprint.",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "everlight.19-213-G6C-AP1Q2-3T": {
+      "category": "led",
+      "prefix": "D",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "K": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603D_G": {
+          "allegro": "0603D_G",
+          "pads": {
+            "1": "A",
+            "2": "K"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Everlight",
+        "mpn": "19-213/G6C-AP1Q2/3T",
+        "type": "LED",
+        "color": "yellow-green"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "19-213SY6C/S530-E2/TR8LED.80976274",
+        "description": "Project yellow-green LED selection; original mixed part string could not be substantiated. Brightness/color bin differs.",
+        "compatibility": "0603 1.6 x 0.8 mm, two-terminal LED; retain original cathode/anode binding.",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "broadcom.HSMF-A201-A00J1": {
+      "category": "led",
+      "prefix": "D",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HSMF-A201": {
+          "allegro": "HSMF-A201",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Broadcom",
+        "mpn": "HSMF-A201-A00J1",
+        "type": "LED",
+        "color": "red-green"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "LE-RGW35280.1a1a83de",
+        "description": "Project selection of the Avago alternate explicitly named in ST_LINK_V2-1.SCHDOC; differs from Everluck C-09 BOM.",
+        "compatibility": "PLCC-4 3.5 x 2.8 mm HSMF-A201; pins 1=red cathode, 2=red anode, 3=green cathode, 4=green anode; unchanged original footprint/pad map.",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "taitron.MMBT9013": {
+      "category": "transistor",
+      "prefix": "Q",
+      "pins": {
+        "E": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        },
+        "C": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SOT23-3": {
+          "allegro": "SOT23-3",
+          "pads": {
+            "1": "E",
+            "2": "B",
+            "3": "C"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Taitron",
+        "mpn": "MMBT9013"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "MMBT9013.1e8f3bf1",
+        "description": "Project manufacturer selection; original BOM labels manufacturer ST without a verifiable part datasheet.",
+        "compatibility": "SOT-23. Original MB1180 SOT23-3 footprint numbers the two paired pads opposite JEDEC: original pad 1 = vendor pin 2 (E), pad 2 = vendor pin 1 (B), pad 3 = vendor pin 3 (C). Original PCB at rotation 90 deg has pad 1 at (+1,+0.98) mm and pad 2 at (+1,-0.98) mm from center; preserve this footprint geometry, do not replace it with a normally numbered SOT-23 footprint.",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "yageo.CC0603JRNPO9BN200": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "0603C": {
+          "allegro": "0603C",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "YAGEO",
+        "mpn": "CC0603JRNPO9BN200"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "capacitor.9db21403",
+        "description": "Project procurement selection for DNP 20 pF schematic comment; remains DNP.",
+        "compatibility": "Nonpolar 0603 20 pF 50 V NP0 +/-5%; identical two-pad electrical mapping.",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    },
+    "ck.KSS221GLFS": {
+      "category": "switch",
+      "prefix": "SW",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SW2_5R6_5R5x3R1": {
+          "allegro": "SW2_5R6_5R5x3R1",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "C&K",
+        "mpn": "KSS221GLFS"
+      },
+      "source": {
+        "kind": "project_selection",
+        "derived_from": "switch.913a899f",
+        "description": "Complete ordering suffix for KSS221G explicitly named in MCU_32.SchDoc, absent from generic BOM.",
+        "compatibility": "SPST normally-open momentary side-actuated SMT; two contacts, silver option; original footprint pads 3.7 x 2 mm at 5.6 mm centers accept KSS gullwing terminals (datasheet 5.5 mm spacing).",
+        "audit": "schematics/nucleo_l432kc/sources.json"
+      }
+    }
+  }
+}

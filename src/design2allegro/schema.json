@@ -273,7 +273,8 @@
             "pull",
             "required",
             "state",
-            "voltage"
+            "voltage",
+            "isolated_all"
           ]
         },
         "scope": {
@@ -468,26 +469,10 @@
           "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
         },
         "rules": {
-          "oneOf": [
-            {
-              "type": "string",
-              "minLength": 1
-            },
-            {
-              "$ref": "#/$defs/rules"
-            }
-          ]
+          "$ref": "#/$defs/rules"
         },
         "waivers": {
-          "oneOf": [
-            {
-              "type": "string",
-              "minLength": 1
-            },
-            {
-              "$ref": "#/$defs/waivers"
-            }
-          ]
+          "$ref": "#/$defs/waivers"
         },
         "id": {
           "type": "string",

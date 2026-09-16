@@ -1,0 +1,231 @@
+circuit 2;
+
+include "templates.circuit";
+
+module target {
+    ports
+        AVDD, BOOT0, GND, MCO, NRST, NetC12_1, NetC13_1, NetL1_2, NetLD3_1, NetR23_2, NetSB11_1,
+        NetSB12_1, NetSB13_1, NetSB4_2, NetSB7_2, PA0, PA1, PA10, PA11, PA12, PA13, PA14, PA15, PA2,
+        PA3, PA4, PA5, PA6, PA7, PA8, PA9, PB0, PB1, PB3, PB4, PB5, PB6, PB7, PF0, PF1, VDD;
+    part capacitor_vdd using capacitor_100_nf {
+        id = "p992caacc4470562e9f7d5e3defbe35d1";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "target";
+    }
+    part capacitor_link using capacitor_4_3_pf {
+        id = "p723c2cd557815b74bbdd91316b036b07";
+        properties = { manufacturer = "YAGEO"; mpn = "0603CG4R3C500NT"; capacitance = 4.3 pF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "target";
+    }
+    part capacitor_link_2 using capacitor_4_3_pf {
+        id = "p4749a884b3d554678b26a75c99502bce";
+        properties = { manufacturer = "YAGEO"; mpn = "0603CG4R3C500NT"; capacitance = 4.3 pF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "target";
+    }
+    part capacitor_vdd_2 using capacitor_100_nf {
+        id = "p5a89a56b0ad6583787e521aacfafbcb0";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "target";
+    }
+    part capacitor_nrst using capacitor_100_nf {
+        id = "p397ece7315bf51d4a3742df35df0de56";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "target";
+    }
+    part resistor_boot0 using resistor_10000_ohm {
+        id = "p170b54a13ad55a8187e07087acf76882";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-0710KL"; resistance = 10000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "target";
+    }
+    part analog_supply_bead {
+        id = "p0c50cea3c1ec5f17bb9bf5439671acd6";
+        device = "FCM1608KF-601T05.163c0081";
+        package = "0603L";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "Tai-tech";
+            mpn = "FCM1608KF-601T05";
+            impedance = 600 ohm;
+            current_rating = 500 mA; dc_resistance = 0.5 ohm; impedance_frequency = 100 MHz; rating_conditions = "DCR maximum; impedance measured at 100 MHz, 60 mV. Manufacturer -601T05 rating corrects BOM 350 mA."; };
+        electrical = {  };
+        identity_namespace = "target";
+    }
+    part capacitor_avdd using capacitor_100_nf {
+        id = "p447cab4ba9935c70b31b3728b98e8300";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "target";
+    }
+    part jumper_link using jumper_closed {
+        id = "p5d855add5f045552ad6511f91ee1807a";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_link_2 using jumper_closed {
+        id = "p5ccbf005f13e52e6956ad6cb1ae5321e";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_link_3 using jumper_closed {
+        id = "p82367bfa5693575aab25752538de0357";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_pf1 using jumper_open {
+        id = "pf43894ff897c514db3cf3eeff3719d09";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_vdd using jumper_closed {
+        id = "p51e4e1f15efe5e7d986f14abb22b9fd9";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_pf0 using jumper_open {
+        id = "p161a98eb20b950128b089b02211ec423";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_link_4 using jumper_closed {
+        id = "pa334bec923b55f508cc6f0dc6f0070ac";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part target_mcu {
+        id = "pa9b5323fd5c05a878b9ea74a5a37f5ca";
+        device = "STM32L432KCU6U.1c2be81d";
+        package = "UFQFPN32_5X5_P05_EP33";
+        assembly = "fitted";
+        properties = { manufacturer = "STMicroelectronics"; mpn = "STM32L432KCU6U"; supply_min = 1.71 V; supply_max = 3.6 V; };
+        electrical = {  };
+        identity_namespace = "target";
+    }
+    part jumper_boot0 using jumper_closed {
+        id = "p1359da86a9535cd0a5e25868c0ac3e9f";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part user_led {
+        id = "p043d3d66170558fd9921061aa33c0db5";
+        device = "everlight.19-213-G6C-AP1Q2-3T";
+        package = "0603D_G";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "Everlight";
+            mpn = "19-213/G6C-AP1Q2/3T";
+            type = "LED";
+            color = "yellow-green"; current_rating = 25 mA; voltage_rating = 5 V; rating_conditions = "Absolute maxima at 25 C: DC forward current 25 mA, reverse voltage 5 V (not forward operating voltage)."; };
+        electrical = {  };
+        identity_namespace = "target";
+    }
+    part resistor_link {
+        id = "p9aafb0a5b9005db892803260d38952a2";
+        device = "RC0603FR-07510RL.f4611e61";
+        package = "0603R";
+        assembly = "fitted";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07510RL"; resistance = 510 ohm; tolerance = 1 %; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "target";
+    }
+    part jumper_pb3 using jumper_closed {
+        id = "pb0d333ee0cd2535ba4f57d2fd406bd18";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part reset_button {
+        id = "pb46300f0e4805deb93c24435979387f5";
+        device = "ck.KSS221GLFS";
+        package = "SW2_5R6_5R5x3R1";
+        assembly = "fitted";
+        properties = { initial_state = "open"; manufacturer = "C&K"; mpn = "KSS221GLFS"; current_rating = 50 mA; voltage_rating = 32 V; rating_conditions = "Silver contacts: 32 V DC, 1 to 50 mA, maximum 1 VA; normally open momentary."; };
+        electrical = { role = "switch"; };
+        identity_namespace = "target";
+    }
+    part rtc_crystal {
+        id = "p5d44e11f38cb5d0dad6446fc90a3fda7";
+        device = "NX3215SA-32.768KHZ-EXS00A-MU00525.31eef493";
+        package = "XTAL_2SM_3R2X1R5";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "NDK";
+            mpn = "NX3215SA-32.768KHZ-EXS00A-MU00525";
+            frequency = 32.768 kHz;
+            load_capacitance = 6 pF;
+            frequency_tolerance = 20 ppm;
+        };
+        electrical = {  };
+        identity_namespace = "target";
+    }
+    part jumper_mco using jumper_open {
+        id = "p73919005db3c5e269cd022cecd890883";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_mco_pa0 using jumper_open {
+        id = "pf6cd1e06f0b5501f882c17b9ea955f97";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_pa6_pb6 using jumper_closed {
+        id = "pf79f999bd5b25b94afbd2df8cabe3041";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    part jumper_pa5_pb7 using jumper_closed {
+        id = "p10f59074e2e05ba1b6943dbaa9f68ec7";
+        electrical = { role = "jumper"; };
+        identity_namespace = "target";
+    }
+    net AVDD = capacitor_avdd.P1, analog_supply_bead.P1, target_mcu.VDDA, port.AVDD;
+    net BOOT0 = resistor_boot0.P1, jumper_boot0.P2, port.BOOT0;
+    net GND =
+        reset_button.P2, capacitor_nrst.P1, capacitor_link_2.P2, capacitor_link.P2, capacitor_vdd.P2,
+        capacitor_avdd.P2, capacitor_vdd_2.P2, user_led.K, resistor_boot0.P2, jumper_link_4.P2,
+        jumper_link_3.P2, target_mcu.EP_GND, port.GND;
+    net MCO = jumper_mco_pa0.P1, jumper_mco.P1, port.MCO;
+    net NRST = reset_button.P1, capacitor_nrst.P2, target_mcu.NRST, port.NRST;
+    net NetC12_1 = capacitor_link_2.P1, jumper_link.P1, rtc_crystal.P1, port.NetC12_1;
+    net NetC13_1 = capacitor_link.P1, jumper_link_2.P1, rtc_crystal.P2, port.NetC13_1;
+    net NetL1_2 = analog_supply_bead.P2, jumper_vdd.P1, port.NetL1_2;
+    net NetLD3_1 = user_led.A, resistor_link.P1, port.NetLD3_1;
+    net NetR23_2 = resistor_link.P2, jumper_pb3.P1, port.NetR23_2;
+    net NetSB11_1 = jumper_link_4.P1, target_mcu.VSS_16, port.NetSB11_1;
+    net NetSB12_1 = jumper_boot0.P1, target_mcu.PH3_BOOT0, port.NetSB12_1;
+    net NetSB13_1 = jumper_link_3.P1, target_mcu.VSS_32, port.NetSB13_1;
+    net NetSB4_2 = jumper_mco.P2, jumper_link.P2, jumper_pf0.P2, target_mcu.PC14, port.NetSB4_2;
+    net NetSB7_2 = jumper_link_2.P2, jumper_pf1.P2, target_mcu.PC15, port.NetSB7_2;
+    net PA0 = jumper_mco_pa0.P2, target_mcu.PA0, port.PA0;
+    net PA1 = target_mcu.PA1, port.PA1;
+    net PA10 = target_mcu.PA10, port.PA10;
+    net PA11 = target_mcu.PA11, port.PA11;
+    net PA12 = target_mcu.PA12, port.PA12;
+    net PA13 = target_mcu.PA13, port.PA13;
+    net PA14 = target_mcu.PA14, port.PA14;
+    net PA15 = target_mcu.PA15, port.PA15;
+    net PA2 = target_mcu.PA2, port.PA2;
+    net PA3 = target_mcu.PA3, port.PA3;
+    net PA4 = target_mcu.PA4, port.PA4;
+    net PA5 = jumper_pa5_pb7.P1, target_mcu.PA5, port.PA5;
+    net PA6 = jumper_pa6_pb6.P1, target_mcu.PA6, port.PA6;
+    net PA7 = target_mcu.PA7, port.PA7;
+    net PA8 = target_mcu.PA8, port.PA8;
+    net PA9 = target_mcu.PA9, port.PA9;
+    net PB0 = target_mcu.PB0, port.PB0;
+    net PB1 = target_mcu.PB1, port.PB1;
+    net PB3 = jumper_pb3.P2, target_mcu.PB3, port.PB3;
+    net PB4 = target_mcu.PB4, port.PB4;
+    net PB5 = target_mcu.PB5, port.PB5;
+    net PB6 = jumper_pa6_pb6.P2, target_mcu.PB6, port.PB6;
+    net PB7 = jumper_pa5_pb7.P2, target_mcu.PB7, port.PB7;
+    net PF0 = jumper_pf0.P1, port.PF0;
+    net PF1 = jumper_pf1.P1, port.PF1;
+    net VDD =
+        capacitor_vdd.P1, capacitor_vdd_2.P1, jumper_vdd.P2, target_mcu.VDD_1, target_mcu.VDD_17,
+        port.VDD;
+}

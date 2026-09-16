@@ -1,0 +1,79 @@
+circuit 2;
+
+include "templates.circuit";
+
+module interfaces {
+    ports
+        AVDD, GND, NRST, NetCN1_4, PA0, PA1, PA10, PA11, PA12, PA2, PA3, PA4, PA5, PA6, PA7, PA8,
+        PA9, PB0, PB1, PB3, PB4, PB5, PB6, PB7, PF0, PF1, STM_JTCK, STM_JTMS, U5V, USB_DM, USB_DP,
+        V3V3, V3V3_ST_LINK, V5, VIN;
+    part arduino_right using connector_15 {
+        id = "p353244e827d657ca931a5f5f14e0e3a7";
+        properties = { manufacturer = "Wuerth Elektronik"; mpn = "61301511121"; };
+        electrical = { demo_shunt = { pins = ["4", "5"]; initial_state = "closed"; removable = true; }; };
+        identity_namespace = "interfaces";
+    }
+    part arduino_left using connector_15 {
+        id = "pe5d8515e7e3553bd832212ffcfb57483";
+        properties = { manufacturer = "Wuerth Elektronik"; mpn = "61301511121"; };
+        identity_namespace = "interfaces";
+    }
+    part debug_programming_header {
+        id = "p48b1e23b0072572087be71a80609122a";
+        device = "wuerth.61300511121";
+        package = "HDR_1x5_2R54_V_M";
+        assembly = "dnp";
+        properties = { positions = 5; pitch = 2.54 mm; manufacturer = "Wuerth Elektronik"; mpn = "61300511121"; current_rating = 3 A; voltage_rating = 250 V; rating_conditions = "Working voltage AC; remains DNP."; };
+        electrical = {  };
+        identity_namespace = "interfaces";
+    }
+    part usb_connector {
+        id = "p99ff9c243f385465b864c8e6edb209f9";
+        device = "1050170001.8dc511f7";
+        package = "Molex_1050170001";
+        assembly = "fitted";
+        properties = { manufacturer = "MOLEX"; mpn = "1050170001"; current_rating = 1 A; voltage_rating = 30 V; pitch = 0.65 mm; positions = 5; rating_conditions = "1 A signal contacts; power contacts 1.8 A. Voltage 30 V AC RMS; positions excludes shield/anchor pads."; };
+        electrical = {  };
+        identity_namespace = "interfaces";
+    }
+    net AVDD = arduino_left.P13, port.AVDD;
+    net GND =
+        usb_connector.EXP, usb_connector.EXP_11, usb_connector.GND, usb_connector.Shield,
+        usb_connector.Shield_7, usb_connector.Shield_8, usb_connector.Shield_9,
+        debug_programming_header.P2, arduino_right.P4, arduino_left.P2, port.GND;
+    net NRST = arduino_right.P3, arduino_left.P3, port.NRST;
+    net NetCN1_4 = usb_connector.ID, port.NetCN1_4;
+    net PA0 = arduino_left.P12, port.PA0;
+    net PA1 = arduino_left.P11, port.PA1;
+    net PA10 = arduino_right.P2, port.PA10;
+    net PA11 = arduino_right.P13, port.PA11;
+    net PA12 = arduino_right.P5, port.PA12;
+    net PA2 = arduino_left.P5, port.PA2;
+    net PA3 = arduino_left.P10, port.PA3;
+    net PA4 = arduino_left.P9, port.PA4;
+    net PA5 = arduino_left.P8, port.PA5;
+    net PA6 = arduino_left.P7, port.PA6;
+    net PA7 = arduino_left.P6, port.PA7;
+    net PA8 = arduino_right.P12, port.PA8;
+    net PA9 = arduino_right.P1, port.PA9;
+    net PB0 = arduino_right.P6, port.PB0;
+    net PB1 = arduino_right.P9, port.PB1;
+    net PB3 = arduino_left.P15, port.PB3;
+    net PB4 = arduino_right.P15, port.PB4;
+    net PB5 = arduino_right.P14, port.PB5;
+    net PB6 = arduino_right.P8, port.PB6;
+    net PB7 = arduino_right.P7, port.PB7;
+    net PF0 = arduino_right.P10, port.PF0;
+    net PF1 = arduino_right.P11, port.PF1;
+    net STM_JTCK = debug_programming_header.P3, port.STM_JTCK;
+    net STM_JTMS = debug_programming_header.P1, port.STM_JTMS;
+    net U5V = usb_connector.VBUS, port.U5V;
+    net USB_DM = usb_connector.DM, port.USB_DM;
+    net USB_DP = usb_connector.DP, port.USB_DP;
+    net V3V3 = arduino_left.P14, port.V3V3;
+    net V3V3_ST_LINK = debug_programming_header.P4, port.V3V3_ST_LINK;
+    net V5 = arduino_left.P4, port.V5;
+    net VIN = arduino_left.P1, port.VIN;
+    nc
+        debug_programming_header.P5;
+}

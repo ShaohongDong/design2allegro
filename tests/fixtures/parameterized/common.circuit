@@ -1,0 +1,21 @@
+circuit 2;
+const R: resistance = 10 kohm;
+template resistor {
+    device = "generic.resistor"; package = "resistor_0603"; assembly = fitted;
+    properties { tolerance = 1 %; power_rating = 0.1 W; }
+}
+module divider(upper: resistance = $R, lower: resistance = $upper/2) {
+    ports IN,OUT,GND;
+    const CHECK: resistance = $lower;
+    part hi using resistor { id = "upper"; properties { resistance = $upper; } }
+    part lo using resistor { id = "lower"; properties { resistance = $CHECK; } }
+    net IN = hi.A,port.IN;
+    net OUT = hi.B,lo.A,port.OUT;
+    net GND = lo.B,port.GND;
+    group MID = [pin(hi.B), pin(lo.A)];
+    rules {
+        rule MIDPOINT connected [pin(hi.B)] { targets = [pin(lo.A)]; }
+        rule PRESENT required $MID;
+        rule SELECT required { selector { entity = pins; pattern = "hi.*"; } }
+    }
+}

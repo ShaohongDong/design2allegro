@@ -1,0 +1,77 @@
+circuit 1;
+
+board "fpga_soc" {
+    top = "board";
+    id = "synthetic-fpga-soc";
+    library = "standard@1";
+}
+
+module endpoint {
+    ports data[4], dqs_p, dqs_n, dm, clk, rst;
+    part chip {
+        id = "chip";
+        device = "synthetic.fpga_soc";
+        package = "bga10";
+        assembly = "fitted";
+    }
+    net data = port.data, chip.group("DATA");
+    net dqs_p = port.dqs_p, chip.DQS_P;
+    net dqs_n = port.dqs_n, chip.DQS_N;
+    net dm = port.dm, chip.DM;
+    net clk = port.clk, chip.CLK;
+    net rst = port.rst, chip.RST;
+    nc
+        chip.SPARE;
+}
+
+module wrapper {
+    ports data[4], dqs_p, dqs_n, dm, clk, rst;
+    instance endpoint: endpoint { id = "endpoint"; }
+    net data = port.data, endpoint.data;
+    net dqs_p = port.dqs_p, endpoint.dqs_p;
+    net dqs_n = port.dqs_n, endpoint.dqs_n;
+    net dm = port.dm, endpoint.dm;
+    net clk = port.clk, endpoint.clk;
+    net rst = port.rst, endpoint.rst;
+}
+
+module board {
+    instance fpga: wrapper { id = "fpga"; }
+    instance soc: wrapper { id = "soc"; }
+    net DATA = fpga.data, soc.data;
+    net DQS_P = fpga.dqs_p, soc.dqs_p;
+    net DQS_N = fpga.dqs_n, soc.dqs_n;
+    net DM = fpga.dm, soc.dm;
+    net CLK = fpga.clk, soc.clk;
+    net RST = fpga.rst, soc.rst;
+}
+
+rules {
+    description = "Synthetic static example; not a certified device rule pack";
+    rule "DDR" ddr [part(fpga.endpoint.chip)] {
+        controller = [
+            {
+                dq = [
+                    pin(fpga.endpoint.chip.D0), pin(fpga.endpoint.chip.D1),
+                    pin(fpga.endpoint.chip.D2), pin(fpga.endpoint.chip.D3)
+                ];
+                dqs_p = pin(fpga.endpoint.chip.DQS_P);
+                dqs_n = pin(fpga.endpoint.chip.DQS_N);
+                dm = pin(fpga.endpoint.chip.DM);
+            }
+        ];
+        memory = [
+            {
+                dq = [
+                    pin(soc.endpoint.chip.D0), pin(soc.endpoint.chip.D1), pin(soc.endpoint.chip.D2),
+                    pin(soc.endpoint.chip.D3)
+                ];
+                dqs_p = pin(soc.endpoint.chip.DQS_P);
+                dqs_n = pin(soc.endpoint.chip.DQS_N);
+                dm = pin(soc.endpoint.chip.DM);
+            }
+        ];
+    }
+    rule "CLOCK" connected [pin(fpga.endpoint.chip.CLK)] { targets = [pin(soc.endpoint.chip.CLK)]; }
+    rule "RESET" connected [pin(fpga.endpoint.chip.RST)] { targets = [pin(soc.endpoint.chip.RST)]; }
+}

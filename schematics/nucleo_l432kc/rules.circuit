@@ -1,0 +1,893 @@
+circuit 2;
+
+group SIGNAL_ROOTS = [
+    pin(stlink.resistor_ain_1.P2), pin(target.capacitor_avdd.P1), pin(target.resistor_boot0.P1),
+    pin(power.capacitor_e5v.P1), pin(target.reset_button.P2), pin(stlink.resistor_led_stlink.P1),
+    pin(stlink.capacitor_mco.P1), pin(target.reset_button.P1), pin(target.capacitor_link_2.P1),
+    pin(target.capacitor_link.P1), pin(power.capacitor_link_3.P2), pin(power.capacitor_link_2.P2),
+    pin(interfaces.usb_connector.ID), pin(target.analog_supply_bead.P2),
+    pin(stlink.debug_status_led.P2), pin(stlink.debug_status_led.P3),
+    pin(stlink.debug_status_led.P4), pin(power.power_led.P1), pin(target.user_led.A),
+    pin(stlink.resistor_link_5.P1), pin(stlink.resistor_link_2.P2), pin(stlink.resistor_link_4.P2),
+    pin(stlink.resistor_usb_dp.P2), pin(target.resistor_link.P2), pin(stlink.resistor_link_6.P2),
+    pin(stlink.resistor_mco.P1), pin(stlink.resistor_link_3.P2), pin(power.resistor_link.P1),
+    pin(target.jumper_link_4.P1), pin(target.jumper_boot0.P1), pin(target.jumper_link_3.P1),
+    pin(target.jumper_mco.P2), pin(target.jumper_link_2.P2), pin(stlink.capacitor_osc_in.P1),
+    pin(stlink.capacitor_osc_out.P1), pin(interfaces.arduino_left.P12),
+    pin(interfaces.arduino_left.P11), pin(interfaces.arduino_right.P2),
+    pin(interfaces.arduino_right.P13), pin(interfaces.arduino_right.P5),
+    pin(stlink.resistor_pa13_t_swdio_in.P2), pin(target.target_mcu.PA14),
+    pin(stlink.jumper_pa15_stlink_tx.P1), pin(interfaces.arduino_left.P5),
+    pin(interfaces.arduino_left.P10), pin(interfaces.arduino_left.P9),
+    pin(interfaces.arduino_left.P8), pin(interfaces.arduino_left.P7),
+    pin(interfaces.arduino_left.P6), pin(interfaces.arduino_right.P12),
+    pin(interfaces.arduino_right.P1), pin(interfaces.arduino_right.P6),
+    pin(interfaces.arduino_right.P9), pin(interfaces.arduino_left.P15),
+    pin(interfaces.arduino_right.P15), pin(interfaces.arduino_right.P14),
+    pin(interfaces.arduino_right.P8), pin(interfaces.arduino_right.P7),
+    pin(interfaces.arduino_right.P10), pin(interfaces.arduino_right.P11),
+    pin(power.resistor_pwr_enn_u5v.P2), pin(stlink.jumper_pa2_stlink_rx.P2),
+    pin(stlink.jumper_pa15_stlink_tx.P2), pin(interfaces.debug_programming_header.P3),
+    pin(interfaces.debug_programming_header.P1), pin(stlink.capacitor_stm_rst.P2),
+    pin(stlink.debug_mcu.PA7), pin(stlink.debug_mcu.PA6), pin(stlink.jumper_nrst_t_nrst.P1),
+    pin(stlink.resistor_pa13_t_swdio_in.P1), pin(stlink.debug_mcu.PA10), pin(power.capacitor_u5v.P2),
+    pin(power.capacitor_u5v_st_link.P2), pin(interfaces.usb_connector.DM),
+    pin(interfaces.usb_connector.DP), pin(stlink.resistor_usb_renumn.P2),
+    pin(interfaces.arduino_left.P14), pin(power.capacitor_v3v3_st_link.P1),
+    pin(power.capacitor_v5_2.P1), pin(target.capacitor_vdd.P1), pin(power.capacitor_vin.P1),
+    pin(power.capacitor_vo_2.P2)
+];
+
+rules {
+    description = "MB1180 schematic C.1 connectivity, BOM C-09 evaluated for L432KC; static checks only.";
+    rule "PRESENT_AIN_1" required [pin(stlink.resistor_ain_1.P2), pin(stlink.resistor_ain_1_vo.P2), pin(stlink.debug_mcu.PA0)];
+    rule "NET_AIN_1" connected [pin(stlink.resistor_ain_1.P2)] {
+        targets = [pin(stlink.resistor_ain_1_vo.P2), pin(stlink.debug_mcu.PA0)];
+    }
+    rule "PRESENT_AVDD" required [
+        pin(target.capacitor_avdd.P1), pin(interfaces.arduino_left.P13),
+        pin(target.analog_supply_bead.P1), pin(target.target_mcu.VDDA)
+    ];
+    rule "NET_AVDD" connected [pin(target.capacitor_avdd.P1)] {
+        targets = [
+            pin(interfaces.arduino_left.P13), pin(target.analog_supply_bead.P1),
+            pin(target.target_mcu.VDDA)
+        ];
+    }
+    rule "PRESENT_BOOT0" required [pin(target.resistor_boot0.P1), pin(target.jumper_boot0.P2)];
+    rule "NET_BOOT0" connected [pin(target.resistor_boot0.P1)] {
+        targets = [pin(target.jumper_boot0.P2)];
+    }
+    rule "PRESENT_E5V" required [
+        pin(power.capacitor_e5v.P1), pin(power.diode_e5v.A), pin(power.diode_e5v_v5.A),
+        pin(stlink.resistor_e5v.P1), pin(power.vin_regulator.Vout), pin(power.vin_regulator.Tab)
+    ];
+    rule "NET_E5V" connected [pin(power.capacitor_e5v.P1)] {
+        targets = [
+            pin(power.diode_e5v.A), pin(power.diode_e5v_v5.A), pin(stlink.resistor_e5v.P1),
+            pin(power.vin_regulator.Vout), pin(power.vin_regulator.Tab)
+        ];
+    }
+    rule "PRESENT_GND" required [
+        pin(target.reset_button.P2), pin(power.capacitor_u5v_st_link.P1),
+        pin(power.capacitor_vo_2.P1), pin(target.capacitor_nrst.P1), pin(target.capacitor_link_2.P2),
+        pin(target.capacitor_link.P2), pin(power.capacitor_v5_2.P2), pin(power.capacitor_link_3.P1),
+        pin(power.capacitor_v3v3_st_link.P2), pin(power.capacitor_link_2.P1),
+        pin(power.capacitor_link.P1), pin(power.capacitor_v3v3_st_link_2.P1),
+        pin(stlink.capacitor_v3v3_st_link.P1), pin(stlink.capacitor_osc_out.P2),
+        pin(stlink.capacitor_osc_in.P2), pin(power.capacitor_vin.P2), pin(target.capacitor_vdd.P2),
+        pin(target.capacitor_avdd.P2), pin(power.capacitor_e5v.P2), pin(stlink.capacitor_mco.P2),
+        pin(stlink.capacitor_stm_rst.P1), pin(stlink.capacitor_v3v3_st_link_2.P1),
+        pin(power.capacitor_u5v.P1), pin(target.capacitor_vdd_2.P2), pin(power.capacitor_v5.P1),
+        pin(power.capacitor_vo.P2), pin(interfaces.usb_connector.EXP),
+        pin(interfaces.usb_connector.EXP_11), pin(interfaces.usb_connector.GND),
+        pin(interfaces.usb_connector.Shield), pin(interfaces.usb_connector.Shield_7),
+        pin(interfaces.usb_connector.Shield_8), pin(interfaces.usb_connector.Shield_9),
+        pin(interfaces.debug_programming_header.P2), pin(interfaces.arduino_right.P4),
+        pin(interfaces.arduino_left.P2), pin(stlink.debug_status_led.P1), pin(power.power_led.P2),
+        pin(target.user_led.K), pin(stlink.resistor_link_5.P2), pin(stlink.resistor_ain_1.P1),
+        pin(stlink.resistor_link_2.P1), pin(stlink.resistor_link_4.P1), pin(stlink.resistor_link.P2),
+        pin(target.resistor_boot0.P2), pin(stlink.resistor_link_6.P1),
+        pin(stlink.resistor_link_3.P1), pin(power.resistor_link.P2), pin(target.jumper_link_4.P2),
+        pin(target.jumper_link_3.P2), pin(power.usb_power_switch.GND), pin(target.target_mcu.EP_GND),
+        pin(power.target_regulator.GND), pin(power.target_regulator.GND_2),
+        pin(power.debug_regulator.GND), pin(stlink.debug_mcu.PB2_BOOT1), pin(stlink.debug_mcu.VSS_1),
+        pin(stlink.debug_mcu.VSS_2), pin(stlink.debug_mcu.VSS_3), pin(stlink.debug_mcu.VSSA),
+        pin(power.vin_regulator.P1)
+    ];
+    rule "NET_GND" connected [pin(target.reset_button.P2)] {
+        targets = [
+            pin(power.capacitor_u5v_st_link.P1), pin(power.capacitor_vo_2.P1),
+            pin(target.capacitor_nrst.P1), pin(target.capacitor_link_2.P2),
+            pin(target.capacitor_link.P2), pin(power.capacitor_v5_2.P2),
+            pin(power.capacitor_link_3.P1), pin(power.capacitor_v3v3_st_link.P2),
+            pin(power.capacitor_link_2.P1), pin(power.capacitor_link.P1),
+            pin(power.capacitor_v3v3_st_link_2.P1), pin(stlink.capacitor_v3v3_st_link.P1),
+            pin(stlink.capacitor_osc_out.P2), pin(stlink.capacitor_osc_in.P2),
+            pin(power.capacitor_vin.P2), pin(target.capacitor_vdd.P2), pin(target.capacitor_avdd.P2),
+            pin(power.capacitor_e5v.P2), pin(stlink.capacitor_mco.P2),
+            pin(stlink.capacitor_stm_rst.P1), pin(stlink.capacitor_v3v3_st_link_2.P1),
+            pin(power.capacitor_u5v.P1), pin(target.capacitor_vdd_2.P2), pin(power.capacitor_v5.P1),
+            pin(power.capacitor_vo.P2), pin(interfaces.usb_connector.EXP),
+            pin(interfaces.usb_connector.EXP_11), pin(interfaces.usb_connector.GND),
+            pin(interfaces.usb_connector.Shield), pin(interfaces.usb_connector.Shield_7),
+            pin(interfaces.usb_connector.Shield_8), pin(interfaces.usb_connector.Shield_9),
+            pin(interfaces.debug_programming_header.P2), pin(interfaces.arduino_right.P4),
+            pin(interfaces.arduino_left.P2), pin(stlink.debug_status_led.P1),
+            pin(power.power_led.P2), pin(target.user_led.K), pin(stlink.resistor_link_5.P2),
+            pin(stlink.resistor_ain_1.P1), pin(stlink.resistor_link_2.P1),
+            pin(stlink.resistor_link_4.P1), pin(stlink.resistor_link.P2),
+            pin(target.resistor_boot0.P2), pin(stlink.resistor_link_6.P1),
+            pin(stlink.resistor_link_3.P1), pin(power.resistor_link.P2),
+            pin(target.jumper_link_4.P2), pin(target.jumper_link_3.P2),
+            pin(power.usb_power_switch.GND), pin(target.target_mcu.EP_GND),
+            pin(power.target_regulator.GND), pin(power.target_regulator.GND_2),
+            pin(power.debug_regulator.GND), pin(stlink.debug_mcu.PB2_BOOT1),
+            pin(stlink.debug_mcu.VSS_1), pin(stlink.debug_mcu.VSS_2), pin(stlink.debug_mcu.VSS_3),
+            pin(stlink.debug_mcu.VSSA), pin(power.vin_regulator.P1)
+        ];
+    }
+    rule "PRESENT_LED_STLINK" required [
+        pin(stlink.resistor_led_stlink.P1), pin(stlink.resistor_led_stlink_2.P1),
+        pin(stlink.debug_mcu.PA9)
+    ];
+    rule "NET_LED_STLINK" connected [pin(stlink.resistor_led_stlink.P1)] {
+        targets = [pin(stlink.resistor_led_stlink_2.P1), pin(stlink.debug_mcu.PA9)];
+    }
+    rule "PRESENT_MCO" required [
+        pin(stlink.capacitor_mco.P1), pin(stlink.resistor_mco.P2), pin(target.jumper_mco_pa0.P1),
+        pin(target.jumper_mco.P1)
+    ];
+    rule "NET_MCO" connected [pin(stlink.capacitor_mco.P1)] {
+        targets = [pin(stlink.resistor_mco.P2), pin(target.jumper_mco_pa0.P1), pin(target.jumper_mco.P1)];
+    }
+    rule "PRESENT_NRST" required [
+        pin(target.reset_button.P1), pin(target.capacitor_nrst.P2), pin(interfaces.arduino_right.P3),
+        pin(interfaces.arduino_left.P3), pin(stlink.jumper_nrst_t_nrst.P2),
+        pin(target.target_mcu.NRST)
+    ];
+    rule "NET_NRST" connected [pin(target.reset_button.P1)] {
+        targets = [
+            pin(target.capacitor_nrst.P2), pin(interfaces.arduino_right.P3),
+            pin(interfaces.arduino_left.P3), pin(stlink.jumper_nrst_t_nrst.P2),
+            pin(target.target_mcu.NRST)
+        ];
+    }
+    rule "PRESENT_NetC12_1" required [pin(target.capacitor_link_2.P1), pin(target.jumper_link.P1), pin(target.rtc_crystal.P1)];
+    rule "NET_NetC12_1" connected [pin(target.capacitor_link_2.P1)] {
+        targets = [pin(target.jumper_link.P1), pin(target.rtc_crystal.P1)];
+    }
+    rule "PRESENT_NetC13_1" required [pin(target.capacitor_link.P1), pin(target.jumper_link_2.P1), pin(target.rtc_crystal.P2)];
+    rule "NET_NetC13_1" connected [pin(target.capacitor_link.P1)] {
+        targets = [pin(target.jumper_link_2.P1), pin(target.rtc_crystal.P2)];
+    }
+    rule "PRESENT_NetC15_2" required [
+        pin(power.capacitor_link_3.P2), pin(power.capacitor_link.P2), pin(power.diode_u5v.K),
+        pin(power.diode_e5v.K), pin(power.debug_regulator.Vin), pin(power.debug_regulator.CE)
+    ];
+    rule "NET_NetC15_2" connected [pin(power.capacitor_link_3.P2)] {
+        targets = [
+            pin(power.capacitor_link.P2), pin(power.diode_u5v.K), pin(power.diode_e5v.K),
+            pin(power.debug_regulator.Vin), pin(power.debug_regulator.CE)
+        ];
+    }
+    rule "PRESENT_NetC17_2" required [pin(power.capacitor_link_2.P2), pin(power.debug_regulator.BYPASS)];
+    rule "NET_NetC17_2" connected [pin(power.capacitor_link_2.P2)] {
+        targets = [pin(power.debug_regulator.BYPASS)];
+    }
+    rule "PRESENT_NetCN1_4" required [pin(interfaces.usb_connector.ID), pin(stlink.resistor_link.P1)];
+    rule "NET_NetCN1_4" connected [pin(interfaces.usb_connector.ID)] {
+        targets = [pin(stlink.resistor_link.P1)];
+    }
+    rule "PRESENT_NetL1_2" required [pin(target.analog_supply_bead.P2), pin(target.jumper_vdd.P1)];
+    rule "NET_NetL1_2" connected [pin(target.analog_supply_bead.P2)] {
+        targets = [pin(target.jumper_vdd.P1)];
+    }
+    rule "PRESENT_NetLD1_2" required [pin(stlink.debug_status_led.P2), pin(stlink.resistor_led_stlink.P2)];
+    rule "NET_NetLD1_2" connected [pin(stlink.debug_status_led.P2)] {
+        targets = [pin(stlink.resistor_led_stlink.P2)];
+    }
+    rule "PRESENT_NetLD1_3" required [pin(stlink.debug_status_led.P3), pin(stlink.resistor_led_stlink_2.P2)];
+    rule "NET_NetLD1_3" connected [pin(stlink.debug_status_led.P3)] {
+        targets = [pin(stlink.resistor_led_stlink_2.P2)];
+    }
+    rule "PRESENT_NetLD1_4" required [pin(stlink.debug_status_led.P4), pin(stlink.resistor_v3v3_st_link.P1)];
+    rule "NET_NetLD1_4" connected [pin(stlink.debug_status_led.P4)] {
+        targets = [pin(stlink.resistor_v3v3_st_link.P1)];
+    }
+    rule "PRESENT_NetLD2_1" required [pin(power.power_led.P1), pin(power.resistor_v5.P1)];
+    rule "NET_NetLD2_1" connected [pin(power.power_led.P1)] { targets = [pin(power.resistor_v5.P1)]; }
+    rule "PRESENT_NetLD3_1" required [pin(target.user_led.A), pin(target.resistor_link.P1)];
+    rule "NET_NetLD3_1" connected [pin(target.user_led.A)] { targets = [pin(target.resistor_link.P1)]; }
+    rule "PRESENT_NetR10_1" required [
+        pin(stlink.resistor_link_5.P1), pin(stlink.resistor_e5v.P2),
+        pin(stlink.jumper_v3v3_st_link.P2), pin(stlink.debug_mcu.PB3_JTDO)
+    ];
+    rule "NET_NetR10_1" connected [pin(stlink.resistor_link_5.P1)] {
+        targets = [
+            pin(stlink.resistor_e5v.P2), pin(stlink.jumper_v3v3_st_link.P2),
+            pin(stlink.debug_mcu.PB3_JTDO)
+        ];
+    }
+    rule "PRESENT_NetR13_2" required [pin(stlink.resistor_link_2.P2), pin(stlink.debug_mcu.PC14)];
+    rule "NET_NetR13_2" connected [pin(stlink.resistor_link_2.P2)] {
+        targets = [pin(stlink.debug_mcu.PC14)];
+    }
+    rule "PRESENT_NetR16_2" required [pin(stlink.resistor_link_4.P2), pin(stlink.debug_mcu.PC13)];
+    rule "NET_NetR16_2" connected [pin(stlink.resistor_link_4.P2)] {
+        targets = [pin(stlink.debug_mcu.PC13)];
+    }
+    rule "PRESENT_NetR1_2" required [pin(stlink.resistor_usb_dp.P2), pin(stlink.reset_transistor.E)];
+    rule "NET_NetR1_2" connected [pin(stlink.resistor_usb_dp.P2)] {
+        targets = [pin(stlink.reset_transistor.E)];
+    }
+    rule "PRESENT_NetR23_2" required [pin(target.resistor_link.P2), pin(target.jumper_pb3.P1)];
+    rule "NET_NetR23_2" connected [pin(target.resistor_link.P2)] {
+        targets = [pin(target.jumper_pb3.P1)];
+    }
+    rule "PRESENT_NetR3_2" required [
+        pin(stlink.resistor_link_6.P2), pin(stlink.resistor_u5v.P1),
+        pin(stlink.resistor_usb_renumn.P1), pin(stlink.reset_transistor.B)
+    ];
+    rule "NET_NetR3_2" connected [pin(stlink.resistor_link_6.P2)] {
+        targets = [
+            pin(stlink.resistor_u5v.P1), pin(stlink.resistor_usb_renumn.P1),
+            pin(stlink.reset_transistor.B)
+        ];
+    }
+    rule "PRESENT_NetR5_1" required [pin(stlink.resistor_mco.P1), pin(stlink.debug_mcu.PA8)];
+    rule "NET_NetR5_1" connected [pin(stlink.resistor_mco.P1)] {
+        targets = [pin(stlink.debug_mcu.PA8)];
+    }
+    rule "PRESENT_NetR6_2" required [pin(stlink.resistor_link_3.P2), pin(stlink.debug_mcu.BOOT0)];
+    rule "NET_NetR6_2" connected [pin(stlink.resistor_link_3.P2)] {
+        targets = [pin(stlink.debug_mcu.BOOT0)];
+    }
+    rule "PRESENT_NetR7_1" required [pin(power.resistor_link.P1), pin(power.usb_power_switch.SET)];
+    rule "NET_NetR7_1" connected [pin(power.resistor_link.P1)] {
+        targets = [pin(power.usb_power_switch.SET)];
+    }
+    rule "PRESENT_NetSB11_1" required [pin(target.jumper_link_4.P1), pin(target.target_mcu.VSS_16)];
+    rule "NET_NetSB11_1" connected [pin(target.jumper_link_4.P1)] {
+        targets = [pin(target.target_mcu.VSS_16)];
+    }
+    rule "PRESENT_NetSB12_1" required [pin(target.jumper_boot0.P1), pin(target.target_mcu.PH3_BOOT0)];
+    rule "NET_NetSB12_1" connected [pin(target.jumper_boot0.P1)] {
+        targets = [pin(target.target_mcu.PH3_BOOT0)];
+    }
+    rule "PRESENT_NetSB13_1" required [pin(target.jumper_link_3.P1), pin(target.target_mcu.VSS_32)];
+    rule "NET_NetSB13_1" connected [pin(target.jumper_link_3.P1)] {
+        targets = [pin(target.target_mcu.VSS_32)];
+    }
+    rule "PRESENT_NetSB4_2" required [
+        pin(target.jumper_mco.P2), pin(target.jumper_link.P2), pin(target.jumper_pf0.P2),
+        pin(target.target_mcu.PC14)
+    ];
+    rule "NET_NetSB4_2" connected [pin(target.jumper_mco.P2)] {
+        targets = [pin(target.jumper_link.P2), pin(target.jumper_pf0.P2), pin(target.target_mcu.PC14)];
+    }
+    rule "PRESENT_NetSB7_2" required [pin(target.jumper_link_2.P2), pin(target.jumper_pf1.P2), pin(target.target_mcu.PC15)];
+    rule "NET_NetSB7_2" connected [pin(target.jumper_link_2.P2)] {
+        targets = [pin(target.jumper_pf1.P2), pin(target.target_mcu.PC15)];
+    }
+    rule "PRESENT_OSC_IN" required [pin(stlink.capacitor_osc_in.P1), pin(stlink.debug_mcu.OSCIN), pin(stlink.debug_crystal.OSC2)];
+    rule "NET_OSC_IN" connected [pin(stlink.capacitor_osc_in.P1)] {
+        targets = [pin(stlink.debug_mcu.OSCIN), pin(stlink.debug_crystal.OSC2)];
+    }
+    rule "PRESENT_OSC_OUT" required [pin(stlink.capacitor_osc_out.P1), pin(stlink.debug_mcu.OSCOUT), pin(stlink.debug_crystal.OSC1)];
+    rule "NET_OSC_OUT" connected [pin(stlink.capacitor_osc_out.P1)] {
+        targets = [pin(stlink.debug_mcu.OSCOUT), pin(stlink.debug_crystal.OSC1)];
+    }
+    rule "PRESENT_PA0" required [pin(interfaces.arduino_left.P12), pin(target.jumper_mco_pa0.P2), pin(target.target_mcu.PA0)];
+    rule "NET_PA0" connected [pin(interfaces.arduino_left.P12)] {
+        targets = [pin(target.jumper_mco_pa0.P2), pin(target.target_mcu.PA0)];
+    }
+    rule "PRESENT_PA1" required [pin(interfaces.arduino_left.P11), pin(target.target_mcu.PA1)];
+    rule "NET_PA1" connected [pin(interfaces.arduino_left.P11)] {
+        targets = [pin(target.target_mcu.PA1)];
+    }
+    rule "PRESENT_PA10" required [pin(interfaces.arduino_right.P2), pin(target.target_mcu.PA10)];
+    rule "NET_PA10" connected [pin(interfaces.arduino_right.P2)] {
+        targets = [pin(target.target_mcu.PA10)];
+    }
+    rule "PRESENT_PA11" required [pin(interfaces.arduino_right.P13), pin(target.target_mcu.PA11)];
+    rule "NET_PA11" connected [pin(interfaces.arduino_right.P13)] {
+        targets = [pin(target.target_mcu.PA11)];
+    }
+    rule "PRESENT_PA12" required [pin(interfaces.arduino_right.P5), pin(target.target_mcu.PA12)];
+    rule "NET_PA12" connected [pin(interfaces.arduino_right.P5)] {
+        targets = [pin(target.target_mcu.PA12)];
+    }
+    rule "PRESENT_PA13" required [
+        pin(stlink.resistor_pa13_t_swdio_in.P2), pin(target.target_mcu.PA13),
+        pin(stlink.debug_mcu.PB14)
+    ];
+    rule "NET_PA13" connected [pin(stlink.resistor_pa13_t_swdio_in.P2)] {
+        targets = [pin(target.target_mcu.PA13), pin(stlink.debug_mcu.PB14)];
+    }
+    rule "PRESENT_PA14" required [pin(target.target_mcu.PA14), pin(stlink.debug_mcu.PA5), pin(stlink.debug_mcu.PB13)];
+    rule "NET_PA14" connected [pin(target.target_mcu.PA14)] {
+        targets = [pin(stlink.debug_mcu.PA5), pin(stlink.debug_mcu.PB13)];
+    }
+    rule "PRESENT_PA15" required [pin(stlink.jumper_pa15_stlink_tx.P1), pin(target.target_mcu.PA15)];
+    rule "NET_PA15" connected [pin(stlink.jumper_pa15_stlink_tx.P1)] {
+        targets = [pin(target.target_mcu.PA15)];
+    }
+    rule "PRESENT_PA2" required [
+        pin(interfaces.arduino_left.P5), pin(stlink.jumper_pa2_stlink_rx.P1),
+        pin(target.target_mcu.PA2)
+    ];
+    rule "NET_PA2" connected [pin(interfaces.arduino_left.P5)] {
+        targets = [pin(stlink.jumper_pa2_stlink_rx.P1), pin(target.target_mcu.PA2)];
+    }
+    rule "PRESENT_PA3" required [pin(interfaces.arduino_left.P10), pin(target.target_mcu.PA3)];
+    rule "NET_PA3" connected [pin(interfaces.arduino_left.P10)] {
+        targets = [pin(target.target_mcu.PA3)];
+    }
+    rule "PRESENT_PA4" required [pin(interfaces.arduino_left.P9), pin(target.target_mcu.PA4)];
+    rule "NET_PA4" connected [pin(interfaces.arduino_left.P9)] {
+        targets = [pin(target.target_mcu.PA4)];
+    }
+    rule "PRESENT_PA5" required [pin(interfaces.arduino_left.P8), pin(target.jumper_pa5_pb7.P1), pin(target.target_mcu.PA5)];
+    rule "NET_PA5" connected [pin(interfaces.arduino_left.P8)] {
+        targets = [pin(target.jumper_pa5_pb7.P1), pin(target.target_mcu.PA5)];
+    }
+    rule "PRESENT_PA6" required [pin(interfaces.arduino_left.P7), pin(target.jumper_pa6_pb6.P1), pin(target.target_mcu.PA6)];
+    rule "NET_PA6" connected [pin(interfaces.arduino_left.P7)] {
+        targets = [pin(target.jumper_pa6_pb6.P1), pin(target.target_mcu.PA6)];
+    }
+    rule "PRESENT_PA7" required [pin(interfaces.arduino_left.P6), pin(target.target_mcu.PA7)];
+    rule "NET_PA7" connected [pin(interfaces.arduino_left.P6)] {
+        targets = [pin(target.target_mcu.PA7)];
+    }
+    rule "PRESENT_PA8" required [pin(interfaces.arduino_right.P12), pin(target.target_mcu.PA8)];
+    rule "NET_PA8" connected [pin(interfaces.arduino_right.P12)] {
+        targets = [pin(target.target_mcu.PA8)];
+    }
+    rule "PRESENT_PA9" required [pin(interfaces.arduino_right.P1), pin(target.target_mcu.PA9)];
+    rule "NET_PA9" connected [pin(interfaces.arduino_right.P1)] {
+        targets = [pin(target.target_mcu.PA9)];
+    }
+    rule "PRESENT_PB0" required [pin(interfaces.arduino_right.P6), pin(target.target_mcu.PB0)];
+    rule "NET_PB0" connected [pin(interfaces.arduino_right.P6)] {
+        targets = [pin(target.target_mcu.PB0)];
+    }
+    rule "PRESENT_PB1" required [pin(interfaces.arduino_right.P9), pin(target.target_mcu.PB1)];
+    rule "NET_PB1" connected [pin(interfaces.arduino_right.P9)] {
+        targets = [pin(target.target_mcu.PB1)];
+    }
+    rule "PRESENT_PB3" required [pin(interfaces.arduino_left.P15), pin(target.jumper_pb3.P2), pin(target.target_mcu.PB3)];
+    rule "NET_PB3" connected [pin(interfaces.arduino_left.P15)] {
+        targets = [pin(target.jumper_pb3.P2), pin(target.target_mcu.PB3)];
+    }
+    rule "PRESENT_PB4" required [pin(interfaces.arduino_right.P15), pin(target.target_mcu.PB4)];
+    rule "NET_PB4" connected [pin(interfaces.arduino_right.P15)] {
+        targets = [pin(target.target_mcu.PB4)];
+    }
+    rule "PRESENT_PB5" required [pin(interfaces.arduino_right.P14), pin(target.target_mcu.PB5)];
+    rule "NET_PB5" connected [pin(interfaces.arduino_right.P14)] {
+        targets = [pin(target.target_mcu.PB5)];
+    }
+    rule "PRESENT_PB6" required [pin(interfaces.arduino_right.P8), pin(target.jumper_pa6_pb6.P2), pin(target.target_mcu.PB6)];
+    rule "NET_PB6" connected [pin(interfaces.arduino_right.P8)] {
+        targets = [pin(target.jumper_pa6_pb6.P2), pin(target.target_mcu.PB6)];
+    }
+    rule "PRESENT_PB7" required [pin(interfaces.arduino_right.P7), pin(target.jumper_pa5_pb7.P2), pin(target.target_mcu.PB7)];
+    rule "NET_PB7" connected [pin(interfaces.arduino_right.P7)] {
+        targets = [pin(target.jumper_pa5_pb7.P2), pin(target.target_mcu.PB7)];
+    }
+    rule "PRESENT_PF0" required [pin(interfaces.arduino_right.P10), pin(target.jumper_pf0.P1)];
+    rule "NET_PF0" connected [pin(interfaces.arduino_right.P10)] {
+        targets = [pin(target.jumper_pf0.P1)];
+    }
+    rule "PRESENT_PF1" required [pin(interfaces.arduino_right.P11), pin(target.jumper_pf1.P1)];
+    rule "NET_PF1" connected [pin(interfaces.arduino_right.P11)] {
+        targets = [pin(target.jumper_pf1.P1)];
+    }
+    rule "PRESENT_PWR_ENN" required [
+        pin(power.resistor_pwr_enn_u5v.P2), pin(power.usb_power_switch.O_N_),
+        pin(stlink.debug_mcu.PB15)
+    ];
+    rule "NET_PWR_ENN" connected [pin(power.resistor_pwr_enn_u5v.P2)] {
+        targets = [pin(power.usb_power_switch.O_N_), pin(stlink.debug_mcu.PB15)];
+    }
+    rule "PRESENT_STLINK_RX" required [pin(stlink.jumper_pa2_stlink_rx.P2), pin(stlink.debug_mcu.PA3)];
+    rule "NET_STLINK_RX" connected [pin(stlink.jumper_pa2_stlink_rx.P2)] {
+        targets = [pin(stlink.debug_mcu.PA3)];
+    }
+    rule "PRESENT_STLINK_TX" required [pin(stlink.jumper_pa15_stlink_tx.P2), pin(stlink.debug_mcu.PA2)];
+    rule "NET_STLINK_TX" connected [pin(stlink.jumper_pa15_stlink_tx.P2)] {
+        targets = [pin(stlink.debug_mcu.PA2)];
+    }
+    rule "PRESENT_STM_JTCK" required [pin(interfaces.debug_programming_header.P3), pin(stlink.debug_mcu.JTCK_SWCLK)];
+    rule "NET_STM_JTCK" connected [pin(interfaces.debug_programming_header.P3)] {
+        targets = [pin(stlink.debug_mcu.JTCK_SWCLK)];
+    }
+    rule "PRESENT_STM_JTMS" required [pin(interfaces.debug_programming_header.P1), pin(stlink.debug_mcu.JTMS_SWDIO)];
+    rule "NET_STM_JTMS" connected [pin(interfaces.debug_programming_header.P1)] {
+        targets = [pin(stlink.debug_mcu.JTMS_SWDIO)];
+    }
+    rule "PRESENT_STM_RST" required [
+        pin(stlink.capacitor_stm_rst.P2), pin(stlink.resistor_stm_rst_v3v3_st_link.P1),
+        pin(stlink.debug_mcu.NRST)
+    ];
+    rule "NET_STM_RST" connected [pin(stlink.capacitor_stm_rst.P2)] {
+        targets = [pin(stlink.resistor_stm_rst_v3v3_st_link.P1), pin(stlink.debug_mcu.NRST)];
+    }
+    rule "PRESENT_T_JTDI" required [pin(stlink.debug_mcu.PA7)];
+    rule "PRESENT_T_JTDO" required [pin(stlink.debug_mcu.PA6)];
+    rule "PRESENT_T_NRST" required [pin(stlink.jumper_nrst_t_nrst.P1), pin(stlink.debug_mcu.PB0)];
+    rule "NET_T_NRST" connected [pin(stlink.jumper_nrst_t_nrst.P1)] {
+        targets = [pin(stlink.debug_mcu.PB0)];
+    }
+    rule "PRESENT_T_SWDIO_IN" required [pin(stlink.resistor_pa13_t_swdio_in.P1), pin(stlink.debug_mcu.PB12)];
+    rule "NET_T_SWDIO_IN" connected [pin(stlink.resistor_pa13_t_swdio_in.P1)] {
+        targets = [pin(stlink.debug_mcu.PB12)];
+    }
+    rule "PRESENT_T_SWO" required [pin(stlink.debug_mcu.PA10)];
+    rule "PRESENT_U5V" required [
+        pin(power.capacitor_u5v.P2), pin(interfaces.usb_connector.VBUS), pin(power.diode_u5v.A),
+        pin(power.resistor_pwr_enn_u5v.P1), pin(stlink.resistor_u5v.P2),
+        pin(power.usb_power_switch.IN), pin(power.usb_power_switch.IN_2)
+    ];
+    rule "NET_U5V" connected [pin(power.capacitor_u5v.P2)] {
+        targets = [
+            pin(interfaces.usb_connector.VBUS), pin(power.diode_u5v.A),
+            pin(power.resistor_pwr_enn_u5v.P1), pin(stlink.resistor_u5v.P2),
+            pin(power.usb_power_switch.IN), pin(power.usb_power_switch.IN_2)
+        ];
+    }
+    rule "PRESENT_U5V_ST_LINK" required [
+        pin(power.capacitor_u5v_st_link.P2), pin(power.diode_u5v_st_link_v5.A),
+        pin(power.usb_power_switch.OUT), pin(power.usb_power_switch.OUT_7)
+    ];
+    rule "NET_U5V_ST_LINK" connected [pin(power.capacitor_u5v_st_link.P2)] {
+        targets = [
+            pin(power.diode_u5v_st_link_v5.A), pin(power.usb_power_switch.OUT),
+            pin(power.usb_power_switch.OUT_7)
+        ];
+    }
+    rule "PRESENT_USB_DM" required [pin(interfaces.usb_connector.DM), pin(stlink.debug_mcu.PA11)];
+    rule "NET_USB_DM" connected [pin(interfaces.usb_connector.DM)] {
+        targets = [pin(stlink.debug_mcu.PA11)];
+    }
+    rule "PRESENT_USB_DP" required [pin(interfaces.usb_connector.DP), pin(stlink.resistor_usb_dp.P1), pin(stlink.debug_mcu.PA12)];
+    rule "NET_USB_DP" connected [pin(interfaces.usb_connector.DP)] {
+        targets = [pin(stlink.resistor_usb_dp.P1), pin(stlink.debug_mcu.PA12)];
+    }
+    rule "PRESENT_USB_RENUMN" required [pin(stlink.resistor_usb_renumn.P2), pin(stlink.debug_mcu.PA15_JTDI)];
+    rule "NET_USB_RENUMN" connected [pin(stlink.resistor_usb_renumn.P2)] {
+        targets = [pin(stlink.debug_mcu.PA15_JTDI)];
+    }
+    rule "PRESENT_V3V3" required [
+        pin(interfaces.arduino_left.P14), pin(power.current_measurement_jumper.COMMON),
+        pin(power.jumper_v3v3_vo.P2)
+    ];
+    rule "NET_V3V3" connected [pin(interfaces.arduino_left.P14)] {
+        targets = [pin(power.current_measurement_jumper.COMMON), pin(power.jumper_v3v3_vo.P2)];
+    }
+    rule "PRESENT_V3V3_ST_LINK" required [
+        pin(power.capacitor_v3v3_st_link.P1), pin(power.capacitor_v3v3_st_link_2.P2),
+        pin(stlink.capacitor_v3v3_st_link.P2), pin(stlink.capacitor_v3v3_st_link_2.P2),
+        pin(interfaces.debug_programming_header.P4), pin(stlink.resistor_v3v3_st_link.P2),
+        pin(stlink.resistor_stm_rst_v3v3_st_link.P2), pin(stlink.jumper_v3v3_st_link.P1),
+        pin(stlink.reset_transistor.C), pin(power.debug_regulator.Vout), pin(stlink.debug_mcu.VBAT),
+        pin(stlink.debug_mcu.VDD_1), pin(stlink.debug_mcu.VDD_2), pin(stlink.debug_mcu.VDD_3),
+        pin(stlink.debug_mcu.VDDA)
+    ];
+    rule "NET_V3V3_ST_LINK" connected [pin(power.capacitor_v3v3_st_link.P1)] {
+        targets = [
+            pin(power.capacitor_v3v3_st_link_2.P2), pin(stlink.capacitor_v3v3_st_link.P2),
+            pin(stlink.capacitor_v3v3_st_link_2.P2), pin(interfaces.debug_programming_header.P4),
+            pin(stlink.resistor_v3v3_st_link.P2), pin(stlink.resistor_stm_rst_v3v3_st_link.P2),
+            pin(stlink.jumper_v3v3_st_link.P1), pin(stlink.reset_transistor.C),
+            pin(power.debug_regulator.Vout), pin(stlink.debug_mcu.VBAT), pin(stlink.debug_mcu.VDD_1),
+            pin(stlink.debug_mcu.VDD_2), pin(stlink.debug_mcu.VDD_3), pin(stlink.debug_mcu.VDDA)
+        ];
+    }
+    rule "PRESENT_V5" required [
+        pin(power.capacitor_v5_2.P1), pin(power.capacitor_v5.P2), pin(interfaces.arduino_left.P4),
+        pin(power.diode_e5v_v5.K), pin(power.diode_u5v_st_link_v5.K), pin(power.resistor_v5.P2),
+        pin(power.target_regulator.EN), pin(power.target_regulator.VI)
+    ];
+    rule "NET_V5" connected [pin(power.capacitor_v5_2.P1)] {
+        targets = [
+            pin(power.capacitor_v5.P2), pin(interfaces.arduino_left.P4), pin(power.diode_e5v_v5.K),
+            pin(power.diode_u5v_st_link_v5.K), pin(power.resistor_v5.P2),
+            pin(power.target_regulator.EN), pin(power.target_regulator.VI)
+        ];
+    }
+    rule "PRESENT_VDD" required [
+        pin(target.capacitor_vdd.P1), pin(target.capacitor_vdd_2.P1),
+        pin(power.current_measurement_jumper.NO), pin(target.jumper_vdd.P2),
+        pin(target.target_mcu.VDD_1), pin(target.target_mcu.VDD_17)
+    ];
+    rule "NET_VDD" connected [pin(target.capacitor_vdd.P1)] {
+        targets = [
+            pin(target.capacitor_vdd_2.P1), pin(power.current_measurement_jumper.NO),
+            pin(target.jumper_vdd.P2), pin(target.target_mcu.VDD_1), pin(target.target_mcu.VDD_17)
+        ];
+    }
+    rule "PRESENT_VIN" required [pin(power.capacitor_vin.P1), pin(interfaces.arduino_left.P1), pin(power.vin_regulator.Vin)];
+    rule "NET_VIN" connected [pin(power.capacitor_vin.P1)] {
+        targets = [pin(interfaces.arduino_left.P1), pin(power.vin_regulator.Vin)];
+    }
+    rule "PRESENT_VO" required [
+        pin(power.capacitor_vo_2.P2), pin(power.capacitor_vo.P1), pin(stlink.resistor_ain_1_vo.P1),
+        pin(power.jumper_v3v3_vo.P1), pin(power.target_regulator.VO)
+    ];
+    rule "NET_VO" connected [pin(power.capacitor_vo_2.P2)] {
+        targets = [
+            pin(power.capacitor_vo.P1), pin(stlink.resistor_ain_1_vo.P1),
+            pin(power.jumper_v3v3_vo.P1), pin(power.target_regulator.VO)
+        ];
+    }
+    rule "NC" no_connect [
+        pin(interfaces.debug_programming_header.P5), pin(power.usb_power_switch.F_A_U_L_T_),
+        pin(power.target_regulator.PG), pin(power.target_regulator.NC), pin(stlink.debug_mcu.PA1),
+        pin(stlink.debug_mcu.PA4), pin(stlink.debug_mcu.PB1), pin(stlink.debug_mcu.PB10),
+        pin(stlink.debug_mcu.PB11), pin(stlink.debug_mcu.PC15), pin(stlink.debug_mcu.PB4_JNTRST),
+        pin(stlink.debug_mcu.PB5), pin(stlink.debug_mcu.PB6), pin(stlink.debug_mcu.PB7),
+        pin(stlink.debug_mcu.PB8), pin(stlink.debug_mcu.PB9)
+    ];
+    rule "ASSEMBLY_B1" attribute [part(target.reset_button)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C1" attribute [part(power.capacitor_u5v_st_link)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C10" attribute [part(power.capacitor_vo_2)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C11" attribute [part(target.capacitor_nrst)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C12" attribute [part(target.capacitor_link_2)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C13" attribute [part(target.capacitor_link)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C14" attribute [part(power.capacitor_v5_2)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C15" attribute [part(power.capacitor_link_3)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C16" attribute [part(power.capacitor_v3v3_st_link)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C17" attribute [part(power.capacitor_link_2)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C18" attribute [part(power.capacitor_link)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C19" attribute [part(power.capacitor_v3v3_st_link_2)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C2" attribute [part(stlink.capacitor_v3v3_st_link)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C20" attribute [part(stlink.capacitor_osc_out)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C21" attribute [part(stlink.capacitor_osc_in)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C22" attribute [part(power.capacitor_vin)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C23" attribute [part(target.capacitor_vdd)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C24" attribute [part(target.capacitor_avdd)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C25" attribute [part(power.capacitor_e5v)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C3" attribute [part(stlink.capacitor_mco)] { name = "assembly"; equals = "dnp"; }
+    rule "ASSEMBLY_C4" attribute [part(stlink.capacitor_stm_rst)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C5" attribute [part(stlink.capacitor_v3v3_st_link_2)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C6" attribute [part(power.capacitor_u5v)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C7" attribute [part(target.capacitor_vdd_2)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_C8" attribute [part(power.capacitor_v5)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_C9" attribute [part(power.capacitor_vo)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_CN1" attribute [part(interfaces.usb_connector)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_CN2" attribute [part(interfaces.debug_programming_header)] {
+        name = "assembly";
+        equals = "dnp";
+    }
+    rule "ASSEMBLY_CN3" attribute [part(interfaces.arduino_right)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_CN4" attribute [part(interfaces.arduino_left)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_D1" attribute [part(power.diode_u5v)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_D2" attribute [part(power.diode_e5v)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_D3" attribute [part(power.diode_e5v_v5)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_D4" attribute [part(power.diode_u5v_st_link_v5)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_JP1" attribute [part(power.current_measurement_jumper)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_L1" attribute [part(target.analog_supply_bead)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_LD1" attribute [part(stlink.debug_status_led)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_LD2" attribute [part(power.power_led)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_LD3" attribute [part(target.user_led)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R1" attribute [part(stlink.resistor_usb_dp)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R10" attribute [part(stlink.resistor_link_5)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R11" attribute [part(stlink.resistor_e5v)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R12" attribute [part(stlink.resistor_ain_1)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R13" attribute [part(stlink.resistor_link_2)] { name = "assembly"; equals = "dnp"; }
+    rule "ASSEMBLY_R14" attribute [part(stlink.resistor_ain_1_vo)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R15" attribute [part(power.resistor_pwr_enn_u5v)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R16" attribute [part(stlink.resistor_link_4)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R17" attribute [part(stlink.resistor_v3v3_st_link)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R18" attribute [part(stlink.resistor_led_stlink)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R19" attribute [part(stlink.resistor_led_stlink_2)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R2" attribute [part(stlink.resistor_link)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R20" attribute [part(stlink.resistor_pa13_t_swdio_in)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R21" attribute [part(target.resistor_boot0)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R22" attribute [part(power.resistor_v5)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R23" attribute [part(target.resistor_link)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R3" attribute [part(stlink.resistor_link_6)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R4" attribute [part(stlink.resistor_u5v)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R5" attribute [part(stlink.resistor_mco)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R6" attribute [part(stlink.resistor_link_3)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R7" attribute [part(power.resistor_link)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_R8" attribute [part(stlink.resistor_usb_renumn)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_R9" attribute [part(stlink.resistor_stm_rst_v3v3_st_link)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_SB1" attribute [part(stlink.jumper_v3v3_st_link)] {
+        name = "initial_state";
+        equals = "open";
+    }
+    rule "ASSEMBLY_SB10" attribute [part(target.jumper_vdd)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB11" attribute [part(target.jumper_link_4)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB12" attribute [part(target.jumper_boot0)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB13" attribute [part(target.jumper_link_3)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB14" attribute [part(power.jumper_v3v3_vo)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB15" attribute [part(target.jumper_pb3)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB16" attribute [part(target.jumper_pa6_pb6)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB17" attribute [part(target.jumper_mco_pa0)] {
+        name = "initial_state";
+        equals = "open";
+    }
+    rule "ASSEMBLY_SB18" attribute [part(target.jumper_pa5_pb7)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB2" attribute [part(stlink.jumper_pa2_stlink_rx)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB3" attribute [part(stlink.jumper_pa15_stlink_tx)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB4" attribute [part(target.jumper_mco)] { name = "initial_state"; equals = "open"; }
+    rule "ASSEMBLY_SB5" attribute [part(target.jumper_link)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB6" attribute [part(target.jumper_pf0)] { name = "initial_state"; equals = "open"; }
+    rule "ASSEMBLY_SB7" attribute [part(target.jumper_link_2)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_SB8" attribute [part(target.jumper_pf1)] { name = "initial_state"; equals = "open"; }
+    rule "ASSEMBLY_SB9" attribute [part(stlink.jumper_nrst_t_nrst)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "ASSEMBLY_T1" attribute [part(stlink.reset_transistor)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_U1" attribute [part(power.usb_power_switch)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_U2" attribute [part(target.target_mcu)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_U3" attribute [part(power.target_regulator)] {
+        name = "assembly";
+        equals = "fitted";
+    }
+    rule "ASSEMBLY_U4" attribute [part(power.debug_regulator)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_U5" attribute [part(stlink.debug_mcu)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_U6" attribute [part(power.vin_regulator)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_X1" attribute [part(target.rtc_crystal)] { name = "assembly"; equals = "fitted"; }
+    rule "ASSEMBLY_X2" attribute [part(stlink.debug_crystal)] { name = "assembly"; equals = "fitted"; }
+    rule "JP1_SHUNT" attribute [part(power.current_measurement_jumper)] {
+        name = "initial_state";
+        equals = "closed";
+    }
+    rule "DEMO_SHUNT" attribute [part(interfaces.arduino_right)] {
+        name = "demo_shunt";
+        equals = { pins = ["4", "5"]; initial_state = "closed"; removable = true; };
+    }
+    rule "TARGET_SWDIO" capability [pin(target.target_mcu.PA13)] { capability = "SWDIO"; }
+    rule "TARGET_SWCLK" capability [pin(target.target_mcu.PA14)] { capability = "SWCLK"; }
+    rule "VCP_TX" path [pin(target.target_mcu.PA2)] {
+        target = pin(stlink.debug_mcu.PA3);
+        via = [
+            {
+                pins = [pin(stlink.jumper_pa2_stlink_rx.P1), pin(stlink.jumper_pa2_stlink_rx.P2)];
+                role = "jumper";
+            }
+        ];
+    }
+    rule "VCP_RX" path [pin(target.target_mcu.PA15)] {
+        target = pin(stlink.debug_mcu.PA2);
+        via = [
+            {
+                pins = [pin(stlink.jumper_pa15_stlink_tx.P1), pin(stlink.jumper_pa15_stlink_tx.P2)];
+                role = "jumper";
+            }
+        ];
+    }
+    rule "TARGET_RESET" path [pin(stlink.debug_mcu.PB0)] {
+        target = pin(target.target_mcu.NRST);
+        via = [
+            {
+                pins = [pin(stlink.jumper_nrst_t_nrst.P1), pin(stlink.jumper_nrst_t_nrst.P2)];
+                role = "jumper";
+            }
+        ];
+    }
+    rule "VALUE_R1" attribute [part(stlink.resistor_usb_dp)] { name = "resistance"; equals = 1500 ohm; }
+    rule "VALUE_R10" attribute [part(stlink.resistor_link_5)] {
+        name = "resistance";
+        equals = 4700 ohm;
+    }
+    rule "VALUE_R11" attribute [part(stlink.resistor_e5v)] { name = "resistance"; equals = 2700 ohm; }
+    rule "VALUE_R12" attribute [part(stlink.resistor_ain_1)] { name = "resistance"; equals = 4700 ohm; }
+    rule "VALUE_R13" attribute [part(stlink.resistor_link_2)] {
+        name = "resistance";
+        equals = 10000 ohm;
+    }
+    rule "VALUE_R14" attribute [part(stlink.resistor_ain_1_vo)] {
+        name = "resistance";
+        equals = 4700 ohm;
+    }
+    rule "VALUE_R15" attribute [part(power.resistor_pwr_enn_u5v)] {
+        name = "resistance";
+        equals = 10000 ohm;
+    }
+    rule "VALUE_R16" attribute [part(stlink.resistor_link_4)] {
+        name = "resistance";
+        equals = 10000 ohm;
+    }
+    rule "VALUE_R17" attribute [part(stlink.resistor_v3v3_st_link)] {
+        name = "resistance";
+        equals = 0 ohm;
+    }
+    rule "VALUE_R18" attribute [part(stlink.resistor_led_stlink)] {
+        name = "resistance";
+        equals = 100 ohm;
+    }
+    rule "VALUE_R19" attribute [part(stlink.resistor_led_stlink_2)] {
+        name = "resistance";
+        equals = 100 ohm;
+    }
+    rule "VALUE_R2" attribute [part(stlink.resistor_link)] { name = "resistance"; equals = 100000 ohm; }
+    rule "VALUE_R20" attribute [part(stlink.resistor_pa13_t_swdio_in)] {
+        name = "resistance";
+        equals = 100 ohm;
+    }
+    rule "VALUE_R21" attribute [part(target.resistor_boot0)] {
+        name = "resistance";
+        equals = 10000 ohm;
+    }
+    rule "VALUE_R22" attribute [part(power.resistor_v5)] { name = "resistance"; equals = 1000 ohm; }
+    rule "VALUE_R23" attribute [part(target.resistor_link)] { name = "resistance"; equals = 510 ohm; }
+    rule "VALUE_R3" attribute [part(stlink.resistor_link_6)] {
+        name = "resistance";
+        equals = 36000 ohm;
+    }
+    rule "VALUE_R4" attribute [part(stlink.resistor_u5v)] { name = "resistance"; equals = 10000 ohm; }
+    rule "VALUE_R5" attribute [part(stlink.resistor_mco)] { name = "resistance"; equals = 100 ohm; }
+    rule "VALUE_R6" attribute [part(stlink.resistor_link_3)] {
+        name = "resistance";
+        equals = 100000 ohm;
+    }
+    rule "VALUE_R7" attribute [part(power.resistor_link)] { name = "resistance"; equals = 2700 ohm; }
+    rule "VALUE_R8" attribute [part(stlink.resistor_usb_renumn)] {
+        name = "resistance";
+        equals = 100 ohm;
+    }
+    rule "VALUE_R9" attribute [part(stlink.resistor_stm_rst_v3v3_st_link)] {
+        name = "resistance";
+        equals = 100000 ohm;
+    }
+    rule NO_SHORT isolated_all $SIGNAL_ROOTS;
+}

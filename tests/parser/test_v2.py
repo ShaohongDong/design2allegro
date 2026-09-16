@@ -9,13 +9,13 @@ import os
 from pathlib import Path
 
 import pytest
-import yaml
-from conftest import write_yaml
+from conftest import write_circuit
 
 from design2allegro import ElectricalError, compile_design, export_design, load_design
 from design2allegro.annotation import annotate, read_lock
 from design2allegro.model import CompiledDesign, canonical
 from design2allegro.properties import normalize
+from design2allegro.syntax import parse
 from design2allegro.verify import NetlistFormatError, verify_package
 
 
@@ -47,14 +47,14 @@ def project(tmp_path):
         doc["modules"]["board"]["nc"] += [
             {"part": name, "pin": pin} for pin in ["A", "B"]
         ]
-    write_yaml(p / "board.yaml", doc)
-    return p / "board.yaml"
+    write_circuit(p / "board.circuit", doc)
+    return p / "board.circuit"
 
 
 def edit(project, fn):
-    d = yaml.safe_load(project.read_text())
+    d = parse(project.read_text(), str(project))
     fn(d)
-    write_yaml(project, d)
+    write_circuit(project, d)
 
 
 def build(project, out):

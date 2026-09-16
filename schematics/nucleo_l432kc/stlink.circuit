@@ -1,0 +1,292 @@
+circuit 2;
+
+include "templates.circuit";
+
+module stlink {
+    ports
+        AIN_1, E5V, GND, LED_STLINK, MCO, NRST, NetCN1_4, NetLD1_2, NetLD1_3, NetLD1_4, NetR10_1,
+        NetR13_2, NetR16_2, NetR1_2, NetR3_2, NetR5_1, NetR6_2, OSC_IN, OSC_OUT, PA13, PA14, PA15,
+        PA2, PWR_ENN, STLINK_RX, STLINK_TX, STM_JTCK, STM_JTMS, STM_RST, T_JTDI, T_JTDO, T_NRST,
+        T_SWDIO_IN, T_SWO, U5V, USB_DM, USB_DP, USB_RENUMN, V3V3_ST_LINK, VO;
+    part debug_crystal {
+        id = "p64aea18904dc5a3fba2901e2dbd87c26";
+        device = "NX3225GD-8MHz-EXS00A-CG04874.0e291baf";
+        package = "XTAL_2SM_3R2x2R5";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "NDK";
+            mpn = "NX3225GD-8MHz-EXS00A-CG04874";
+            frequency = 8 MHz;
+            load_capacitance = 8 pF; frequency_tolerance = 20 ppm; rating_conditions = "Initial frequency tolerance at 25 C; not the separate +/-50 ppm temperature stability."; };
+        electrical = {  };
+        identity_namespace = "stlink";
+    }
+    part jumper_pa15_stlink_tx using jumper_closed {
+        id = "pbd168b70b338511a818bb6181793a0ec";
+        electrical = { role = "jumper"; };
+        identity_namespace = "stlink";
+    }
+    part jumper_pa2_stlink_rx using jumper_closed {
+        id = "p709116e3bdde5166bfc902fd7ed2a99f";
+        electrical = { role = "jumper"; };
+        identity_namespace = "stlink";
+    }
+    part debug_status_led {
+        id = "pdf95c96da898564abc760c5193fd2752";
+        device = "broadcom.HSMF-A201-A00J1";
+        package = "HSMF-A201";
+        assembly = "fitted";
+        properties = { manufacturer = "Broadcom"; mpn = "HSMF-A201-A00J1"; type = "LED"; color = "red-green"; current_rating = 30 mA; voltage_rating = 5 V; rating_conditions = "Per GaP die absolute maximum at 25 C; derate with temperature; voltage rating is reverse voltage."; };
+        electrical = {  };
+        identity_namespace = "stlink";
+    }
+    part resistor_usb_dp {
+        id = "p944f1e24c41e5a26bad056134d1e1a02";
+        device = "RC0603FR-071K5L.f4611e61";
+        package = "0603R";
+        assembly = "fitted";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-071K5L"; resistance = 1500 ohm; tolerance = 1 %; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_link using resistor_100000_ohm {
+        id = "p3ae5a4605efd55e3b0d2d8a0d9ce7e00";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100KL"; resistance = 100000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_led_stlink using resistor_100_ohm {
+        id = "p5eafc96a02ae5040b54bbdf639a4e318";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100RL"; resistance = 100 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_led_stlink_2 using resistor_100_ohm {
+        id = "p3811f6510adf5d32b212e19e8e2e1dfe";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100RL"; resistance = 100 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_v3v3_st_link {
+        id = "p23e2994667a453bea6bf29e8668f643a";
+        device = "RC0603JR-070RL.f4611e61";
+        package = "0603R";
+        assembly = "fitted";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603JR-070RL"; resistance = 0 ohm; tolerance = 5 %; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_mco using resistor_100_ohm {
+        id = "p2f0f8bafa1035e5d982b87dd9e270bad";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100RL"; resistance = 100 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_pa13_t_swdio_in using resistor_100_ohm {
+        id = "pdc9001b6e691557bbe54a0adea9a8e65";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100RL"; resistance = 100 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_link_2 {
+        id = "p6974507e503a5e7ea90c30f0dc460dd2";
+        device = "RC0603FR-0710KL.f4611e61";
+        package = "0603R";
+        assembly = "dnp";
+        properties = { resistance = 10000 ohm; power_rating = 0.1 W; manufacturer = "YAGEO"; mpn = "RC0603FR-0710KL"; tolerance = 1 %; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_stm_rst_v3v3_st_link using resistor_100000_ohm {
+        id = "pb863d90474c8586bbf4e03d802155a37";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100KL"; resistance = 100000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_link_3 using resistor_100000_ohm {
+        id = "pca1e0ff6a0485b5292936249c7559368";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100KL"; resistance = 100000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_link_4 using resistor_10000_ohm {
+        id = "p80c9508feab257c7bcccf5eac129c554";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-0710KL"; resistance = 10000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_ain_1_vo using resistor_4700_ohm {
+        id = "pe694a3d56f9d59799d2bb627b4e65d70";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-074K7L"; resistance = 4700 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_ain_1 using resistor_4700_ohm {
+        id = "p5212689bdb575e84b0e22c1a16e84bd9";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-074K7L"; resistance = 4700 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part capacitor_v3v3_st_link using capacitor_100_nf {
+        id = "p54e9981e77265b71825d035219d0da2b";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "stlink";
+    }
+    part capacitor_v3v3_st_link_2 using capacitor_100_nf {
+        id = "p86c8f3dcdfe75425853905fd0d4b3df5";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "stlink";
+    }
+    part capacitor_mco {
+        id = "p4bd52d60f7445cf1a8850dac6e9e98c4";
+        device = "yageo.CC0603JRNPO9BN200";
+        package = "0603C";
+        assembly = "dnp";
+        properties = { capacitance = 20 pF; manufacturer = "YAGEO"; mpn = "CC0603JRNPO9BN200"; dielectric = "NPO"; polarized = false; tolerance = 5 %; voltage_rating = 50 V; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "stlink";
+    }
+    part capacitor_osc_in using capacitor_10_pf {
+        id = "p26ab41477a0455f5a921a372fb83d24d";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603JRNPO9BN100"; capacitance = 10 pF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "stlink";
+    }
+    part capacitor_osc_out using capacitor_10_pf {
+        id = "p5ab7248970295522a6e88b209784b2fd";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603JRNPO9BN100"; capacitance = 10 pF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "stlink";
+    }
+    part capacitor_stm_rst using capacitor_100_nf {
+        id = "p7bb572dd853850a3a9237eb1fff70832";
+        properties = { manufacturer = "YAGEO"; mpn = "CC0603KRX7R7BB104"; capacitance = 100 nF; };
+        electrical = { role = "capacitor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_e5v using resistor_2700_ohm {
+        id = "p884a2a4e02d552189a2bc62bf7228479";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-072K7L"; resistance = 2700 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_link_5 using resistor_4700_ohm {
+        id = "p3c62445a055d58f2a414b32e0e19abe7";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-074K7L"; resistance = 4700 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part reset_transistor {
+        id = "p6027d3b5d0d957c0a40bead63856dde1";
+        device = "taitron.MMBT9013";
+        package = "SOT23-3";
+        assembly = "fitted";
+        properties = { manufacturer = "Taitron"; mpn = "MMBT9013"; type = "NPN"; current_rating = 500 mA; voltage_rating = 20 V; power_rating = 225 mW; rating_conditions = "Absolute maxima at 25 C; VCEO; power for datasheet FR-5 board, derate 1.8 mW/C. Historical footprint pad numbers differ from vendor pin numbers; see sources.json."; };
+        electrical = {  };
+        identity_namespace = "stlink";
+    }
+    part resistor_u5v using resistor_10000_ohm {
+        id = "pe3ab6525c6a15b29ad17657b45e90200";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-0710KL"; resistance = 10000 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_link_6 {
+        id = "p972d13f092d85ddfb3d3a0c196dfceca";
+        device = "RC0603FR-0736KL.f4611e61";
+        package = "0603R";
+        assembly = "fitted";
+        properties = {
+            manufacturer = "YAGEO";
+            mpn = "RC0603FR-0736KL";
+            resistance = 36000 ohm;
+            tolerance = 1 %; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part resistor_usb_renumn using resistor_100_ohm {
+        id = "p4a1bba15aa9353a088623dc9586340eb";
+        properties = { manufacturer = "YAGEO"; mpn = "RC0603FR-07100RL"; resistance = 100 ohm; power_rating = 0.1 W; };
+        electrical = { role = "resistor"; };
+        identity_namespace = "stlink";
+    }
+    part debug_mcu {
+        id = "p5fc60f8196c45795a5b7df92cad6bb8b";
+        device = "STM32F103CBT6.d13446b6";
+        package = "LQFP48_0R5_7x7";
+        assembly = "fitted";
+        properties = { manufacturer = "STM"; mpn = "STM32F103CBT6"; supply_min = 2 V; supply_max = 3.6 V; };
+        electrical = {  };
+        identity_namespace = "stlink";
+    }
+    part jumper_v3v3_st_link using jumper_open {
+        id = "pd39f0c32ca68517293bc2b40280875a5";
+        electrical = { role = "jumper"; };
+        identity_namespace = "stlink";
+    }
+    part jumper_nrst_t_nrst using jumper_closed {
+        id = "p3d84eb6fb8015e9b88a74a1177d256a3";
+        electrical = { role = "jumper"; };
+        identity_namespace = "stlink";
+    }
+    net AIN_1 = resistor_ain_1.P2, resistor_ain_1_vo.P2, debug_mcu.PA0, port.AIN_1;
+    net E5V = resistor_e5v.P1, port.E5V;
+    net GND =
+        capacitor_v3v3_st_link.P1, capacitor_osc_out.P2, capacitor_osc_in.P2, capacitor_mco.P2,
+        capacitor_stm_rst.P1, capacitor_v3v3_st_link_2.P1, debug_status_led.P1, resistor_link_5.P2,
+        resistor_ain_1.P1, resistor_link_2.P1, resistor_link_4.P1, resistor_link.P2,
+        resistor_link_6.P1, resistor_link_3.P1, debug_mcu.PB2_BOOT1, debug_mcu.VSS_1,
+        debug_mcu.VSS_2, debug_mcu.VSS_3, debug_mcu.VSSA, port.GND;
+    net LED_STLINK =
+        resistor_led_stlink.P1, resistor_led_stlink_2.P1, debug_mcu.PA9, port.LED_STLINK;
+    net MCO = capacitor_mco.P1, resistor_mco.P2, port.MCO;
+    net NRST = jumper_nrst_t_nrst.P2, port.NRST;
+    net NetCN1_4 = resistor_link.P1, port.NetCN1_4;
+    net NetLD1_2 = debug_status_led.P2, resistor_led_stlink.P2, port.NetLD1_2;
+    net NetLD1_3 = debug_status_led.P3, resistor_led_stlink_2.P2, port.NetLD1_3;
+    net NetLD1_4 = debug_status_led.P4, resistor_v3v3_st_link.P1, port.NetLD1_4;
+    net NetR10_1 =
+        resistor_link_5.P1, resistor_e5v.P2, jumper_v3v3_st_link.P2, debug_mcu.PB3_JTDO,
+        port.NetR10_1;
+    net NetR13_2 = resistor_link_2.P2, debug_mcu.PC14, port.NetR13_2;
+    net NetR16_2 = resistor_link_4.P2, debug_mcu.PC13, port.NetR16_2;
+    net NetR1_2 = resistor_usb_dp.P2, reset_transistor.E, port.NetR1_2;
+    net NetR3_2 =
+        resistor_link_6.P2, resistor_u5v.P1, resistor_usb_renumn.P1, reset_transistor.B,
+        port.NetR3_2;
+    net NetR5_1 = resistor_mco.P1, debug_mcu.PA8, port.NetR5_1;
+    net NetR6_2 = resistor_link_3.P2, debug_mcu.BOOT0, port.NetR6_2;
+    net OSC_IN = capacitor_osc_in.P1, debug_mcu.OSCIN, debug_crystal.OSC2, port.OSC_IN;
+    net OSC_OUT = capacitor_osc_out.P1, debug_mcu.OSCOUT, debug_crystal.OSC1, port.OSC_OUT;
+    net PA13 = resistor_pa13_t_swdio_in.P2, debug_mcu.PB14, port.PA13;
+    net PA14 = debug_mcu.PA5, debug_mcu.PB13, port.PA14;
+    net PA15 = jumper_pa15_stlink_tx.P1, port.PA15;
+    net PA2 = jumper_pa2_stlink_rx.P1, port.PA2;
+    net PWR_ENN = debug_mcu.PB15, port.PWR_ENN;
+    net STLINK_RX = jumper_pa2_stlink_rx.P2, debug_mcu.PA3, port.STLINK_RX;
+    net STLINK_TX = jumper_pa15_stlink_tx.P2, debug_mcu.PA2, port.STLINK_TX;
+    net STM_JTCK = debug_mcu.JTCK_SWCLK, port.STM_JTCK;
+    net STM_JTMS = debug_mcu.JTMS_SWDIO, port.STM_JTMS;
+    net STM_RST =
+        capacitor_stm_rst.P2, resistor_stm_rst_v3v3_st_link.P1, debug_mcu.NRST, port.STM_RST;
+    net T_JTDI = debug_mcu.PA7, port.T_JTDI;
+    net T_JTDO = debug_mcu.PA6, port.T_JTDO;
+    net T_NRST = jumper_nrst_t_nrst.P1, debug_mcu.PB0, port.T_NRST;
+    net T_SWDIO_IN = resistor_pa13_t_swdio_in.P1, debug_mcu.PB12, port.T_SWDIO_IN;
+    net T_SWO = debug_mcu.PA10, port.T_SWO;
+    net U5V = resistor_u5v.P2, port.U5V;
+    net USB_DM = debug_mcu.PA11, port.USB_DM;
+    net USB_DP = resistor_usb_dp.P1, debug_mcu.PA12, port.USB_DP;
+    net USB_RENUMN = resistor_usb_renumn.P2, debug_mcu.PA15_JTDI, port.USB_RENUMN;
+    net V3V3_ST_LINK =
+        capacitor_v3v3_st_link.P2, capacitor_v3v3_st_link_2.P2, resistor_v3v3_st_link.P2,
+        resistor_stm_rst_v3v3_st_link.P2, jumper_v3v3_st_link.P1, reset_transistor.C, debug_mcu.VBAT,
+        debug_mcu.VDD_1, debug_mcu.VDD_2, debug_mcu.VDD_3, debug_mcu.VDDA, port.V3V3_ST_LINK;
+    net VO = resistor_ain_1_vo.P1, port.VO;
+    nc
+        debug_mcu.PA1, debug_mcu.PA4, debug_mcu.PB1, debug_mcu.PB10, debug_mcu.PB11, debug_mcu.PC15,
+        debug_mcu.PB4_JNTRST, debug_mcu.PB5, debug_mcu.PB6, debug_mcu.PB7, debug_mcu.PB8,
+        debug_mcu.PB9;
+}

@@ -115,5 +115,250 @@
     "T_SWO": "T_SWO",
     "USB_DM": "USB_DM",
     "NetR7_1": "NetR7_1"
-  }
+  },
+  "project_selections": [
+    {
+      "parts": [
+        "interfaces/arduino_left",
+        "interfaces/arduino_right"
+      ],
+      "official_device": "PH254015B-09303.c47470bb",
+      "selected_device": "wuerth.61301511121",
+      "manufacturer": "Wuerth Elektronik",
+      "mpn": "61301511121",
+      "reason": "Project substitute for undocumented ATOM header; male interface follows the original schematic comment and PCB footprint description.",
+      "compatibility": "15 positions, 2.54 mm pitch, 0.64 mm square posts fit original 1.02 mm holes; 6 mm mating post, 3 mm solder tail; retain original pad numbering and footprint name (historical _F suffix is misleading)."
+    },
+    {
+      "parts": [
+        "interfaces/debug_programming_header"
+      ],
+      "official_device": "connector.da8493c1",
+      "selected_device": "wuerth.61300511121",
+      "manufacturer": "Wuerth Elektronik",
+      "mpn": "61300511121",
+      "reason": "Explicit procurement choice for generic DNP header; remains DNP.",
+      "compatibility": "Single row 5-pin 2.54 mm vertical male header, 0.64 mm square posts; sequential original pad numbering."
+    },
+    {
+      "parts": [
+        "power/power_led"
+      ],
+      "official_device": "19-217/R6C-AL1M2VY/3T.97c0a86b",
+      "selected_device": "everlight.19-217-R6C-P1Q2-3T",
+      "manufacturer": "Everlight",
+      "mpn": "19-217/R6C-P1Q2/3T",
+      "reason": "Project red LED selection with published datasheet; brightness bin differs from original BOM.",
+      "compatibility": "0603 1.6 x 0.8 mm, two-terminal red LED; retain cathode/anode binding and polarity orientation in original footprint."
+    },
+    {
+      "parts": [
+        "target/user_led"
+      ],
+      "official_device": "19-213SY6C/S530-E2/TR8LED.80976274",
+      "selected_device": "everlight.19-213-G6C-AP1Q2-3T",
+      "manufacturer": "Everlight",
+      "mpn": "19-213/G6C-AP1Q2/3T",
+      "reason": "Project yellow-green LED selection; original mixed part string could not be substantiated. Brightness/color bin differs.",
+      "compatibility": "0603 1.6 x 0.8 mm, two-terminal LED; retain original cathode/anode binding."
+    },
+    {
+      "parts": [
+        "stlink/debug_status_led"
+      ],
+      "official_device": "LE-RGW35280.1a1a83de",
+      "selected_device": "broadcom.HSMF-A201-A00J1",
+      "manufacturer": "Broadcom",
+      "mpn": "HSMF-A201-A00J1",
+      "reason": "Project selection of the Avago alternate explicitly named in ST_LINK_V2-1.SCHDOC; differs from Everluck C-09 BOM.",
+      "compatibility": "PLCC-4 3.5 x 2.8 mm HSMF-A201; pins 1=red cathode, 2=red anode, 3=green cathode, 4=green anode; unchanged original footprint/pad map."
+    },
+    {
+      "parts": [
+        "stlink/reset_transistor"
+      ],
+      "official_device": "MMBT9013.1e8f3bf1",
+      "selected_device": "taitron.MMBT9013",
+      "manufacturer": "Taitron",
+      "mpn": "MMBT9013",
+      "reason": "Project manufacturer selection; original BOM labels manufacturer ST without a verifiable part datasheet.",
+      "compatibility": "SOT-23. Original MB1180 SOT23-3 footprint numbers the two paired pads opposite JEDEC: original pad 1 = vendor pin 2 (E), pad 2 = vendor pin 1 (B), pad 3 = vendor pin 3 (C). Original PCB at rotation 90 deg has pad 1 at (+1,+0.98) mm and pad 2 at (+1,-0.98) mm from center; preserve this footprint geometry, do not replace it with a normally numbered SOT-23 footprint."
+    },
+    {
+      "parts": [
+        "stlink/capacitor_mco"
+      ],
+      "official_device": "capacitor.9db21403",
+      "selected_device": "yageo.CC0603JRNPO9BN200",
+      "manufacturer": "YAGEO",
+      "mpn": "CC0603JRNPO9BN200",
+      "reason": "Project procurement selection for DNP 20 pF schematic comment; remains DNP.",
+      "compatibility": "Nonpolar 0603 20 pF 50 V NP0 +/-5%; identical two-pad electrical mapping."
+    },
+    {
+      "parts": [
+        "target/reset_button"
+      ],
+      "official_device": "switch.913a899f",
+      "selected_device": "ck.KSS221GLFS",
+      "manufacturer": "C&K",
+      "mpn": "KSS221GLFS",
+      "reason": "Complete ordering suffix for KSS221G explicitly named in MCU_32.SchDoc, absent from generic BOM.",
+      "compatibility": "SPST normally-open momentary side-actuated SMT; two contacts, silver option; original footprint pads 3.7 x 2 mm at 5.6 mm centers accept KSS gullwing terminals (datasheet 5.5 mm spacing)."
+    },
+    {
+      "parts": [
+        "stlink/resistor_link_2"
+      ],
+      "official_device": "resistor.f4611e61",
+      "selected_device": "RC0603FR-0710KL.f4611e61",
+      "manufacturer": "YAGEO",
+      "mpn": "RC0603FR-0710KL",
+      "reason": "Project procurement selection for generic DNP 10 kohm; remains DNP.",
+      "compatibility": "Nonpolar 0603, two pads, 10 kohm +/-1%, 0.1 W."
+    }
+  ],
+  "specification_sources": [
+    {
+      "id": "rc0603",
+      "url": "https://pdf.support/ddc26812/yageo.com/RC0603JRF13360RL.pdf",
+      "sha256": "8e137f29fae97d4cdd4c8293e4217ad26e17696a7b71679c3bb6f7d382cf9f81",
+      "parts": "All RC0603 resistors including DNP R13",
+      "evidence": "Electrical characteristics table: 0.1 W at 70 C; derate above 70 C."
+    },
+    {
+      "id": "ld1117",
+      "url": "https://www.st.com/resource/en/datasheet/ld1117.pdf",
+      "sha256": "4fd8415a20d932fdc1de5be99e1aa5d2af1546f05c0a785a047ff93420364348",
+      "parts": "power/vin_regulator",
+      "evidence": "Table 7, 5 V version: regulation input range 6.5 to 15 V; output up to 800 mA subject to thermal limits."
+    },
+    {
+      "id": "ld3985",
+      "url": "https://www.st.com/resource/en/datasheet/ld3985.pdf",
+      "sha256": "d909f94a6b4df434f9590fe0ffe423f9ad8fe9c877c95327e0fa6e651e75ddb6",
+      "parts": "power/debug_regulator",
+      "evidence": "Device input operating range 2.5 to 6 V, 150 mA; 3.3 V regulation also requires dropout headroom."
+    },
+    {
+      "id": "ld39050",
+      "url": "https://www.st.com/resource/en/datasheet/ld39050.pdf",
+      "sha256": "3b8efe78effed4528cdad1b91f87eccf0d96779dd72926cf440209c7b46ca9c5",
+      "parts": "power/target_regulator",
+      "evidence": "Device input operating range 1.5 to 5.5 V, 500 mA; 3.3 V regulation also requires dropout headroom."
+    },
+    {
+      "id": "st890",
+      "url": "https://www.st.com/resource/en/datasheet/st890.pdf",
+      "sha256": "d156a463fe4876e74dcec068e6d7f33d51c9eade12212be9e9672fe8be539a1c",
+      "parts": "power/usb_power_switch",
+      "evidence": "Operating input range 2.7 to 5.5 V."
+    },
+    {
+      "id": "bat60",
+      "url": "https://www.st.com/resource/en/datasheet/bat60.pdf",
+      "sha256": "08fc7b205cf240a34f8f3d1c5cacaee7bc8258198265c93c3808b93eb053e97a",
+      "parts": "All BAT60JFILM diodes",
+      "evidence": "Page 1: repetitive peak current 3 A at duty 0.11; reverse rating VRRM 10 V. This is not a 3 A continuous rating."
+    },
+    {
+      "id": "f103",
+      "url": "https://www.st.com/resource/en/datasheet/stm32f103cb.pdf",
+      "sha256": "1e54ce18e6c34c5b4a78986f26e245e143748c721009fc9af5953795c30686bc",
+      "parts": "stlink/debug_mcu",
+      "evidence": "General operating conditions: VDD 2.0 to 3.6 V; peripheral-specific constraints are separate."
+    },
+    {
+      "id": "ndk8",
+      "url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8882/NX3225GD-Datasheet.pdf",
+      "sha256": "f1a9116e7aec7fb2f0ccecb93282be63acaec90848d6225ba002c815f24b6f8a",
+      "parts": "stlink/debug_crystal",
+      "evidence": "Page 2 EXS00A-CG04874 row: +/-20 ppm at 25 C. Temperature stability +/-50 ppm is a different parameter."
+    },
+    {
+      "id": "bead",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/1b1ec6494ff25408fab6244ef8a53e44.pdf",
+      "sha256": "05e18280afc765092839099c4cf6c62e12eeca9857bc9e1d1330ee7545ea1c7a",
+      "parts": "target/analog_supply_bead",
+      "evidence": "TBM01-150600456 FCM1608KF-601T05 row: 600 ohm at 100 MHz/60 mV, DCR max 0.50 ohm, rated current 500 mA. Corrects official BOM 350 mA."
+    },
+    {
+      "id": "kss",
+      "url": "https://www.ckswitches.com/media/1463/kss.pdf",
+      "parts": "target/reset_button",
+      "evidence": "Page 1 silver contacts: 32 VDC, 1 to 50 mA, 1 VA max; normally-open momentary. KSS221G is named by original SchDoc; LFS is ordering completion."
+    },
+    {
+      "id": "green",
+      "url": "https://www1.futureelectronics.com/doc/EVERLIGHT/19-213G6C-AP1Q23T.pdf",
+      "sha256": "b5e60f73b8b82a8453f10f4ed4358d0dd0fd3adb52f9afa6e2216ccf85538a77",
+      "parts": "target/user_led",
+      "evidence": "Page 3: absolute maximum 25 mA forward, 5 V reverse at 25 C; page 2 dimensions 0603 1.6 x 0.8 mm."
+    },
+    {
+      "id": "red",
+      "url": "https://www.everlight.com/wp-content/uploads/2021/02/DSE-0008610-19-217-R6C-P1Q2-3T-V6.pdf",
+      "sha256": "03c2a7e529d39e29ba816a75f65d07affc69ba4358773308aac336d486e8f216",
+      "parts": "power/power_led",
+      "evidence": "Absolute maximum table: 25 mA forward, 5 V reverse at 25 C; outline 0603 1.6 x 0.8 mm."
+    },
+    {
+      "id": "bicolor",
+      "url": "https://www.tme.eu/Document/6ddcc9408878eecb29caa1d60e5a978b/HSMF-A211-A00J1.pdf",
+      "sha256": "2c6deaeafbe9cee71dfca48c98e237e7cc1bd229f6b2a59bcbc89243bb86390a",
+      "parts": "stlink/debug_status_led",
+      "evidence": "Pages 2-5: HSMF-A201 uses GaP red/yellow-green, 30 mA per die and 5 V reverse at 25 C; PLCC-4 pin definitions and 3.5 x 2.8 mm outline."
+    },
+    {
+      "id": "mmbt9013",
+      "url": "https://www.taitroncomponents.com/catalog/Datasheet/MMBT9013.pdf",
+      "sha256": "31371f2a8e22c145ff6b9f186d1770d399d75b1f472023aa0d27ed42972296b1",
+      "parts": "stlink/reset_transistor",
+      "evidence": "Page 1: NPN, VCEO 20 V, IC 500 mA, 225 mW on specified FR-5 board at 25 C. Vendor pins B1/E2/C3; original MB1180 footprint uses E1/B2/C3 at corresponding positions."
+    },
+    {
+      "id": "header15",
+      "url": "https://www.we-online.com/components/products/datasheet/61301511121.pdf",
+      "sha256": "7a58fef4a949be4fd2d125231b2510c39c5c5b52fd2efcc60b13c239d5cff029",
+      "parts": "interfaces/arduino_left, interfaces/arduino_right",
+      "evidence": "Pages 1-2: 15-way single-row 2.54 mm pitch, 0.64 mm square posts, 6 mm mating length and 3 mm solder tail, rated 3 A/250 VAC."
+    },
+    {
+      "id": "header5",
+      "url": "https://www.we-online.com/components/products/datasheet/61300511121.pdf",
+      "sha256": "b91171c2b94275ccb3824762a4b77dcd0cd9031e8a818e869a6c9f18c053ad8b",
+      "parts": "interfaces/debug_programming_header",
+      "evidence": "Pages 1-2: 5-way single-row 2.54 mm pitch, 0.64 mm square posts, 3 A/250 VAC; stays DNP."
+    },
+    {
+      "id": "cap20",
+      "url": "https://store.comet.bg/download-file.php?id=28574",
+      "sha256": "f115fcd1337a6d9fd4f539f89903392cb5554dee8354c1f549e9f9aba4e965d4",
+      "parts": "stlink/capacitor_mco",
+      "evidence": "Page 1: 20 pF +/-5%, 50 VDC, NP0, nonpolar, 0603 1.6 x 0.8 mm; stays DNP."
+    },
+    {
+      "id": "usb",
+      "url": "https://www.molex.com/en-us/products/part-detail/1050170001",
+      "parts": "interfaces/usb_connector",
+      "evidence": "5 signal/power positions at 0.65 mm pitch; 30 VAC RMS; 1 A signal, 1.8 A power contacts. Scalar current field takes the lower contact rating; shield/anchor pads do not count as positions."
+    },
+    {
+      "id": "l432",
+      "url": "https://www.st.com/resource/en/datasheet/stm32l432kc.pdf",
+      "sha256": "411517499bfbb10cfedea93c4b9f61418c662d94599a8b811df0c8773fbdd735",
+      "parts": "target/target_mcu",
+      "evidence": "General operating conditions: VDD 1.71 to 3.6 V."
+    }
+  ],
+  "specification_corrections": [
+    {
+      "part": "target/analog_supply_bead",
+      "field": "current_rating",
+      "official_bom": "350 mA",
+      "manufacturer_datasheet": "500 mA",
+      "source": "bead"
+    }
+  ],
+  "selection_scope": "Project procurement variant with original connectivity, pad geometry/names and assembly states preserved; no claim these substitutions are factory-fitted. Allegro package geometry must match the original MB1180 footprints, especially the non-JEDEC SOT23-3 numbering."
 }

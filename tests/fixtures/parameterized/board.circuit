@@ -1,0 +1,12 @@
+circuit 2;
+include "common.circuit" as analog;
+const R: resistance = 99 kohm;
+board demo { id = "demo"; library = "standard@1"; top = board; }
+module board {
+    instance sense: analog.divider(upper = $analog.R*2) { id = "sense-stable"; }
+    instance other: analog.divider() { id = "other-stable"; }
+    net IN = sense.IN; net OUT = sense.OUT; net GND = sense.GND;
+    net IN2 = other.IN; net OUT2 = other.OUT; net GND2 = other.GND;
+}
+group ROOTS = [pin(sense.hi.A), pin(sense.hi.B), pin(sense.lo.B)];
+rules { rule SEP isolated_all $ROOTS; }

@@ -1,0 +1,109 @@
+circuit 2;
+
+include "templates.circuit";
+include "rules.circuit";
+include "interfaces.circuit";
+include "power.circuit";
+include "stlink.circuit";
+include "target.circuit";
+
+board "nucleo_l432kc" {
+    top = "board";
+    id = "nucleo-l432kc";
+    library = "standard@2";
+}
+
+module board {
+    instance interfaces: interfaces { id = "interfaces"; }
+    instance power: power { id = "power"; }
+    instance stlink: stlink { id = "stlink"; }
+    instance target: target { id = "target"; }
+    net AIN_1 = stlink.AIN_1;
+    net AVDD = interfaces.AVDD, target.AVDD;
+    net BOOT0 = target.BOOT0;
+    net E5V = power.E5V, stlink.E5V;
+    net GND = interfaces.GND, power.GND, stlink.GND, target.GND { electrical = { role = "ground"; }; };
+    net LED_STLINK = stlink.LED_STLINK;
+    net MCO = stlink.MCO, target.MCO;
+    net NRST = interfaces.NRST, stlink.NRST, target.NRST;
+    net NetC12_1 = target.NetC12_1;
+    net NetC13_1 = target.NetC13_1;
+    net NetC15_2 = power.NetC15_2;
+    net NetC17_2 = power.NetC17_2;
+    net NetCN1_4 = interfaces.NetCN1_4, stlink.NetCN1_4;
+    net NetL1_2 = target.NetL1_2;
+    net NetLD1_2 = stlink.NetLD1_2;
+    net NetLD1_3 = stlink.NetLD1_3;
+    net NetLD1_4 = stlink.NetLD1_4;
+    net NetLD2_1 = power.NetLD2_1;
+    net NetLD3_1 = target.NetLD3_1;
+    net NetR10_1 = stlink.NetR10_1;
+    net NetR13_2 = stlink.NetR13_2;
+    net NetR16_2 = stlink.NetR16_2;
+    net NetR1_2 = stlink.NetR1_2;
+    net NetR23_2 = target.NetR23_2;
+    net NetR3_2 = stlink.NetR3_2;
+    net NetR5_1 = stlink.NetR5_1;
+    net NetR6_2 = stlink.NetR6_2;
+    net NetR7_1 = power.NetR7_1;
+    net NetSB11_1 = target.NetSB11_1;
+    net NetSB12_1 = target.NetSB12_1;
+    net NetSB13_1 = target.NetSB13_1;
+    net NetSB4_2 = target.NetSB4_2;
+    net NetSB7_2 = target.NetSB7_2;
+    net OSC_IN = stlink.OSC_IN;
+    net OSC_OUT = stlink.OSC_OUT;
+    net PA0 = interfaces.PA0, target.PA0;
+    net PA1 = interfaces.PA1, target.PA1;
+    net PA10 = interfaces.PA10, target.PA10;
+    net PA11 = interfaces.PA11, target.PA11;
+    net PA12 = interfaces.PA12, target.PA12;
+    net PA13 = stlink.PA13, target.PA13;
+    net PA14 = stlink.PA14, target.PA14;
+    net PA15 = stlink.PA15, target.PA15;
+    net PA2 = interfaces.PA2, stlink.PA2, target.PA2;
+    net PA3 = interfaces.PA3, target.PA3;
+    net PA4 = interfaces.PA4, target.PA4;
+    net PA5 = interfaces.PA5, target.PA5;
+    net PA6 = interfaces.PA6, target.PA6;
+    net PA7 = interfaces.PA7, target.PA7;
+    net PA8 = interfaces.PA8, target.PA8;
+    net PA9 = interfaces.PA9, target.PA9;
+    net PB0 = interfaces.PB0, target.PB0;
+    net PB1 = interfaces.PB1, target.PB1;
+    net PB3 = interfaces.PB3, target.PB3;
+    net PB4 = interfaces.PB4, target.PB4;
+    net PB5 = interfaces.PB5, target.PB5;
+    net PB6 = interfaces.PB6, target.PB6;
+    net PB7 = interfaces.PB7, target.PB7;
+    net PF0 = interfaces.PF0, target.PF0;
+    net PF1 = interfaces.PF1, target.PF1;
+    net PWR_ENN = power.PWR_ENN, stlink.PWR_ENN;
+    net STLINK_RX = stlink.STLINK_RX;
+    net STLINK_TX = stlink.STLINK_TX;
+    net STM_JTCK = interfaces.STM_JTCK, stlink.STM_JTCK;
+    net STM_JTMS = interfaces.STM_JTMS, stlink.STM_JTMS;
+    net STM_RST = stlink.STM_RST;
+    net T_JTDI = stlink.T_JTDI;
+    net T_JTDO = stlink.T_JTDO;
+    net T_NRST = stlink.T_NRST;
+    net T_SWDIO_IN = stlink.T_SWDIO_IN;
+    net T_SWO = stlink.T_SWO;
+    net U5V = interfaces.U5V, power.U5V, stlink.U5V;
+    net U5V_ST_LINK = power.U5V_ST_LINK;
+    net USB_DM = interfaces.USB_DM, stlink.USB_DM;
+    net USB_DP = interfaces.USB_DP, stlink.USB_DP;
+    net USB_RENUMN = stlink.USB_RENUMN;
+    net V3V3 = interfaces.V3V3, power.V3V3;
+    net V3V3_ST_LINK = interfaces.V3V3_ST_LINK, power.V3V3_ST_LINK, stlink.V3V3_ST_LINK;
+    net V5 = interfaces.V5, power.V5;
+    net VDD = power.VDD, target.VDD;
+    net VIN = interfaces.VIN, power.VIN;
+    net VO = power.VO, stlink.VO;
+}
+
+accessory "demo-shunt" {
+    description = "Removable demonstration shunt between Arduino header ground and PA12 (official CN3 pads 4–5)";
+    quantity = 1;
+    assembly = "fitted";
+}

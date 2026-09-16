@@ -3,18 +3,25 @@
 Use Python 3.12+ and `.venv`; install `pip install -e '.[dev]'`. Make targets use
 `.venv/bin/python` unless `PYTHON=/path/to/python` is supplied. The runtime package
 is `src/design2allegro/`; schemas and the versioned shared catalogue ship inside its wheel. Tests live in
-`tests/parser/`. Examples are YAML projects under `schematics/`.
+`tests/parser/`. Examples are Circuit projects under `schematics/`.
 
-`make test` runs parser, hierarchy/bus, electrical-rule, CLI and delivery tests.
-`make example` builds/verifies the existing FPGA/SoC regression fixture and confirms that NUCLEO
-is blocked only by its documented missing mandatory attributes.
-`make benchmark` measures a 10,000-pin design from actual YAML loading through
-export, recording timings and peak process RSS in `build/parser/benchmark/result.json`.
+`make test` tests compiler behavior: parsing, hierarchy/buses, electrical rules,
+annotation, CLI and delivery. Tests use small synthetic circuits under
+`tests/fixtures/` or temporary inputs; they must not read `schematics/` or assert
+board-specific component counts, procurement choices, pinouts or warning lists.
+Board expectations belong in the design's Circuit rules and source documentation.
+`make verify-package` follows the same boundary, using the synthetic `fpga_soc`
+and `parameterized` fixtures. Board validation is an explicit `check`, `build`
+and `verify` workflow, separate from kernel regression tests.
+`make example` builds/verifies the existing FPGA/SoC regression fixture and the multifile
+NUCLEO design with complete specifications and documented selections.
+`make benchmark` measures a 10,000-pin Circuit 2 design with an included parameterized module from actual Circuit parsing through
+export, recording timings and peak process RSS in `build/parser/benchmark/circuit2/result.json`.
 No timing threshold is implied by that measurement.
 
 `make build` builds one `design2allegro` wheel from a staged source copy.
 `make verify-package` installs it in a fresh virtual environment and runs all
-three commands outside the repository, including negative input checks. It checks
+three commands outside the repository, including Circuit 1, multifile Circuit 2 and negative input checks. It checks
 that neither SKiDL nor the old native extension is installed in that environment.
 
 Logs and disposable outputs are confined to `build/parser/`. `make clean-preview`
@@ -24,7 +31,7 @@ New wheel hashes live in `dist/design2allegro-SHA256SUMS`; older wheel files rem
 historical artifacts and must not be used to validate this implementation.
 
 Format Python with Black and isort (`isort --profile black`). Add behavioral
-regressions for changes to YAML semantics, connectivity or rule decisions.
+regressions for changes to Circuit semantics, connectivity or rule decisions.
 Handwritten Telesis/device fixtures and round-trip inventory comparisons provide
 offline evidence, not vendor-tool acceptance.
 
