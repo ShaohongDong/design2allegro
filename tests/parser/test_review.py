@@ -218,6 +218,8 @@ def test_http_api_static_assets_and_conflicts(delivered, tmp_path):
                 "/",
                 "/style.css",
                 "/app.js",
+                "/graph-model.js",
+                "/graph.js",
                 "/vendor/cytoscape.min.js",
                 "/vendor/LICENSE.cytoscape",
             ):

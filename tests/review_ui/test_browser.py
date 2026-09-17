@@ -83,6 +83,14 @@ def test_graph_details_search_filters_and_cross_probe(page, app):
     page.locator("#collapse").click()
     assert page.evaluate('cy.nodes(".module").length') == 2
     assert page.evaluate('cy.nodes(".part").length') == 0
+    assert page.evaluate('cy.nodes(".port").length') == 6
+    assert page.evaluate('cy.nodes(".rail").length') == 2
+    assert page.evaluate(
+        'cy.nodes(".ground").every(n=>n.data("rotation")===90 || n.data("rotation")===270)'
+    )
+    assert sorted(
+        page.evaluate('cy.edges().not(".lead").flatMap(e=>e.data("pins"))')
+    ) == sorted(k for k, pin in app.package["pins"].items() if not pin["nc"])
     page.locator("#restore").click()
     assert page.evaluate('cy.nodes(".part").length') == 6
     page.locator('[data-tab="diagnostics"]').click()
@@ -177,7 +185,7 @@ def test_save_failure_retry_and_conflicting_tabs(page, app):
     expect(page.locator("#note")).to_have_value("另一标签页")
 
 
-@pytest.mark.parametrize("width,height", [(1280, 800), (1920, 1080)])
+@pytest.mark.parametrize("width,height", [(1280, 800), (1440, 900), (1920, 1080)])
 def test_viewports_drag_zoom_and_screenshot(page, app, width, height):
     page.set_viewport_size({"width": width, "height": height})
     page.locator("#fit").click()
@@ -253,8 +261,10 @@ def test_large_synthetic_graph_remains_searchable(browser, tmp_path):
             page.goto(server.url)
             expect(page.locator("#save-state")).to_contain_text("已载入", timeout=20000)
             page.wait_for_function('document.getElementById("graph-loading").hidden')
-            assert page.evaluate("cy.nodes().length") == 3000
-            assert page.evaluate("cy.edges().length") == 2400
+            assert page.evaluate('cy.nodes(".part").length') == 1200
+            assert page.evaluate('cy.nodes(".pin").length') == 2400
+            assert page.evaluate('cy.edges(".wire").length') == 1200
+            assert page.evaluate('cy.nodes(".rail").length') == 600
             expect(page.locator(".object-row")).to_have_count(60)
             page.locator("#search").fill("c599/hi")
             expect(page.locator("#list-count")).to_have_text("1 个结果")
@@ -266,3 +276,39 @@ def test_large_synthetic_graph_remains_searchable(browser, tmp_path):
             context.close()
             server.shutdown()
             thread.join(timeout=5)
+
+
+def test_wheel_zoom_step_anchor_and_limits(page):
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    page.evaluate("""() => {
+      window.wheelEvents=0;
+      cy.on('scrollzoom',()=>{window.wheelEvents++;});
+      cy.zoom(1);
+      cy.pan({x:0,y:0});
+    }""")
+    box = page.locator("#graph").bounding_box()
+    point = {"x": box["width"] * 0.35, "y": box["height"] * 0.4}
+    page.mouse.move(box["x"] + point["x"], box["y"] + point["y"])
+
+    def wheel(delta):
+        count = page.evaluate("window.wheelEvents")
+        page.mouse.wheel(0, delta)
+        page.wait_for_function("count => window.wheelEvents > count", arg=count)
+        return page.evaluate("cy.zoom()")
+
+    def model_point():
+        return page.evaluate(
+            "p => ({x:(p.x-cy.pan().x)/cy.zoom(),y:(p.y-cy.pan().y)/cy.zoom()})",
+            point,
+        )
+
+    anchor = model_point()
+    # A first wheel step should be visibly larger than the former ~1% change.
+    assert 1.04 < wheel(-100) < 1.06
+    assert model_point() == pytest.approx(anchor, abs=0.1)
+    assert wheel(100) == pytest.approx(1, abs=0.001)
+    assert model_point() == pytest.approx(anchor, abs=0.1)
+    page.evaluate("() => { cy.zoom(2.999); }")
+    assert wheel(-100) == pytest.approx(3)
+    page.evaluate("() => { cy.zoom(0.005001); }")
+    assert wheel(100) == pytest.approx(0.005)

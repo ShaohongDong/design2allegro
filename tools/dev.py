@@ -104,6 +104,8 @@ def verify_review(entry, package, work, env):
             for resource in (
                 "/",
                 "/app.js",
+                "/graph-model.js",
+                "/graph.js",
                 "/style.css",
                 "/vendor/cytoscape.min.js",
                 "/vendor/LICENSE.cytoscape",

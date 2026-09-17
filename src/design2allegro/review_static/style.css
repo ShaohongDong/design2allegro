@@ -660,3 +660,16 @@ dialog p {
 [hidden] {
   display: none !important;
 }
+
+.rail-control {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+}
+.rail-control small {
+  color: #62748c;
+}
+#display-warning {
+  color: #a64b25;
+  font-size: 12px;
+}

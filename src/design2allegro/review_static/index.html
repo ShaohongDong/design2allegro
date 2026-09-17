@@ -6,6 +6,8 @@
     <title>网表人工审查</title>
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/vendor/cytoscape.min.js"></script>
+    <script defer src="/graph-model.js"></script>
+    <script defer src="/graph.js"></script>
     <script defer src="/app.js"></script>
   </head>
   <body>
@@ -100,12 +102,13 @@
           <div id="graph-loading" hidden>正在布局…</div>
           <div class="legend">
             <span class="legend-part"></span>元件
-            <span class="legend-net"></span>网络
+            <span class="legend-net"></span>分支点
             <span class="legend-dnp"></span>DNP <span>Shift + 拖动框选</span>
           </div>
         </div>
         <div class="graph-footer">
-          <span id="graph-count"></span
+          <span id="graph-count"></span>
+          <span id="display-warning" role="status"></span
           ><button id="hide-selected">隐藏选中图元</button
           ><button id="focus">仅看关联</button>
         </div>

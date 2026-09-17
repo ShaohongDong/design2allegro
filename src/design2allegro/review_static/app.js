@@ -317,7 +317,7 @@ function updateSelectionCount() {
 }
 function syncSelection() {
   syncing = true;
-  cy?.nodes().forEach((n) => n.data("key") && n.selectify());
+  cy?.nodes().forEach((n) => (n.data("key") ? n.selectify() : n.unselectify()));
   cy?.nodes().forEach((n) =>
     selected.has(n.data("key")) ? n.select() : n.unselect(),
   );
@@ -467,7 +467,7 @@ function renderDetail() {
         ["端点数量", x.pins.length],
       ]),
     );
-    detail.append(section("全部网络端点"));
+    detail.append(railControl(x), section("全部网络端点"));
     for (const id of x.pins) detail.append(endpoint(pkg.pins[id]));
     if (Object.keys(x.electrical || {}).length)
       detail.append(
@@ -519,323 +519,12 @@ function showDiagnostic(d) {
     node("pre", JSON.stringify(d.source || [], null, 2)),
   );
   cy.elements().removeClass("highlight faded");
-  const ids = d.targets.map(graphIdFor).filter(Boolean);
-  if (ids.length) {
-    const found = cy.nodes().filter((n) => ids.includes(n.id()));
+  let found = cy.collection();
+  for (const key of d.targets) found = found.add(graphElementsFor(key));
+  if (found.length) {
     found.add(found.connectedEdges()).addClass("highlight");
-    cy.fit(found.closedNeighborhood(), 65);
+    cy.fit(found.add(found.edges().connectedNodes()), 65);
   }
-}
-function moduleOf(part) {
-  return part.hierarchy.length > 1 ? part.hierarchy[0] : null;
-}
-function graphIdFor(key) {
-  if (key.startsWith("pin:")) {
-    const p = object(key);
-    return graphIdFor("part:" + p.ref);
-  }
-  if (key.startsWith("part:")) {
-    const mod = moduleOf(object(key));
-    return collapsed.has(mod) ? "module:" + mod : key;
-  }
-  return key;
-}
-function selectObject(key) {
-  if (!object(key)) return;
-  currentKey = key;
-  const actual = key.startsWith("pin:") ? "part:" + object(key).ref : key;
-  if (actual.startsWith("part:")) collapsed.delete(moduleOf(object(actual)));
-  manuallyHidden.delete(actual);
-  focusKeys = null;
-  // Cross-probing must reveal targets even when a list filter would hide them.
-  $("search").value = "";
-  $("status-filter").value = "all";
-  $("assembly-filter").value = "all";
-  buildGraph(false);
-  renderList();
-  renderDetail();
-  const id = graphIdFor(key),
-    target = cy.getElementById(id);
-  cy.elements().removeClass("highlight faded");
-  if (target.length) {
-    let area = target.closedNeighborhood();
-    if (key.startsWith("pin:") && !object(key).nc)
-      area = area.add(cy.getElementById("net:" + object(key).net));
-    cy.elements().addClass("faded");
-    area.removeClass("faded").addClass("highlight");
-    cy.animate({ fit: { eles: area, padding: 65 } }, { duration: 180 });
-  }
-}
-const graphStyles = [
-  {
-    selector: "node",
-    style: {
-      label: "data(label)",
-      "font-family": "system-ui",
-      "font-size": 11,
-      "text-valign": "center",
-      "text-halign": "center",
-      "background-color": "#fff",
-      color: "#253e64",
-      "border-color": "#6e8fc5",
-      "border-width": 1.5,
-      shape: "round-rectangle",
-      width: 96,
-      height: 38,
-      "text-wrap": "ellipsis",
-      "text-max-width": 90,
-    },
-  },
-  {
-    selector: "node.net",
-    style: {
-      shape: "ellipse",
-      width: 14,
-      height: 14,
-      "background-color": "#35a5a3",
-      "border-color": "#238d8c",
-      "font-size": 9,
-      "text-valign": "bottom",
-      "text-margin-y": 6,
-      color: "#398888",
-      "text-max-width": 120,
-    },
-  },
-  {
-    selector: "node.module",
-    style: {
-      shape: "round-rectangle",
-      "background-color": "#e5edfa",
-      "border-style": "dashed",
-      width: 125,
-      height: 52,
-      "font-weight": "bold",
-    },
-  },
-  {
-    selector: "node.dnp",
-    style: {
-      "border-style": "dashed",
-      "background-color": "#f1edf6",
-      "border-color": "#9987b6",
-    },
-  },
-  {
-    selector: "node.approved",
-    style: { "border-color": "#219979", "border-width": 3 },
-  },
-  {
-    selector: "node.issue",
-    style: { "border-color": "#d76442", "border-width": 3 },
-  },
-  {
-    selector: "edge",
-    style: {
-      width: 1.2,
-      "line-color": "#c0ccdd",
-      "curve-style": "bezier",
-      "font-size": 9,
-      color: "#6c7f9a",
-      "text-background-color": "#f8fafd",
-      "text-background-opacity": 0.9,
-      "text-background-padding": 2,
-    },
-  },
-  { selector: "edge.labels", style: { label: "data(label)" } },
-  { selector: ".faded", style: { opacity: 0.2 } },
-  {
-    selector: ".highlight",
-    style: { opacity: 1, "line-color": "#4174d6", "z-index": 5 },
-  },
-  {
-    selector: "node.highlight",
-    style: { "border-color": "#245ddb", "border-width": 3 },
-  },
-  {
-    selector: "node:selected",
-    style: {
-      "overlay-color": "#245ddb",
-      "overlay-opacity": 0.12,
-      "overlay-padding": 5,
-      "border-width": 3,
-    },
-  },
-];
-function allowedObjects() {
-  if (
-    !$("search").value.trim() &&
-    $("status-filter").value === "all" &&
-    $("assembly-filter").value === "all"
-  )
-    return null;
-  const allowed = new Set();
-  for (const x of filteredRows()) {
-    if (x.key)
-      for (const key of relatedKeys(x.key)) allowed.add(graphIdFor(key));
-    else for (const key of x.targets) allowed.add(graphIdFor(key));
-  }
-  return allowed;
-}
-function buildGraph(layout = true) {
-  const oldPositions = new Map(
-    cy.nodes().map((n) => [n.id(), { ...n.position() }]),
-  );
-  const elements = [],
-    nodeIds = new Set(),
-    allowed = allowedObjects();
-  const visible = (key) =>
-    !manuallyHidden.has(key) &&
-    (!allowed || allowed.has(key)) &&
-    (!focusKeys || focusKeys.has(key));
-  const modules = new Map();
-  for (const p of Object.values(pkg.parts)) {
-    const id = graphIdFor(p.key);
-    if (manuallyHidden.has(p.key) || !visible(id)) continue;
-    if (id.startsWith("module:")) {
-      if (!modules.has(id)) modules.set(id, []);
-      modules.get(id).push(p);
-      continue;
-    }
-    elements.push({
-      data: {
-        id,
-        key: p.key,
-        label: p.reference + (p.assembly === "dnp" ? " · DNP" : ""),
-      },
-      classes: "part " + p.assembly,
-    });
-    nodeIds.add(id);
-  }
-  for (const [id, parts] of modules) {
-    elements.push({
-      data: {
-        id,
-        label: id.slice(7) + " · " + parts.length,
-        members: parts.map((p) => p.key),
-      },
-      classes: "module",
-    });
-    nodeIds.add(id);
-  }
-  for (const n of Object.values(pkg.nets)) {
-    if (!visible(n.key)) continue;
-    elements.push({
-      data: { id: n.key, key: n.key, label: n.name },
-      classes: "net",
-    });
-    nodeIds.add(n.key);
-    const ends = new Map();
-    for (const pinId of n.pins) {
-      const pin = pkg.pins[pinId],
-        id = graphIdFor("part:" + pin.ref);
-      if (!nodeIds.has(id)) continue;
-      if (!ends.has(id)) ends.set(id, []);
-      ends.get(id).push(pinId);
-    }
-    for (const [source, ids] of ends)
-      elements.push({
-        data: {
-          id: "edge:" + JSON.stringify([source, n.key]),
-          source,
-          target: n.key,
-          pins: ids,
-          label:
-            ids.length > 1
-              ? ids.length + " 个引脚"
-              : pkg.pins[ids[0]].name + " [" + pkg.pins[ids[0]].num + "]",
-        },
-      });
-  }
-  syncing = true;
-  cy.batch(() => {
-    cy.elements().remove();
-    cy.add(elements);
-    cy.nodes().forEach((n) => {
-      if (oldPositions.has(n.id())) n.position(oldPositions.get(n.id()));
-    });
-  });
-  syncing = false;
-  styleGraph();
-  syncSelection();
-  const shownParts =
-    cy.nodes(".part").length +
-    [...modules.values()].reduce((sum, x) => sum + x.length, 0);
-  $("graph-count").textContent =
-    `${shownParts}/${Object.keys(pkg.parts).length} 元件 · ${cy.nodes(".net").length}/${Object.keys(pkg.nets).length} 网络 · ${collapsed.size} 个模块折叠 · 隐藏 ${Object.keys(pkg.parts).length + Object.keys(pkg.nets).length - shownParts - cy.nodes(".net").length} 个对象`;
-  if (layout || cy.nodes().some((n) => !oldPositions.has(n.id()))) runLayout();
-}
-function styleGraph() {
-  if (!cy) return;
-  cy.batch(() => {
-    cy.nodes().forEach((n) => {
-      n.removeClass("approved issue");
-      if (n.data("key")) n.addClass(entry(n.data("key")).status);
-    });
-    cy.edges().toggleClass("labels", $("labels").checked);
-  });
-}
-function runLayout() {
-  $("graph-loading").hidden = false;
-  const large = cy.elements().length > 2000;
-  const layout = cy.layout(
-    large
-      ? { name: "grid", padding: 40, avoidOverlap: true }
-      : {
-          name: "cose",
-          animate: false,
-          randomize: false,
-          padding: 55,
-          nodeRepulsion: () => 9000,
-          idealEdgeLength: () => 100,
-          numIter: 400,
-        },
-  );
-  requestAnimationFrame(() => {
-    layout.run();
-    $("graph-loading").hidden = true;
-  });
-}
-function initGraph() {
-  cy = cytoscape({
-    container: $("graph"),
-    elements: [],
-    style: graphStyles,
-    minZoom: 0.04,
-    maxZoom: 3,
-    wheelSensitivity: 0.2,
-    boxSelectionEnabled: true,
-    selectionType: "additive",
-    layout: { name: "preset" },
-  });
-  cy.on("tap", "node", (ev) => {
-    const n = ev.target;
-    if (n.hasClass("module")) {
-      collapsed.delete(n.id().slice(7));
-      buildGraph();
-    } else selectObject(n.data("key"));
-  });
-  cy.on("tap", "edge", (ev) => {
-    const edge = ev.target;
-    currentKey = null;
-    $("detail").replaceChildren(
-      node("h1", "连接引脚", "detail-title"),
-      node("div", "连线仅表示引脚属于同一 PCB 网络", "detail-path"),
-    );
-    for (const id of edge.data("pins"))
-      $("detail").append(endpoint(pkg.pins[id]));
-    $("detail").append(
-      button("查看完整网络", () => selectObject(edge.data("target"))),
-    );
-  });
-  cy.on("select unselect", "node", (ev) => {
-    if (syncing) return;
-    const key = ev.target.data("key");
-    if (key) {
-      ev.type === "select" ? selected.add(key) : selected.delete(key);
-      renderList();
-    }
-  });
-  buildGraph();
 }
 function applyFilters() {
   page = 0;
@@ -923,10 +612,12 @@ function bindUI() {
     if (!keys.length) return;
     focusKeys = new Set();
     for (const key of keys) {
-      const n = cy.getElementById(graphIdFor(key));
-      n.closedNeighborhood()
-        .nodes()
-        .forEach((x) => focusKeys.add(x.id()));
+      const related = relatedKeys(key);
+      for (const k of [...related]) {
+        if (k.startsWith("net:"))
+          for (const endpointKey of relatedKeys(k)) related.add(endpointKey);
+      }
+      for (const k of related) focusKeys.add(ownerKey(k));
     }
     buildGraph();
   };

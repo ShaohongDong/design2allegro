@@ -23,6 +23,8 @@ STATUSES = {"pending", "approved", "issue"}
 MAX_BODY = 8 * 1024 * 1024
 STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
+    "/graph-model.js": ("graph-model.js", "text/javascript; charset=utf-8"),
+    "/graph.js": ("graph.js", "text/javascript; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/style.css": ("style.css", "text/css; charset=utf-8"),
     "/vendor/cytoscape.min.js": (
