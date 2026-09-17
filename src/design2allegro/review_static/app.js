@@ -490,7 +490,7 @@ function renderDetail() {
                 return;
               }
               const area = cy
-                .nodes(".part, .module")
+                .nodes(".pin, .module")
                 .filter((n) => n.data("group") === group);
               if (area.length) cy.fit(area, 65);
             };
@@ -518,6 +518,7 @@ function renderDetail() {
     detail.append(
       button("查看元件 " + x.reference, () => selectObject("part:" + x.ref)),
       endpoint(x),
+      traceControls(x),
     );
   }
   const keys = relatedKeys(currentKey),
@@ -628,6 +629,7 @@ function bindUI() {
     collapsed.clear();
     manuallyHidden.clear();
     focusKeys = null;
+    traceOnly = false;
     $("search").value = "";
     $("status-filter").value = "all";
     $("assembly-filter").value = "all";

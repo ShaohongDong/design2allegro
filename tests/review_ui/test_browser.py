@@ -53,6 +53,7 @@ def page(browser, app):
     page.on("pageerror", lambda e: errors.append(str(e)))
     page.goto(app.url)
     expect(page.locator("#save-state")).to_contain_text("已载入")
+    expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
     yield page
     assert not errors
     context.close()
@@ -65,7 +66,8 @@ def choose(page, key):
 
 def test_graph_details_search_filters_and_cross_probe(page, app):
     expect(page.locator("#inventory")).to_contain_text("6 元件")
-    assert page.evaluate('cy.nodes(".part").length') == 6
+    expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
+    assert page.evaluate('cy.nodes(".pin").length') == 12
     page.locator("#search").fill("spare")
     expect(page.locator("#list-count")).to_have_text("2 个结果")
     expect(page.locator("#graph-count")).to_contain_text("隐藏")
@@ -81,18 +83,12 @@ def test_graph_details_search_filters_and_cross_probe(page, app):
     page.locator(".endpoint .link").first.click()
     expect(page.locator("#detail")).to_contain_text("物理焊盘")
     page.locator("#collapse").click()
+    expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
     assert page.evaluate('cy.nodes(".module").length') == 2
     assert page.evaluate('cy.nodes(".part").length') == 0
-    assert page.evaluate('cy.nodes(".port").length') == 6
-    assert page.evaluate('cy.nodes(".rail").length') == 2
-    assert page.evaluate(
-        'cy.nodes(".ground").every(n=>n.data("rotation")===90 || n.data("rotation")===270)'
-    )
-    assert sorted(
-        page.evaluate('cy.edges().not(".lead").flatMap(e=>e.data("pins"))')
-    ) == sorted(k for k, pin in app.package["pins"].items() if not pin["nc"])
     page.locator("#restore").click()
-    assert page.evaluate('cy.nodes(".part").length') == 6
+    expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
+    assert page.evaluate('cy.nodes(".pin").length') == 12
     page.locator('[data-tab="diagnostics"]').click()
     page.locator("#diagnostic-filter").select_option("all")
     page.locator(".object-row").first.click()
@@ -203,14 +199,18 @@ def test_viewports_drag_zoom_and_screenshot(page, app, width, height):
     expect(page.locator("#batch-apply")).to_be_enabled()
     page.locator("#clear-selection").click()
     pos = page.evaluate(
-        'cy.getElementById("part:sense-stable/upper").renderedPosition()'
+        'cy.getElementById("pin:" + pkg.parts["sense-stable/upper"].pins[0]).renderedPosition()'
     )
-    before = page.evaluate('cy.getElementById("part:sense-stable/upper").position()')
+    before = page.evaluate(
+        'cy.getElementById("pin:" + pkg.parts["sense-stable/upper"].pins[0]).position()'
+    )
     page.mouse.move(box["x"] + pos["x"], box["y"] + pos["y"])
     page.mouse.down()
     page.mouse.move(box["x"] + pos["x"] + 50, box["y"] + pos["y"] + 35, steps=12)
     page.mouse.up()
-    after = page.evaluate('cy.getElementById("part:sense-stable/upper").position()')
+    after = page.evaluate(
+        'cy.getElementById("pin:" + pkg.parts["sense-stable/upper"].pins[0]).position()'
+    )
     assert abs(after["x"] - before["x"]) > 10
     zoom = page.evaluate("cy.zoom()")
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
@@ -259,14 +259,16 @@ def test_large_synthetic_graph_remains_searchable(browser, tmp_path):
             page.goto(server.url)
             expect(page.locator("#save-state")).to_contain_text("已载入", timeout=20000)
             expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
-            assert page.evaluate('cy.nodes(".part").length') == 1200
+            assert page.evaluate('cy.nodes(".part").length') == 0
+            expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
             assert page.evaluate('cy.nodes(".pin").length') == 2400
             assert page.evaluate('cy.edges(".wire").length') == 1200
-            assert page.evaluate('cy.nodes(".rail").length') == 600
+            assert page.evaluate('cy.nodes(".ground").length') == 600
             expect(page.locator(".object-row")).to_have_count(60)
             page.locator("#search").fill("c599/hi")
             expect(page.locator("#list-count")).to_have_text("1 个结果")
-            assert page.evaluate('cy.nodes(".part").length') == 1
+            expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
+            assert page.evaluate('cy.nodes(".pin").length') == 2
             page.locator(".object-row").click()
             expect(page.locator("#detail")).to_contain_text("c599/hi")
             assert not errors
@@ -285,7 +287,11 @@ def test_wheel_zoom_step_anchor_and_limits(page):
       cy.pan({x:0,y:0});
     }""")
     box = page.locator("#graph").bounding_box()
-    point = {"x": box["width"] * 0.35, "y": box["height"] * 0.4}
+    # WheelEvent client coordinates are integer CSS pixels in Chromium.
+    point = {
+        "x": round(box["x"] + box["width"] * 0.35) - box["x"],
+        "y": round(box["y"] + box["height"] * 0.4) - box["y"],
+    }
     page.mouse.move(box["x"] + point["x"], box["y"] + point["y"])
 
     def wheel(delta):
@@ -301,11 +307,20 @@ def test_wheel_zoom_step_anchor_and_limits(page):
         )
 
     anchor = model_point()
-    # A first wheel step should be visibly larger than the former ~1% change.
-    assert 1.04 < wheel(-100) < 1.06
+    assert wheel(-100) == pytest.approx(1.15)
     assert model_point() == pytest.approx(anchor, abs=0.1)
-    assert wheel(100) == pytest.approx(1, abs=0.001)
+    assert wheel(100) == pytest.approx(1.15 * 0.85)
     assert model_point() == pytest.approx(anchor, abs=0.1)
+    expected = 1.15 * 0.85
+    for delta in (-1, -250, -100, 1, 250, 100):
+        expected *= 1.15 if delta < 0 else 0.85
+        assert wheel(delta) == pytest.approx(expected)
+        assert model_point() == pytest.approx(anchor, abs=0.1)
+    # A zero vertical delta cannot change zoom or fall through to native handling.
+    before = page.evaluate("cy.zoom()")
+    page.evaluate("""() => document.getElementById('graph').dispatchEvent(
+      new WheelEvent('wheel',{deltaX:100,deltaY:0,bubbles:true,cancelable:true}))""")
+    assert page.evaluate("cy.zoom()") == before
     page.evaluate("() => { cy.zoom(2.999); }")
     assert wheel(-100) == pytest.approx(3)
     page.evaluate("() => { cy.zoom(0.005001); }")

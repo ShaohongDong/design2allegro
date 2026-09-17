@@ -1,199 +1,160 @@
-"""Runtime symbol geometry and native routing regressions."""
+"""Pure topology and traversal contracts, independent of layout and visibility."""
 
 from test_browser import browser  # noqa: F401
 from test_pin_graph import graph_page  # noqa: F401
 
 
-def test_geometry_detects_diagonals_obstacles_and_shared_paths(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-metrics.js")
-        results = page.evaluate("""async () => {
-          const {measure,mergedSegments}=await import('/layout-metrics.js');
-          const nodes=[{id:'a',x:0,y:0,classes:[]},{id:'b',x:100,y:0,classes:[]},
-            {id:'wall',x:50,y:0,width:20,height:20,classes:['part']}];
-          const wire={id:'e',net:'N',source:'a',target:'b',points:[{x:0,y:0},{x:100,y:0}]};
-          return {
-            obstacle:measure({nodes,wires:[wire]}).penetrations,
-            shared:measure({nodes,wires:[wire,{...wire,id:'f',net:'M'}]}).shared,
-            diagonal:measure({nodes,wires:[{...wire,points:[{x:0,y:0},{x:100,y:10}]}]}).nonOrthogonal,
-            deduplicated:mergedSegments([wire,{...wire,id:'f'}]).length,
-            missing:measure({nodes,wires:[wire],expected:{N:['a','b','lost']}}).missingEndpoints
-          };
-        }""")
-        assert results == {
-            "obstacle": 1,
-            "shared": 1,
-            "diagonal": 1,
-            "deduplicated": 1,
-            "missing": 1,
-        }
-    finally:
-        page.close()
-
-
-def test_two_pin_rotation_preserves_polarity_and_pin_identity(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-layout.js")
-        result = page.evaluate("""async () => {
-          const {optimizePorts}=await import('/layout-layout.js');
-          const n=(id,x,classes,data)=>({id,x,y:0,width:50,height:50,classes,data,labelBox:null});
-          const scene={nodes:[
-            n('part:D',0,['part'],{label:'D1'}),
-            n('pin:D.K',-45,['pin'],{owner:'part:D',label:'1 K'}),
-            n('pin:D.A',45,['pin'],{owner:'part:D',label:'2 A'}),
-            n('g',-110,['rail'],{owner:'part:D',role:'ground',label:'GND'}),
-            n('v',110,['rail'],{owner:'part:D',role:'power',label:'VDD'})],
-            wires:[{source:'pin:D.K',target:'g',rail:true},{source:'pin:D.A',target:'v',rail:true}],
-            pkg:{pins:{'D.K':{num:'1'},'D.A':{num:'2'}}}};
-          optimizePorts(scene);
-          return {rotation:scene.nodes[0].rotation,plans:Object.fromEntries(scene.nodes.filter(n=>n.classes.includes("pin")).map(n=>[n.id,{direction:n.direction,dx:n.data.dx,dy:n.data.dy}])),ids:scene.nodes.map(n=>n.id)};
-        }""")
-        assert result["rotation"] == 270
-        assert result["plans"]["pin:D.K"]["direction"] == "S"
-        assert result["plans"]["pin:D.A"]["direction"] == "N"
-        assert result["ids"] == ["part:D", "pin:D.K", "pin:D.A", "g", "v"]
-    finally:
-        page.close()
-
-
-def test_rail_connectivity_uses_net_identity_and_requires_leads(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-metrics.js")
-        result = page.evaluate("""async () => {
-          const {measure}=await import('/layout-metrics.js');
-          const nodes=['a','b','r1','r2'].map((id,i)=>({id,x:i*30,y:0,width:1,height:1,
-            classes:id.startsWith('r')?['rail']:[],data:{netKey:'N',label:'GND'}}));
-          const wires=[['a','r1'],['b','r2']].map(([source,target],i)=>({id:String(i),net:'N',source,target,
-            points:[nodes.find(n=>n.id===source),nodes.find(n=>n.id===target)]}));
-          const scene={nodes,wires,expected:{N:['a','b','r1','r2']}};
-          const valid=measure(scene);
-          nodes[3].data.netKey='M';
-          const wrongNet=measure(scene);
-          nodes[3].data.netKey='N';
-          const missingLead=measure({...scene,wires:wires.slice(0,1)});
-          return [valid.disconnectedNets,wrongNet.disconnectedNets,missingLead.missingEndpoints,missingLead.disconnectedNets];
-        }""")
-        assert result == [0, 1, 2, 1]
-    finally:
-        page.close()
-
-
-def test_split_junction_cannot_hide_an_elbow(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-metrics.js")
-        result = page.evaluate("""async () => {
-          const {measure}=await import('/layout-metrics.js');
-          const nodes=[{id:'a',x:0,y:0,classes:[]},{id:'b',x:50,y:50,classes:[]},
-            {id:'j',x:50,y:0,classes:['branch'],data:{netKey:'N'}}];
-          const w=(id,source,target,points)=>({id,net:'N',source,target,points});
-          return [measure({nodes,wires:[w('whole','a','b',[nodes[0],nodes[2],nodes[1]])]}).bends,
-            measure({nodes,wires:[w('first','a','j',[nodes[0],nodes[2]]),w('second','j','b',[nodes[2],nodes[1]])]}).bends];
-        }""")
-        assert result == [1, 1]
-    finally:
-        page.close()
-
-
-def test_native_path_rejects_fallback_diagonal_and_wrong_pin(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-routing.js")
-        assert page.evaluate("""async()=>{
-          const {nativePathValid}=await import('/layout-routing.js');
-          const a={x:37,y:0},b={x:0,y:0};
-          return [nativePathValid([a,b],a,b),nativePathValid([{x:51,y:0},{x:0,y:-28}],a,b),
-            nativePathValid([{x:51,y:0},b],a,b),nativePathValid([],a,b)];
-        }""") == [True, False, False, False]
-    finally:
-        page.close()
-
-
-def test_compact_geometry_rotation_polarity_and_fallback(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-geometry.js")
-        result = page.evaluate("""async()=>{
-          const {compactPassives,passiveSpec}=await import('/layout-geometry.js');
-          const ids=['C.1','C.2'],parts={C:{category:'capacitor',pins:ids,properties:{polarized:true}}};
-          const pins={'C.1':{id:'C.1',num:'1',name:'+'},'C.2':{id:'C.2',num:'2',name:'-'}};
-          const scene={pkg:{parts,pins},wires:[],nodes:[{id:'part:C',x:0,y:0,width:150,height:64,rotation:90,classes:['part'],data:{label:'C1\\n123456789 pF'}},
-            ...ids.map(id=>({id:'pin:'+id,x:0,y:0,width:5,height:5,classes:['pin'],data:{owner:'part:C',label:id}}))]};
-          compactPassives(scene);const owner=scene.nodes[0],a=scene.nodes[1],b=scene.nodes[2];
-          return {positive:owner.symbol.positive,distance:Math.hypot(a.x-b.x,a.y-b.y),sides:[a.direction,b.direction],
-            extent:[owner.width,owner.height],labels:owner.labelBox.w>50,
-            unknown:passiveSpec({category:'generic',pins:ids},Object.values(pins)),
-            array:passiveSpec({category:'resistor',pins:[...ids,'C.3']},Object.values(pins)),
-            unmarked:passiveSpec(parts.C,[{name:'1'},{name:'2'}])};
-        }""")
-        assert result == dict(
-            positive="C.1",
-            distance=72,
-            sides=["N", "S"],
-            extent=[24, 36],
-            labels=True,
-            unknown=None,
-            array=None,
-            unmarked=None,
+def circuit():
+    # R forms an automatic path to U. U can branch through A/B and rejoin at T.
+    assignments = {
+        "R": ["IN", "MID"],
+        "U": ["MID", "LEFT", "RIGHT", "SPARE", None],
+        "A": ["LEFT", "JOIN"],
+        "B": ["RIGHT", "JOIN"],
+        "T": ["JOIN", "GND"],
+        "D": ["SPARE", "OUT"],
+        "Z": ["OUT", "IN"],
+    }
+    parts, pins, nets = {}, {}, {}
+    for ref, connections in assignments.items():
+        ids = []
+        for i, net in enumerate(connections):
+            identity = f"{ref}.{i+1}"
+            ids.append(identity)
+            pins[identity] = dict(
+                id=identity,
+                key="pin:" + identity,
+                ref=ref,
+                num=str(i + 1),
+                name=f"P{i+1}",
+                reference=ref,
+                net=net,
+                nc=net is None,
+            )
+            if net:
+                nets.setdefault(
+                    net, dict(name=net, key="net:" + net, pins=[], aliases=[])
+                )["pins"].append(identity)
+        parts[ref] = dict(
+            key="part:" + ref,
+            pins=ids,
+            assembly="dnp" if ref == "D" else "fitted",
+            hierarchy=["board", ref],
         )
-    finally:
-        page.close()
+    return dict(parts=parts, pins=pins, nets=nets)
 
 
-def test_dense_terminal_rows_route_to_real_pins(graph_page):
-    page, server = graph_page
-    origin = server.url.rstrip("/")
-    try:
-        page.goto(origin + "/layout-routing.js")
-        result = page.evaluate("""async()=>{
-          const {AvoidLib}=await import('/vendor/libavoid.js');await AvoidLib.load('/vendor/libavoid.wasm');
-          const {SceneRouter}=await import('/layout-routing.js');const {measure}=await import('/layout-metrics.js');
-          const nodes=[{id:'ic',x:120,y:24,width:70,height:100,classes:['part'],data:{}}],wires=[];
-          for(let i=0;i<2;i++){
-            nodes.push({id:'p'+i,x:65,y:i*48,width:5,height:5,direction:'W',classes:['pin'],data:{owner:'ic'}});
-            nodes.push({id:'n'+i,x:0,y:i*48,width:2,height:2,classes:['net'],data:{owner:'ic',netKey:'N'+i},labelBox:{x1:-17,x2:17,y1:i*48+4,y2:i*48+18,w:34,h:14}});
-            wires.push({id:'w'+i,net:'N'+i,source:'p'+i,target:'n'+i});
-          }
-          const r=new SceneRouter(AvoidLib.getInstance(),{nodes,wires});
-          try{const s=r.compute(),m=measure(s);return {failed:m.failedRoutes,diagonal:m.nonOrthogonal,penetrations:m.penetrations,starts:s.wires.map(w=>w.points[0].x)};}finally{r.dispose();}
-        }""")
-        assert result == dict(failed=0, diagonal=0, penetrations=0, starts=[65, 65])
-    finally:
-        page.close()
-
-
-def test_cross_module_trees_keep_unique_ids_and_pin_inventory(graph_page):
-    page, _ = graph_page
-    result = page.evaluate("""async()=>{
-      const {topology}=await import('/layout-search.js');
-      const scenes=['left','right'].map(group=>{
-        const nodes=[0,1,2].map(i=>({id:'pin:'+group+i,x:i*100,y:0,width:5,height:5,
-          classes:['pin'],data:{pins:[group+i]},direction:'E'}));
-        return {group,nodes,expected:{BUS:nodes.map(n=>n.id)},
-          wires:[1,2].map(i=>({id:group+i,net:'BUS',source:nodes[0].id,target:nodes[i].id,points:[]}))};
-      });
-      return ['mst','horizontal'].map(mode=>{
-        const graphs=scenes.map(s=>topology(s,mode));
-        const ids=graphs.flatMap(s=>[...s.nodes.map(n=>n.id),...s.wires.map(w=>w.id)]);
-        return {unique:new Set(ids).size===ids.length,pins:graphs.flatMap(s=>s.wires.flatMap(w=>w.pins)).sort()};
-      });
-    }""")
-    assert (
-        result
-        == [
-            {
-                "unique": True,
-                "pins": ["left0", "left1", "left2", "right0", "right1", "right2"],
-            }
-        ]
-        * 2
+def trace(page, pkg, root="R.1", choices=None, overrides=None):
+    return page.evaluate(
+        """o=>{
+      const t=ReviewGraphModel.trace(o.pkg,o.root,o.choices,o.overrides);
+      return {pins:[...t.pins].sort(),nets:[...t.nets].sort(),crosses:[...t.transitions.values()]};
+    }""",
+        dict(pkg=pkg, root=root, choices=choices or {}, overrides=overrides or {}),
     )
+
+
+def test_auto_two_pin_dnp_nc_and_rail_boundaries(graph_page):
+    page, _ = graph_page
+    pkg = circuit()
+    t = trace(page, pkg)
+    assert set(t["pins"]) == {"R.1", "R.2", "U.1", "Z.1", "Z.2", "D.2"}
+    assert "D.1" not in t["pins"]  # DNP doesn't cross automatically.
+    assert trace(page, pkg, root="U.5")["pins"] == ["U.5"]
+    assert trace(page, pkg, root="T.2")["pins"] == ["T.2"]
+    assert len(trace(page, pkg, root="T.2", overrides={"GND": "signal"})["pins"]) > 1
+    manual = trace(page, pkg, choices={"D.2": ["D.1"]})
+    assert "D.1" in manual["pins"] and "U.4" in manual["pins"]
+    invalid = trace(page, pkg, choices={"U.1": ["A.1", "U.5", "missing"]})
+    assert invalid == t  # Can't cross to another device, NC, or nonexistent pin.
+
+
+def test_multiselect_reconvergence_removal_and_cycles(graph_page):
+    page, _ = graph_page
+    pkg = circuit()
+    both = trace(page, pkg, choices={"U.1": ["U.2", "U.3"]})
+    assert {"A.1", "A.2", "B.1", "B.2", "T.1", "T.2"} <= set(both["pins"])
+    left = trace(page, pkg, choices={"U.1": ["U.2"]})
+    assert set(left["pins"]) == set(
+        both["pins"]
+    )  # right branch still reached through JOIN.
+    none = trace(page, pkg)
+    assert "T.1" not in none["pins"]
+    # A manually closed loop terminates and retains all unique relationships.
+    loop = trace(page, pkg, choices={"U.1": ["U.4"], "D.1": ["D.2"]})
+    assert len(loop["pins"]) == len(set(loop["pins"]))
+    assert {"D.1", "D.2", "Z.1", "Z.2"} <= set(loop["pins"])
+    assert {"IN", "MID", "SPARE", "OUT"} == set(loop["nets"])
+
+
+def test_topology_preserves_identity_and_collapsed_membership(graph_page):
+    page, _ = graph_page
+    pkg = circuit()
+    result = page.evaluate(
+        """pkg=>{
+      const full=ReviewGraphModel.topology(pkg);
+      const folded=ReviewGraphModel.topology(pkg,{collapsed:new Set(['board'])});
+      const chain=ReviewGraphModel.topology(pkg,{root:'R.1',onlyTrace:true});
+      return {
+        fullPins:full.nodes.filter(n=>n.classes.split(' ').includes('pin')).map(n=>n.data.pinId),
+        foldedPins:folded.nodes.filter(n=>n.classes==='module').flatMap(n=>n.data.pins),
+        netPins:full.edges.filter(e=>e.classes==='wire').flatMap(e=>e.data.pins),
+        chainPins:chain.nodes.filter(n=>n.classes.split(' ').includes('pin')).map(n=>n.data.pinId),
+        crosses:full.edges.filter(e=>e.classes==='transition').every(e=>!e.data.netKey),
+        unique:new Set(full.nodes.map(n=>n.data.id).concat(full.edges.map(e=>e.data.id))).size===full.nodes.length+full.edges.length
+      };
+    }""",
+        pkg,
+    )
+    assert sorted(result["fullPins"]) == sorted(pkg["pins"])
+    assert sorted(result["foldedPins"]) == sorted(pkg["pins"])
+    assert sorted(result["netPins"]) == sorted(
+        k for k, p in pkg["pins"].items() if p["net"] not in (None, "GND")
+    )
+    assert sorted(result["chainPins"]) == trace(page, pkg)["pins"]
+    assert result["crosses"] and result["unique"]
+
+
+def test_junction_geometry_net_identity_and_collinear_union(graph_page):
+    page, _ = graph_page
+
+    def dots(paths, anchors=None):
+        return page.evaluate(
+            "(data)=>ReviewGraphModel.junctions(data.wires,data.anchors)",
+            {
+                "wires": [
+                    {"netKey": net, "points": [{"x": x, "y": y} for x, y in points]}
+                    for net, points in paths
+                ],
+                "anchors": anchors or [],
+            },
+        )
+
+    h = ("net:A", [(-50, 0), (50, 0)])
+    v = ("net:A", [(0, -50), (0, 50)])
+    t = ("net:A", [(0, 0), (0, 50)])
+    expected = [{"netKey": "net:A", "x": 0, "y": 0}]
+    assert dots([h, t]) == expected
+    assert dots([h, v]) == expected
+    assert dots([h, h, v, v]) == expected
+    assert dots([("net:A", [(-50, 0), (0, 0), (0, 50)])]) == []
+    assert dots([h, ("net:B", v[1])]) == []
+    assert dots([h, (None, v[1])]) == []
+    assert dots([h, ("net:A", [(-25, 0), (25, 0)])]) == []
+    assert dots(
+        [("net:A", [(-50, 0), (50, 0)]), ("net:A", [(-25, 0), (25, 0), (25, 40)])]
+    ) == [{"netKey": "net:A", "x": 25, "y": 0}]
+    assert dots([h, t], [{"netKey": "net:A", "x": 0, "y": 0}]) == []
+    assert dots([h, t], [{"netKey": "net:B", "x": 0, "y": 0}]) == expected
+    assert dots([h, ("net:A", [(0, 0.000000001), (0, 50)])]) == expected
+    assert dots([h, ("net:A", [(0, 1), (0, 50)])]) == []
+    assert dots([("net:A", [(0, 0), (0, 0), (10, 10)])]) == []
+
+
+def test_many_disjoint_networks_do_not_create_junctions(graph_page):
+    page, _ = graph_page
+    assert page.evaluate("""()=>{
+      const wires=Array.from({length:10000},(_,i)=>({netKey:'net:'+i,
+        points:[{x:0,y:i},{x:100,y:i},{x:100,y:i+20}]}));
+      return ReviewGraphModel.junctions(wires).length;
+    }""") == 0

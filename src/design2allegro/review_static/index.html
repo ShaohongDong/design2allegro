@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/style.css" />
     <script defer src="/vendor/cytoscape.min.js"></script>
     <script defer src="/graph-model.js"></script>
+    <script defer src="/graph-symbols.js"></script>
     <script defer src="/graph.js"></script>
     <script defer src="/app.js"></script>
   </head>
@@ -89,22 +90,29 @@
           ><button id="batch-apply" class="primary">标记选中项</button>
         </div>
       </aside>
-      <section class="graph-panel" aria-label="全板连接拓扑">
+      <section class="graph-panel" aria-label="全板引脚连接拓扑">
         <div class="graph-toolbar">
-          <strong>全板连接</strong><button id="fit">适应视图</button
+          <strong>引脚连接</strong><button id="fit">适应视图</button
           ><button id="layout">重新布局</button
           ><button id="collapse">按模块折叠</button
           ><button id="restore">恢复全部</button
-          ><label><input id="labels" type="checkbox" />连线标签</label>
+          ><label><input id="labels" type="checkbox" checked />连线标签</label>
+        </div>
+        <div class="trace-toolbar">
+          <span id="trace-summary">选择引脚后可追踪连接链</span>
+          <button id="trace-only" disabled>仅看连接链</button>
+          <button id="trace-clear" disabled>清除追踪</button>
         </div>
         <div class="graph-stage">
           <div id="graph"></div>
           <div id="graph-loading" hidden>正在布局…</div>
-          <button id="cancel-layout" hidden>取消精排</button>
+          <button id="cancel-layout" hidden>取消布局</button>
           <div class="legend">
-            <span class="legend-part"></span>元件
-            <span class="legend-net"></span>分支点
-            <span class="legend-dnp"></span>DNP <span>Shift + 拖动框选</span>
+            <span class="legend-part"></span>接线点
+            <span class="legend-net"></span>网络
+            <span class="legend-dnp"></span>DNP
+            <span>实心点：同网连接 · 虚线：追踪跨越</span>
+            <span>Shift + 拖动框选</span>
           </div>
         </div>
         <div class="graph-footer">

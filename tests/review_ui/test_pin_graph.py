@@ -156,76 +156,64 @@ def graph_page(browser, tmp_path):
     } == before
 
 
-def assert_endpoints(page):
-    failures = page.evaluate("""() => cy.edges().not('.lead').map(e => {
-      const a=e.sourceEndpoint(), b=e.targetEndpoint();
-      const p=e.source().position(), q=e.target().position();
-      return {id:e.id(), error: Math.max(Math.hypot(a.x-p.x,a.y-p.y),Math.hypot(b.x-q.x,b.y-q.y))};
-    }).filter(x => !Number.isFinite(x.error) || x.error > 0.1)""")
-    assert failures == []
-
-
-def test_categories_connectivity_drag_and_pin_review(graph_page):
+def test_pin_inventory_connections_and_review(graph_page):
     page, server = graph_page
-    assert page.evaluate('cy.nodes(".pin").length') == len(server.package["pins"])
+    assert page.evaluate('cy.nodes(".part").length') == 0
+    assert sorted(page.evaluate('cy.nodes(".pin").map(n=>n.data("pinId"))')) == sorted(
+        server.package["pins"]
+    )
+    # Every signal endpoint occurs exactly once in actual network edges.
+    actual = page.evaluate('cy.edges(".wire").flatMap(e=>e.data("pins"))')
+    expected = page.evaluate(
+        'Object.values(pkg.pins).filter(p=>!p.nc && ReviewGraphModel.classify(pkg.nets[p.net],railOverrides).role==="signal").map(p=>p.id)'
+    )
+    assert sorted(actual) == sorted(expected)
     assert page.evaluate(
-        'new Set(cy.nodes(".part").map(n=>n.data("image"))).size'
-    ) == len(REQUIRED)
-    assert page.evaluate('cy.nodes(".nc").length') > 0
-    assert page.evaluate('cy.nodes(".nc").connectedEdges().not(".lead").length') == 0
-    # Independent inventory check: each connected pin occurs once in actual wires.
-    memberships = page.evaluate('cy.edges().not(".lead").flatMap(e=>e.data("pins"))')
-    assert sorted(memberships) == sorted(
-        k for k, p in server.package["pins"].items() if not p["nc"]
+        'cy.edges(".wire").every(e=>e.data("pins").every(id=>"net:"+pkg.pins[id].net===e.data("netKey")))'
     )
-    assert (
-        page.evaluate(
-            'cy.edges(".wire").filter(e=>e.data("netKey")==="net:SELF").length'
-        )
-        == 1
-    )
-    assert (
-        page.evaluate('cy.nodes(".junction").filter(n=>n.id()==="net:BUS").length') == 1
-    )
-    assert (
-        page.evaluate(
-            'cy.edges(".wire").filter(e=>["net:GND","net:AGND","net:VDD"].includes(e.data("netKey"))).length'
-        )
-        == 0
-    )
-    assert_endpoints(page)
-    # Move a high pin count body and validate every attachment and wire afterwards.
-    page.evaluate('() => { cy.getElementById("part:ic").position({x:200,y:200}); }')
-    assert page.evaluate(
-        'cy.nodes(".pin").filter(n=>n.data("owner")==="part:ic").every(n=>Math.abs(n.position("x")-200-n.data("dx"))<0.01 && Math.abs(n.position("y")-200-n.data("dy"))<0.01)'
-    )
-    assert_endpoints(page)
-    page.evaluate('selectObject("pin:ic.P2")')
-    expect(page.locator("#detail")).to_contain_text("物理焊盘")
-    page.locator("#review-status").select_option("issue")
+    assert page.evaluate('cy.nodes(".pin").every(n=>n.grabbable())')
+    assert page.evaluate('cy.nodes(".net").every(n=>!n.selectable())')
+    key = page.evaluate('"pin:" + pkg.parts.ic.pins[0]')
+    page.evaluate("(key)=>selectObject(key)", key)
+    page.locator("#review-status").select_option("approved")
     expect(page.locator("#save-state")).to_contain_text("已保存")
-    assert server.store.read()["entries"]["pin:ic.P2"]["status"] == "issue"
-    # Physical click on the independent pin, not a programmatic tap event.
-    page.evaluate('() => { cy.stop(true); cy.fit(cy.getElementById("part:ic"), 80); }')
-    point = page.evaluate('cy.getElementById("pin:ic.P3").renderedPosition()')
-    box = page.locator("#graph").bounding_box()
-    page.mouse.click(box["x"] + point["x"], box["y"] + point["y"])
-    expect(page.locator("#detail .detail-path")).to_have_text("ic.P3")
-    page.locator("#layout").click()
-    expect(page.locator("#graph-loading")).to_be_hidden()
-    assert_endpoints(page)
-    assert page.evaluate("""() => cy.edges('.lead').every(e => {
-      const a=e.sourceEndpoint(), b=e.targetEndpoint();
-      const n=e.source(),pin=e.target(),d=pin.data('direction');
-      const distance=n.data('symbol')?18:20;
-      return (['W','E'].includes(d)?Math.abs(a.y-b.y)<0.1:Math.abs(a.x-b.x)<0.1)
-        && Math.abs(Math.hypot(a.x-b.x,a.y-b.y)-distance)<0.1;
-    })""")
+    assert server.store.read()["entries"][key]["status"] == "approved"
 
 
-def test_rail_rules_overrides_storage_and_clicks(graph_page):
+def test_trace_controls_multiselect_and_clear(graph_page):
     page, server = graph_page
-    checks = [
+    root = server.package["parts"]["ic"]["pins"][0]
+    page.evaluate('(id)=>selectObject("pin:"+id)', root)
+    page.get_by_role("button", name="从此追踪", exact=True).click()
+    expect(page.locator("#trace-summary")).to_contain_text("起点")
+    page.get_by_role("button", name="仅看连接链", exact=True).click()
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate('cy.nodes(".pin").length') < len(server.package["pins"])
+    # IC SELF and ONLY are disconnected until the user selects the IC exits.
+    choices = [
+        p
+        for p in server.package["pins"].values()
+        if p["ref"] == "ic" and p["net"] in ("SELF", "ONLY")
+    ]
+    first = choices[0]["id"]
+    page.locator(f'.trace-exits input[value="{first}"]').check()
+    page.locator("#apply-trace-exits").click()
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate("(id)=>currentChain.pins.has(id)", first)
+    assert page.evaluate('cy.edges(".transition").length') > 0
+    page.locator(f'.trace-exits input[value="{first}"]').uncheck()
+    page.locator("#apply-trace-exits").click()
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert not page.evaluate("(id)=>currentChain.pins.has(id)", first)
+    page.locator("#trace-clear").click()
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate('cy.nodes(".pin").length') == len(server.package["pins"])
+    assert server.store.read()["entries"] == {}
+
+
+def test_rail_roles_persistence_and_stops(graph_page):
+    page, server = graph_page
+    for name, aliases, electrical, expected in [
         ("GND", [], {}, "ground"),
         ("AGND", [], {}, "ground"),
         ("GND_SENSE", [], {}, "signal"),
@@ -234,73 +222,57 @@ def test_rail_rules_overrides_storage_and_clicks(graph_page):
         ("rail", ["mod/VDD"], {}, "power"),
         ("VCC", [], {"role": "signal"}, "signal"),
         ("custom", [], {"role": "ground"}, "ground"),
-        ("VDD", [], {}, "power"),
         ("+5V", [], {}, "power"),
         ("-12V", [], {}, "power"),
-    ]
-    for name, aliases, electrical, expected in checks:
-        result = page.evaluate(
-            "(n)=>ReviewGraphModel.classify(n,{})",
-            {"name": name, "aliases": aliases, "electrical": electrical},
+    ]:
+        assert (
+            page.evaluate(
+                "(n)=>ReviewGraphModel.classify(n,{}).role",
+                {"name": name, "aliases": aliases, "electrical": electrical},
+            )
+            == expected
         )
-        assert result["role"] == expected
+    root = server.package["nets"]["VDD"]["pins"][0]
+    page.evaluate('(id)=>selectObject("pin:"+id)', root)
+    page.get_by_role("button", name="从此追踪", exact=True).click()
+    assert page.evaluate("currentChain.pins.size") == 1
     page.evaluate('selectObject("net:VDD")')
     page.locator("#net-display-role").select_option("signal")
-    assert (
-        page.evaluate('cy.nodes(".rail").filter(n=>n.data("key")==="net:VDD").length')
-        == 0
-    )
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate("currentChain.pins.size") > 1
+    assert page.evaluate('cy.getElementById("net:VDD").length') == 1
     page.reload()
     expect(page.locator("#save-state")).to_contain_text("已载入")
     page.evaluate('selectObject("net:VDD")')
     expect(page.locator("#net-display-role")).to_have_value("signal")
+    assert page.evaluate("traceRoot") is None
     assert server.store.read()["entries"] == {}
+    page.evaluate('()=>{Storage.prototype.setItem=()=>{throw new Error("full")};}')
     page.locator("#net-display-role").select_option("auto")
-    expect(page.locator("#graph-loading")).to_be_hidden()
-    page.evaluate('() => { cy.stop(true); cy.fit(cy.getElementById("part:ic"), 100); }')
-    point = page.evaluate(
-        'cy.nodes(".rail").filter(n=>n.data("owner")==="part:ic" && n.data("key")==="net:GND")[0].renderedPosition()'
-    )
-    box = page.locator("#graph").bounding_box()
-    page.mouse.click(box["x"] + point["x"], box["y"] + point["y"])
-    expect(page.locator("#detail h1")).to_have_text("GND")
-    assert page.locator(".endpoint").count() == len(
-        server.package["nets"]["GND"]["pins"]
-    )
-    page.evaluate(
-        '() => { Storage.prototype.setItem = () => { throw new Error("full"); }; }'
-    )
-    page.locator("#net-display-role").select_option("signal")
     expect(page.locator("#display-warning")).to_contain_text("未持久化")
-    assert (
-        page.evaluate("ReviewGraphModel.classify(pkg.nets.GND,railOverrides).role")
-        == "signal"
-    )
 
 
-@pytest.mark.parametrize("width,height", [(1440, 900), (1920, 1080)])
-def test_dense_pin_visuals(graph_page, width, height):
+@pytest.mark.parametrize("width,height", [(1280, 800), (1440, 900), (1920, 1080)])
+def test_pin_visuals_and_readable_bounds(graph_page, width, height):
     page, _ = graph_page
     page.set_viewport_size({"width": width, "height": height})
-    page.evaluate(
-        '() => { selectObject("part:ic"); cy.stop(true); cy.fit(cy.getElementById("part:ic").union(cy.nodes().filter(n=>n.data("owner")==="part:ic")),55); }'
-    )
-    page.wait_for_function('cy.nodes(".part").every(n=>n.backgrounding()===false)')
-    assert page.evaluate("document.documentElement.scrollWidth") == width
-    # Names/physical numbers have distinct measured rendered bounds on each side.
-    assert page.evaluate("""() => {
-      for (const side of ['left','right']) {
-        const pins=cy.nodes('.pin.'+side).filter(n=>n.data('owner')==='part:ic').sort((a,b)=>a.position('y')-b.position('y'));
-        for(let i=1;i<pins.length;i++) if(pins[i-1].renderedBoundingBox().y2>=pins[i].renderedBoundingBox().y1) return false;
-      }
-      return true;
-    }""")
-    ARTIFACT.mkdir(parents=True, exist_ok=True)
-    page.screenshot(path=str(ARTIFACT / f"pins-{width}.png"))
-    page.locator("#restore").click()
+    page.evaluate('selectObject("pin:"+pkg.parts.ic.pins[0])')
     expect(page.locator("#graph-loading")).to_be_hidden()
-    page.evaluate("() => { cy.fit(undefined, 40); }")
-    page.screenshot(path=str(ARTIFACT / f"categories-{width}.png"))
+    assert page.evaluate("document.documentElement.scrollWidth") == width
+    assert page.locator("#graph").bounding_box()["width"] > 400
+    # Labels use conservative measured character widths, inside independent cards.
+    assert page.evaluate("""cy.nodes('.pin').every(n=>{
+      const b=n.boundingBox({includeLabels:true,includeOverlays:false});
+      return b.w <= n.width()+5 && b.h <= n.height()+5;
+    })""")
+    assert page.evaluate(
+        """cy.nodes('.pin').filter(n=>!n.hasClass('compact')).every(n=>{
+      const b=n.boundingBox({includeNodes:false,includeLabels:true,includeOverlays:false});
+      return b.x1 >= n.position('x')-n.width()/2+50 && b.y2 <= n.position('y')+n.data('anchorY')-8;
+    })"""
+    )
+    ARTIFACT.mkdir(parents=True, exist_ok=True)
+    page.screenshot(path=str(ARTIFACT / f"pin-chain-{width}.png"))
 
 
 def test_ten_thousand_pins_remain_searchable(browser, tmp_path):
@@ -308,134 +280,146 @@ def test_ten_thousand_pins_remain_searchable(browser, tmp_path):
     with serve(output, tmp_path / "state") as server:
         context = browser.new_context(viewport={"width": 1440, "height": 900})
         page = context.new_page()
-        page.add_init_script("""window.reviewBusyTicks=0;
-          setInterval(()=>{const el=document.getElementById('graph-loading');
-            if(el && !el.hidden) window.reviewBusyTicks++;},20);""")
+        page.add_init_script(
+            'window.busyTicks=0;setInterval(()=>{if(document.getElementById("graph-loading")?.hidden===false)window.busyTicks++},20)'
+        )
         errors = []
-        page.on("pageerror", lambda error: errors.append(str(error)))
+        page.on("pageerror", lambda e: errors.append(str(e)))
         started = time.monotonic()
         page.goto(server.url)
         expect(page.locator("#save-state")).to_contain_text("已载入", timeout=30000)
         expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
-        load_ms = (time.monotonic() - started) * 1000
         assert page.evaluate('cy.nodes(".pin").length') == 10000
         assert page.evaluate('cy.edges(".wire").length') == 5000
-        metrics = page.evaluate("({...graphMetrics})")
-        assert metrics["layout"] == "elk-layered"
-        assert metrics["failedRoutes"] == 0
-        assert metrics["conflicts"] == 0
-        assert page.evaluate("reviewBusyTicks") > 10
+        metrics = page.evaluate("({...graphMetrics,busyTicks})")
+        assert metrics["layout"] == "elk-pin-layered"
+        assert metrics["busyTicks"] > 0
+        metrics["load_ms"] = (time.monotonic() - started) * 1000
         started = time.monotonic()
         page.locator("#search").fill("chip99")
         expect(page.locator("#list-count")).to_have_text("1 个结果", timeout=10000)
+        expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
+        assert page.evaluate('cy.nodes(".pin").length') == 100
         page.locator(".object-row").click()
         expect(page.locator("#detail")).to_contain_text("chip99")
-        metrics.update(load_ms=load_ms, locate_ms=(time.monotonic() - started) * 1000)
+        metrics["locate_ms"] = (time.monotonic() - started) * 1000
         ARTIFACT.mkdir(parents=True, exist_ok=True)
         (ARTIFACT / "10000-pins-metrics.json").write_text(json.dumps(metrics, indent=2))
         assert not errors
         context.close()
 
 
-def test_display_settings_are_isolated_and_read_failure_is_nonfatal(graph_page):
-    page, server = graph_page
-    page.evaluate("""() => {
-      localStorage.setItem('design2allegro.display:'+JSON.stringify([pkg.board_id,'another-fingerprint']),JSON.stringify({VDD:'signal'}));
-      localStorage.setItem('design2allegro.display:'+JSON.stringify(['another-board',pkg.fingerprint]),JSON.stringify({VDD:'signal'}));
+def test_display_settings_isolation_and_unavailable_storage(graph_page):
+    page, _ = graph_page
+    page.evaluate("""()=>{
+      localStorage.setItem('design2allegro.display:'+JSON.stringify([pkg.board_id,'other']),JSON.stringify({VDD:'signal'}));
+      localStorage.setItem('design2allegro.display:'+JSON.stringify(['other',pkg.fingerprint]),JSON.stringify({VDD:'signal'}));
     }""")
     page.reload()
     expect(page.locator("#save-state")).to_contain_text("已载入")
-    assert (
-        page.evaluate('cy.nodes(".rail").filter(n=>n.data("key")==="net:VDD").length')
-        == 8
-    )
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate('cy.nodes(".power").length') > 0
+    assert page.evaluate('cy.getElementById("net:VDD").length') == 0
     page.add_init_script(
-        'Storage.prototype.getItem = () => { throw new Error("unavailable"); };'
+        'Storage.prototype.getItem=()=>{throw new Error("unavailable")};'
     )
     page.reload()
     expect(page.locator("#save-state")).to_contain_text("已载入")
     expect(page.locator("#display-warning")).to_contain_text("无法读取")
-    assert server.store.read()["entries"] == {}
 
 
-def assert_ground_directions(page):
-    assert page.evaluate("""()=>cy.nodes('.ground').every(n=>{
-      const pin=n.connectedEdges('.rail-wire')[0].source();
-      return n.data('rotation')===ReviewGraphModel.groundAppearance(pin.position(),n.position()).rotation;
-    })""")
+def test_clear_exits_retains_other_branch_in_ui(graph_page):
+    page, server = graph_page
+    pins = server.package["parts"]["ic"]["pins"]
+    root = pins[0]
+    targets = [p for p in pins if server.package["pins"][p]["net"] in ("SELF", "ONLY")]
+    page.evaluate('(id)=>selectObject("pin:"+id)', root)
+    page.get_by_role("button", name="从此追踪", exact=True).click()
+    for identity in targets:
+        page.locator(f'.trace-exits input[value="{identity}"]').check()
+    page.locator("#apply-trace-exits").click()
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate("(ids)=>ids.every(id=>currentChain.pins.has(id))", targets)
+    # Remove one of the same-net exits: both SELF pins remain reachable.
+    self_pins = [p for p in targets if server.package["pins"][p]["net"] == "SELF"]
+    page.locator(f'.trace-exits input[value="{self_pins[0]}"]').uncheck()
+    page.locator("#apply-trace-exits").click()
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate("(ids)=>ids.every(id=>currentChain.pins.has(id))", self_pins)
+    # Auxiliary graph nodes must never become extra batch-review objects.
+    page.evaluate("()=>{cy.nodes().select()}")
+    page.wait_for_timeout(50)
+    assert page.evaluate('[...selected].every(key=>key.startsWith("pin:"))')
 
 
-def test_ground_direction_vectors_and_attachment_updates(graph_page):
-    page, _ = graph_page
-    for x, y, side, rotation in [
-        (-65, 0, -1, 90),
-        (65, 0, 1, 270),
-        (0, -65, 1, 180),
-        (0, 65, 1, 0),
-        (0, 0, -1, 90),
-        (0, 0, 1, 270),
-        (65, 65, 1, 315),
-    ]:
-        result = page.evaluate(
-            "([x,y,side]) => ReviewGraphModel.groundAppearance({x:0,y:0},{x,y},side)",
-            [x, y, side],
-        )
-        assert result["rotation"] == rotation
-        svg = unquote(result["image"].split(",", 1)[1])
-        assert 'viewBox="0 0 48 48"' in svg
-        assert f"rotate({rotation} 24 24)" in svg
-    assert_ground_directions(page)
-    # Exercise upper and lower attachments through the same drag/layout update path.
-    for dy, rotation in [(-65, 180), (65, 0)]:
-        actual = page.evaluate(
-            """([dy]) => {
-          const rail=cy.nodes('.ground').filter(n=>n.data('owner')==='part:ic')[0];
-          const pin=rail.connectedEdges('.rail-wire')[0].source();
-          rail.data({dx:pin.data('dx'),dy:pin.data('dy')+dy});
-          positionAttachments('part:ic');
-          return rail.data('rotation');
-        }""",
-            [dy],
-        )
-        assert actual == rotation
-        assert_endpoints(page)
+def test_category_symbols_states_and_fallback(graph_page):
+    page, server = graph_page
+    assert page.evaluate("""cy.nodes('.pin').every(n=>
+      n.data('category')===pkg.parts[pkg.pins[n.data('pinId')].ref].category &&
+      n.style('background-opacity')==='0' && n.style('border-width')==='0px')""")
+    images = page.evaluate("""()=>Object.fromEntries(Object.values(pkg.parts).map(p=>{
+      const n=cy.getElementById('pin:'+p.pins[0]);return [p.category,n.data('image')];
+    }))""")
+    assert len(images) == 14
+    assert len(set(images.values())) == 14
+    assert all(value.startswith("data:image/svg+xml") for value in images.values())
+    assert page.evaluate("""()=>{
+      const options={width:210,height:86,anchorY:10};
+      return ReviewSymbols.image({...options,category:'missing'})===ReviewSymbols.image({...options,category:'generic'});
+    }""")
+    key = "pin:" + server.package["parts"]["ic"]["pins"][0]
+    page.evaluate("(key)=>selectObject(key)", key)
+    before = page.evaluate('(key)=>cy.getElementById(key).data("image")', key)
+    page.locator("#review-status").select_option("approved")
+    expect(page.locator("#save-state")).to_contain_text("已保存")
+    approved = page.evaluate('(key)=>cy.getElementById(key).data("image")', key)
+    assert approved != before
+    page.locator("#review-status").select_option("issue")
+    expect(page.locator("#save-state")).to_contain_text("已保存")
+    assert page.evaluate('(key)=>cy.getElementById(key).data("image")', key) not in (
+        before,
+        approved,
+    )
+    page.evaluate('()=>{cy.elements().removeClass("highlight chain");cy.zoom(.4)}')
+    assert page.evaluate(
+        'cy.nodes(".pin").every(n=>n.hasClass("compact") && n.data("image"))'
+    )
+    page.evaluate(
+        "(key)=>{cy.getElementById(key).select();syncSelection();updateDetailLevel()}",
+        key,
+    )
+    assert page.evaluate('(key)=>!cy.getElementById(key).hasClass("compact")', key)
+
+
+def test_symbol_drag_keeps_rendered_wires_at_anchor(graph_page):
+    page, server = graph_page
+    key = "pin:" + server.package["parts"]["resistor"]["pins"][0]
+    result = page.evaluate(
+        """key=>{
+      const n=cy.getElementById(key),before={...n.position()};
+      n.emit('grab');n.position({x:before.x+83,y:before.y+47});n.emit('free');
+      return {before,after:{...n.position()},routes:n.connectedEdges().map(e=>({
+        source:{...e.source().position(),offset:e.source().data('anchorY')},
+        target:{...e.target().position(),offset:e.target().data('anchorY')},
+        points:[e.sourceEndpoint(),...(e.segmentPoints()||[]),e.targetEndpoint()]
+      }))};
+    }""",
+        key,
+    )
+    assert result["after"] == {
+        "x": result["before"]["x"] + 83,
+        "y": result["before"]["y"] + 47,
+    }
+    for route in result["routes"]:
+        for endpoint, point in [
+            (route["source"], route["points"][0]),
+            (route["target"], route["points"][-1]),
+        ]:
+            assert point["x"] == pytest.approx(endpoint["x"], abs=0.1)
+            assert point["y"] == pytest.approx(
+                endpoint["y"] + endpoint["offset"], abs=0.1
+            )
+        for a, b in zip(route["points"], route["points"][1:]):
+            assert abs(a["x"] - b["x"]) < 0.1 or abs(a["y"] - b["y"]) < 0.1
     page.locator("#layout").click()
     expect(page.locator("#graph-loading")).to_be_hidden()
-    assert_endpoints(page)
-    page.evaluate(
-        '() => { cy.getElementById("part:resistor").position({x:200,y:300}); }'
-    )
-    assert_ground_directions(page)
-    assert_endpoints(page)
-
-
-@pytest.mark.parametrize("width,height", [(1440, 900), (1920, 1080)])
-def test_ground_rotation_visuals_and_role_switch(graph_page, width, height):
-    page, _ = graph_page
-    page.set_viewport_size({"width": width, "height": height})
-    page.evaluate('selectObject("net:BUS")')
-    page.locator("#net-display-role").select_option("ground")
-    expect(page.locator("#graph-loading")).to_be_hidden()
-    assert_ground_directions(page)
-    page.locator("#net-display-role").select_option("power")
-    assert page.evaluate(
-        'cy.nodes(".power").filter(n=>n.data("key")==="net:BUS").every(n=>n.data("image")===ReviewGraphModel.image("power"))'
-    )
-    page.locator("#net-display-role").select_option("ground")
-    page.evaluate("""() => {
-      manuallyHidden=new Set(Object.values(pkg.parts).filter(p=>!['resistor','capacitor'].includes(p.id)).map(p=>p.key));
-      buildGraph();
-    }""")
-    expect(page.locator("#graph-loading")).to_be_hidden()
-    page.evaluate("""() => {
-      cy.getElementById('part:resistor').position({x:0,y:0});
-      cy.getElementById('part:capacitor').position({x:0,y:180});
-      cy.fit(undefined,90);
-    }""")
-    page.wait_for_function('cy.nodes(".ground").every(n=>n.backgrounding()===false)')
-    assert page.evaluate(
-        'cy.nodes(".ground").every(n=>n.style("text-rotation")==="none" && Number.isFinite(parseFloat(n.style("text-margin-x"))) && Number.isFinite(parseFloat(n.style("text-margin-y"))))'
-    )
-    assert_endpoints(page)
-    ARTIFACT.mkdir(parents=True, exist_ok=True)
-    page.screenshot(path=str(ARTIFACT / f"ground-rotation-{width}.png"))
