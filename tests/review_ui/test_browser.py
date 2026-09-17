@@ -192,9 +192,7 @@ def test_viewports_drag_zoom_and_screenshot(page, app, width, height):
     box = page.locator("#graph").bounding_box()
     assert box["width"] > 400 and box["height"] > 400
     assert page.evaluate("document.documentElement.scrollWidth") == width
-    page.wait_for_function(
-        'cy.nodes().length > 0 && document.getElementById("graph-loading").hidden'
-    )
+    expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
     page.keyboard.down("Shift")
     page.mouse.move(box["x"] + 3, box["y"] + 3)
     page.mouse.down()
@@ -260,7 +258,7 @@ def test_large_synthetic_graph_remains_searchable(browser, tmp_path):
             page.on("pageerror", lambda e: errors.append(str(e)))
             page.goto(server.url)
             expect(page.locator("#save-state")).to_contain_text("已载入", timeout=20000)
-            page.wait_for_function('document.getElementById("graph-loading").hidden')
+            expect(page.locator("#graph-loading")).to_be_hidden(timeout=30000)
             assert page.evaluate('cy.nodes(".part").length') == 1200
             assert page.evaluate('cy.nodes(".pin").length') == 2400
             assert page.evaluate('cy.edges(".wire").length') == 1200

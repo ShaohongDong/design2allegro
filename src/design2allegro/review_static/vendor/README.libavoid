@@ -1,0 +1,6 @@
+libavoid-js 0.4.5
+Source: https://github.com/Aksem/libavoid-js
+Distribution: https://registry.npmjs.org/libavoid-js/-/libavoid-js-0.4.5.tgz
+SHA512: 9BrYRXAQ+nmLuHZSqf4z52YN8TroBPxyqo6A6h6Pj03j5UYNx/Hhnd/rg+kiLVrE76wzBeBVO3OW7kaEpzYC9Q==
+License: LGPL-2.1-or-later (see LICENSE.libavoid).
+JS and WASM must be upgraded together. Upstream includes source and Emscripten binding build instructions.

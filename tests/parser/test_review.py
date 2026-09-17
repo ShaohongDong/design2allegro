@@ -220,11 +220,31 @@ def test_http_api_static_assets_and_conflicts(delivered, tmp_path):
                 "/app.js",
                 "/graph-model.js",
                 "/graph.js",
+                "/graph-worker.js",
+                "/layout-routing.js",
+                "/layout-geometry.js",
+                "/layout-layout.js",
+                "/layout-metrics.js",
+                "/layout-search.js",
+                "/vendor/LICENSE.libavoid",
+                "/vendor/README.libavoid",
+                "/vendor/libavoid.js",
+                "/vendor/libavoid.wasm",
+                "/vendor/elk-api.js",
+                "/vendor/elk-worker.min.js",
+                "/vendor/LICENSE.elk",
+                "/vendor/README.elk",
                 "/vendor/cytoscape.min.js",
                 "/vendor/LICENSE.cytoscape",
             ):
                 with call(path) as response:
                     assert response.status == 200 and response.read()
+                    if path.endswith(".wasm"):
+                        assert response.headers.get_content_type() == "application/wasm"
+                    if path == "/":
+                        csp = response.headers["Content-Security-Policy"]
+                        assert "'wasm-unsafe-eval'" in csp
+                        assert "'unsafe-eval'" not in csp
             key = next(iter(data["objects"]))
             body = {"revision": 0, "changes": {key: {"status": "approved"}}}
             for options in ({"token": False}, {"origin": "https://other.invalid"}):

@@ -25,6 +25,26 @@ STATIC = {
     "/": ("index.html", "text/html; charset=utf-8"),
     "/graph-model.js": ("graph-model.js", "text/javascript; charset=utf-8"),
     "/graph.js": ("graph.js", "text/javascript; charset=utf-8"),
+    "/vendor/README.elk": ("vendor/README.elk", "text/plain; charset=utf-8"),
+    "/vendor/LICENSE.elk": ("vendor/LICENSE.elk", "text/plain; charset=utf-8"),
+    "/vendor/elk-api.js": ("vendor/elk-api.js", "text/javascript; charset=utf-8"),
+    "/vendor/elk-worker.min.js": (
+        "vendor/elk-worker.min.js",
+        "text/javascript; charset=utf-8",
+    ),
+    "/layout-geometry.js": ("layout-geometry.js", "text/javascript; charset=utf-8"),
+    "/layout-layout.js": ("layout-layout.js", "text/javascript; charset=utf-8"),
+    "/layout-routing.js": ("layout-routing.js", "text/javascript; charset=utf-8"),
+    "/layout-metrics.js": ("layout-metrics.js", "text/javascript; charset=utf-8"),
+    "/layout-search.js": ("layout-search.js", "text/javascript; charset=utf-8"),
+    "/vendor/libavoid.js": ("vendor/libavoid.js", "text/javascript; charset=utf-8"),
+    "/vendor/libavoid.wasm": ("vendor/libavoid.wasm", "application/wasm"),
+    "/vendor/LICENSE.libavoid": (
+        "vendor/LICENSE.libavoid",
+        "text/plain; charset=utf-8",
+    ),
+    "/vendor/README.libavoid": ("vendor/README.libavoid", "text/plain; charset=utf-8"),
+    "/graph-worker.js": ("graph-worker.js", "text/javascript; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
     "/style.css": ("style.css", "text/css; charset=utf-8"),
     "/vendor/cytoscape.min.js": (
@@ -332,7 +352,7 @@ class ReviewHandler(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header(
             "Content-Security-Policy",
-            "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'",
+            "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'",
         )
         if attachment:
             self.send_header(

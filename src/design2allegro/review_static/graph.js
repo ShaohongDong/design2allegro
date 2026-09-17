@@ -1,12 +1,17 @@
-"use strict";
-let graphCoarse = [],
-  railOverrides = Object.create(null),
+const geometryReady = import("/layout-geometry.js");
+("use strict");
+let railOverrides = Object.create(null),
   railStorageKey;
 let graphPositioning = false,
   layoutGeneration = 0,
   graphFocusAfterLayout = null;
 let selectionFrame = null;
 const graphMetrics = {};
+let graphWorker = null,
+  graphWorkerTimer = null,
+  graphRouteTimer = null;
+let graphDragging = false,
+  graphNeedsLayout = false;
 function loadRailSettings() {
   railStorageKey =
     "design2allegro.display:" + JSON.stringify([pkg.board_id, pkg.fingerprint]);
@@ -123,6 +128,16 @@ function highlightObject(key) {
 function selectObject(key) {
   if (!object(key)) return;
   currentKey = key;
+  const viewKey = () =>
+    JSON.stringify([
+      [...collapsed],
+      [...manuallyHidden],
+      focusKeys ? [...focusKeys] : null,
+      $("search").value,
+      $("status-filter").value,
+      $("assembly-filter").value,
+    ]);
+  const previousView = viewKey();
   // Reveal all endpoints when cross-probing a net, including symbol-only rails.
   for (const related of relatedKeys(key)) {
     if (related.startsWith("part:")) {
@@ -137,7 +152,8 @@ function selectObject(key) {
   $("search").value = "";
   $("status-filter").value = "all";
   $("assembly-filter").value = "all";
-  buildGraph(false);
+  if (previousView !== viewKey() || !graphElementsFor(key).length)
+    buildGraph(false);
   renderList();
   renderDetail();
   highlightObject(key);
@@ -303,6 +319,57 @@ const graphStyles = [
   { selector: ".rail, .nc", style: { "border-width": 0 } },
   { selector: ".rail.approved", style: { color: "#219979" } },
   { selector: ".rail.issue", style: { color: "#d76442" } },
+  {
+    selector: ".region",
+    style: {
+      shape: "round-rectangle",
+      width: "data(width)",
+      height: "data(height)",
+      "background-color": "#edf3fa",
+      "background-opacity": 0.5,
+      "border-color": "#c4d3e4",
+      "border-style": "dashed",
+      "text-valign": "top",
+      "text-margin-y": 22,
+      "font-size": 16,
+      "font-weight": "bold",
+      "z-index": -10,
+      events: "no",
+    },
+  },
+  {
+    selector: ".cross-terminal",
+    style: {
+      shape: "diamond",
+      width: 12,
+      height: 12,
+      "background-color": "#5679aa",
+      "text-halign": "center",
+      "text-valign": "top",
+      "text-margin-y": -10,
+    },
+  },
+  {
+    selector: ".route-junction",
+    style: {
+      width: 5,
+      height: 5,
+      "background-color": "#34577c",
+      "border-width": 0,
+    },
+  },
+  {
+    selector: ".route-pending",
+    style: { "line-style": "dashed", "line-color": "#9b9da3" },
+  },
+  {
+    selector: ".route-failed",
+    style: { "line-style": "dashed", "line-color": "#c54c42", width: 2 },
+  },
+  {
+    selector: ".layout-conflict",
+    style: { "border-color": "#c54c42", "border-width": 3 },
+  },
   { selector: ".compact", style: { "font-size": 0 } },
 ];
 function allowedObjects() {
@@ -320,11 +387,36 @@ function allowedObjects() {
 }
 function buildGraph(layout = true) {
   graphFocusAfterLayout = null;
+  cancelGraphCalculation();
   cy.stop(true);
   const started = performance.now();
   const oldPositions = new Map(
     cy.nodes().map((n) => [n.id(), { ...n.position() }]),
   );
+  const oldGeometry = new Map(),
+    oldChildren = new Map();
+  if (!layout)
+    cy.nodes().forEach((n) => {
+      const data = {};
+      for (const field of [
+        "width",
+        "height",
+        "dx",
+        "dy",
+        "direction",
+        "rotation",
+        "symbol",
+        "compactLabel",
+        "geometryLabel",
+      ])
+        if (n.data(field) !== undefined) data[field] = n.data(field);
+      oldGeometry.set(n.id(), { data, label: n.data("label") });
+      if (n.data("owner")) {
+        const ids = oldChildren.get(n.data("owner")) || [];
+        ids.push(n.id());
+        oldChildren.set(n.data("owner"), ids);
+      }
+    });
   const elements = [],
     bodies = new Map(),
     pinEnds = new Map(),
@@ -336,15 +428,10 @@ function buildGraph(layout = true) {
     (!focusKeys || focusKeys.has(key));
   let shownParts = 0,
     shownNets = 0;
-  graphCoarse = [];
   const addBody = (id, data, classes) => {
     const el = { data: { id, ...data }, classes };
     elements.push(el);
     bodies.set(id, el);
-    graphCoarse.push({
-      data: { id, width: data.width + 220, height: data.height + 110 },
-      position: oldPositions.get(id),
-    });
   };
   const addPin = (id, owner, label, dx, dy, side, key, classes, pins) => {
     elements.push({
@@ -378,6 +465,7 @@ function buildGraph(layout = true) {
       id,
       {
         key: part.key,
+        group: moduleOf(part) || "",
         label:
           part.reference +
           (part.assembly === "dnp" ? " · DNP" : "") +
@@ -430,6 +518,7 @@ function buildGraph(layout = true) {
     addBody(
       id,
       {
+        group: id.slice(7),
         label: id.slice(7) + " · " + parts.length,
         members: parts.map((p) => p.key),
         width,
@@ -516,66 +605,92 @@ function buildGraph(layout = true) {
         });
         addWire(net, end.id, id, end.pins, "rail-wire");
       }
-    } else if (ends.length === 2 && net.pins.length === 2) {
-      addWire(net, ends[0].id, ends[1].id, net.pins);
     } else {
-      const id = net.key;
-      const terminal = ends.length === 1;
-      const end = ends[0];
-      const attachment = terminal
-        ? { owner: end.owner, dx: end.dx + end.side * 65, dy: end.dy }
-        : {};
-      const visiblePins = ends.flatMap((e) => e.pins).length;
-      elements.push({
-        data: {
-          id,
-          key: net.key,
-          netKey: net.key,
-          label:
-            net.name +
-            (visiblePins < net.pins.length
-              ? ` · ${visiblePins}/${net.pins.length} 端点`
-              : ""),
-          ...attachment,
-        },
-        classes: "net" + (terminal ? " terminal" : " junction"),
-        grabbable: !terminal,
-      });
-      if (!terminal)
-        graphCoarse.push({
-          data: { id, width: 60, height: 50 },
-          position: oldPositions.get(id),
+      const byGroup = new Map();
+      for (const end of ends) {
+        const group = bodies.get(end.owner).data.group;
+        if (!byGroup.has(group)) byGroup.set(group, []);
+        byGroup.get(group).push(end);
+      }
+      // Use the full inventory, so filtering never turns a cross-module signal
+      // into an apparently complete local net.
+      const allGroups = new Set(
+        net.pins.map((id) => moduleOf(pkg.parts[pkg.pins[id].ref]) || ""),
+      );
+      const cross = allGroups.size > 1;
+      for (const [group, local] of byGroup) {
+        if (!cross && local.length === 2 && net.pins.length === 2) {
+          addWire(net, local[0].id, local[1].id, net.pins);
+          continue;
+        }
+        const id = cross
+          ? "local-net:" + JSON.stringify([net.key, group])
+          : net.key;
+        const terminal = local.length === 1 && !cross;
+        const end = local[0];
+        const visiblePins = local.flatMap((e) => e.pins).length;
+        const label =
+          net.name +
+          (cross ? ` ↗ ${allGroups.size - 1} 个其他模块` : "") +
+          (visiblePins < net.pins.length
+            ? ` · ${visiblePins}/${net.pins.length} 端点`
+            : "");
+        elements.push({
+          data: {
+            id,
+            key: net.key,
+            netKey: net.key,
+            group,
+            label,
+            ...(terminal
+              ? { owner: end.owner, dx: end.dx + end.side * 65, dy: end.dy }
+              : {}),
+          },
+          classes:
+            "net" +
+            (terminal ? " terminal" : cross ? " cross-terminal" : " junction"),
+          grabbable: !terminal,
         });
-      for (const end of ends) addWire(net, end.id, id, end.pins);
-    }
-    if (role === "signal") {
-      if (ends.length === 2 && net.pins.length === 2) {
-        if (ends[0].owner !== ends[1].owner)
-          graphCoarse.push({
-            data: {
-              id: "coarse:" + net.key,
-              source: ends[0].owner,
-              target: ends[1].owner,
-            },
-          });
-      } else if (ends.length > 1)
-        for (const owner of new Set(ends.map((e) => e.owner)))
-          graphCoarse.push({
-            data: {
-              id: "coarse:" + JSON.stringify([net.key, owner]),
-              source: owner,
-              target: net.key,
-            },
-          });
+        for (const end of local) addWire(net, end.id, id, end.pins);
+      }
     }
   }
+
   syncing = true;
+  const stableOwners = new Set();
+  if (!layout) {
+    const children = new Map();
+    for (const { data } of elements)
+      if (!data.source && data.owner) {
+        const ids = children.get(data.owner) || [];
+        ids.push(data.id);
+        children.set(data.owner, ids);
+      }
+    for (const { data } of elements)
+      if (
+        !data.source &&
+        !data.owner &&
+        oldGeometry.has(data.id) &&
+        JSON.stringify((children.get(data.id) || []).sort()) ===
+          JSON.stringify((oldChildren.get(data.id) || []).sort())
+      )
+        stableOwners.add(data.id);
+  }
   graphPositioning = true;
   cy.batch(() => {
     cy.elements().remove();
     cy.add(elements);
     cy.nodes().forEach((n) => {
       if (oldPositions.has(n.id())) n.position(oldPositions.get(n.id()));
+      if (
+        stableOwners.has(n.data("owner") || n.id()) &&
+        oldGeometry.has(n.id())
+      ) {
+        const old = oldGeometry.get(n.id()),
+          data = { ...old.data };
+        if (old.label !== n.data("label")) delete data.geometryLabel;
+        n.data(data);
+      }
     });
     graphPositioning = false;
     positionAttachments();
@@ -588,76 +703,67 @@ function buildGraph(layout = true) {
   graphMetrics.buildMs = performance.now() - started;
   if (
     layout ||
-    graphCoarse.some((e) => !e.data.source && !oldPositions.has(e.data.id))
+    cy
+      .nodes(".part, .module, .net")
+      .some((n) => !n.data("owner") && !oldPositions.has(n.id()))
   )
-    runLayout();
-  else updateDetailLevel();
+    runGraphCalculation(true);
+  else {
+    updateDetailLevel();
+    scheduleGraphRoutes();
+  }
 }
-function routeWire(edge) {
+function applyWirePath(edge, points, failed = false) {
   const a = edge.source().position(),
     b = edge.target().position();
-  const sa = edge.source().data("side") || 0,
-    sb = edge.target().data("side") || 0;
-  if (edge.hasClass("rail-wire") && edge.target().data("role") === "ground") {
-    const appearance = ReviewGraphModel.groundAppearance(a, b, sa);
-    if (edge.target().data("image") !== appearance.image)
-      edge.target().data(appearance);
-  }
   const vx = b.x - a.x,
     vy = b.y - a.y,
     len2 = vx * vx + vy * vy;
-  if (len2 < 1) return;
-  let points = [];
-  if (!edge.hasClass("rail-wire")) {
-    const first = { x: a.x + sa * 28, y: a.y };
-    const last = { x: b.x + sb * 28, y: b.y };
-    const backFacing = (sa && sa * vx <= 0) || (sb && sb * vx >= 0);
-    const sameOwner =
-      edge.source().data("owner") &&
-      edge.source().data("owner") === edge.target().data("owner");
-    if (sameOwner && sa === sb) {
-      const x = sa < 0 ? Math.min(first.x, last.x) : Math.max(first.x, last.x);
-      points = [
-        { x, y: a.y },
-        { x, y: b.y },
-      ];
-    } else if (backFacing || sameOwner) {
-      const owners = [edge.source(), edge.target()]
-        .map((n) => cy.getElementById(n.data("owner")))
-        .filter((n) => n.length);
-      const y =
-        Math.min(
-          a.y,
-          b.y,
-          ...owners.map((n) => n.position("y") - n.height() / 2),
-        ) - 55;
-      points = [first, { x: first.x, y }, { x: last.x, y }, last];
-    } else {
-      const x = (first.x + last.x) / 2;
-      points = [first, { x, y: a.y }, { x, y: b.y }, last];
-    }
-    // Duplicate/end-point segment positions can make the canvas path undefined.
-    points = points.filter(
-      (p, i) =>
-        Math.hypot(p.x - a.x, p.y - a.y) > 0.1 &&
-        Math.hypot(p.x - b.x, p.y - b.y) > 0.1 &&
-        (!i || Math.hypot(p.x - points[i - 1].x, p.y - points[i - 1].y) > 0.1),
+  edge.data("routePoints", points);
+  edge.toggleClass("route-failed", failed).removeClass("route-pending");
+  const bends = points
+    .slice(1, -1)
+    .filter(
+      (p) =>
+        Math.hypot(p.x - a.x, p.y - a.y) > 0.01 &&
+        Math.hypot(p.x - b.x, p.y - b.y) > 0.01,
     );
-  }
-  if (!points.length) {
+  if (!bends.length || len2 < 0.01) {
     edge.style("curve-style", "straight");
     return;
   }
   edge.style({
     "curve-style": "segments",
     "edge-distances": "node-position",
-    "segment-weights": points.map(
+    "segment-weights": bends.map(
       (p) => ((p.x - a.x) * vx + (p.y - a.y) * vy) / len2,
     ),
-    "segment-distances": points.map(
+    "segment-distances": bends.map(
       (p) => (vx * (p.y - a.y) - vy * (p.x - a.x)) / Math.sqrt(len2),
     ),
   });
+}
+function routeWire(edge) {
+  const a = edge.source().position(),
+    b = edge.target().position();
+  if (edge.hasClass("rail-wire")) {
+    if (edge.target().data("role") === "ground")
+      edge
+        .target()
+        .data(
+          ReviewGraphModel.groundAppearance(a, b, edge.source().data("side")),
+        );
+    applyWirePath(edge, [a, b]);
+  } else {
+    // Temporary paths are explicitly styled until the worker validates them.
+    applyWirePath(edge, [
+      a,
+      { x: (a.x + b.x) / 2, y: a.y },
+      { x: (a.x + b.x) / 2, y: b.y },
+      b,
+    ]);
+  }
+  edge.addClass("route-pending");
 }
 function positionAttachments(owner) {
   if (graphPositioning) return;
@@ -678,6 +784,9 @@ function positionAttachments(owner) {
 }
 function updateDetailLevel() {
   cy.batch(() => {
+    const zoom = cy.zoom();
+    cy.nodes(".region").style("font-size", Math.min(100, 14 / zoom));
+    cy.edges(".wire, .rail-wire").style("width", Math.max(1.3, 0.65 / zoom));
     cy.nodes(".pin, .port, .rail, .net").toggleClass(
       "compact",
       cy.zoom() < 0.55,
@@ -696,67 +805,350 @@ function styleGraph() {
   });
   updateDetailLevel();
 }
-function runLayout() {
-  const generation = ++layoutGeneration;
-  $("graph-loading").hidden = false;
-  requestAnimationFrame(() => {
-    if (generation !== layoutGeneration) return;
-    const started = performance.now();
-    const coarse = cytoscape({
-      headless: true,
-      styleEnabled: true,
-      elements: graphCoarse,
-      style: [
-        {
-          selector: "node",
-          style: { width: "data(width)", height: "data(height)" },
-        },
-      ],
-      layout: { name: "preset" },
-    });
-    try {
-      const large = graphCoarse.length > 2000;
-      coarse
-        .layout(
-          large
-            ? { name: "grid", avoidOverlap: true, spacingFactor: 1.15 }
-            : {
-                name: "cose",
-                animate: false,
-                randomize: false,
-                nodeRepulsion: () => 18000,
-                idealEdgeLength: () => 180,
-                componentSpacing: 140,
-                numIter: 400,
-              },
+function cancelGraphCalculation() {
+  ++layoutGeneration;
+  if (graphWorker) graphWorker.terminate();
+  graphWorker = null;
+  clearTimeout(graphWorkerTimer);
+  clearTimeout(graphRouteTimer);
+}
+function scheduleGraphRoutes() {
+  clearTimeout(graphRouteTimer);
+  if (!graphDragging)
+    graphRouteTimer = setTimeout(
+      () => runGraphCalculation(graphNeedsLayout),
+      100,
+    );
+}
+function graphSnapshot(layout) {
+  // Measure labels before restoring the zoom-dependent detail level.
+  cy.nodes().removeClass("compact");
+  const snapshot = {
+    layout,
+    scene: {
+      pkg: { parts: pkg.parts, pins: pkg.pins },
+      nodes: cy
+        .nodes()
+        .filter(
+          (n) =>
+            !n.hasClass("region") &&
+            (!n.hasClass("route-junction") || n.hasClass("branch")),
         )
-        .run();
-      graphPositioning = true;
-      cy.batch(() =>
-        coarse
-          .nodes()
-          .forEach((n) => cy.getElementById(n.id()).position(n.position())),
-      );
-      graphPositioning = false;
-      positionAttachments();
-      cy.fit(undefined, 55);
-      graphMetrics.layoutMs = performance.now() - started;
-      graphMetrics.layout = large ? "grid" : "cose";
-      updateDetailLevel();
-    } finally {
-      graphPositioning = false;
-      coarse.destroy();
-      $("graph-loading").hidden = true;
+        .map((n) => ({
+          id: n.id(),
+          x: n.position("x"),
+          y: n.position("y"),
+          width: n.width(),
+          height: n.height(),
+          classes: n.classes(),
+          data: { ...n.data() },
+          direction: n.data("direction"),
+          rotation: n.data("rotation"),
+          symbol: n.data("symbol"),
+          compactLabel: n.data("compactLabel"),
+          labelBox: n.data("geometryLabel")
+            ? (() => {
+                const b = n.data("geometryLabel"),
+                  p = n.position();
+                return {
+                  x1: p.x + b.x1,
+                  x2: p.x + b.x2,
+                  y1: p.y + b.y1,
+                  y2: p.y + b.y2,
+                  w: b.w,
+                  h: b.h,
+                };
+              })()
+            : (() => {
+                const b = n.boundingBox({
+                  includeNodes: false,
+                  includeLabels: true,
+                  includeOverlays: false,
+                  useCache: false,
+                });
+                return n.data("label") ? { ...b } : null;
+              })(),
+        })),
+      wires: cy.edges(".wire, .rail-wire").map((e) => ({
+        id: e.id(),
+        net: e.data("netKey"),
+        source: e.source().id(),
+        target: e.target().id(),
+        rail: e.hasClass("rail-wire"),
+        pins: e.data("pins") || [],
+        points: e.data("routePoints") || [],
+        failed: e.hasClass("route-failed"),
+      })),
+    },
+  };
+  updateDetailLevel();
+  return snapshot;
+}
+
+async function applyGraphScene(result) {
+  const G = await geometryReady;
+  graphPositioning = true;
+  cy.batch(() => {
+    cy.nodes().removeClass("layout-conflict");
+    cy.edges(".wire, .rail-wire").remove();
+    cy.nodes(".branch, .region, .route-junction").remove();
+    for (const n of result.nodes) {
+      let el = cy.getElementById(n.id);
+      if (!el.length && n.classes.includes("branch"))
+        el = cy.add({
+          data: {
+            id: n.id,
+            key: n.data.netKey,
+            netKey: n.data.netKey,
+            label: "",
+          },
+          classes: "branch route-junction",
+          grabbable: false,
+          selectable: false,
+        });
+      if (!el.length) continue;
+      el.position({ x: n.x, y: n.y });
+      el.data({
+        ...n.data,
+        width: n.width,
+        height: n.height,
+        direction: n.direction,
+        rotation: n.rotation,
+        symbol: n.symbol,
+        compactLabel: n.compactLabel,
+      });
+      if (n.labelBox) {
+        const b = n.labelBox;
+        el.data("geometryLabel", {
+          x1: b.x1 - n.x,
+          x2: b.x2 - n.x,
+          y1: b.y1 - n.y,
+          y2: b.y2 - n.y,
+          w: b.w,
+          h: b.h,
+        });
+        el.style({
+          "text-halign": "center",
+          "text-valign": "center",
+          "text-margin-x": (b.x1 + b.x2) / 2 - n.x,
+          "text-margin-y": (b.y1 + b.y2) / 2 - n.y,
+          "text-max-width": Math.max(260, b.w || 0),
+        });
+      }
+      if (n.symbol) {
+        const vertical = (n.rotation || 0) % 180 !== 0,
+          sw = vertical ? 64 : 80,
+          sh = vertical ? 80 : 64;
+        const polarity = G.polarityBox(n);
+        const plus = polarity
+          ? `<path d="M${(polarity.x1 + polarity.x2) / 2 - n.x - 4} ${(polarity.y1 + polarity.y2) / 2 - n.y}h8m-4 -4v8"/>`
+          : "";
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${sw}" height="${sh}" viewBox="${-sw / 2} ${-sh / 2} ${sw} ${sh}"><g fill="none" stroke="#34577c" stroke-width="1.5"><path transform="rotate(${n.rotation || 0})" d="${G.symbolPath(n.symbol)}"/>${plus}</g></svg>`;
+        el.data(
+          "image",
+          "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg),
+        );
+        el.addClass("passive").style({
+          "border-width": n.classes.includes("dnp") ? 1.5 : 0,
+          "background-opacity": 0,
+          "background-width": sw,
+          "background-height": sh,
+          "background-clip": "none",
+        });
+      }
+      if (n.compactLabel)
+        el.data("label", pkg.pins[n.id.slice(4)]?.num || n.data.label);
+      if (n.classes.includes("rail") && n.data.role === "ground") {
+        const wire = result.wires.find((w) => w.target === n.id);
+        const pin = result.nodes.find((p) => p.id === wire?.source);
+        if (pin) el.data(ReviewGraphModel.groundAppearance(pin, n));
+      }
+      if (n.classes.includes("pin") || n.classes.includes("port")) {
+        const owner = result.nodes.find((p) => p.id === n.data.owner),
+          d = n.direction || (n.data.side < 0 ? "W" : "E");
+        el.removeClass("left right top bottom").addClass(
+          { W: "left", E: "right", N: "top", S: "bottom" }[d],
+        );
+        if (!n.compactLabel) {
+          el.style({
+            "text-halign": d === "W" ? "right" : d === "E" ? "left" : "center",
+            "text-valign": "center",
+            "text-margin-x": d === "W" ? 26 : d === "E" ? -26 : 0,
+            "text-margin-y": d === "N" ? 30 : d === "S" ? -26 : 0,
+          });
+          el.removeData("geometryLabel");
+        }
+
+        const anchor = {
+          x:
+            d === "W"
+              ? -owner.width / 2
+              : d === "E"
+                ? owner.width / 2
+                : n.x - owner.x,
+          y:
+            d === "N"
+              ? -owner.height / 2
+              : d === "S"
+                ? owner.height / 2
+                : n.y - owner.y,
+        };
+        cy.getElementById("lead:" + n.id).data(
+          "anchor",
+          `${anchor.x} ${anchor.y}`,
+        );
+      }
     }
+    for (const w of result.wires) {
+      if (
+        !cy.getElementById(w.source).length ||
+        !cy.getElementById(w.target).length
+      )
+        continue;
+      const e = cy.add({
+        data: {
+          id: w.id,
+          source: w.source,
+          target: w.target,
+          netKey: w.net,
+          label: w.net.slice(4),
+          pins: w.pins || [],
+        },
+        classes: w.rail ? "rail-wire" : "wire",
+        selectable: false,
+      });
+      applyWirePath(e, w.points, w.failed);
+    }
+    for (const id of result.conflicts || [])
+      cy.getElementById(id).addClass("layout-conflict");
+    result.frames.forEach((f) =>
+      cy.add({
+        data: {
+          id: "region:" + JSON.stringify(f.group),
+          label: f.group || "顶层",
+          width: f.x2 - f.x1,
+          height: f.y2 - f.y1,
+        },
+        position: { x: (f.x1 + f.x2) / 2, y: (f.y1 + f.y2) / 2 },
+        classes: "region",
+        selectable: false,
+        grabbable: false,
+      }),
+    );
+  });
+  graphPositioning = false;
+  styleGraph();
+  syncSelection();
+}
+function runGraphCalculation(layout) {
+  cancelGraphCalculation();
+  graphNeedsLayout = layout;
+  const generation = layoutGeneration,
+    input = graphSnapshot(layout);
+  if (!input.scene.nodes.length) {
+    $("graph-loading").hidden = true;
+    return;
+  }
+  $("graph-loading").hidden = false;
+  $("graph-loading").textContent = layout ? "正在布局与布线…" : "正在重新布线…";
+  $("cancel-layout").hidden = true;
+  let preview = false,
+    finished = false;
+  const finish = () => {
+    if (generation !== layoutGeneration) return;
+    finished = true;
+    graphWorker?.terminate();
+    graphWorker = null;
+    clearTimeout(graphWorkerTimer);
+    $("graph-loading").hidden = true;
+    $("cancel-layout").hidden = true;
     if (graphFocusAfterLayout) {
       const key = graphFocusAfterLayout;
       graphFocusAfterLayout = null;
       highlightObject(key);
     }
-  });
+  };
+  const fail = (message) => {
+    if (generation !== layoutGeneration) return;
+    finish();
+    $("layout-warning").textContent = message + "；可点击“重新布局”重试。";
+    cy.edges(".route-pending")
+      .addClass("route-failed")
+      .removeClass("route-pending");
+  };
+  try {
+    graphWorker = new Worker("/graph-worker.js", { type: "module" });
+    graphWorker.onerror = (e) =>
+      fail("布局计算失败，保留当前画面：" + e.message);
+    graphWorkerTimer = setTimeout(
+      () => fail("布局计算超时，保留当前画面"),
+      60000,
+    );
+    let apply = Promise.resolve();
+    graphWorker.onmessage = ({ data }) => {
+      apply = apply
+        .then(async () => {
+          if (
+            finished ||
+            data.generation !== layoutGeneration ||
+            generation !== layoutGeneration
+          )
+            return;
+          if (data.error) {
+            fail("布局计算失败：" + data.error);
+            return;
+          }
+          if (data.phase === "complete" && !data.result) {
+            finish();
+            return;
+          }
+          await geometryReady;
+          if (finished || generation !== layoutGeneration) return;
+          await applyGraphScene(data.result);
+          if (generation !== layoutGeneration) return;
+          graphNeedsLayout = false;
+          graphMetrics.layout = "elk-layered";
+          graphMetrics.conflicts = data.result.conflicts?.length || 0;
+          graphMetrics.failedRoutes = cy.edges(".route-failed").length;
+          $("layout-warning").textContent = [
+            graphMetrics.conflicts
+              ? `${graphMetrics.conflicts} 个元件重叠`
+              : null,
+            graphMetrics.failedRoutes
+              ? `${graphMetrics.failedRoutes} 条连线未找到可用通道（红色虚线）`
+              : null,
+          ]
+            .filter(Boolean)
+            .join("；");
+          if (!preview) {
+            preview = true;
+            $("cancel-layout").hidden = !layout;
+            if (layout) cy.fit(undefined, 55);
+            clearTimeout(graphWorkerTimer);
+            graphWorkerTimer = setTimeout(finish, 10000);
+          }
+          updateDetailLevel();
+          if (data.phase === "complete") finish();
+          else $("graph-loading").textContent = "预览已就绪，正在精排…";
+        })
+        .catch((e) => fail(e.message));
+    };
+    graphWorker.postMessage({ generation, input });
+  } catch (e) {
+    fail("无法启动布局计算：" + e.message);
+  }
+}
+function runLayout() {
+  buildGraph(true);
 }
 function initGraph() {
   loadRailSettings();
+  $("cancel-layout").onclick = () => {
+    cancelGraphCalculation();
+    graphNeedsLayout = false;
+    $("graph-loading").hidden = true;
+    $("cancel-layout").hidden = true;
+  };
   cy = cytoscape({
     container: $("graph"),
     elements: [],
@@ -778,11 +1170,27 @@ function initGraph() {
   cy.on("tap", "edge", (ev) => {
     if (ev.target.data("netKey")) selectObject(ev.target.data("netKey"));
   });
-  cy.on("position", ".part, .module", (ev) =>
-    positionAttachments(ev.target.id()),
-  );
+  cy.on("grab", ".part, .module, .net", () => {
+    graphDragging = true;
+    graphNeedsLayout = false;
+    cancelGraphCalculation();
+  });
+  cy.on("free", ".part, .module, .net", () => {
+    graphDragging = false;
+    scheduleGraphRoutes();
+  });
+  cy.on("position", ".part, .module", (ev) => {
+    if (graphPositioning) return;
+    cancelGraphCalculation();
+    positionAttachments(ev.target.id());
+    scheduleGraphRoutes();
+  });
   cy.on("position", ".net", (ev) => {
-    if (!graphPositioning) ev.target.connectedEdges().forEach(routeWire);
+    if (!graphPositioning) {
+      cancelGraphCalculation();
+      ev.target.connectedEdges().forEach(routeWire);
+      scheduleGraphRoutes();
+    }
   });
   cy.on("zoom", updateDetailLevel);
   cy.on("select unselect", "node", (ev) => {

@@ -673,3 +673,18 @@ dialog p {
   color: #a64b25;
   font-size: 12px;
 }
+
+#layout-warning {
+  color: #b54036;
+  max-width: 260px;
+}
+#graph-loading {
+  pointer-events: none;
+}
+
+#cancel-layout {
+  position: absolute;
+  top: 60px;
+  right: 12px;
+  z-index: 2;
+}

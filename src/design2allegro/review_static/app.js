@@ -467,7 +467,38 @@ function renderDetail() {
         ["端点数量", x.pins.length],
       ]),
     );
-    detail.append(railControl(x), section("全部网络端点"));
+    detail.append(railControl(x));
+    const groups = new Map();
+    for (const id of x.pins) {
+      const pin = pkg.pins[id],
+        group = moduleOf(pkg.parts[pin.ref]) || "";
+      if (!groups.has(group)) groups.set(group, []);
+      groups.get(group).push(pin);
+    }
+    if (groups.size > 1) {
+      detail.append(section("跨模块连接"));
+      for (const [group, pins] of [...groups].sort(([a], [b]) =>
+        a.localeCompare(b),
+      ))
+        detail.append(
+          button(`${group || "顶层"} · ${pins.length} 个端点 ↗`, () => {
+            selectObject(pins[0].key);
+            const focus = () => {
+              if (currentKey !== pins[0].key) return;
+              if (!$("graph-loading").hidden) {
+                setTimeout(focus, 100);
+                return;
+              }
+              const area = cy
+                .nodes(".part, .module")
+                .filter((n) => n.data("group") === group);
+              if (area.length) cy.fit(area, 65);
+            };
+            focus();
+          }),
+        );
+    }
+    detail.append(section("全部网络端点"));
     for (const id of x.pins) detail.append(endpoint(pkg.pins[id]));
     if (Object.keys(x.electrical || {}).length)
       detail.append(

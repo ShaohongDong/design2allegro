@@ -100,6 +100,7 @@
         <div class="graph-stage">
           <div id="graph"></div>
           <div id="graph-loading" hidden>正在布局…</div>
+          <button id="cancel-layout" hidden>取消精排</button>
           <div class="legend">
             <span class="legend-part"></span>元件
             <span class="legend-net"></span>分支点
@@ -108,6 +109,7 @@
         </div>
         <div class="graph-footer">
           <span id="graph-count"></span>
+          <span id="layout-warning" role="status"></span>
           <span id="display-warning" role="status"></span
           ><button id="hide-selected">隐藏选中图元</button
           ><button id="focus">仅看关联</button>

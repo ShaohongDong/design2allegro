@@ -216,7 +216,10 @@ def test_categories_connectivity_drag_and_pin_review(graph_page):
     assert_endpoints(page)
     assert page.evaluate("""() => cy.edges('.lead').every(e => {
       const a=e.sourceEndpoint(), b=e.targetEndpoint();
-      return Math.abs(a.y-b.y)<0.1 && Math.abs(Math.abs(a.x-b.x)-20)<0.1;
+      const n=e.source(),pin=e.target(),d=pin.data('direction');
+      const distance=n.data('symbol')?18:20;
+      return (['W','E'].includes(d)?Math.abs(a.y-b.y)<0.1:Math.abs(a.x-b.x)<0.1)
+        && Math.abs(Math.hypot(a.x-b.x,a.y-b.y)-distance)<0.1;
     })""")
 
 
@@ -305,6 +308,9 @@ def test_ten_thousand_pins_remain_searchable(browser, tmp_path):
     with serve(output, tmp_path / "state") as server:
         context = browser.new_context(viewport={"width": 1440, "height": 900})
         page = context.new_page()
+        page.add_init_script("""window.reviewBusyTicks=0;
+          setInterval(()=>{const el=document.getElementById('graph-loading');
+            if(el && !el.hidden) window.reviewBusyTicks++;},20);""")
         errors = []
         page.on("pageerror", lambda error: errors.append(str(error)))
         started = time.monotonic()
@@ -315,7 +321,10 @@ def test_ten_thousand_pins_remain_searchable(browser, tmp_path):
         assert page.evaluate('cy.nodes(".pin").length') == 10000
         assert page.evaluate('cy.edges(".wire").length') == 5000
         metrics = page.evaluate("({...graphMetrics})")
-        assert metrics["layout"] == "grid"
+        assert metrics["layout"] == "elk-layered"
+        assert metrics["failedRoutes"] == 0
+        assert metrics["conflicts"] == 0
+        assert page.evaluate("reviewBusyTicks") > 10
         started = time.monotonic()
         page.locator("#search").fill("chip99")
         expect(page.locator("#list-count")).to_have_text("1 个结果", timeout=10000)
@@ -349,6 +358,13 @@ def test_display_settings_are_isolated_and_read_failure_is_nonfatal(graph_page):
     assert server.store.read()["entries"] == {}
 
 
+def assert_ground_directions(page):
+    assert page.evaluate("""()=>cy.nodes('.ground').every(n=>{
+      const pin=n.connectedEdges('.rail-wire')[0].source();
+      return n.data('rotation')===ReviewGraphModel.groundAppearance(pin.position(),n.position()).rotation;
+    })""")
+
+
 def test_ground_direction_vectors_and_attachment_updates(graph_page):
     page, _ = graph_page
     for x, y, side, rotation in [
@@ -368,8 +384,7 @@ def test_ground_direction_vectors_and_attachment_updates(graph_page):
         svg = unquote(result["image"].split(",", 1)[1])
         assert 'viewBox="0 0 48 48"' in svg
         assert f"rotate({rotation} 24 24)" in svg
-    assert page.evaluate('cy.nodes(".ground").some(n=>n.data("rotation")===90)')
-    assert page.evaluate('cy.nodes(".ground").some(n=>n.data("rotation")===270)')
+    assert_ground_directions(page)
     # Exercise upper and lower attachments through the same drag/layout update path.
     for dy, rotation in [(-65, 180), (65, 0)]:
         actual = page.evaluate(
@@ -390,12 +405,7 @@ def test_ground_direction_vectors_and_attachment_updates(graph_page):
     page.evaluate(
         '() => { cy.getElementById("part:resistor").position({x:200,y:300}); }'
     )
-    assert (
-        page.evaluate(
-            'cy.nodes(".ground").filter(n=>n.data("owner")==="part:resistor")[0].data("rotation")'
-        )
-        == 270
-    )
+    assert_ground_directions(page)
     assert_endpoints(page)
 
 
@@ -406,9 +416,7 @@ def test_ground_rotation_visuals_and_role_switch(graph_page, width, height):
     page.evaluate('selectObject("net:BUS")')
     page.locator("#net-display-role").select_option("ground")
     expect(page.locator("#graph-loading")).to_be_hidden()
-    assert page.evaluate(
-        'cy.nodes(".ground").filter(n=>n.data("key")==="net:BUS").every(n=>n.data("rotation")===90)'
-    )
+    assert_ground_directions(page)
     page.locator("#net-display-role").select_option("power")
     assert page.evaluate(
         'cy.nodes(".power").filter(n=>n.data("key")==="net:BUS").every(n=>n.data("image")===ReviewGraphModel.image("power"))'
@@ -426,7 +434,7 @@ def test_ground_rotation_visuals_and_role_switch(graph_page, width, height):
     }""")
     page.wait_for_function('cy.nodes(".ground").every(n=>n.backgrounding()===false)')
     assert page.evaluate(
-        'cy.nodes(".ground").every(n=>n.style("text-rotation")==="none" && n.style("text-valign")==="bottom")'
+        'cy.nodes(".ground").every(n=>n.style("text-rotation")==="none" && Number.isFinite(parseFloat(n.style("text-margin-x"))) && Number.isFinite(parseFloat(n.style("text-margin-y"))))'
     )
     assert_endpoints(page)
     ARTIFACT.mkdir(parents=True, exist_ok=True)
