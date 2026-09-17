@@ -22,6 +22,8 @@ from .verify import verify_package
 STATUSES = {"pending", "approved", "issue"}
 MAX_BODY = 8 * 1024 * 1024
 STATIC = {
+    "/graph-geometry.js": ("graph-geometry.js", "text/javascript; charset=utf-8"),
+    "/graph-routing.js": ("graph-routing.js", "text/javascript; charset=utf-8"),
     "/": ("index.html", "text/html; charset=utf-8"),
     "/graph-model.js": ("graph-model.js", "text/javascript; charset=utf-8"),
     "/graph-symbols.js": ("graph-symbols.js", "text/javascript; charset=utf-8"),

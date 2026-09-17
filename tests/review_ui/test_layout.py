@@ -16,7 +16,7 @@ def test_symbol_bounds_routes_and_repeatability(graph_page):
     page, _ = graph_page
     wait_layout(page)
     result = page.evaluate("""()=>({
-      boxes:cy.nodes().not('.junction').map(n=>({id:n.id(),x:n.position('x'),y:n.position('y'),w:n.width(),h:n.height()})),
+      boxes:cy.nodes().not('.junction, .terminal').map(n=>{const b=n.data('box');return {id:n.id(),x:n.position('x')+(b?(b.x1+b.x2)/2:0),y:n.position('y')+(b?(b.y1+b.y2)/2:0),w:b?b.x2-b.x1:n.width(),h:b?b.y2-b.y1:n.height()}}),
       routes:cy.edges().map(e=>({points:e.data('routePoints'),rendered:[e.sourceEndpoint(),...(e.segmentPoints()||[]),e.targetEndpoint()],a:{p:e.source().position(),w:e.source().width(),h:e.source().height(),anchorY:e.source().data('anchorY')},b:{p:e.target().position(),w:e.target().width(),h:e.target().height(),anchorY:e.target().data('anchorY')}}))
     })""")
     boxes = result["boxes"]

@@ -2,6 +2,9 @@
 let railOverrides = Object.create(null),
   railStorageKey;
 let graphPositioning = false;
+let dragSnapshot = null,
+  dragWorker = null,
+  dragTimer = null;
 let junctionFrame = null;
 const dirtyJunctionNets = new Set();
 let graphWorker = null,
@@ -97,8 +100,8 @@ function paintChain() {
   cy.elements().addClass("faded");
   cy.elements()
     .filter((e) =>
-      e.hasClass("transition")
-        ? currentChain.transitions.has(e.id())
+      e.hasClass("component")
+        ? e.data("pins").some((id) => currentChain.pins.has(id))
         : e.hasClass("module")
           ? e.data("pins").some((id) => currentChain.pins.has(id))
           : e.hasClass("pin")
@@ -191,7 +194,7 @@ function traceControls(pin) {
     return wrap;
   }
   wrap.append(
-    node("p", "选择此到达引脚的传播出口；虚线仅表示追踪跨越，不表示导通。"),
+    node("p", "选择此到达引脚的传播出口；高亮表示追踪范围，不表示导通。"),
   );
   const search = node("input");
   search.type = "search";
@@ -286,15 +289,6 @@ const graphStyles = [
       "text-background-padding": 3,
     },
   },
-  {
-    selector: ".transition",
-    style: {
-      "line-style": "dashed",
-      "line-color": "#a77632",
-      label: "追踪跨越",
-      color: "#87571e",
-    },
-  },
   { selector: ".approved", style: { "border-color": "#258363" } },
   {
     selector: ".issue",
@@ -322,7 +316,7 @@ const graphStyles = [
     style: { "background-color": "#d9e8ff", "border-width": 3 },
   },
   {
-    selector: ".pin, .net",
+    selector: ".pin, .net, .component",
     style: {
       "background-opacity": 0,
       "border-width": 0,
@@ -330,18 +324,33 @@ const graphStyles = [
       "background-width": "100%",
       "background-height": "100%",
       "background-fit": "contain",
-      "text-margin-y": -20,
-      "text-margin-x": 26,
+      "text-margin-y": "data(labelY)",
+      "text-margin-x": "data(labelX)",
       "font-size": 12,
       "text-background-opacity": 0,
     },
   },
   {
     selector: ".net",
-    style: { "text-margin-x": 0, "text-margin-y": -15, "font-size": 11 },
+    style: { "font-size": 11 },
   },
+  {
+    selector: ".component",
+    style: { "z-index": 0 },
+  },
+  { selector: ".terminal", style: { "z-index": 2 } },
   { selector: ".pin.dnp", style: { color: "#778493" } },
-  { selector: ".wire.show-label", style: { label: "data(label)" } },
+  {
+    selector: ".wire-label",
+    style: {
+      "background-opacity": 0,
+      "border-width": 0,
+      "font-size": 11,
+      "text-margin-x": 0,
+      "text-margin-y": 0,
+    },
+  },
+  { selector: ".wire-label.hidden-label", style: { label: "" } },
   { selector: ".compact", style: { label: "" } },
   {
     selector: ".junction",
@@ -392,15 +401,25 @@ function visiblePins() {
   );
 }
 function refreshSymbols() {
-  cy.nodes(".pin, .net").forEach((n) => {
+  cy.nodes(".pin, .net, .component").forEach((n) => {
     const image = ReviewSymbols.image({
-      category: n.data("category"),
+      category: n.data("symbolCategory") || n.data("category"),
+      terminal: n.hasClass("terminal"),
+      body: n.hasClass("component"),
+      halfSpan: n.data("halfSpan"),
+      angle: n.data("angle") || 0,
       width: n.data("width"),
       height: n.data("height"),
       anchorY: n.data("anchorY"),
-      status: n.data("key") ? entry(n.data("key")).status : "pending",
+      status: n.hasClass("component")
+        ? entry(n.data("partKey")).status
+        : n.data("key")
+          ? entry(n.data("key")).status
+          : "pending",
       dnp: n.hasClass("dnp"),
       nc: n.hasClass("nc"),
+      ground: n.hasClass("ground"),
+      groundOffsetX: n.data("groundOffsetX") || 0,
       net: n.hasClass("net"),
       emphasis: n.hasClass("highlight")
         ? "highlight"
@@ -430,7 +449,7 @@ function styleGraph() {
         entry(n.data("key")).status,
       );
     });
-    cy.edges(".wire").toggleClass("show-label", $("labels").checked);
+    cy.nodes(".wire-label").toggleClass("hidden-label", !$("labels").checked);
   });
   updateDetailLevel();
 }
@@ -443,6 +462,7 @@ function updateTraceSummary() {
     : "选择引脚后可追踪连接链";
 }
 function buildGraph() {
+  cancelDragRouting();
   if (junctionFrame !== null) cancelAnimationFrame(junctionFrame);
   junctionFrame = null;
   dirtyJunctionNets.clear();
@@ -554,7 +574,29 @@ function scheduleJunctions(netKeys) {
     refreshJunctions(changed);
   });
 }
+function measureGraphText(label, size) {
+  const cache = (measureGraphText.cache ||= new Map()),
+    key = size + "\0" + label;
+  if (cache.has(key)) return cache.get(key);
+  const canvas = (measureGraphText.canvas ||= document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+  context.font = `${size}px system-ui`;
+  const result = {
+    width:
+      Math.ceil(
+        Math.max(
+          0,
+          ...label.split("\n").map((line) => context.measureText(line).width),
+        ),
+      ) + 4,
+    height: label.split("\n").length * size * 1.2 + 4,
+  };
+  if (cache.size >= 50000) cache.clear();
+  cache.set(key, result);
+  return result;
+}
 function runGraphCalculation(model) {
+  ReviewGeometry.prepare(model, measureGraphText);
   const generation = layoutGeneration;
   $("graph-loading").hidden = false;
   $("cancel-layout").hidden = false;
@@ -578,15 +620,26 @@ function runGraphCalculation(model) {
         return;
       }
       cancelGraphCalculation();
-      const elements = [...model.nodes, ...model.edges];
+      const elements = [
+        ...data.modelNodes,
+        ...model.edges,
+        ...(data.labels || []),
+      ];
       graphPositioning = true;
       cy.batch(() => {
         cy.elements().remove();
         cy.add(elements);
         for (const n of data.nodes)
           cy.getElementById(n.id).position(n.position);
-        for (const e of data.edges)
-          applyWirePath(cy.getElementById(e.id), e.points);
+        for (const e of data.edges) {
+          const edge = cy.getElementById(e.id);
+          edge.data({
+            sourceOffset: e.sourceOffset,
+            targetOffset: e.targetOffset,
+            validationPoints: e.validationPoints,
+          });
+          applyWirePath(edge, e.points);
+        }
       });
       graphPositioning = false;
       Object.assign(graphMetrics, data.metrics);
@@ -609,6 +662,7 @@ function runGraphCalculation(model) {
       }
     };
     graphWorker.postMessage({
+      viewport: { width: cy.width(), height: cy.height() },
       nodes: model.nodes,
       edges: model.edges,
       root: traceRoot ? "pin:" + traceRoot : null,
@@ -616,6 +670,76 @@ function runGraphCalculation(model) {
   } catch (e) {
     fail("布局失败：" + e.message);
   }
+}
+function restoreDrag() {
+  if (!dragSnapshot) return;
+  graphPositioning = true;
+  cy.batch(() => {
+    for (const n of dragSnapshot.nodes)
+      cy.getElementById(n.id).position(n.position);
+    for (const e of dragSnapshot.edges)
+      applyWirePath(cy.getElementById(e.id), e.points);
+  });
+  graphPositioning = false;
+  refreshJunctions();
+  dragSnapshot = null;
+}
+function cancelDragRouting() {
+  if (dragWorker) {
+    dragWorker.terminate();
+    dragWorker = null;
+    clearTimeout(dragTimer);
+    restoreDrag();
+  }
+}
+function finishDragRouting() {
+  if (!dragSnapshot) return;
+  const worker = (dragWorker = new Worker("/graph-worker.js"));
+  const fail = (message) => {
+    if (dragWorker !== worker) return;
+    cancelDragRouting();
+    $("layout-warning").textContent = "移动已撤回：" + message;
+  };
+  worker.onerror = () => fail("重新布线失败");
+  dragTimer = setTimeout(() => fail("重新布线超时"), 5000);
+  $("layout-warning").textContent = "正在检查移动位置并重新布线…";
+  worker.onmessage = ({ data }) => {
+    if (dragWorker !== worker) return;
+    if (data.error) {
+      fail(data.error);
+      return;
+    }
+    worker.terminate();
+    dragWorker = null;
+    clearTimeout(dragTimer);
+    dragSnapshot = null;
+    cy.batch(() => {
+      cy.nodes(".wire-label").remove();
+      cy.add(data.labels);
+      for (const e of data.edges) {
+        const edge = cy.getElementById(e.id);
+        edge.data("validationPoints", e.validationPoints);
+        applyWirePath(edge, e.points);
+      }
+    });
+    Object.assign(graphMetrics, data.metrics);
+    refreshJunctions();
+    styleGraph();
+    paintChain();
+    $("layout-warning").textContent = "";
+  };
+  worker.postMessage({
+    mode: "route",
+    nodes: cy
+      .nodes()
+      .not(".junction, .wire-label")
+      .map((n) => ({
+        data: n.data(),
+        classes: n.classes().join(" "),
+        position: { ...n.position() },
+      })),
+    edges: cy.edges().map((e) => ({ data: e.data() })),
+  });
 }
 function runLayout() {
   buildGraph();
@@ -682,10 +806,48 @@ function initGraph() {
     if (e.data("objectKey")) selectObject(e.data("objectKey"));
     else if (e.data("partKey")) selectObject(e.data("partKey"));
   });
-  cy.on("grab", "node", () => cancelGraphCalculation());
+  cy.on("grab", "node", () => {
+    cancelGraphCalculation();
+    cancelDragRouting();
+    dragSnapshot = {
+      nodes: cy
+        .nodes()
+        .not(".junction")
+        .map((n) => ({ id: n.id(), position: { ...n.position() } })),
+      edges: cy
+        .edges()
+        .map((e) => ({ id: e.id(), points: e.data("routePoints") })),
+    };
+  });
+  cy.on("free", "node", finishDragRouting);
   cy.on("position", "node", ({ target: n }) => {
     if (graphPositioning || n.hasClass("junction")) return;
-    n.connectedEdges().forEach((e) => {
+    let moved = n;
+    const body = n.data("bodyId")
+      ? cy.getElementById(n.data("bodyId"))
+      : n.hasClass("component")
+        ? n
+        : null;
+    if (body) {
+      const center = {
+        x: n.position("x") - (n.data("offsetX") || 0),
+        y: n.position("y") - (n.data("offsetY") || 0),
+      };
+      const terminals = cy
+        .nodes(".terminal")
+        .filter((t) => t.data("bodyId") === body.id());
+      graphPositioning = true;
+      body.position(center);
+      terminals.forEach((t) =>
+        t.position({
+          x: center.x + t.data("offsetX"),
+          y: center.y + (t.data("offsetY") || 0),
+        }),
+      );
+      graphPositioning = false;
+      moved = body.union(terminals);
+    }
+    moved.connectedEdges().forEach((e) => {
       const endpoint = (n, other) =>
         n.data("anchorY") !== undefined
           ? { x: n.position("x"), y: n.position("y") + n.data("anchorY") }
@@ -702,7 +864,9 @@ function initGraph() {
       const mid = (a.x + b.x) / 2;
       applyWirePath(e, [a, { x: mid, y: a.y }, { x: mid, y: b.y }, b]);
     });
-    scheduleJunctions(n.connectedEdges(".wire").map((e) => e.data("netKey")));
+    scheduleJunctions(
+      moved.connectedEdges(".wire").map((e) => e.data("netKey")),
+    );
   });
   cy.on("zoom", updateDetailLevel);
   cy.on("select unselect", "node", (ev) => {

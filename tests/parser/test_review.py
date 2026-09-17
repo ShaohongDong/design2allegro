@@ -219,6 +219,8 @@ def test_http_api_static_assets_and_conflicts(delivered, tmp_path):
                 "/style.css",
                 "/app.js",
                 "/graph-model.js",
+                "/graph-geometry.js",
+                "/graph-routing.js",
                 "/graph-symbols.js",
                 "/graph.js",
                 "/graph-worker.js",

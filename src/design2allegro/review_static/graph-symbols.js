@@ -1,5 +1,5 @@
 "use strict";
-// Category badges, not component bodies: no inferred polarity or pin assignment.
+// Pin badges and two-terminal bodies. Polarity is bound by the model, not guessed.
 const ReviewSymbols = (() => {
   const shapes = {
     resistor:
@@ -54,8 +54,14 @@ const ReviewSymbols = (() => {
     status = "pending",
     dnp = false,
     nc = false,
+    ground = false,
+    groundOffsetX = 0,
     emphasis = "",
     net = false,
+    terminal = false,
+    body = false,
+    halfSpan = 0,
+    angle = 0,
   }) {
     if (!Object.hasOwn(shapes, category)) category = "generic";
     const key = JSON.stringify([
@@ -66,8 +72,14 @@ const ReviewSymbols = (() => {
       status,
       dnp,
       nc,
+      ground,
+      groundOffsetX,
       emphasis,
       net,
+      terminal,
+      body,
+      halfSpan,
+      angle,
     ]);
     if (cache.has(key)) return cache.get(key);
     const x = width / 2,
@@ -83,22 +95,52 @@ const ReviewSymbols = (() => {
             : color;
     const halo =
       emphasis === "highlight" ? "#dc8c22" : emphasis ? "#3475bd" : null;
-    const glyph = net
+    const glyph =
+      net || terminal || body
+        ? ""
+        : `<g transform="translate(12 6) scale(.8)" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${shapes[category]}</g>`;
+    const ring =
+      halo && !body
+        ? `<circle cx="${x}" cy="${y}" r="12" fill="${halo}" fill-opacity=".12" stroke="${halo}" stroke-width="1.5"/>`
+        : "";
+    const anchor = body
       ? ""
-      : `<g transform="translate(12 6) scale(.8)" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${shapes[category]}</g>`;
-    const ring = halo
-      ? `<circle cx="${x}" cy="${y}" r="12" fill="${halo}" fill-opacity=".12" stroke="${halo}" stroke-width="1.5"/>`
-      : "";
-    const anchor = nc
-      ? `<path d="M${x - 4} ${y - 4}l8 8m0-8-8 8" stroke="${state}" stroke-width="2"/>`
-      : `<circle cx="${x}" cy="${y}" r="${net ? 3.5 : 4}" fill="${state}" stroke="white" stroke-width="1.2"/>`;
+      : nc
+        ? `<path d="M${x - 4} ${y - 4}l8 8m0-8-8 8" stroke="${state}" stroke-width="2"/>`
+        : `<circle cx="${x}" cy="${y}" r="${net ? 3.5 : 4}" fill="${state}" stroke="white" stroke-width="1.2"/>`;
     const mark =
       status === "approved"
         ? `<path d="M${x + 9} ${y + 8}l3 3 6-7" fill="none" stroke="${state}" stroke-width="1.8"/>`
         : status === "issue"
           ? `<path d="M${x + 13} ${y + 4}v6m0 3v1" stroke="${state}" stroke-width="2"/>`
           : "";
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${glyph}${ring}${anchor}${mark}</svg>`;
+    // Local termination belongs to the pin, so dragging and filtering cannot
+    // separate it from its anchor or introduce another review object.
+    const groundSymbol =
+      ground && !nc && !net
+        ? `<path data-role="ground" d="M${x} ${y}h${groundOffsetX}v24m-12 0h24m-20 5h16m-12 5h8" fill="none" stroke="${halo || state}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+        : "";
+    const bodyShapes = {
+      resistor: shapes.resistor,
+      capacitor: shapes.capacitor,
+      inductor:
+        '<path d="M2 20h6c0-19 8-19 8 0 0-19 8-19 8 0 0-19 8-19 8 0 0-19 8-19 8 0h6"/>',
+      ferrite: shapes.ferrite,
+      crystal: shapes.crystal,
+      diode: shapes.diode,
+      led: '<path d="M2 20h12m20 0h12M14 9v22l20-11zM34 8v24M24 5l7-7m-5 0h5v5m4 5 7-7m-5 0h5v5"/>',
+      switch:
+        '<path d="M2 20h10m24 0h10M13 17 33 1"/><circle cx="12" cy="20" r="2.5"/><circle cx="36" cy="20" r="2.5"/>',
+      jumper:
+        '<path d="M2 20h10m24 0h10M12 17V1h24v16"/><circle cx="12" cy="20" r="3"/><circle cx="36" cy="20" r="3"/>',
+    };
+    const bodyGlyph = body
+      ? `<g data-role="component" transform="rotate(${angle} ${x} ${y})" fill="none" stroke="${halo || state}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M${x - halfSpan} ${y}H${x - 44}M${x + 44} ${y}H${x + halfSpan}"/><g transform="translate(${x - 48} ${y - 40}) scale(2)">${bodyShapes[category] || '<path d="M2 20h8m28 0h8"/><rect x="10" y="9" width="28" height="22"/>'}</g></g>`
+      : "";
+    const statusMark = body
+      ? `<g transform="translate(0 38)">${mark}</g>`
+      : mark;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">${glyph}${bodyGlyph}${groundSymbol}${ring}${anchor}${statusMark}</svg>`;
     const uri = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
     // Avoid retaining unlimited label-width variants across repeated package views.
     if (cache.size >= 2048) cache.clear();

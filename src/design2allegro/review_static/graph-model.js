@@ -117,7 +117,9 @@ const ReviewGraphModel = (() => {
         ? " × NC"
         : role === "signal"
           ? ""
-          : ` ${role === "ground" ? "⏚" : "↑"} ${pin.net}`;
+          : role === "ground"
+            ? ` ${pin.net}`
+            : ` ↑ ${pin.net}`;
       const lines = [
         `${pin.reference}.${pin.num} · ${pin.name}`,
         `${group || "顶层"}${part.assembly === "dnp" ? " · DNP" : ""}${suffix}`,
@@ -130,13 +132,13 @@ const ReviewGraphModel = (() => {
           pinId: pin.id,
           partKey: part.key,
           category: part.category || "generic",
-          anchorY: 10,
+          anchorY: 0,
           group,
           netKey: pin.nc ? null : "net:" + pin.net,
           role,
           label: lines.join("\n"),
-          width: Math.max(210, ...lines.map((s) => [...s].length * 12 + 84)),
-          height: 86,
+          width: 56,
+          height: 90,
         },
         classes: "pin " + role + (part.assembly === "dnp" ? " dnp" : ""),
       });
@@ -175,8 +177,8 @@ const ReviewGraphModel = (() => {
             objectKey: netKey,
             netKey,
             label,
-            width: Math.max(100, [...label].length * 12 + 24),
-            height: 48,
+            width: 20,
+            height: 20,
             anchorY: 0,
           },
           classes: "net",
@@ -191,21 +193,57 @@ const ReviewGraphModel = (() => {
           );
       }
     }
-    const crosses = new Map(chain.transitions);
-    if (!onlyTrace) {
-      for (const pin of Object.values(pkg.pins))
-        for (const other of exits(pkg, pin.id, choices))
-          crosses.set(transitionId(pin.id, other), [pin.id, other]);
-    }
-    for (const [id, [a, b]] of crosses) {
-      if (!represented.has(a) || !represented.has(b)) continue;
-      addEdge(
-        id,
-        represented.get(a),
-        represented.get(b),
-        { label: "追踪跨越", pins: [a, b], partKey: "part:" + pkg.pins[a].ref },
-        "transition",
-      );
+    // Keep real pin identities for review and net membership. Only complete,
+    // visible pairs receive a body; the worker lays each pair out as one unit.
+    const pinNodes = new Map(
+      nodes.filter((n) => n.data.pinId).map((n) => [n.data.pinId, n]),
+    );
+    for (const part of Object.values(pkg.parts)) {
+      if (part.pins.length !== 2 || !part.pins.every((id) => pinNodes.has(id)))
+        continue;
+      let pair = [...part.pins].sort();
+      let symbolCategory = part.category || "generic";
+      if (["diode", "led"].includes(symbolCategory)) {
+        const anode = pair.find((id) => /^(A|ANODE)$/i.test(pkg.pins[id].name));
+        const cathode = pair.find((id) =>
+          /^(K|C|CATHODE)$/i.test(pkg.pins[id].name),
+        );
+        if (anode && cathode && anode !== cathode) pair = [anode, cathode];
+        else symbolCategory = "generic";
+      }
+      const id = "body:" + part.key;
+      const endpoints = pair.map((id) => pinNodes.get(id));
+      const halfSpan = 62;
+      const value =
+        part.value ||
+        Object.entries(part.properties || {}).find(([k]) =>
+          ["resistance", "capacitance", "inductance", "frequency"].includes(k),
+        )?.[1] ||
+        "";
+      const label = `${part.reference} · ${part.category}\n${value}${part.assembly === "dnp" ? " · DNP" : ""}`;
+      nodes.push({
+        data: {
+          id,
+          objectKey: part.key,
+          partKey: part.key,
+          category: part.category,
+          symbolCategory,
+          pins: pair,
+          label,
+          width: 148,
+          height: 148,
+          anchorY: 0,
+          halfSpan,
+        },
+        classes: "component" + (part.assembly === "dnp" ? " dnp" : ""),
+        selectable: false,
+      });
+      endpoints.forEach((n, i) => {
+        n.data.bodyId = id;
+        n.data.offsetX = (i ? 1 : -1) * halfSpan;
+        n.data.side = i ? "E" : "W";
+        n.classes += " terminal";
+      });
     }
     return { nodes, edges, chain };
   }

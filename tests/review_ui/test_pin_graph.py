@@ -200,7 +200,8 @@ def test_trace_controls_multiselect_and_clear(graph_page):
     page.locator("#apply-trace-exits").click()
     expect(page.locator("#graph-loading")).to_be_hidden()
     assert page.evaluate("(id)=>currentChain.pins.has(id)", first)
-    assert page.evaluate('cy.edges(".transition").length') > 0
+    assert page.evaluate('cy.edges(".transition").length') == 0
+    assert page.evaluate("currentChain.transitions.size") > 0
     page.locator(f'.trace-exits input[value="{first}"]').uncheck()
     page.locator("#apply-trace-exits").click()
     expect(page.locator("#graph-loading")).to_be_hidden()
@@ -260,15 +261,13 @@ def test_pin_visuals_and_readable_bounds(graph_page, width, height):
     expect(page.locator("#graph-loading")).to_be_hidden()
     assert page.evaluate("document.documentElement.scrollWidth") == width
     assert page.locator("#graph").bounding_box()["width"] > 400
-    # Labels use conservative measured character widths, inside independent cards.
-    assert page.evaluate("""cy.nodes('.pin').every(n=>{
-      const b=n.boundingBox({includeLabels:true,includeOverlays:false});
-      return b.w <= n.width()+5 && b.h <= n.height()+5;
-    })""")
+    # Labels are independent of hit boxes, but must fit the measured layout envelope.
     assert page.evaluate(
         """cy.nodes('.pin').filter(n=>!n.hasClass('compact')).every(n=>{
+      const owner=n.data('bodyId')?cy.getElementById(n.data('bodyId')):n;
+      const box=owner.data('box'),p=owner.position();
       const b=n.boundingBox({includeNodes:false,includeLabels:true,includeOverlays:false});
-      return b.x1 >= n.position('x')-n.width()/2+50 && b.y2 <= n.position('y')+n.data('anchorY')-8;
+      return b.x1>=p.x+box.x1-1 && b.x2<=p.x+box.x2+1 && b.y1>=p.y+box.y1-1 && b.y2<=p.y+box.y2+1;
     })"""
     )
     ARTIFACT.mkdir(parents=True, exist_ok=True)
@@ -358,10 +357,14 @@ def test_category_symbols_states_and_fallback(graph_page):
       n.data('category')===pkg.parts[pkg.pins[n.data('pinId')].ref].category &&
       n.style('background-opacity')==='0' && n.style('border-width')==='0px')""")
     images = page.evaluate("""()=>Object.fromEntries(Object.values(pkg.parts).map(p=>{
-      const n=cy.getElementById('pin:'+p.pins[0]);return [p.category,n.data('image')];
+      const pin=cy.getElementById('pin:'+p.pins[0]);
+      const n=pin.data('bodyId') ? cy.getElementById(pin.data('bodyId')) : pin;
+      return [p.category,n.data('image')];
     }))""")
     assert len(images) == 14
-    assert len(set(images.values())) == 14
+    assert (
+        len(set(images.values())) >= 12
+    )  # Unknown diode/LED polarity uses a neutral body.
     assert all(value.startswith("data:image/svg+xml") for value in images.values())
     assert page.evaluate("""()=>{
       const options={width:210,height:86,anchorY:10};
@@ -423,3 +426,166 @@ def test_symbol_drag_keeps_rendered_wires_at_anchor(graph_page):
             assert abs(a["x"] - b["x"]) < 0.1 or abs(a["y"] - b["y"]) < 0.1
     page.locator("#layout").click()
     expect(page.locator("#graph-loading")).to_be_hidden()
+
+
+def test_local_ground_symbols_bounds_drag_and_override(graph_page):
+    page, server = graph_page
+    grounds = page.evaluate("""()=>cy.nodes('.ground').map(n=>{
+      const svg=new DOMParser().parseFromString(
+        decodeURIComponent(n.data('image').split(',')[1]),'image/svg+xml').documentElement;
+      document.body.appendChild(svg);
+      const path=svg.querySelector('[data-role="ground"]'), box=path.getBBox();
+      const start=path.getPointAtLength(0), circle=svg.querySelector(':scope > circle:last-of-type');
+      const result={key:n.id(),net:n.data('netKey'),label:n.data('label'),
+        start:{x:start.x,y:start.y},
+        anchor:{x:Number(circle.getAttribute('cx')),y:Number(circle.getAttribute('cy'))},
+        inside:box.x>=1 && box.y>=1 && box.x+box.width<n.width()-1 && box.y+box.height<n.height()-1};
+      svg.remove();return result;
+    })""")
+    assert len(grounds) == sum(
+        len(server.package["nets"][name]["pins"]) for name in ("GND", "AGND")
+    )
+    for ground in grounds:
+        assert ground["start"] == ground["anchor"]
+        assert ground["inside"]
+        assert ground["net"][4:] in ground["label"]
+        assert "⏚" not in ground["label"]
+    assert page.evaluate(
+        """cy.nodes('.pin').every(n=>
+      decodeURIComponent(n.data('image')).includes('data-role="ground"')===n.hasClass('ground'))"""
+    )
+    key = grounds[0]["key"]
+    assert page.evaluate(
+        """key=>{
+      const n=cy.getElementById(key), image=n.data('image'), p={...n.position()};
+      n.emit('grab');n.position({x:p.x+80,y:p.y+45});n.emit('free');
+      cy.zoom(.4);updateDetailLevel();
+      return n.position('x')===p.x+80 && n.position('y')===p.y+45 &&
+        n.data('image')===image && n.hasClass('compact');
+    }""",
+        key,
+    )
+    page.evaluate("key=>{cy.zoom(1);cy.center(cy.getElementById(key))}", key)
+    page.wait_for_timeout(250)  # Allow the canvas to repaint at the new zoom.
+    ARTIFACT.mkdir(parents=True, exist_ok=True)
+    page.screenshot(path=str(ARTIFACT / "local-ground.png"))
+    page.evaluate('selectObject("net:AGND")')
+    page.locator("#net-display-role").select_option("signal")
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate(
+        """cy.nodes('.pin').filter(n=>n.data('netKey')==='net:AGND').every(n=>
+      !decodeURIComponent(n.data('image')).includes('data-role="ground"'))"""
+    )
+    assert page.evaluate('cy.edges(".wire").some(e=>e.data("netKey")==="net:AGND")')
+    page.locator("#net-display-role").select_option("ground")
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.evaluate(
+        """cy.nodes('.pin').filter(n=>n.data('netKey')==='net:AGND').every(n=>
+      decodeURIComponent(n.data('image')).includes('data-role="ground"'))"""
+    )
+    assert page.evaluate('cy.edges(".wire").every(e=>e.data("netKey")!=="net:AGND")')
+
+
+def test_two_terminal_bodies_drag_review_and_partial_visibility(graph_page):
+    page, server = graph_page
+    assert page.evaluate('cy.edges(".transition").length') == 0
+    assert page.evaluate('cy.nodes(".component").length') == sum(
+        len(p["pins"]) == 2 for p in server.package["parts"].values()
+    )
+    assert page.evaluate("""cy.nodes('.component').every(body=>{
+      const pins=body.data('pins').map(id=>cy.getElementById('pin:'+id));
+      return !body.selectable() && pins.every((p,i)=>
+        p.data('bodyId')===body.id() && Math.abs(p.position('y')-body.position('y')-p.data('offsetY'))<.01 &&
+        Math.abs(p.position('x')-body.position('x')-p.data('offsetX'))<.01 &&
+        !decodeURIComponent(p.data('image')).includes('<g transform='));
+    })""")
+    key = "body:part:resistor"
+    for target in (key, "pin:" + server.package["parts"]["resistor"]["pins"][0]):
+        assert page.evaluate(
+            """id=>{
+          const n=cy.getElementById(id), body=n.hasClass('component')?n:cy.getElementById(n.data('bodyId'));
+          const group=body.union(cy.nodes('.terminal').filter(p=>p.data('bodyId')===body.id()));
+          const before=group.map(p=>({...p.position()}));
+          n.emit('grab');n.position({x:n.position('x')+71,y:n.position('y')+29});
+          const moved=group.every((p,i)=>Math.abs(p.position('x')-before[i].x-71)<.01 && Math.abs(p.position('y')-before[i].y-29)<.01);
+          n.emit('free');return moved;
+        }""",
+            target,
+        )
+        # A colliding drop may roll back; the preview must still move the whole body.
+        expect(page.locator("#layout-warning")).not_to_have_text(
+            "正在检查移动位置并重新布线…", timeout=10000
+        )
+    page.evaluate("id=>{cy.zoom(1);cy.center(cy.getElementById(id))}", key)
+    page.wait_for_timeout(250)
+    position = page.evaluate("id=>cy.getElementById(id).renderedPosition()", key)
+    bounds = page.locator("#graph").bounding_box()
+    page.mouse.click(bounds["x"] + position["x"], bounds["y"] + position["y"] + 10)
+    assert page.evaluate("currentKey") == "part:resistor"
+    page.locator("#review-status").select_option("approved")
+    expect(page.locator("#save-state")).to_contain_text("已保存")
+    assert server.store.read()["entries"]["part:resistor"]["status"] == "approved"
+    assert "268168" in page.evaluate(
+        "id=>decodeURIComponent(cy.getElementById(id).data('image'))", key
+    )
+    pin = "pin:" + server.package["parts"]["resistor"]["pins"][0]
+    position = page.evaluate("id=>cy.getElementById(id).renderedPosition()", pin)
+    page.mouse.click(bounds["x"] + position["x"], bounds["y"] + position["y"] + 10)
+    assert page.evaluate("currentKey") == pin
+    assert page.evaluate("""()=>{
+      const id=pkg.parts.resistor.pins[0];
+      const m=ReviewGraphModel.topology(pkg,{visible:new Set([id])});
+      return m.nodes.filter(n=>n.classes.includes('component')).length===0 &&
+        m.nodes.filter(n=>n.data.pinId).length===1 && !m.nodes.find(n=>n.data.pinId).data.bodyId;
+    }""")
+    page.evaluate("()=>{cy.nodes().select();syncSelection()}")
+    assert page.evaluate('[...selected].every(k=>k.startsWith("pin:"))')
+
+
+def test_two_terminal_polarity_same_net_nc_and_dnp(graph_page):
+    page, _ = graph_page
+    assert page.evaluate("""()=>{
+      const copy=structuredClone(pkg), d=copy.parts.diode;
+      copy.pins[d.pins[0]].name='K';copy.pins[d.pins[1]].name='A';
+      const body=ReviewGraphModel.topology(copy).nodes.find(n=>n.data.partKey===d.key && n.classes==='component');
+      return body.data.symbolCategory==='diode' && body.data.pins[0]===d.pins[1] &&
+        cy.getElementById('body:'+d.key).data('symbolCategory')==='generic';
+    }""")
+    page.evaluate("""()=>{
+      const pins=pkg.parts.resistor.pins;
+      for(const id of pins){
+        const p=pkg.pins[id];pkg.nets[p.net].pins=pkg.nets[p.net].pins.filter(x=>x!==id);p.net='PAIR';
+      }
+      pkg.nets.PAIR={name:'PAIR',key:'net:PAIR',pins,aliases:[]};
+      const nc=pkg.pins[pkg.parts.capacitor.pins[1]];
+      pkg.nets[nc.net].pins=pkg.nets[nc.net].pins.filter(x=>x!==nc.id);nc.nc=true;nc.net=null;
+      buildGraph();
+    }""")
+    expect(page.locator("#graph-loading")).to_be_hidden()
+    assert page.locator("#layout-warning").inner_text() == ""
+    assert page.evaluate('cy.getElementById("body:part:capacitor").hasClass("dnp")')
+    assert page.evaluate('cy.nodes(".terminal.nc").length') == 1
+    assert page.evaluate(
+        """cy.edges('.wire').filter(e=>e.data('netKey')==='net:PAIR').every(e=>{
+      const pts=e.data('routePoints'),a=e.source(),b=e.target();
+      return pts[0].x===a.position('x') && pts[0].y===a.position('y')+a.data('anchorY') &&
+        pts.at(-1).x===b.position('x') && pts.at(-1).y===b.position('y')+b.data('anchorY');
+    })"""
+    )
+
+
+@pytest.mark.parametrize("width,height", [(1280, 800), (1440, 900), (1920, 1080)])
+def test_two_terminal_visual_bounds(graph_page, width, height):
+    page, _ = graph_page
+    page.set_viewport_size({"width": width, "height": height})
+    page.evaluate("""()=>{
+      cy.zoom(1);cy.center(cy.getElementById('body:part:resistor'));
+    }""")
+    page.wait_for_timeout(250)
+    assert page.evaluate("""cy.nodes('.component').every(n=>{
+      const b=n.boundingBox({includeNodes:false,includeLabels:true,includeOverlays:false});
+      const box=n.data('box'),p=n.position();
+      return b.x1>=p.x+box.x1-1 && b.x2<=p.x+box.x2+1 && b.y1>=p.y+box.y1-1 && b.y2<=p.y+box.y2+1;
+    })""")
+    ARTIFACT.mkdir(parents=True, exist_ok=True)
+    page.screenshot(path=str(ARTIFACT / f"two-terminal-{width}.png"))

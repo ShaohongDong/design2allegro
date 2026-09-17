@@ -105,6 +105,8 @@ def verify_review(entry, package, work, env):
                 "/",
                 "/app.js",
                 "/graph-model.js",
+                "/graph-geometry.js",
+                "/graph-routing.js",
                 "/graph-symbols.js",
                 "/graph.js",
                 "/graph-worker.js",
