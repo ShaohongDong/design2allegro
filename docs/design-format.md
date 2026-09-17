@@ -38,6 +38,53 @@ of filenames. Generated `components.json`, BOM, PINOUT and FOOTPRINTS are output
 not inputs. Neither assigned references nor project-local component definitions
 are accepted.
 
+## Final netlist expectations
+
+Both language versions accept an optional board field:
+
+```text
+netlist_expectations = "netlist.expected.json";
+```
+
+The path is relative to the entrypoint directory (including `../`); absolute
+paths are rejected. The JSON file is a complete physical contract, for example:
+
+```json
+{
+  "version": 1,
+  "board_id": "my-board",
+  "parts": {
+    "R1": {"package": "0603R", "pins": ["1", "2"]}
+  },
+  "nets": {"RESET": ["R1.1"]},
+  "nc": ["R1.2"]
+}
+```
+
+Use the actual assigned references, physical pad numbers and encoded Telesis net
+names. These references assert expected output; they do not assign references.
+Every physical pin must appear exactly once across the networks and NC list.
+Unknown fields, duplicate JSON keys, duplicate members, unknown pins, incomplete
+coverage, unsupported versions and a different board ID are errors. Object and
+array order do not affect matching. Device hash names are not part of this contract.
+
+Loading validates and freezes the contract and records the source file's SHA-256
+in input provenance. `check` validates its format and coverage, but does not
+produce or compare a final netlist. `build` independently reads the generated
+Telesis and device files before publication and compares all packages, pins,
+net names, network members and unconnected pins. Failure reports concrete
+differences, returns CLI exit code 2, and preserves the previous output and
+reference lock. Existing electrical rules remain in effect.
+
+The package includes a canonical `netlist.expected.json` copy protected by the
+manifest and checked against the frozen snapshot. `verify` repeats the physical
+comparison using that copy, even without the original project. Designs and older
+packages without a contract keep their existing verification behavior. Builds
+never regenerate the source contract: review and update it explicitly when the
+intended board changes. This is offline verification, not an Allegro import test.
+
+## Source syntax
+
 Source is UTF-8, with `//` comments and insignificant whitespace. Braces delimit
 blocks; assignments and connections end with `;`. Double-quoted strings use JSON
 escapes. Bare words are strings, except `true`, `false` and `null`. Numbers may use

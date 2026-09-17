@@ -458,10 +458,15 @@ class Parser:
                 board_seen = True
                 name = self.name()
                 body = self.block()
-                if set(body) - {"id", "library", "top"}:
+                if set(body) - {"id", "library", "top", "netlist_expectations"}:
                     self.error(
                         "Additional properties are not allowed in board: "
-                        + str(sorted(set(body) - {"id", "library", "top"})),
+                        + str(
+                            sorted(
+                                set(body)
+                                - {"id", "library", "top", "netlist_expectations"}
+                            )
+                        ),
                         source,
                     )
                 self.put(body, "name", name, source)

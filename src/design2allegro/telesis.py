@@ -188,6 +188,10 @@ def export(
     content.update(
         {"devices/" + dev + ".txt": text for dev, text in device_text.items()}
     )
+    if "netlist_expectations" in data:
+        from .expectations import FILENAME
+
+        content[FILENAME] = canonical(data["netlist_expectations"]) + "\n"
     if data.get("version") == 2:
         from .artifacts import generate
 

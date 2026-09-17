@@ -303,6 +303,8 @@ def compile_design(design):
         "net_aliases": aliases,
         "inputs": design.inputs,
     }
+    if design.netlist_expectations is not None:
+        data["netlist_expectations"] = design.netlist_expectations
     return CompiledDesign(
         canonical(data),
         canonical(resolve_rules(design.rules, data)),

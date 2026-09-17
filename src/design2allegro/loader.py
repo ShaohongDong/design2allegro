@@ -59,6 +59,7 @@ class LoadedDesign:
     name: str = "design"
     path: str = ""
     catalog: dict | None = None
+    netlist_expectations: dict | None = None
 
 
 def load_design(path, *, library_root=None):
@@ -71,6 +72,16 @@ def load_design(path, *, library_root=None):
 
     document = load_source(path, inputs)
     validate(document, "design")
+    expectations = None
+    if "netlist_expectations" in document:
+        from .expectations import load_expectations
+
+        relative = Path(document["netlist_expectations"])
+        if relative.is_absolute():
+            fail("netlist_expectations must be a relative path", document)
+        expected_path = (path.parent / relative).resolve()
+        expectations, checksum = load_expectations(expected_path, document["id"])
+        inputs[str(expected_path)] = checksum
     from .catalog import load_catalog
 
     catalog = load_catalog(document["library"], inputs, library_root)
@@ -86,4 +97,5 @@ def load_design(path, *, library_root=None):
         document["name"],
         str(path),
         catalog,
+        expectations,
     )

@@ -11,6 +11,7 @@ board "nucleo_l432kc" {
     top = "board";
     id = "nucleo-l432kc";
     library = "standard@2";
+    netlist_expectations = "netlist.expected.json";
 }
 
 module board {

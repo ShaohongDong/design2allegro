@@ -166,6 +166,7 @@ def _verify_package(directory, expected=None):
         raise NetlistFormatError("manifest net mapping differs from circuit")
     inverse_refs = {v: k for k, v in references.items()}
     physical = set()
+    actual_terminals = {}
     for ref, package in packages.items():
         device, terminals = parse_device(
             (root / "devices" / (package["device"] + ".txt")).read_text()
@@ -187,11 +188,27 @@ def _verify_package(directory, expected=None):
         if terminals != want_terminals:
             raise NetlistFormatError("device terminals differ from circuit")
         physical.update(ref + "." + n for n in terminals)
+        actual_terminals[ref] = terminals
     for endpoints in nets.values():
         if not endpoints <= physical:
             raise NetlistFormatError("net references unknown physical pin")
     if physical != set(manifest["pins"].values()):
         raise NetlistFormatError("physical inventory differs from manifest")
+    from .expectations import FILENAME, compare_netlist, load_expectations
+
+    if "netlist_expectations" in expected:
+        if FILENAME not in manifest["files"]:
+            raise NetlistFormatError("missing final netlist expectations")
+        contract, _ = load_expectations(root / FILENAME, expected["board_id"])
+        if contract != expected["netlist_expectations"]:
+            raise NetlistFormatError(
+                "delivered netlist expectations differ from snapshot"
+            )
+        compare_netlist(
+            contract, expected["board_id"], packages, actual_terminals, nets
+        )
+    elif FILENAME in manifest["files"]:
+        raise NetlistFormatError("unexpected final netlist expectations")
     if expected is not None:
         if set(packages) != set(manifest["references"].values()):
             raise NetlistFormatError("reference inventory mismatch")
