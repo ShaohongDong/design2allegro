@@ -104,19 +104,9 @@ def verify_review(entry, package, work, env):
             for resource in (
                 "/",
                 "/app.js",
-                "/graph-model.js",
-                "/graph-geometry.js",
-                "/graph-routing.js",
-                "/graph-symbols.js",
-                "/graph.js",
-                "/graph-worker.js",
-                "/vendor/elk-api.js",
-                "/vendor/elk-worker.min.js",
-                "/vendor/LICENSE.elk",
-                "/vendor/README.elk",
+                "/records.js",
+                "/tables.js",
                 "/style.css",
-                "/vendor/cytoscape.min.js",
-                "/vendor/LICENSE.cytoscape",
             ):
                 with urlopen(url + resource, timeout=5) as response:
                     assert response.status == 200 and response.read()

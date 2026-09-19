@@ -16,7 +16,7 @@ and `verify` workflow, separate from kernel regression tests.
 `make test-ui` runs the review browser tests on synthetic exported packages.
 Install the dev extra and run `.venv/bin/python -m playwright install chromium`
 once before running it. The local review server, persistence and HTTP API are
-covered by `make test`; browser interactions and large graph rendering are separate.
+covered by `make test`; browser interactions and large netlist table pagination are separate.
 
 `make example` builds/verifies the existing FPGA/SoC regression fixture and the multifile
 NUCLEO design with complete specifications and documented selections.

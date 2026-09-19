@@ -22,30 +22,11 @@ from .verify import verify_package
 STATUSES = {"pending", "approved", "issue"}
 MAX_BODY = 8 * 1024 * 1024
 STATIC = {
-    "/graph-geometry.js": ("graph-geometry.js", "text/javascript; charset=utf-8"),
-    "/graph-routing.js": ("graph-routing.js", "text/javascript; charset=utf-8"),
     "/": ("index.html", "text/html; charset=utf-8"),
-    "/graph-model.js": ("graph-model.js", "text/javascript; charset=utf-8"),
-    "/graph-symbols.js": ("graph-symbols.js", "text/javascript; charset=utf-8"),
-    "/graph.js": ("graph.js", "text/javascript; charset=utf-8"),
-    "/vendor/README.elk": ("vendor/README.elk", "text/plain; charset=utf-8"),
-    "/vendor/LICENSE.elk": ("vendor/LICENSE.elk", "text/plain; charset=utf-8"),
-    "/vendor/elk-api.js": ("vendor/elk-api.js", "text/javascript; charset=utf-8"),
-    "/vendor/elk-worker.min.js": (
-        "vendor/elk-worker.min.js",
-        "text/javascript; charset=utf-8",
-    ),
-    "/graph-worker.js": ("graph-worker.js", "text/javascript; charset=utf-8"),
     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
+    "/records.js": ("records.js", "text/javascript; charset=utf-8"),
+    "/tables.js": ("tables.js", "text/javascript; charset=utf-8"),
     "/style.css": ("style.css", "text/css; charset=utf-8"),
-    "/vendor/cytoscape.min.js": (
-        "vendor/cytoscape.min.js",
-        "text/javascript; charset=utf-8",
-    ),
-    "/vendor/LICENSE.cytoscape": (
-        "vendor/LICENSE.cytoscape",
-        "text/plain; charset=utf-8",
-    ),
 }
 
 
@@ -343,7 +324,7 @@ class ReviewHandler(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header(
             "Content-Security-Policy",
-            "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'",
+            "default-src 'self'; script-src 'self'; worker-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'",
         )
         if attachment:
             self.send_header(

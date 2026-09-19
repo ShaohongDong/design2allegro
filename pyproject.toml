@@ -22,7 +22,7 @@ where = ["src"]
 include = ["design2allegro*"]
 
 [tool.setuptools.package-data]
-design2allegro = ["schema.json", "libraries/*/*.json", "review_static/*", "review_static/vendor/*"]
+design2allegro = ["schema.json", "libraries/*/*.json", "review_static/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests/parser"]

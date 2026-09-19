@@ -5,151 +5,207 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>网表人工审查</title>
     <link rel="stylesheet" href="/style.css" />
-    <script defer src="/vendor/cytoscape.min.js"></script>
-    <script defer src="/graph-geometry.js"></script>
-    <script defer src="/graph-model.js"></script>
-    <script defer src="/graph-symbols.js"></script>
-    <script defer src="/graph.js"></script>
+    <script defer src="/records.js"></script>
+    <script defer src="/tables.js"></script>
     <script defer src="/app.js"></script>
   </head>
   <body>
     <header>
-      <div class="brand">
-        <span class="brand-icon">⊞</span>
-        <div>
-          <strong>网表审查</strong><small>DESIGN2ALLEGRO · LOCAL REVIEW</small>
-        </div>
-      </div>
-      <div id="board-name">正在载入交付包…</div>
-      <div class="header-actions">
-        <span class="readonly">设计只读</span
+      <div><strong>网表审查</strong><small>连接对照 · 设计只读</small></div>
+      <h1 id="board-name">正在载入交付包…</h1>
+      <div class="actions">
+        <button id="diagnostics">检查结果</button
         ><button id="export">导出记录</button
         ><button id="import">导入记录</button
         ><input
-          type="file"
           id="import-file"
+          type="file"
           accept=".json,application/json"
           hidden
         />
       </div>
     </header>
     <section class="overview">
-      <span id="inventory"></span><span class="divider"></span
-      ><span id="progress"></span
-      ><span class="save-state" id="save-state" role="status">正在连接…</span
+      <span id="inventory"></span
+      ><span id="save-state" role="status">正在连接…</span
       ><button id="retry" hidden>重试保存</button
-      ><button id="reload">刷新审查记录</button>
+      ><button id="reload">刷新记录</button>
     </section>
+    <section id="progress" aria-label="审核进度"></section>
     <div id="error" role="alert" hidden></div>
-    <main>
-      <aside class="navigator">
-        <div class="search-wrap">
-          <label for="search">查找对象</label
-          ><input
-            id="search"
-            type="search"
-            placeholder="位号、型号、网络、引脚…"
-            autocomplete="off"
-          />
+    <div class="navigation">
+      <button id="back" disabled>← 返回上一位置</button
+      ><span>选择引脚查看同网端点；选择端点定位元件</span
+      ><span id="navigation-message" role="status"></span>
+    </div>
+    <main id="workspace">
+      <section class="panel" id="left-panel" aria-label="元件引脚">
+        <div class="panel-heading">
+          <span class="step">01</span>
+          <h2>元件与引脚</h2>
         </div>
-        <nav class="tabs" aria-label="对象列表">
-          <button data-tab="parts" class="active">元件</button
-          ><button data-tab="nets">网络</button
-          ><button data-tab="diagnostics">检查结果</button>
-        </nav>
-        <div class="filters">
-          <select id="status-filter" aria-label="人工状态筛选">
-            <option value="all">全部审查状态</option>
-            <option value="pending">待审</option>
-            <option value="approved">通过</option>
-            <option value="issue">有问题</option></select
+        <div class="picker-filters">
+          <input
+            id="part-search"
+            type="search"
+            aria-label="查找元件"
+            placeholder="查找位号、型号、引脚或网名"
+          /><select id="module-filter" aria-label="模块筛选">
+            <option value="all">全部模块</option></select
           ><select id="assembly-filter" aria-label="装配筛选">
             <option value="all">全部装配</option>
             <option value="fitted">已装配</option>
             <option value="dnp">DNP</option></select
-          ><select id="diagnostic-filter" aria-label="检查结果筛选">
-            <option value="attention">需关注的检查</option>
-            <option value="all">全部检查</option>
-          </select>
+          ><select id="part-status" aria-label="元件审核状态"></select>
         </div>
-        <div class="list-heading">
-          <span id="list-count"></span
-          ><button id="select-page">选择本页</button>
+        <label class="picker-label"
+          >元件
+          <select id="part-picker" aria-label="选择元件"></select
+        ></label>
+        <div class="object-heading">
+          <strong id="part-title">尚未选择元件</strong
+          ><button id="review-part">审核此元件</button
+          ><button id="part-details">详情</button>
         </div>
-        <div id="object-list" class="object-list"></div>
+        <div class="table-filters">
+          <input
+            id="left-search"
+            type="search"
+            aria-label="筛选元件引脚"
+            placeholder="筛选焊盘、名称、网络"
+          /><select id="left-status" aria-label="左侧引脚审核状态"></select
+          ><span id="left-count"></span>
+        </div>
+        <div class="table-scroll" id="left-scroll">
+          <table id="left-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
         <div class="pager">
-          <button id="previous">上一页</button><span id="page-number"></span
-          ><button id="next">下一页</button>
-        </div>
-        <div class="batch">
-          <span id="selection-count">未选择对象</span
-          ><button id="clear-selection">清空</button
-          ><select id="batch-status" aria-label="批量审查状态">
-            <option value="approved">通过</option>
-            <option value="issue">有问题</option>
-            <option value="pending">待审</option></select
-          ><button id="batch-apply" class="primary">标记选中项</button>
-        </div>
-      </aside>
-      <section class="graph-panel" aria-label="全板引脚连接拓扑">
-        <div class="graph-toolbar">
-          <strong>引脚连接</strong><button id="fit">适应视图</button
-          ><button id="layout">重新布局</button
-          ><button id="collapse">按模块折叠</button
-          ><button id="restore">恢复全部</button
-          ><label><input id="labels" type="checkbox" checked />连线标签</label>
-        </div>
-        <div class="trace-toolbar">
-          <span id="trace-summary">选择引脚后可追踪连接链</span>
-          <button id="trace-only" disabled>仅看连接链</button>
-          <button id="trace-clear" disabled>清除追踪</button>
-        </div>
-        <div class="graph-stage">
-          <div id="graph"></div>
-          <div id="graph-loading" hidden>正在布局…</div>
-          <button id="cancel-layout" hidden>取消布局</button>
-          <div class="legend">
-            <span class="legend-part"></span>接线点
-            <span class="legend-net"></span>网络
-            <span class="legend-dnp"></span>DNP
-            <span>实心点：同网连接 · 双端符号：元件</span>
-            <span>Shift + 拖动框选</span>
-          </div>
-        </div>
-        <div class="graph-footer">
-          <span id="graph-count"></span>
-          <span id="layout-warning" role="status"></span>
-          <span id="display-warning" role="status"></span
-          ><button id="hide-selected">隐藏选中图元</button
-          ><button id="focus">仅看关联</button>
+          <button id="left-select">选择本页</button
+          ><button id="left-previous">上一页</button><span id="left-page"></span
+          ><button id="left-next">下一页</button>
         </div>
       </section>
-      <aside class="inspector">
-        <div class="inspector-heading">
-          <span>对象详情</span><span class="verified">交付包已验证</span>
+      <section class="panel" id="right-panel" aria-label="网络全部端点">
+        <div class="panel-heading">
+          <span class="step">02</span>
+          <h2>网络与端点</h2>
+          <span class="hint">实际 PCB 连接</span>
         </div>
-        <div id="detail">
-          <div class="empty">
-            <div class="empty-icon">⌖</div>
-            <h2>从连接开始审查</h2>
-            <p>选择一个元件或网络，查看完整引脚映射、规格与关联检查。</p>
-            <p>点击网络端点可在表格和全板拓扑间定位。</p>
-          </div>
+        <div class="picker-filters">
+          <input
+            id="net-search"
+            type="search"
+            aria-label="查找网络"
+            placeholder="查找网名、别名、位号或引脚"
+          /><select id="net-status" aria-label="网络审核状态"></select>
         </div>
-      </aside>
+        <label class="picker-label"
+          >网络
+          <select id="net-picker" aria-label="选择网络"></select
+        ></label>
+        <div class="object-heading">
+          <strong id="net-title">尚未选择网络</strong
+          ><button id="review-net">审核此网络</button
+          ><button id="net-details">详情</button>
+        </div>
+        <div class="table-filters">
+          <input
+            id="right-search"
+            type="search"
+            aria-label="筛选网络端点"
+            placeholder="筛选位号、焊盘、模块"
+          /><select id="right-status" aria-label="右侧引脚审核状态"></select
+          ><span id="right-count"></span>
+        </div>
+        <div class="table-scroll" id="right-scroll">
+          <table id="right-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+          <p id="right-empty" class="empty"></p>
+        </div>
+        <div class="pager">
+          <button id="right-select">选择本页</button
+          ><button id="right-previous">上一页</button
+          ><span id="right-page"></span><button id="right-next">下一页</button>
+        </div>
+      </section>
     </main>
+    <section class="batch">
+      <span id="selection-count">未选择引脚</span
+      ><button id="clear-selection">清空</button
+      ><select id="batch-status" aria-label="批量审查状态">
+        <option value="approved">通过</option>
+        <option value="issue">有问题</option>
+        <option value="pending">待审</option></select
+      ><button id="batch-apply" disabled>标记选中引脚</button>
+    </section>
+    <section id="review-panel" aria-label="当前对象审核">
+      <div class="review-heading">
+        <strong id="review-target">请选择审核对象</strong
+        ><button id="current-details" disabled>对象详情</button
+        ><button id="next-pending" disabled>下一待审项 →</button>
+      </div>
+      <div id="review-editor">
+        <label
+          >结论
+          <select id="review-status" disabled>
+            <option value="pending">待审</option>
+            <option value="approved">通过</option>
+            <option value="issue">有问题</option>
+          </select></label
+        ><label class="note-label" for="note"
+          >批注 · 自动保存<textarea
+            id="note"
+            maxlength="20000"
+            disabled
+            placeholder="记录核对依据、发现的问题或待确认事项…"
+          ></textarea>
+        </label>
+      </div>
+      <small id="note-time"></small>
+    </section>
     <footer>
       <span>人工结论独立于 ERC / DRC，不改变设计与网表。</span
       ><span id="version-label"></span>
     </footer>
+    <dialog id="detail-dialog" class="drawer">
+      <button id="close-detail" class="close">关闭详情</button>
+      <div id="detail"></div>
+    </dialog>
+    <dialog id="checks-dialog">
+      <div class="dialog-heading">
+        <h2>检查结果</h2>
+        <button id="close-checks">关闭</button>
+      </div>
+      <div class="table-filters">
+        <input
+          id="check-search"
+          type="search"
+          aria-label="查找检查结果"
+          placeholder="搜索规则、证据或消息"
+        /><select id="diagnostic-filter" aria-label="检查结果筛选">
+          <option value="attention">需关注的检查</option>
+          <option value="all">全部检查</option>
+        </select>
+      </div>
+      <div id="checks-list"></div>
+      <div class="pager">
+        <button id="checks-previous">上一页</button
+        ><span id="checks-page"></span><button id="checks-next">下一页</button>
+      </div>
+    </dialog>
     <dialog id="import-dialog">
       <h2>导入审查记录</h2>
       <p id="import-summary"></p>
-      <p>确认后替换本版本的全部人工记录；未包含的记录将恢复为待审。</p>
+      <p>确认后替换本版本全部人工记录；未包含的记录恢复为待审。</p>
       <div id="import-preview"></div>
-      <div class="dialog-actions">
+      <div class="actions">
         <button id="cancel-import">取消</button
-        ><button id="confirm-import" class="primary">确认替换记录</button>
+        ><button id="confirm-import">确认替换记录</button>
       </div>
     </dialog>
   </body>

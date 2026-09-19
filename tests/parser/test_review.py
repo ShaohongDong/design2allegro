@@ -218,27 +218,20 @@ def test_http_api_static_assets_and_conflicts(delivered, tmp_path):
                 "/",
                 "/style.css",
                 "/app.js",
-                "/graph-model.js",
-                "/graph-geometry.js",
-                "/graph-routing.js",
-                "/graph-symbols.js",
-                "/graph.js",
-                "/graph-worker.js",
-                "/vendor/elk-api.js",
-                "/vendor/elk-worker.min.js",
-                "/vendor/LICENSE.elk",
-                "/vendor/README.elk",
-                "/vendor/cytoscape.min.js",
-                "/vendor/LICENSE.cytoscape",
+                "/records.js",
+                "/tables.js",
             ):
                 with call(path) as response:
                     assert response.status == 200 and response.read()
-                    if path.endswith(".wasm"):
-                        assert response.headers.get_content_type() == "application/wasm"
                     if path == "/":
                         csp = response.headers["Content-Security-Policy"]
-                        assert "'wasm-unsafe-eval'" in csp
+                        assert "'wasm-unsafe-eval'" not in csp
+                        assert "worker-src 'none'" in csp
                         assert "'unsafe-eval'" not in csp
+            for retired in ("/graph.js", "/graph-worker.js", "/vendor/elk-api.js"):
+                with pytest.raises(HTTPError) as exc:
+                    call(retired)
+                assert exc.value.code == 404
             key = next(iter(data["objects"]))
             body = {"revision": 0, "changes": {key: {"status": "approved"}}}
             for options in ({"token": False}, {"origin": "https://other.invalid"}):
