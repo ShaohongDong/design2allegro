@@ -55,7 +55,7 @@ const ReviewSymbols = (() => {
     dnp = false,
     nc = false,
     ground = false,
-    groundOffsetX = 0,
+    side = "S",
     emphasis = "",
     net = false,
     terminal = false,
@@ -73,7 +73,7 @@ const ReviewSymbols = (() => {
       dnp,
       nc,
       ground,
-      groundOffsetX,
+      side,
       emphasis,
       net,
       terminal,
@@ -116,9 +116,15 @@ const ReviewSymbols = (() => {
           : "";
     // Local termination belongs to the pin, so dragging and filtering cannot
     // separate it from its anchor or introduce another review object.
+    const [dx, dy] = terminal
+      ? { W: [-1, 0], E: [1, 0], N: [0, -1], S: [0, 1] }[side] || [0, 1]
+      : [0, 1];
+    const point = (along, across = 0) =>
+      `${x + dx * along + dy * across} ${y + dy * along - dx * across}`;
+    const groundPath = `M${point(0)}L${point(24)}M${point(24, -12)}L${point(24, 12)}M${point(29, -8)}L${point(29, 8)}M${point(34, -4)}L${point(34, 4)}`;
     const groundSymbol =
       ground && !nc && !net
-        ? `<path data-role="ground" d="M${x} ${y}h${groundOffsetX}v24m-12 0h24m-20 5h16m-12 5h8" fill="none" stroke="${halo || state}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+        ? `<path data-role="ground" d="${groundPath}" fill="none" stroke="${halo || state}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
         : "";
     const bodyShapes = {
       resistor: shapes.resistor,

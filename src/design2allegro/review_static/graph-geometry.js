@@ -53,6 +53,12 @@ const ReviewGeometry = (() => {
       d.labelX = 0;
       d.labelY = -22;
       d.anchorY = 0;
+      d.layoutKind =
+        n.classes === "net"
+          ? "net"
+          : n.classes.includes("pin")
+            ? "pin"
+            : "fixed";
       if (d.bodyId) {
         d.width = 40;
         d.height = 90;
@@ -69,8 +75,15 @@ const ReviewGeometry = (() => {
         d.width = n.classes === "net" ? 20 : 56;
         d.height = n.classes === "net" ? 20 : 90;
         if (n.classes !== "net") d.labelX = d.text.width / 2 + 36;
+        else d.labelY = -Math.max(22, d.text.height / 2 + 14);
         d.obstacles = [
           rect(0, 0, d.width, d.height),
+          rect(d.labelX, d.labelY, d.text.width, d.text.height),
+        ];
+        // The icon is above the anchor. Its own escape may bypass the anchor
+        // enclosure, but must not pass through the icon or its label.
+        d.escapeObstacles = [
+          ...(n.classes === "net" ? [] : [rect(4, -23, 44, 36)]),
           rect(d.labelX, d.labelY, d.text.width, d.text.height),
         ];
         d.box = union(d.obstacles);
@@ -120,17 +133,16 @@ const ReviewGeometry = (() => {
           rect(0, 0, vertical ? 90 : 100, vertical ? 100 : 90),
           rect(title.x, title.y, d.text.width, d.text.height),
         ];
-        const groundOffsets = terminals.map((t, i) =>
-          t.classes.includes("ground") && positions[i].y < 0 ? -72 : 0,
-        );
-        if (groundOffsets.some(Boolean))
-          title.y = Math.max(20, d.text.height / 2 + 12);
-        obstacles[1] = rect(title.x, title.y, d.text.width, d.text.height);
         terminals.forEach((t, i) => {
           const p = positions[i],
             l = labels[i];
-          if (groundOffsets[i])
-            obstacles.push(rect(p.x - 42, p.y + 17, 84, 36));
+          if (t.classes.includes("ground")) {
+            const dx = Math.sign(p.x),
+              dy = Math.sign(p.y);
+            obstacles.push(
+              rect(p.x + dx * 17, p.y + dy * 17, dx ? 38 : 28, dy ? 38 : 28),
+            );
+          }
           obstacles.push(
             rect(p.x, p.y + 10, 36, 66),
             rect(p.x + l.x, p.y + l.y, t.data.text.width, t.data.text.height),
@@ -139,7 +151,6 @@ const ReviewGeometry = (() => {
         return {
           angle,
           positions,
-          groundOffsets,
           labels,
           title,
           obstacles,
@@ -174,8 +185,7 @@ const ReviewGeometry = (() => {
         labelX: l.x,
         labelY: l.y,
         side: p.x < 0 ? "W" : p.x > 0 ? "E" : p.y < 0 ? "N" : "S",
-        groundOffsetX: variant.groundOffsets[i],
-        width: variant.groundOffsets[i] ? 184 : 40,
+        width: t.role === "ground" && p.x !== 0 ? 80 : 40,
       });
     });
   }
@@ -187,12 +197,10 @@ const ReviewGeometry = (() => {
       while (result.length > 1) {
         const a = result.at(-2),
           b = result.at(-1);
-        if (
-          !(
-            (a.x === b.x && b.x === p.x && (b.y - a.y) * (p.y - b.y) >= 0) ||
-            (a.y === b.y && b.y === p.y && (b.x - a.x) * (p.x - b.x) >= 0)
-          )
-        )
+        if (!(
+          (a.x === b.x && b.x === p.x && (b.y - a.y) * (p.y - b.y) >= 0) ||
+          (a.y === b.y && b.y === p.y && (b.x - a.x) * (p.x - b.x) >= 0)
+        ))
           break;
         result.pop();
       }

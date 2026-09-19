@@ -419,7 +419,7 @@ function refreshSymbols() {
       dnp: n.hasClass("dnp"),
       nc: n.hasClass("nc"),
       ground: n.hasClass("ground"),
-      groundOffsetX: n.data("groundOffsetX") || 0,
+      side: n.data("side") || "S",
       net: n.hasClass("net"),
       emphasis: n.hasClass("highlight")
         ? "highlight"

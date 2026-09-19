@@ -3,6 +3,62 @@ importScripts("/vendor/elk-api.js", "/graph-geometry.js", "/graph-routing.js");
 const engine = new ELK({ workerUrl: "/vendor/elk-worker.min.js" });
 const G = ReviewGeometry,
   R = ReviewRouting;
+function escapeChoices(node, box, point = node.position) {
+  const side = node.data.bodyId ? node.data.side : null;
+  const sides = side
+    ? [side]
+    : node.data.layoutKind === "fixed"
+      ? ["W", "E"]
+      : ["W", "E", "N", "S"];
+  return sides
+    .map((side) => ({
+      side,
+      point: {
+        x: side === "W" ? box.x1 : side === "E" ? box.x2 : point.x,
+        y: side === "N" ? box.y1 : side === "S" ? box.y2 : point.y,
+      },
+    }))
+    .filter(
+      (candidate) =>
+        !(node.data.escapeObstacles || []).some((obstacle) =>
+          R.hits(point, candidate.point, G.move(obstacle, node.position)),
+        ),
+    );
+}
+function layoutBetter(a, b) {
+  for (const key of [
+    "bends",
+    "alignmentDeviation",
+    "crossings",
+    "wireLength",
+    "area",
+  ])
+    if (Math.abs((a[key] || 0) - (b[key] || 0)) > 0.01)
+      return (a[key] || 0) < (b[key] || 0);
+  return false;
+}
+function layoutLimits(scene) {
+  return (
+    scene.optimizationLimits || {
+      area: scene.metrics.area * 1.1,
+      wireLength: scene.metrics.wireLength * 1.1,
+      crossings: scene.metrics.crossings,
+    }
+  );
+}
+function rejectLayout(metrics, reference, limits) {
+  return metrics.area > limits.area + 0.01
+    ? "area"
+    : metrics.wireLength > limits.wireLength + 0.01
+      ? "length"
+      : metrics.crossings > reference.crossings
+        ? "crossings"
+        : metrics.foreignOverlap
+          ? "overlap"
+          : !layoutBetter(metrics, reference)
+            ? "noImprovement"
+            : null;
+}
 function pack(scenes, aspect) {
   const ordered = scenes
     .map((s, i) => ({
@@ -97,7 +153,10 @@ async function candidate(
       ? d.angle % 180
         ? ["N", "S"]
         : ["W", "E"]
-      : ["W", "E"];
+      : escapeChoices(
+          { data: d, position: { x: 0, y: 0 } },
+          { x1: b.x1 - 8, y1: b.y1 - 8, x2: b.x2 + 8, y2: b.y2 + 8 },
+        ).map((c) => c.side);
     const ps = sides.flatMap((side) =>
       (moduleNets.get(id) || [null]).map((net, i) => {
         const suffix = net === null ? "" : String(i);
@@ -142,11 +201,15 @@ async function candidate(
       targetPin = localTerminals.get(
         reversed ? e.data.originalSource : e.data.originalTarget,
       )?.data;
+    const selectSide = (id, preferred) =>
+      [preferred, "W", "E", "S", "N"].find((side) =>
+        ports.has(id + ":" + side + (moduleNets.has(id) ? "0" : "")),
+      );
     const from =
-        (sourcePin?.side || "E") +
+        (sourcePin?.side || selectSide(src, direction === "DOWN" ? "S" : "E")) +
         (moduleNets.has(src) ? moduleNets.get(src).indexOf(e.data.netKey) : ""),
       to =
-        (targetPin?.side || "W") +
+        (targetPin?.side || selectSide(dst, direction === "DOWN" ? "N" : "W")) +
         (moduleNets.has(dst) ? moduleNets.get(dst).indexOf(e.data.netKey) : "");
     return {
       id: "e" + i,
@@ -340,43 +403,61 @@ function compact(scene, axis) {
   };
 }
 // Search individual body orientations and nearby free positions using routed cost.
-function optimizeLocal(scene, budget) {
-  const ceiling = scene.metrics.area * 1.1;
-  const before = scene.metrics;
-  const stats = { rotations: 0, moves: 0, candidates: 0 };
-  const length = (e) =>
-    e.points
+function detourBodies(scene) {
+  const scores = new Map(
+    scene.nodes.filter((n) => n.data.variants).map((n) => [n.id, 0]),
+  );
+  for (const e of scene.edges) {
+    const length = e.points
       .slice(1)
       .reduce(
-        (s, p, i) =>
-          s + Math.abs(p.x - e.points[i].x) + Math.abs(p.y - e.points[i].y),
+        (sum, p, i) =>
+          sum + Math.abs(p.x - e.points[i].x) + Math.abs(p.y - e.points[i].y),
         0,
       );
-  const better = (a, b) => {
-    for (const key of ["wireLength", "bends", "crossings", "area"]) {
-      if (Math.abs(a[key] - b[key]) > 0.01) return a[key] < b[key];
-    }
-    return false;
+    const detour =
+      length -
+      Math.abs(e.points[0].x - e.points.at(-1).x) -
+      Math.abs(e.points[0].y - e.points.at(-1).y) +
+      12 * Math.max(0, e.points.length - 2);
+    for (const id of new Set([e.source, e.target]))
+      if (scores.has(id)) scores.set(id, scores.get(id) + detour);
+  }
+  return [...scores]
+    .map(([id, score]) => ({ id, score }))
+    .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
+}
+function optimizeLocal(scene, budget, options = {}) {
+  scene.optimizationLimits = layoutLimits(scene);
+  const previous = scene.localOptimization;
+  const ceiling = scene.optimizationLimits.area;
+  const before = scene.metrics;
+  const stats = {
+    rotations: 0,
+    moves: 0,
+    candidates: 0,
+    accepted: 0,
+    ...previous,
+    rejected: {
+      collision: 0,
+      area: 0,
+      bends: 0,
+      overlap: 0,
+      noImprovement: 0,
+      audit: 0,
+      routing: 0,
+      length: 0,
+      crossings: 0,
+      ...previous?.rejected,
+    },
   };
-  for (let round = 0; round < 2 && budget.remaining; round++) {
+  for (
+    let round = 0;
+    round < (options.rounds ?? 2) && budget.remaining;
+    round++
+  ) {
     let changed = false;
-    const bodies = scene.nodes
-      .filter((n) => n.data.variants)
-      .map((n) => ({
-        id: n.id,
-        score: scene.edges
-          .filter((e) => e.source === n.id || e.target === n.id)
-          .reduce(
-            (s, e) =>
-              s +
-              length(e) -
-              Math.abs(e.points[0].x - e.points.at(-1).x) -
-              Math.abs(e.points[0].y - e.points.at(-1).y) +
-              12 * (e.points.length - 2),
-            0,
-          ),
-      }))
-      .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
+    const bodies = options.id ? [{ id: options.id }] : detourBodies(scene);
     for (const { id } of bodies) {
       if (!budget.remaining) break;
       const body = scene.nodes.find((n) => n.id === id);
@@ -488,7 +569,10 @@ function optimizeLocal(scene, budget) {
             x2: p.x + b.x2 + 8,
             y2: p.y + b.y2 + 8,
           };
-          if (others.some((o) => R.rectOverlap(box, o))) continue;
+          if (others.some((o) => R.rectOverlap(box, o))) {
+            stats.rejected.collision++;
+            continue;
+          }
           let score = 0;
           for (const e of affected) {
             const front = e.source === id,
@@ -509,26 +593,28 @@ function optimizeLocal(scene, budget) {
           }
           angleCandidates.push({ variant, p, box, score });
         }
-        candidates.push(
-          ...angleCandidates.sort((a, b) => a.score - b.score).slice(0, 9),
+        const stationary = angleCandidates.find(
+          (c) => c.p.x === body.position.x && c.p.y === body.position.y,
         );
+        if (stationary && variant.angle !== body.data.angle)
+          candidates.push({ ...stationary, stationary: true });
+        const mobile = angleCandidates
+          .filter((c) => c.p.x !== body.position.x || c.p.y !== body.position.y)
+          .sort(
+            (a, b) => a.score - b.score || a.p.x - b.p.x || a.p.y - b.p.y,
+          )[0];
+        if (mobile) candidates.push(mobile);
       }
       candidates.sort(
         (a, b) =>
+          Number(!!b.stationary) - Number(!!a.stationary) ||
           a.score - b.score ||
           a.variant.angle - b.variant.angle ||
           a.p.x - b.p.x ||
           a.p.y - b.p.y,
       );
       let best = scene;
-      const angles = new Set();
-      const finalists = candidates
-        .filter((c) => {
-          if (angles.has(c.variant.angle)) return false;
-          angles.add(c.variant.angle);
-          return true;
-        })
-        .slice(0, 3);
+      const finalists = candidates.slice(0, 8);
       for (const c of finalists) {
         if (!budget.remaining) break;
         budget.remaining--;
@@ -580,18 +666,23 @@ function optimizeLocal(scene, budget) {
               points: [a.p, a.s, { x: a.s.x, y: b.s.y }, b.s, b.p],
             };
           });
-          const routed = R.route(input, boxes),
+          const routed = R.route(input, boxes, { preferBends: true }),
             labels = R.labels(routed.edges, routed.obstacles, routed.wires);
           const metrics = R.metrics(routed.edges, boxes, labels);
-          if (
-            metrics.area > ceiling ||
-            metrics.bends > scene.metrics.bends ||
-            metrics.foreignOverlap ||
-            !better(metrics, best.metrics)
-          )
+          const reason = rejectLayout(
+            metrics,
+            best.metrics,
+            scene.optimizationLimits,
+          );
+          if (reason) {
+            stats.rejected[reason]++;
             continue;
+          }
           const audit = R.audit(routed.edges, boxes, labels);
-          if (audit.boxOverlaps || audit.obstacleViolations) continue;
+          if (audit.boxOverlaps || audit.obstacleViolations) {
+            stats.rejected.audit++;
+            continue;
+          }
           const bounds = G.union([
             ...boxes,
             ...labels.map((n) =>
@@ -606,12 +697,22 @@ function optimizeLocal(scene, budget) {
               e.points.map((p) => G.rect(p.x, p.y, 0, 0)),
             ),
           ]);
-          best = { nodes, edges: routed.edges, labels, boxes, bounds, metrics };
+          best = {
+            ...scene,
+            nodes,
+            edges: routed.edges,
+            labels,
+            boxes,
+            bounds,
+            metrics,
+          };
         } catch (e) {
+          stats.rejected.routing++;
           /* A failed candidate leaves the accepted scene intact. */
         }
       }
       if (best !== scene) {
+        stats.accepted++;
         const moved = best.nodes.find((n) => n.id === id);
         if (moved.data.angle !== body.data.angle) stats.rotations++;
         if (
@@ -628,14 +729,341 @@ function optimizeLocal(scene, budget) {
   scene.localOptimization = {
     ...stats,
     areaCeiling: ceiling,
-    beforeArea: before.area,
+    wireLengthCeiling: scene.optimizationLimits.wireLength,
+    beforeArea: previous?.beforeArea ?? before.area,
     afterArea: scene.metrics.area,
-    beforeWireLength: before.wireLength,
+    beforeWireLength: previous?.beforeWireLength ?? before.wireLength,
     afterWireLength: scene.metrics.wireLength,
-    beforeBends: before.bends,
+    beforeBends: previous?.beforeBends ?? before.bends,
     afterBends: scene.metrics.bends,
+    budgetExhausted: budget.remaining === 0,
   };
   return scene;
+}
+
+function optimizeScenes(scenes, budget) {
+  scenes.forEach((scene, i) => {
+    scenes[i] = optimizeLocal(scene, budget, { rounds: 0 });
+  });
+  for (let round = 0; round < 2 && budget.remaining; round++) {
+    const ordered = scenes
+      .flatMap((s, index) => detourBodies(s).map((b) => ({ ...b, index })))
+      .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
+    let changed = false;
+    for (const { index, id } of ordered) {
+      if (!budget.remaining) break;
+      const before = scenes[index];
+      scenes[index] = optimizeLocal(before, budget, { id, rounds: 1 });
+      changed ||= before !== scenes[index];
+    }
+    if (!changed) break;
+  }
+  scenes.forEach((scene) => {
+    scene.localOptimization.budgetExhausted = budget.remaining === 0;
+  });
+}
+
+// A candidate owns all its moved nodes. Failed routing cannot mutate the scene.
+function jointCandidate(scene, shifts, portNodes) {
+  const nodes = scene.nodes.map((n) => {
+    const delta = shifts.get(n.data.bodyId || n.id) || { x: 0, y: 0 };
+    return {
+      ...n,
+      data: { ...n.data },
+      position: { x: n.position.x + delta.x, y: n.position.y + delta.y },
+    };
+  });
+  const map = new Map(nodes.map((n) => [n.id, n]));
+  const boxes = scene.boxes.map((b) => ({
+    ...b,
+    ...G.move(b, shifts.get(b.id) || { x: 0, y: 0 }),
+  }));
+  const boxMap = new Map(boxes.map((b) => [b.id, b]));
+  const index = new R.Index();
+  for (const box of boxes) {
+    if (index.query(box).some((b) => R.rectOverlap(b, box)))
+      throw new Error("collision");
+    index.add(box);
+  }
+  const input = scene.edges.map((e) => {
+    if (!portNodes.has(e.source) && !portNodes.has(e.target))
+      return { ...e, points: e.validationPoints };
+    const endpoints = [
+      [e.sourcePin, e.source, e.sourceOffset, true],
+      [e.targetPin, e.target, e.targetOffset, false],
+    ].map(([pin, owner, offset, front]) => {
+      const node = map.get(pin),
+        p = {
+          x: node.position.x + (offset?.x || 0),
+          y: node.position.y + (offset?.y || 0),
+        };
+      const delta = shifts.get(owner) || { x: 0, y: 0 };
+      const old = front ? e.escapeStart : e.escapeEnd;
+      // Module ports keep their separate per-net offsets and original side.
+      const choices =
+        node.data.layoutKind === "fixed" && !node.data.bodyId
+          ? [{ point: { x: old.x + delta.x, y: old.y + delta.y } }]
+          : escapeChoices(node, boxMap.get(owner), p);
+      return { p, choices };
+    });
+    const [a, b] = endpoints;
+    const pairs = a.choices
+      .flatMap((s) =>
+        b.choices.map((t) => {
+          const points = [
+            a.p,
+            s.point,
+            { x: s.point.x, y: t.point.y },
+            t.point,
+            b.p,
+          ];
+          const score = R.metrics(
+            [{ ...e, points: G.simplify(points) }],
+            [],
+            [],
+          );
+          return { points, score };
+        }),
+      )
+      .sort(
+        (a, b) =>
+          a.score.bends - b.score.bends ||
+          a.score.wireLength - b.score.wireLength,
+      );
+    let best;
+    for (const pair of pairs.slice(0, 3)) {
+      try {
+        const routed = R.route([{ ...e, points: pair.points }], boxes, {
+          preferBends: true,
+        }).edges[0];
+        const score = R.metrics([routed], [], []);
+        if (!best || layoutBetter(score, best.score))
+          best = { edge: routed, score };
+      } catch (_) {
+        /* Try another geometrically legal escape. */
+      }
+    }
+    if (!best) throw new Error("routing");
+    return { ...best.edge, points: best.edge.validationPoints };
+  });
+  const routed = R.route(input, boxes, { preferBends: true });
+  const labels = R.labels(routed.edges, routed.obstacles, routed.wires);
+  const metrics = R.metrics(routed.edges, boxes, labels);
+  const audit = R.audit(routed.edges, boxes, labels);
+  if (audit.obstacleViolations || audit.boxOverlaps) throw new Error("audit");
+  const bounds = G.union([
+    ...boxes,
+    ...labels.map((n) =>
+      G.rect(n.position.x, n.position.y, n.data.width + 8, n.data.height + 8),
+    ),
+    ...routed.edges.flatMap((e) => e.points.map((p) => G.rect(p.x, p.y, 0, 0))),
+  ]);
+  return {
+    ...scene,
+    nodes,
+    boxes,
+    edges: routed.edges,
+    labels,
+    metrics,
+    bounds,
+  };
+}
+function jointGroups(scene) {
+  const movable = new Set(
+    scene.nodes
+      .filter(
+        (n) =>
+          !n.data.bodyId &&
+          (n.data.variants || ["pin", "net"].includes(n.data.layoutKind)),
+      )
+      .map((n) => n.id),
+  );
+  const adjacent = new Map([...movable].map((id) => [id, []]));
+  for (const e of scene.edges) {
+    adjacent.get(e.source)?.push({ id: e.target, edge: e });
+    adjacent.get(e.target)?.push({ id: e.source, edge: e });
+  }
+  return [...movable]
+    .map((id) => {
+      const ids = [id];
+      // A two-hop neighborhood includes the endpoints behind a net junction.
+      for (let i = 0; i < Math.min(2, ids.length) && ids.length < 6; i++)
+        for (const neighbor of adjacent.get(ids[i]) || [])
+          if (
+            movable.has(neighbor.id) &&
+            !ids.includes(neighbor.id) &&
+            ids.length < 6
+          )
+            ids.push(neighbor.id);
+      const edges = scene.edges.filter(
+        (e) => ids.includes(e.source) || ids.includes(e.target),
+      );
+      const m = R.metrics(edges, [], []);
+      return { id, ids, score: m.bends * 100 + m.alignmentDeviation };
+    })
+    .filter((g) => g.score > 0)
+    .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
+}
+function jointProposals(scene, group) {
+  const byId = new Map(scene.nodes.map((n) => [n.id, n]));
+  const boxes = new Map(scene.boxes.map((b) => [b.id, b]));
+  const anchor = (id) => {
+    const e = scene.edges.find(
+      (e) =>
+        (e.source === id && group.ids.includes(e.target)) ||
+        (e.target === id && group.ids.includes(e.source)),
+    );
+    return e
+      ? e.source === id
+        ? e.points[0]
+        : e.points.at(-1)
+      : byId.get(id).position;
+  };
+  const proposals = [new Map()];
+  for (const axis of ["y", "x"]) {
+    const other = axis === "x" ? "y" : "x";
+    const coordinates = group.ids
+      .map((id) => anchor(id)[axis])
+      .sort((a, b) => a - b);
+    const targets = [
+      anchor(group.id)[axis],
+      coordinates[Math.floor(coordinates.length / 2)],
+    ];
+    for (const target of new Set(targets)) {
+      const shifts = new Map(
+        group.ids.map((id) => [
+          id,
+          { x: 0, y: 0, [axis]: target - anchor(id)[axis] },
+        ]),
+      );
+      proposals.push(shifts);
+      // Spread along the trunk only when simultaneous alignment would overlap.
+      const spread = new Map([...shifts].map(([id, d]) => [id, { ...d }]));
+      const ordered = [...group.ids].sort(
+        (a, b) => anchor(a)[other] - anchor(b)[other] || a.localeCompare(b),
+      );
+      let last = -Infinity;
+      for (const id of ordered) {
+        const box = boxes.get(id),
+          delta = spread.get(id);
+        delta[other] = Math.max(0, last + 16 - box[other + "1"]);
+        last = box[other + "2"] + delta[other];
+      }
+      proposals.push(spread);
+    }
+    for (const e of scene.edges
+      .filter((e) => e.source === group.id || e.target === group.id)
+      .slice(0, 4)) {
+      const p = e.source === group.id ? e.points[0] : e.points.at(-1);
+      const q = e.source === group.id ? e.points.at(-1) : e.points[0];
+      proposals.push(
+        new Map([[group.id, { x: 0, y: 0, [axis]: q[axis] - p[axis] }]]),
+      );
+    }
+  }
+  const seen = new Set();
+  return proposals.filter((shifts) => {
+    const key = JSON.stringify(
+      [...shifts]
+        .filter(([, d]) => d.x || d.y)
+        .sort(([a], [b]) => a.localeCompare(b)),
+    );
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+function optimizeJoint(scenes, budget) {
+  scenes.forEach((scene) => {
+    scene.optimizationLimits = layoutLimits(scene);
+    scene.jointOptimization = {
+      candidates: 0,
+      accepted: 0,
+      movedNodes: 0,
+      maxMovedTogether: 0,
+      exitChanges: 0,
+      beforeBends: scene.metrics.bends,
+      beforeAlignment: scene.metrics.alignmentDeviation,
+      beforeWireLength: scene.metrics.wireLength,
+      rejected: {},
+      limits: { ...scene.optimizationLimits },
+    };
+  });
+  for (let round = 0; round < 2 && budget.remaining; round++) {
+    const groups = scenes
+      .flatMap((scene, index) =>
+        jointGroups(scene).map((group) => ({ ...group, index })),
+      )
+      .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id));
+    let changed = false;
+    for (const group of groups) {
+      if (!budget.remaining) break;
+      const scene = scenes[group.index],
+        stats = scene.jointOptimization;
+      let best = scene;
+      for (const shifts of jointProposals(scene, group)) {
+        if (!budget.remaining) break;
+        budget.remaining--;
+        stats.candidates++;
+        try {
+          const candidate = jointCandidate(scene, shifts, new Set(group.ids));
+          const reason = rejectLayout(
+            candidate.metrics,
+            best.metrics,
+            scene.optimizationLimits,
+          );
+          if (reason) {
+            stats.rejected[reason] = (stats.rejected[reason] || 0) + 1;
+            continue;
+          }
+          best = candidate;
+        } catch (error) {
+          const reason = ["collision", "audit"].includes(error.message)
+            ? error.message
+            : "routing";
+          stats.rejected[reason] = (stats.rejected[reason] || 0) + 1;
+        }
+      }
+      if (best !== scene) {
+        stats.accepted++;
+        const old = new Map(scene.nodes.map((n) => [n.id, n]));
+        const movedTogether = best.nodes.filter(
+          (n) =>
+            !n.data.bodyId &&
+            (n.position.x !== old.get(n.id).position.x ||
+              n.position.y !== old.get(n.id).position.y),
+        ).length;
+        stats.movedNodes += movedTogether;
+        stats.maxMovedTogether = Math.max(
+          stats.maxMovedTogether,
+          movedTogether,
+        );
+        const direction = (p, q) => (Math.abs(p.x - q.x) < 0.001 ? "y" : "x");
+        best.edges.forEach((e, i) => {
+          const previous = scene.edges[i];
+          stats.exitChanges += Number(
+            direction(e.points[0], e.escapeStart) !==
+              direction(previous.points[0], previous.escapeStart),
+          );
+          stats.exitChanges += Number(
+            direction(e.points.at(-1), e.escapeEnd) !==
+              direction(previous.points.at(-1), previous.escapeEnd),
+          );
+        });
+        scenes[group.index] = best;
+        changed = true;
+      }
+    }
+    if (!changed) break;
+  }
+  scenes.forEach((scene) =>
+    Object.assign(scene.jointOptimization, {
+      afterBends: scene.metrics.bends,
+      afterAlignment: scene.metrics.alignmentDeviation,
+      afterWireLength: scene.metrics.wireLength,
+      budgetExhausted: budget.remaining === 0,
+    }),
+  );
 }
 
 self.onmessage = async ({ data }) => {
@@ -750,7 +1178,7 @@ self.onmessage = async ({ data }) => {
     if (byId.has(root)) order.unshift(root);
     let failures = 0;
     const candidateMetrics = [];
-    const localBudget = { remaining: 256 };
+    const localBudget = { remaining: 512 };
     for (const seed of order) {
       if (visited.has(seed)) continue;
       visited.add(seed);
@@ -834,9 +1262,11 @@ self.onmessage = async ({ data }) => {
             failures++;
           }
         }
-      best = optimizeLocal(best, localBudget);
       scenes.push(best);
     }
+    optimizeScenes(scenes, localBudget);
+    const jointBudget = { remaining: 256 };
+    optimizeJoint(scenes, jointBudget);
     const packingStart = performance.now(),
       packed = pack(
         scenes,
@@ -918,6 +1348,17 @@ self.onmessage = async ({ data }) => {
         rejectedCandidates: failures,
         candidateMetrics,
         localOptimization: scenes.map((s) => s.localOptimization),
+        jointOptimization: scenes.map((s) => s.jointOptimization),
+        jointBudget: {
+          limit: 256,
+          remaining: jointBudget.remaining,
+          exhausted: jointBudget.remaining === 0,
+        },
+        localBudget: {
+          limit: 512,
+          remaining: localBudget.remaining,
+          exhausted: localBudget.remaining === 0,
+        },
       },
     });
   } catch (e) {

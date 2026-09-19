@@ -109,7 +109,7 @@ const ReviewRouting = (() => {
     }
   }
   // Lazy coordinate visibility grid: only explored vertices are allocated.
-  function search(start, end, index, wires, net) {
+  function search(start, end, index, wires, net, bendCost = 12) {
     const xs = new Set([start.x, end.x]),
       ys = new Set([start.y, end.y]);
     for (const r of index.items) {
@@ -166,7 +166,7 @@ const ReviewRouting = (() => {
             n.g +
             Math.abs(a.x - b.x) +
             Math.abs(a.y - b.y) +
-            (n.dir && n.dir !== dir ? 12 : 0),
+            (n.dir && n.dir !== dir ? bendCost : 0),
           k = x + "," + y + "," + dir;
         if (best.has(k) && best.get(k) <= g) continue;
         best.set(k, g);
@@ -182,7 +182,22 @@ const ReviewRouting = (() => {
     }
     throw new Error("无法找到满足间距要求的线路");
   }
-  function route(edges, boxes) {
+  function pathScore(points) {
+    const simplified = ReviewGeometry.simplify(points);
+    return {
+      length: simplified
+        .slice(1)
+        .reduce(
+          (sum, p, i) =>
+            sum +
+            Math.abs(p.x - simplified[i].x) +
+            Math.abs(p.y - simplified[i].y),
+          0,
+        ),
+      bends: Math.max(0, simplified.length - 2),
+    };
+  }
+  function route(edges, boxes, options = {}) {
     const obstacles = new Index(boxes),
       wires = new Index(),
       result = [];
@@ -210,6 +225,60 @@ const ReviewRouting = (() => {
         );
         points = [points[0], ...middle, points.at(-1)];
       }
+      const before = pathScore(points);
+      const lengthLimit = before.length * (options.preferBends ? 1.1 : 1);
+      const start = points[1],
+        end = points.at(-2);
+      // Optimize the middle only: escape segments keep their physical port identity.
+      const improve = (middle) => {
+        if (
+          !middle
+            .slice(1)
+            .every((p, i) => clear(middle[i], p, obstacles, wires, e.net))
+        )
+          return;
+        const candidate = [points[0], ...middle, points.at(-1)];
+        const next = pathScore(candidate),
+          current = pathScore(points);
+        if (
+          options.preferBends
+            ? next.length <= lengthLimit + EPS &&
+              (next.bends < current.bends ||
+                (next.bends === current.bends &&
+                  next.length < current.length - EPS))
+            : next.length <= current.length + EPS &&
+              next.bends <= current.bends &&
+              (next.length < current.length - EPS || next.bends < current.bends)
+        )
+          points = candidate;
+      };
+      improve([start, end]);
+      improve([start, { x: start.x, y: end.y }, end]);
+      improve([start, { x: end.x, y: start.y }, end]);
+      const lowerBound =
+        pathScore([points[0], start]).length +
+        Math.abs(start.x - end.x) +
+        Math.abs(start.y - end.y) +
+        pathScore([end, points.at(-1)]).length;
+      if (
+        pathScore(points).length > lowerBound + EPS ||
+        (options.preferBends && pathScore(points).bends > 2)
+      ) {
+        try {
+          improve(
+            search(
+              start,
+              end,
+              obstacles,
+              wires,
+              e.net,
+              options.preferBends ? lengthLimit + 1 : 12,
+            ),
+          );
+        } catch (_) {
+          // A legal original route remains usable when the bounded search fails.
+        }
+      }
       // Keep port escape points for independent validation, simplify for rendering only.
       for (let i = 1; i < points.length; i++)
         if (
@@ -227,7 +296,14 @@ const ReviewRouting = (() => {
         escapeEnd = points.at(-2);
       const validationPoints = points;
       points = ReviewGeometry.simplify(points);
-      result.push({ ...e, points, escapeStart, escapeEnd, validationPoints });
+      result.push({
+        ...e,
+        points,
+        escapeStart,
+        escapeEnd,
+        validationPoints,
+        routeOptimization: { before, after: pathScore(points) },
+      });
       for (let i = 1; i < points.length; i++)
         wires.add({
           ...segmentBox(points[i - 1], points[i]),
@@ -293,6 +369,24 @@ const ReviewRouting = (() => {
     return labels;
   }
   function metrics(edges, boxes, labels) {
+    const networks = new Map();
+    for (const e of edges) {
+      if (!networks.has(e.net)) networks.set(e.net, new Map());
+      const points = networks.get(e.net);
+      points.set(e.sourcePin || e.source, e.points[0]);
+      points.set(e.targetPin || e.target, e.points.at(-1));
+    }
+    let alignmentDeviation = 0;
+    for (const points of networks.values()) {
+      const deviation = (axis) => {
+        const values = [...points.values()]
+          .map((p) => p[axis])
+          .sort((a, b) => a - b);
+        const median = values[Math.floor(values.length / 2)];
+        return values.reduce((sum, value) => sum + Math.abs(value - median), 0);
+      };
+      alignmentDeviation += Math.min(deviation("x"), deviation("y"));
+    }
     const rs = [
       ...boxes,
       ...labels.map((n) =>
@@ -344,9 +438,26 @@ const ReviewRouting = (() => {
       width: box.x2 - box.x1,
       height: box.y2 - box.y1,
       wireLength: length,
+      alignmentDeviation,
       bends,
       crossings,
       foreignOverlap: overlap,
+      routing: edges.reduce(
+        (sum, e) => {
+          const r = e.routeOptimization;
+          if (r) {
+            sum.savedLength += r.before.length - r.after.length;
+            sum.removedBends += r.before.bends - r.after.bends;
+            if (
+              r.before.length > r.after.length + EPS ||
+              r.before.bends > r.after.bends
+            )
+              sum.shortenedEdges++;
+          }
+          return sum;
+        },
+        { savedLength: 0, removedBends: 0, shortenedEdges: 0 },
+      ),
       occupancy: area
         ? boxes.reduce((s, r) => s + (r.x2 - r.x1) * (r.y2 - r.y1), 0) / area
         : 0,
