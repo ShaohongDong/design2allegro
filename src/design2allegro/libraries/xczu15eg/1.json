@@ -1,0 +1,6932 @@
+{
+  "version": 2,
+  "name": "xczu15eg",
+  "revision": "1",
+  "devices": {
+    "amd.xczu15eg": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "VN": {
+          "type": "INPUT"
+        },
+        "VP": {
+          "type": "INPUT"
+        },
+        "IO_L1N_AD11N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_AD11P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_AD10N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_AD10P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_AD9N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_AD9P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_AD8N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_AD8P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_HDGC_AD7N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_HDGC_AD7P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_HDGC_AD6N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_HDGC_AD6P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_HDGC_AD5N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_HDGC_AD5P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_HDGC_AD4N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_HDGC_AD4P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_AD3N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_AD3P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_AD2N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_AD2P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_AD1N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_AD1P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_AD0N_44": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_AD0P_44": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_AD11N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_AD11P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_AD10N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_AD10P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_AD9N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_AD9P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_AD8N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_AD8P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_HDGC_AD7N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_HDGC_AD7P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_HDGC_AD6N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_HDGC_AD6P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_HDGC_AD5N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_HDGC_AD5P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_HDGC_AD4N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_HDGC_AD4P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_AD3N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_AD3P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_AD2N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_AD2P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_AD1N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_AD1P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_AD0N_47": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_AD0P_47": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_AD15N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_AD15P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_AD14N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_AD14P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_AD13N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_AD13P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_AD12N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_AD12P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_HDGC_48": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_AD11N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_AD11P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_AD10N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_AD10P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_AD9N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_AD9P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_AD8N_48": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_AD8P_48": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_AD15N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_AD15P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_AD14N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_AD14P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_AD13N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_AD13P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_AD12N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_AD12P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_HDGC_49": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_AD11N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_AD11P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_AD10N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_AD10P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_AD9N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_AD9P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_AD8N_49": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_AD8P_49": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_AD15N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_AD15P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_AD14N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_AD14P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_AD13N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_AD13P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_AD12N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_AD12P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_HDGC_50": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_AD11N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_AD11P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_AD10N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_AD10P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_AD9N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_AD9P_50": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_AD8N_50": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_AD8P_50": {
+          "type": "BIDIR"
+        },
+        "IO_T0U_N12_VRP_64": {
+          "type": "BIDIR"
+        },
+        "IO_T1U_N12_64": {
+          "type": "BIDIR"
+        },
+        "IO_T2U_N12_64": {
+          "type": "BIDIR"
+        },
+        "IO_T3U_N12_64": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_T0L_N1_DBC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_T0L_N0_DBC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_T0L_N3_64": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_T0L_N2_64": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_T0L_N5_AD15N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_T0L_N4_AD15P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_T0U_N7_DBC_AD7N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_T0U_N6_DBC_AD7P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_T0U_N9_AD14N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_T0U_N8_AD14P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_T0U_N11_AD6N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_T0U_N10_AD6P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_T1L_N1_QBC_AD13N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_T1L_N0_QBC_AD13P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_T1L_N3_AD5N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_T1L_N2_AD5P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_T1L_N5_AD12N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_T1L_N4_AD12P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_T1U_N7_QBC_AD4N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_T1U_N6_QBC_AD4P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_T1U_N9_GC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_T1U_N8_GC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_T1U_N11_GC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_T1U_N10_GC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L13N_T2L_N1_GC_QBC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L13P_T2L_N0_GC_QBC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L14N_T2L_N3_GC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L14P_T2L_N2_GC_64": {
+          "type": "BIDIR"
+        },
+        "IO_L15N_T2L_N5_AD11N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L15P_T2L_N4_AD11P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L16N_T2U_N7_QBC_AD3N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L16P_T2U_N6_QBC_AD3P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L17N_T2U_N9_AD10N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L17P_T2U_N8_AD10P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L18N_T2U_N11_AD2N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L18P_T2U_N10_AD2P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L19N_T3L_N1_DBC_AD9N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L19P_T3L_N0_DBC_AD9P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L20N_T3L_N3_AD1N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L20P_T3L_N2_AD1P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L21N_T3L_N5_AD8N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L21P_T3L_N4_AD8P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L22N_T3U_N7_DBC_AD0N_64": {
+          "type": "BIDIR"
+        },
+        "IO_L22P_T3U_N6_DBC_AD0P_64": {
+          "type": "BIDIR"
+        },
+        "IO_L23N_T3U_N9_64": {
+          "type": "BIDIR"
+        },
+        "IO_L23P_T3U_N8_64": {
+          "type": "BIDIR"
+        },
+        "IO_L24N_T3U_N11_64": {
+          "type": "BIDIR"
+        },
+        "IO_L24P_T3U_N10_64": {
+          "type": "BIDIR"
+        },
+        "IO_T0U_N12_VRP_65": {
+          "type": "BIDIR"
+        },
+        "IO_T1U_N12_65": {
+          "type": "BIDIR"
+        },
+        "IO_T2U_N12_65": {
+          "type": "BIDIR"
+        },
+        "IO_T3U_N12_65": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_T0L_N1_DBC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_T0L_N0_DBC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_T0L_N3_65": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_T0L_N2_65": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_T0L_N5_AD15N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_T0L_N4_AD15P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_T0U_N7_DBC_AD7N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_T0U_N6_DBC_AD7P_SMBALERT_65": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_T0U_N9_AD14N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_T0U_N8_AD14P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_T0U_N11_AD6N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_T0U_N10_AD6P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_T1L_N1_QBC_AD13N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_T1L_N0_QBC_AD13P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_T1L_N3_AD5N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_T1L_N2_AD5P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_T1L_N5_AD12N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_T1L_N4_AD12P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_T1U_N7_QBC_AD4N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_T1U_N6_QBC_AD4P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_T1U_N9_GC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_T1U_N8_GC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_T1U_N11_GC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_T1U_N10_GC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L13N_T2L_N1_GC_QBC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L13P_T2L_N0_GC_QBC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L14N_T2L_N3_GC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L14P_T2L_N2_GC_65": {
+          "type": "BIDIR"
+        },
+        "IO_L15N_T2L_N5_AD11N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L15P_T2L_N4_AD11P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L16N_T2U_N7_QBC_AD3N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L16P_T2U_N6_QBC_AD3P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L17N_T2U_N9_AD10N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L17P_T2U_N8_AD10P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L18N_T2U_N11_AD2N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L18P_T2U_N10_AD2P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L19N_T3L_N1_DBC_AD9N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L19P_T3L_N0_DBC_AD9P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L20N_T3L_N3_AD1N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L20P_T3L_N2_AD1P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L21N_T3L_N5_AD8N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L21P_T3L_N4_AD8P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L22N_T3U_N7_DBC_AD0N_65": {
+          "type": "BIDIR"
+        },
+        "IO_L22P_T3U_N6_DBC_AD0P_65": {
+          "type": "BIDIR"
+        },
+        "IO_L23N_T3U_N9_65": {
+          "type": "BIDIR"
+        },
+        "IO_L23P_T3U_N8_I2C_SCLK_65": {
+          "type": "BIDIR"
+        },
+        "IO_L24N_T3U_N11_PERSTN0_65": {
+          "type": "BIDIR"
+        },
+        "IO_L24P_T3U_N10_PERSTN1_I2C_SDA_65": {
+          "type": "BIDIR"
+        },
+        "IO_T0U_N12_VRP_66": {
+          "type": "BIDIR"
+        },
+        "IO_T1U_N12_66": {
+          "type": "BIDIR"
+        },
+        "IO_T2U_N12_66": {
+          "type": "BIDIR"
+        },
+        "IO_T3U_N12_66": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_T0L_N1_DBC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_T0L_N0_DBC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_T0L_N3_66": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_T0L_N2_66": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_T0L_N5_AD15N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_T0L_N4_AD15P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_T0U_N7_DBC_AD7N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_T0U_N6_DBC_AD7P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_T0U_N9_AD14N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_T0U_N8_AD14P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_T0U_N11_AD6N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_T0U_N10_AD6P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_T1L_N1_QBC_AD13N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_T1L_N0_QBC_AD13P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_T1L_N3_AD5N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_T1L_N2_AD5P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_T1L_N5_AD12N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_T1L_N4_AD12P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_T1U_N7_QBC_AD4N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_T1U_N6_QBC_AD4P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_T1U_N9_GC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_T1U_N8_GC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_T1U_N11_GC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_T1U_N10_GC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L13N_T2L_N1_GC_QBC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L13P_T2L_N0_GC_QBC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L14N_T2L_N3_GC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L14P_T2L_N2_GC_66": {
+          "type": "BIDIR"
+        },
+        "IO_L15N_T2L_N5_AD11N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L15P_T2L_N4_AD11P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L16N_T2U_N7_QBC_AD3N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L16P_T2U_N6_QBC_AD3P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L17N_T2U_N9_AD10N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L17P_T2U_N8_AD10P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L18N_T2U_N11_AD2N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L18P_T2U_N10_AD2P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L19N_T3L_N1_DBC_AD9N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L19P_T3L_N0_DBC_AD9P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L20N_T3L_N3_AD1N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L20P_T3L_N2_AD1P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L21N_T3L_N5_AD8N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L21P_T3L_N4_AD8P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L22N_T3U_N7_DBC_AD0N_66": {
+          "type": "BIDIR"
+        },
+        "IO_L22P_T3U_N6_DBC_AD0P_66": {
+          "type": "BIDIR"
+        },
+        "IO_L23N_T3U_N9_66": {
+          "type": "BIDIR"
+        },
+        "IO_L23P_T3U_N8_66": {
+          "type": "BIDIR"
+        },
+        "IO_L24N_T3U_N11_66": {
+          "type": "BIDIR"
+        },
+        "IO_L24P_T3U_N10_66": {
+          "type": "BIDIR"
+        },
+        "IO_T0U_N12_VRP_67": {
+          "type": "BIDIR"
+        },
+        "IO_T1U_N12_67": {
+          "type": "BIDIR"
+        },
+        "IO_T2U_N12_67": {
+          "type": "BIDIR"
+        },
+        "IO_T3U_N12_67": {
+          "type": "BIDIR"
+        },
+        "IO_L1N_T0L_N1_DBC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L1P_T0L_N0_DBC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L2N_T0L_N3_67": {
+          "type": "BIDIR"
+        },
+        "IO_L2P_T0L_N2_67": {
+          "type": "BIDIR"
+        },
+        "IO_L3N_T0L_N5_AD15N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L3P_T0L_N4_AD15P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L4N_T0U_N7_DBC_AD7N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L4P_T0U_N6_DBC_AD7P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L5N_T0U_N9_AD14N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L5P_T0U_N8_AD14P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L6N_T0U_N11_AD6N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L6P_T0U_N10_AD6P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L7N_T1L_N1_QBC_AD13N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L7P_T1L_N0_QBC_AD13P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L8N_T1L_N3_AD5N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L8P_T1L_N2_AD5P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L9N_T1L_N5_AD12N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L9P_T1L_N4_AD12P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L10N_T1U_N7_QBC_AD4N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L10P_T1U_N6_QBC_AD4P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L11N_T1U_N9_GC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L11P_T1U_N8_GC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L12N_T1U_N11_GC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L12P_T1U_N10_GC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L13N_T2L_N1_GC_QBC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L13P_T2L_N0_GC_QBC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L14N_T2L_N3_GC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L14P_T2L_N2_GC_67": {
+          "type": "BIDIR"
+        },
+        "IO_L15N_T2L_N5_AD11N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L15P_T2L_N4_AD11P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L16N_T2U_N7_QBC_AD3N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L16P_T2U_N6_QBC_AD3P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L17N_T2U_N9_AD10N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L17P_T2U_N8_AD10P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L18N_T2U_N11_AD2N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L18P_T2U_N10_AD2P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L19N_T3L_N1_DBC_AD9N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L19P_T3L_N0_DBC_AD9P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L20N_T3L_N3_AD1N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L20P_T3L_N2_AD1P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L21N_T3L_N5_AD8N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L21P_T3L_N4_AD8P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L22N_T3U_N7_DBC_AD0N_67": {
+          "type": "BIDIR"
+        },
+        "IO_L22P_T3U_N6_DBC_AD0P_67": {
+          "type": "BIDIR"
+        },
+        "IO_L23N_T3U_N9_67": {
+          "type": "BIDIR"
+        },
+        "IO_L23P_T3U_N8_67": {
+          "type": "BIDIR"
+        },
+        "IO_L24N_T3U_N11_67": {
+          "type": "BIDIR"
+        },
+        "IO_L24P_T3U_N10_67": {
+          "type": "BIDIR"
+        },
+        "MGTHRXN0_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXP0_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXN0_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXP0_128": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0N_128": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0P_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXN1_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXP1_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXN1_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXP1_128": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1N_128": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1P_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXN2_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXP2_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXN2_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXP2_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXN3_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXP3_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXN3_128": {
+          "type": "INPUT"
+        },
+        "MGTHTXP3_128": {
+          "type": "INPUT"
+        },
+        "MGTHRXN0_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXP0_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXN0_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXP0_129": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0N_129": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0P_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXN1_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXP1_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXN1_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXP1_129": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1N_129": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1P_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXN2_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXP2_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXN2_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXP2_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXN3_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXP3_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXN3_129": {
+          "type": "INPUT"
+        },
+        "MGTHTXP3_129": {
+          "type": "INPUT"
+        },
+        "MGTHRXN0_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXP0_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXN0_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXP0_130": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0N_130": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0P_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXN1_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXP1_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXN1_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXP1_130": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1N_130": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1P_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXN2_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXP2_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXN2_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXP2_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXN3_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXP3_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXN3_130": {
+          "type": "INPUT"
+        },
+        "MGTHTXP3_130": {
+          "type": "INPUT"
+        },
+        "MGTHRXN0_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXP0_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXN0_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXP0_228": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0N_228": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0P_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXN1_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXP1_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXN1_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXP1_228": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1N_228": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1P_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXN2_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXP2_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXN2_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXP2_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXN3_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXP3_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXN3_228": {
+          "type": "INPUT"
+        },
+        "MGTHTXP3_228": {
+          "type": "INPUT"
+        },
+        "MGTHRXN0_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXP0_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXN0_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXP0_229": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0N_229": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0P_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXN1_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXP1_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXN1_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXP1_229": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1N_229": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1P_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXN2_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXP2_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXN2_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXP2_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXN3_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXP3_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXN3_229": {
+          "type": "INPUT"
+        },
+        "MGTHTXP3_229": {
+          "type": "INPUT"
+        },
+        "MGTHRXN0_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXP0_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXN0_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXP0_230": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0N_230": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK0P_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXN1_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXP1_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXN1_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXP1_230": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1N_230": {
+          "type": "INPUT"
+        },
+        "MGTREFCLK1P_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXN2_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXP2_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXN2_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXP2_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXN3_230": {
+          "type": "INPUT"
+        },
+        "MGTHRXP3_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXN3_230": {
+          "type": "INPUT"
+        },
+        "MGTHTXP3_230": {
+          "type": "INPUT"
+        },
+        "PS_MIO0_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO10_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO11_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO12_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO13_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO14_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO15_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO16_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO17_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO18_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO19_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO1_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO20_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO21_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO22_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO23_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO24_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO25_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO2_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO3_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO4_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO5_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO6_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO7_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO8_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO9_500": {
+          "type": "BIDIR"
+        },
+        "PS_MIO26_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO27_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO28_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO29_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO30_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO31_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO32_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO33_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO34_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO35_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO36_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO37_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO38_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO39_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO40_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO41_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO42_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO43_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO44_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO45_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO46_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO47_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO48_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO49_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO50_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO51_501": {
+          "type": "BIDIR"
+        },
+        "PS_MIO52_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO53_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO54_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO55_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO56_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO57_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO58_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO59_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO60_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO61_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO62_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO63_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO64_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO65_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO66_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO67_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO68_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO69_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO70_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO71_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO72_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO73_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO74_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO75_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO76_502": {
+          "type": "BIDIR"
+        },
+        "PS_MIO77_502": {
+          "type": "BIDIR"
+        },
+        "PS_DONE_503": {
+          "type": "OPENCOLL"
+        },
+        "PS_ERROR_OUT_503": {
+          "type": "OUTPUT"
+        },
+        "PS_ERROR_STATUS_503": {
+          "type": "OUTPUT"
+        },
+        "PS_INIT_B_503": {
+          "type": "OPENCOLL"
+        },
+        "PS_JTAG_TCK_503": {
+          "type": "INPUT"
+        },
+        "PS_JTAG_TDI_503": {
+          "type": "INPUT"
+        },
+        "PS_JTAG_TDO_503": {
+          "type": "OUTPUT"
+        },
+        "PS_JTAG_TMS_503": {
+          "type": "INPUT"
+        },
+        "PS_MODE0_503": {
+          "type": "INPUT"
+        },
+        "PS_MODE1_503": {
+          "type": "INPUT"
+        },
+        "PS_MODE2_503": {
+          "type": "INPUT"
+        },
+        "PS_MODE3_503": {
+          "type": "INPUT"
+        },
+        "PS_PADI_503": {
+          "type": "INPUT"
+        },
+        "PS_PADO_503": {
+          "type": "OUTPUT"
+        },
+        "PS_POR_B_503": {
+          "type": "INPUT"
+        },
+        "PS_PROG_B_503": {
+          "type": "INPUT"
+        },
+        "PS_REF_CLK_503": {
+          "type": "INPUT"
+        },
+        "PS_SRST_B_503": {
+          "type": "INPUT"
+        },
+        "PS_DDR_A0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A10_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A11_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A12_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A13_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A14_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A15_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A16_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A17_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A2_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A3_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A4_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A5_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A6_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A7_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A8_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_A9_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_ACT_N_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_ALERT_N_504": {
+          "type": "INPUT"
+        },
+        "PS_DDR_BA0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_BA1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_BG0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_BG1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CK0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CK1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CKE0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CKE1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CK_N0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CK_N1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CS_N0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_CS_N1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_DM0_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM1_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM2_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM3_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM4_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM5_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM6_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM7_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DM8_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ0_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ10_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ11_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ12_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ13_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ14_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ15_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ16_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ17_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ18_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ19_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ1_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ20_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ21_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ22_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ23_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ24_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ25_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ26_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ27_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ28_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ29_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ2_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ30_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ31_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ32_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ33_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ34_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ35_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ36_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ37_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ38_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ39_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ3_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ40_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ41_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ42_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ43_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ44_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ45_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ46_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ47_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ48_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ49_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ4_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ50_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ51_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ52_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ53_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ54_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ55_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ56_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ57_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ58_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ59_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ5_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ60_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ61_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ62_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ63_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ64_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ65_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ66_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ67_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ68_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ69_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ6_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ70_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ71_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ7_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ8_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQ9_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N0_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N1_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N2_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N3_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N4_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N5_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N6_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N7_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_N8_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P0_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P1_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P2_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P3_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P4_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P5_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P6_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P7_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_DQS_P8_504": {
+          "type": "BIDIR"
+        },
+        "PS_DDR_ODT0_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_ODT1_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_PARITY_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_RAM_RST_N_504": {
+          "type": "OUTPUT"
+        },
+        "PS_DDR_ZQ_504": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK0N_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK0P_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRREF_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXN0_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXP0_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXN0_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXP0_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK1N_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK1P_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXN1_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXP1_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXN1_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXP1_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK2N_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK2P_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXN2_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXP2_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXN2_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXP2_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK3N_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTREFCLK3P_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXN3_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRRXP3_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXN3_505": {
+          "type": "INPUT"
+        },
+        "PS_MGTRTXP3_505": {
+          "type": "INPUT"
+        },
+        "GND_A1": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_A10": {
+          "type": "PWRIN"
+        },
+        "GND_A11": {
+          "type": "PWRIN"
+        },
+        "GND_A14": {
+          "type": "PWRIN"
+        },
+        "GND_A19": {
+          "type": "PWRIN"
+        },
+        "GND_A2": {
+          "type": "PWRIN"
+        },
+        "GND_A24": {
+          "type": "PWRIN"
+        },
+        "GND_A28": {
+          "type": "PWRIN"
+        },
+        "MGTRREF_L": {
+          "type": "INPUT"
+        },
+        "MGTAVTTRCAL_L": {
+          "type": "PWRIN"
+        },
+        "GND_A33": {
+          "type": "PWRIN"
+        },
+        "GND_A34": {
+          "type": "PWRIN"
+        },
+        "MGTAVTTRCAL_R": {
+          "type": "PWRIN"
+        },
+        "MGTRREF_R": {
+          "type": "INPUT"
+        },
+        "GND_A9": {
+          "type": "PWRIN"
+        },
+        "VCCINT_IO_AA13": {
+          "type": "PWRIN"
+        },
+        "GND_AA14": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AA15": {
+          "type": "PWRIN"
+        },
+        "GND_AA16": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AA17": {
+          "type": "PWRIN"
+        },
+        "GND_AA18": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AA19": {
+          "type": "PWRIN"
+        },
+        "GND_AA20": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTLP_AA21": {
+          "type": "PWRIN"
+        },
+        "VCC_PSBATT": {
+          "type": "PWRIN"
+        },
+        "VCC_PSAUX_AA23": {
+          "type": "PWRIN"
+        },
+        "GND_AA24": {
+          "type": "PWRIN"
+        },
+        "VCC_PSAUX_AA25": {
+          "type": "PWRIN"
+        },
+        "GND_AA26": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVCC_AA29": {
+          "type": "PWRIN"
+        },
+        "GND_AA30": {
+          "type": "PWRIN"
+        },
+        "GND_AA33": {
+          "type": "PWRIN"
+        },
+        "GND_AA34": {
+          "type": "PWRIN"
+        },
+        "GND_AA4": {
+          "type": "PWRIN"
+        },
+        "VCCO_66_AA9": {
+          "type": "PWRIN"
+        },
+        "GND_AB12": {
+          "type": "PWRIN"
+        },
+        "VCCINT_IO_AB13": {
+          "type": "PWRIN"
+        },
+        "VCCBRAM_AB14": {
+          "type": "PWRIN"
+        },
+        "GND_AB15": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AB16": {
+          "type": "PWRIN"
+        },
+        "GND_AB17": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AB18": {
+          "type": "PWRIN"
+        },
+        "GND_AB19": {
+          "type": "PWRIN"
+        },
+        "GND_AB2": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AB20": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTLP_AB21": {
+          "type": "PWRIN"
+        },
+        "GND_AB22": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTLP_AB23": {
+          "type": "PWRIN"
+        },
+        "GND_PSADC_AB24": {
+          "type": "PWRIN"
+        },
+        "VCC_PSADC_AB25": {
+          "type": "PWRIN"
+        },
+        "GND_AB26": {
+          "type": "PWRIN"
+        },
+        "GND_AB27": {
+          "type": "PWRIN"
+        },
+        "GND_AB31": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVTT_AB32": {
+          "type": "PWRIN"
+        },
+        "GND_AB7": {
+          "type": "PWRIN"
+        },
+        "GND_AC10": {
+          "type": "PWRIN"
+        },
+        "VCCINT_IO_AC13": {
+          "type": "PWRIN"
+        },
+        "VCCBRAM_AC14": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AC15": {
+          "type": "PWRIN"
+        },
+        "GND_AC16": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AC17": {
+          "type": "PWRIN"
+        },
+        "GND_AC18": {
+          "type": "PWRIN"
+        },
+        "VCCINT_AC19": {
+          "type": "PWRIN"
+        },
+        "GND_AC20": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTLP_AC21": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTLP_AC22": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTLP_AC23": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_AC24": {
+          "type": "PWRIN"
+        },
+        "GND_PSADC_AC25": {
+          "type": "PWRIN"
+        },
+        "VCC_PSADC_AC26": {
+          "type": "PWRIN"
+        },
+        "GND_AC27": {
+          "type": "PWRIN"
+        },
+        "GND_AC28": {
+          "type": "PWRIN"
+        },
+        "GND_AC29": {
+          "type": "PWRIN"
+        },
+        "GND_AC30": {
+          "type": "PWRIN"
+        },
+        "GND_AC31": {
+          "type": "PWRIN"
+        },
+        "GND_AC32": {
+          "type": "PWRIN"
+        },
+        "GND_AC33": {
+          "type": "PWRIN"
+        },
+        "GND_AC34": {
+          "type": "PWRIN"
+        },
+        "GND_AC5": {
+          "type": "PWRIN"
+        },
+        "VREF_65": {
+          "type": "PWRIN"
+        },
+        "VREF_66": {
+          "type": "PWRIN"
+        },
+        "GND_AD13": {
+          "type": "PWRIN"
+        },
+        "POR_OVERRIDE": {
+          "type": "INPUT"
+        },
+        "PUDC_B": {
+          "type": "INPUT"
+        },
+        "VCC_PSINTFP_AD21": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_AD22": {
+          "type": "PWRIN"
+        },
+        "GND_AD23": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_DDR_AD24": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_AD25": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_AD26": {
+          "type": "PWRIN"
+        },
+        "GND_AD3": {
+          "type": "PWRIN"
+        },
+        "VCCO_65_AD8": {
+          "type": "PWRIN"
+        },
+        "GND_AE11": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO0_500_AE16": {
+          "type": "PWRIN"
+        },
+        "GND_AE21": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_AE22": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_AE23": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_DDR_AE24": {
+          "type": "PWRIN"
+        },
+        "VCC_PSINTFP_DDR_AE25": {
+          "type": "PWRIN"
+        },
+        "GND_AE26": {
+          "type": "PWRIN"
+        },
+        "GND_AE31": {
+          "type": "PWRIN"
+        },
+        "GND_AE6": {
+          "type": "PWRIN"
+        },
+        "VCCO_44_AF14": {
+          "type": "PWRIN"
+        },
+        "GND_AF19": {
+          "type": "PWRIN"
+        },
+        "GND_AF24": {
+          "type": "PWRIN"
+        },
+        "NC_AF26": {
+          "type": "NOCONNECT"
+        },
+        "NC_AF27": {
+          "type": "NOCONNECT"
+        },
+        "GND_AF29": {
+          "type": "PWRIN"
+        },
+        "GND_AF34": {
+          "type": "PWRIN"
+        },
+        "GND_AF4": {
+          "type": "PWRIN"
+        },
+        "VCCO_65_AF9": {
+          "type": "PWRIN"
+        },
+        "GND_AG12": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO0_500_AG17": {
+          "type": "PWRIN"
+        },
+        "GND_AG2": {
+          "type": "PWRIN"
+        },
+        "GND_AG22": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AG27": {
+          "type": "PWRIN"
+        },
+        "GND_AG32": {
+          "type": "PWRIN"
+        },
+        "VCCO_65_AG7": {
+          "type": "PWRIN"
+        },
+        "GND_AH10": {
+          "type": "PWRIN"
+        },
+        "GND_AH15": {
+          "type": "PWRIN"
+        },
+        "GND_AH20": {
+          "type": "PWRIN"
+        },
+        "GND_AH25": {
+          "type": "PWRIN"
+        },
+        "GND_AH30": {
+          "type": "PWRIN"
+        },
+        "GND_AH5": {
+          "type": "PWRIN"
+        },
+        "VREF_64": {
+          "type": "PWRIN"
+        },
+        "VCCO_44_AJ13": {
+          "type": "PWRIN"
+        },
+        "GND_AJ18": {
+          "type": "PWRIN"
+        },
+        "GND_AJ23": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AJ24": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AJ28": {
+          "type": "PWRIN"
+        },
+        "GND_AJ3": {
+          "type": "PWRIN"
+        },
+        "GND_AJ33": {
+          "type": "PWRIN"
+        },
+        "VCCO_64_AJ8": {
+          "type": "PWRIN"
+        },
+        "VCCO_64_AK11": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO0_500_AK16": {
+          "type": "PWRIN"
+        },
+        "GND_AK21": {
+          "type": "PWRIN"
+        },
+        "GND_AK26": {
+          "type": "PWRIN"
+        },
+        "GND_AK31": {
+          "type": "PWRIN"
+        },
+        "GND_AK6": {
+          "type": "PWRIN"
+        },
+        "GND_AL14": {
+          "type": "PWRIN"
+        },
+        "GND_AL19": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AL24": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AL29": {
+          "type": "PWRIN"
+        },
+        "GND_AL34": {
+          "type": "PWRIN"
+        },
+        "GND_AL4": {
+          "type": "PWRIN"
+        },
+        "VCCO_64_AL9": {
+          "type": "PWRIN"
+        },
+        "GND_AM12": {
+          "type": "PWRIN"
+        },
+        "GND_AM17": {
+          "type": "PWRIN"
+        },
+        "GND_AM2": {
+          "type": "PWRIN"
+        },
+        "GND_AM22": {
+          "type": "PWRIN"
+        },
+        "GND_AM27": {
+          "type": "PWRIN"
+        },
+        "GND_AM32": {
+          "type": "PWRIN"
+        },
+        "GND_AM7": {
+          "type": "PWRIN"
+        },
+        "GND_AN10": {
+          "type": "PWRIN"
+        },
+        "GND_AN15": {
+          "type": "PWRIN"
+        },
+        "GND_AN20": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AN25": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSDDR_504_AN30": {
+          "type": "PWRIN"
+        },
+        "GND_AN5": {
+          "type": "PWRIN"
+        },
+        "GND_AP13": {
+          "type": "PWRIN"
+        },
+        "GND_AP23": {
+          "type": "PWRIN"
+        },
+        "GND_AP28": {
+          "type": "PWRIN"
+        },
+        "GND_AP34": {
+          "type": "PWRIN"
+        },
+        "GND_B11": {
+          "type": "PWRIN"
+        },
+        "GND_B17": {
+          "type": "PWRIN"
+        },
+        "GND_B22": {
+          "type": "PWRIN"
+        },
+        "GND_B28": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_B3": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_B31": {
+          "type": "PWRIN"
+        },
+        "GND_B32": {
+          "type": "PWRIN"
+        },
+        "GND_B4": {
+          "type": "PWRIN"
+        },
+        "GND_B7": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_B8": {
+          "type": "PWRIN"
+        },
+        "GND_C1": {
+          "type": "PWRIN"
+        },
+        "GND_C10": {
+          "type": "PWRIN"
+        },
+        "GND_C11": {
+          "type": "PWRIN"
+        },
+        "GND_C15": {
+          "type": "PWRIN"
+        },
+        "GND_C2": {
+          "type": "PWRIN"
+        },
+        "GND_C20": {
+          "type": "PWRIN"
+        },
+        "GND_C25": {
+          "type": "PWRIN"
+        },
+        "GND_C28": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_C29": {
+          "type": "PWRIN"
+        },
+        "GND_C30": {
+          "type": "PWRIN"
+        },
+        "GND_C33": {
+          "type": "PWRIN"
+        },
+        "GND_C34": {
+          "type": "PWRIN"
+        },
+        "GND_C5": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_C6": {
+          "type": "PWRIN"
+        },
+        "GND_C9": {
+          "type": "PWRIN"
+        },
+        "GND_D13": {
+          "type": "PWRIN"
+        },
+        "GND_D18": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO2_502_D23": {
+          "type": "PWRIN"
+        },
+        "GND_D26": {
+          "type": "PWRIN"
+        },
+        "GND_D27": {
+          "type": "PWRIN"
+        },
+        "GND_D28": {
+          "type": "PWRIN"
+        },
+        "GND_D3": {
+          "type": "PWRIN"
+        },
+        "GND_D31": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_D32": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_D4": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_D7": {
+          "type": "PWRIN"
+        },
+        "GND_D8": {
+          "type": "PWRIN"
+        },
+        "GND_D9": {
+          "type": "PWRIN"
+        },
+        "GND_E1": {
+          "type": "PWRIN"
+        },
+        "GND_E11": {
+          "type": "PWRIN"
+        },
+        "VCCO_49_E16": {
+          "type": "PWRIN"
+        },
+        "GND_E2": {
+          "type": "PWRIN"
+        },
+        "VCCO_47_E21": {
+          "type": "PWRIN"
+        },
+        "GND_E26": {
+          "type": "PWRIN"
+        },
+        "GND_E29": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_E30": {
+          "type": "PWRIN"
+        },
+        "GND_E33": {
+          "type": "PWRIN"
+        },
+        "GND_E34": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_E5": {
+          "type": "PWRIN"
+        },
+        "GND_E6": {
+          "type": "PWRIN"
+        },
+        "GND_E9": {
+          "type": "PWRIN"
+        },
+        "VCCO_49_F14": {
+          "type": "PWRIN"
+        },
+        "GND_F19": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO2_502_F24": {
+          "type": "PWRIN"
+        },
+        "GND_F26": {
+          "type": "PWRIN"
+        },
+        "GND_F27": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_L_F28": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_F3": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_F31": {
+          "type": "PWRIN"
+        },
+        "GND_F32": {
+          "type": "PWRIN"
+        },
+        "GND_F4": {
+          "type": "PWRIN"
+        },
+        "GND_F7": {
+          "type": "PWRIN"
+        },
+        "MGTVCCAUX_R_F8": {
+          "type": "PWRIN"
+        },
+        "GND_F9": {
+          "type": "PWRIN"
+        },
+        "GND_G1": {
+          "type": "PWRIN"
+        },
+        "VCCO_50_G12": {
+          "type": "PWRIN"
+        },
+        "VCCO_48_G17": {
+          "type": "PWRIN"
+        },
+        "GND_G2": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO2_502_G22": {
+          "type": "PWRIN"
+        },
+        "GND_G26": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_L_G29": {
+          "type": "PWRIN"
+        },
+        "GND_G30": {
+          "type": "PWRIN"
+        },
+        "GND_G33": {
+          "type": "PWRIN"
+        },
+        "GND_G34": {
+          "type": "PWRIN"
+        },
+        "GND_G5": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_G6": {
+          "type": "PWRIN"
+        },
+        "GND_G9": {
+          "type": "PWRIN"
+        },
+        "GND_H15": {
+          "type": "PWRIN"
+        },
+        "VCCO_47_H20": {
+          "type": "PWRIN"
+        },
+        "GND_H26": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_L_H27": {
+          "type": "PWRIN"
+        },
+        "GND_H28": {
+          "type": "PWRIN"
+        },
+        "GND_H3": {
+          "type": "PWRIN"
+        },
+        "GND_H31": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_H32": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_H4": {
+          "type": "PWRIN"
+        },
+        "MGTVCCAUX_R_H7": {
+          "type": "PWRIN"
+        },
+        "GND_H8": {
+          "type": "PWRIN"
+        },
+        "GND_H9": {
+          "type": "PWRIN"
+        },
+        "GND_J1": {
+          "type": "PWRIN"
+        },
+        "VCCO_50_J13": {
+          "type": "PWRIN"
+        },
+        "VCCO_48_J18": {
+          "type": "PWRIN"
+        },
+        "GND_J2": {
+          "type": "PWRIN"
+        },
+        "GND_J23": {
+          "type": "PWRIN"
+        },
+        "GND_J26": {
+          "type": "PWRIN"
+        },
+        "GND_J29": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_J30": {
+          "type": "PWRIN"
+        },
+        "GND_J33": {
+          "type": "PWRIN"
+        },
+        "GND_J34": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_J5": {
+          "type": "PWRIN"
+        },
+        "GND_J6": {
+          "type": "PWRIN"
+        },
+        "GND_J9": {
+          "type": "PWRIN"
+        },
+        "GND_K11": {
+          "type": "PWRIN"
+        },
+        "GND_K21": {
+          "type": "PWRIN"
+        },
+        "GND_K26": {
+          "type": "PWRIN"
+        },
+        "GND_K27": {
+          "type": "PWRIN"
+        },
+        "MGTVCCAUX_L_K28": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_K3": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_K31": {
+          "type": "PWRIN"
+        },
+        "GND_K32": {
+          "type": "PWRIN"
+        },
+        "GND_K4": {
+          "type": "PWRIN"
+        },
+        "GND_K7": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_R_K8": {
+          "type": "PWRIN"
+        },
+        "GND_K9": {
+          "type": "PWRIN"
+        },
+        "GND_L1": {
+          "type": "PWRIN"
+        },
+        "GND_L14": {
+          "type": "PWRIN"
+        },
+        "GND_L2": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO1_501_L24": {
+          "type": "PWRIN"
+        },
+        "GND_L26": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_L_L29": {
+          "type": "PWRIN"
+        },
+        "GND_L30": {
+          "type": "PWRIN"
+        },
+        "GND_L33": {
+          "type": "PWRIN"
+        },
+        "GND_L34": {
+          "type": "PWRIN"
+        },
+        "GND_L5": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_L6": {
+          "type": "PWRIN"
+        },
+        "GND_L9": {
+          "type": "PWRIN"
+        },
+        "GND_M12": {
+          "type": "PWRIN"
+        },
+        "VCCINT_M16": {
+          "type": "PWRIN"
+        },
+        "GND_M17": {
+          "type": "PWRIN"
+        },
+        "VCCINT_M18": {
+          "type": "PWRIN"
+        },
+        "GND_M19": {
+          "type": "PWRIN"
+        },
+        "VCCINT_M20": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO1_501_M22": {
+          "type": "PWRIN"
+        },
+        "GND_M26": {
+          "type": "PWRIN"
+        },
+        "MGTVCCAUX_L_M27": {
+          "type": "PWRIN"
+        },
+        "GND_M28": {
+          "type": "PWRIN"
+        },
+        "GND_M3": {
+          "type": "PWRIN"
+        },
+        "GND_M31": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_M32": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_M4": {
+          "type": "PWRIN"
+        },
+        "GND_M7": {
+          "type": "PWRIN"
+        },
+        "GND_M8": {
+          "type": "PWRIN"
+        },
+        "GND_M9": {
+          "type": "PWRIN"
+        },
+        "GND_N1": {
+          "type": "PWRIN"
+        },
+        "GND_N10": {
+          "type": "PWRIN"
+        },
+        "VREF_67": {
+          "type": "PWRIN"
+        },
+        "VCCINT_N15": {
+          "type": "PWRIN"
+        },
+        "GND_N16": {
+          "type": "PWRIN"
+        },
+        "VCCINT_N17": {
+          "type": "PWRIN"
+        },
+        "GND_N18": {
+          "type": "PWRIN"
+        },
+        "VCCINT_N19": {
+          "type": "PWRIN"
+        },
+        "GND_N2": {
+          "type": "PWRIN"
+        },
+        "GND_N20": {
+          "type": "PWRIN"
+        },
+        "GND_N26": {
+          "type": "PWRIN"
+        },
+        "GND_N29": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_N30": {
+          "type": "PWRIN"
+        },
+        "GND_N33": {
+          "type": "PWRIN"
+        },
+        "GND_N34": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_N5": {
+          "type": "PWRIN"
+        },
+        "GND_N6": {
+          "type": "PWRIN"
+        },
+        "GND_N7": {
+          "type": "PWRIN"
+        },
+        "GND_P13": {
+          "type": "PWRIN"
+        },
+        "VCCINT_P14": {
+          "type": "PWRIN"
+        },
+        "GND_P15": {
+          "type": "PWRIN"
+        },
+        "VCCINT_P16": {
+          "type": "PWRIN"
+        },
+        "GND_P17": {
+          "type": "PWRIN"
+        },
+        "VCCINT_P18": {
+          "type": "PWRIN"
+        },
+        "GND_P19": {
+          "type": "PWRIN"
+        },
+        "VCCINT_P20": {
+          "type": "PWRIN"
+        },
+        "GND_P23": {
+          "type": "PWRIN"
+        },
+        "GND_P26": {
+          "type": "PWRIN"
+        },
+        "GND_P27": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_L_P28": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_R_P3": {
+          "type": "PWRIN"
+        },
+        "MGTAVTT_L_P31": {
+          "type": "PWRIN"
+        },
+        "GND_P32": {
+          "type": "PWRIN"
+        },
+        "GND_P4": {
+          "type": "PWRIN"
+        },
+        "GND_P7": {
+          "type": "PWRIN"
+        },
+        "VCCO_67_P8": {
+          "type": "PWRIN"
+        },
+        "GND_R1": {
+          "type": "PWRIN"
+        },
+        "GND_R11": {
+          "type": "PWRIN"
+        },
+        "GND_R14": {
+          "type": "PWRIN"
+        },
+        "VCCINT_R15": {
+          "type": "PWRIN"
+        },
+        "GND_R16": {
+          "type": "PWRIN"
+        },
+        "VCCINT_R17": {
+          "type": "PWRIN"
+        },
+        "GND_R18": {
+          "type": "PWRIN"
+        },
+        "VCCINT_R19": {
+          "type": "PWRIN"
+        },
+        "GND_R2": {
+          "type": "PWRIN"
+        },
+        "GND_R20": {
+          "type": "PWRIN"
+        },
+        "GND_R26": {
+          "type": "PWRIN"
+        },
+        "MGTAVCC_L_R29": {
+          "type": "PWRIN"
+        },
+        "GND_R30": {
+          "type": "PWRIN"
+        },
+        "GND_R33": {
+          "type": "PWRIN"
+        },
+        "GND_R34": {
+          "type": "PWRIN"
+        },
+        "GND_R5": {
+          "type": "PWRIN"
+        },
+        "GND_R6": {
+          "type": "PWRIN"
+        },
+        "GND_R7": {
+          "type": "PWRIN"
+        },
+        "VCCAUX_T14": {
+          "type": "PWRIN"
+        },
+        "GND_T15": {
+          "type": "PWRIN"
+        },
+        "VCCINT_T16": {
+          "type": "PWRIN"
+        },
+        "GNDADC": {
+          "type": "PWRIN"
+        },
+        "VCCADC": {
+          "type": "PWRIN"
+        },
+        "GND_T19": {
+          "type": "PWRIN"
+        },
+        "VCCINT_T20": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO3_503_T24": {
+          "type": "PWRIN"
+        },
+        "GND_T26": {
+          "type": "PWRIN"
+        },
+        "GND_T27": {
+          "type": "PWRIN"
+        },
+        "GND_T28": {
+          "type": "PWRIN"
+        },
+        "GND_T3": {
+          "type": "PWRIN"
+        },
+        "GND_T31": {
+          "type": "PWRIN"
+        },
+        "GND_T32": {
+          "type": "PWRIN"
+        },
+        "GND_T4": {
+          "type": "PWRIN"
+        },
+        "GND_T5": {
+          "type": "PWRIN"
+        },
+        "VCCO_67_T9": {
+          "type": "PWRIN"
+        },
+        "GND_U1": {
+          "type": "PWRIN"
+        },
+        "GND_U12": {
+          "type": "PWRIN"
+        },
+        "VCCAUX_IO_U13": {
+          "type": "PWRIN"
+        },
+        "VCCAUX_U14": {
+          "type": "PWRIN"
+        },
+        "VCCINT_U15": {
+          "type": "PWRIN"
+        },
+        "GND_U16": {
+          "type": "PWRIN"
+        },
+        "VREFN": {
+          "type": "PWRIN"
+        },
+        "VCCINT_U19": {
+          "type": "PWRIN"
+        },
+        "GND_U2": {
+          "type": "PWRIN"
+        },
+        "GND_U20": {
+          "type": "PWRIN"
+        },
+        "VCCO_PSIO3_503_U22": {
+          "type": "PWRIN"
+        },
+        "GND_U26": {
+          "type": "PWRIN"
+        },
+        "GND_U29": {
+          "type": "PWRIN"
+        },
+        "GND_U3": {
+          "type": "PWRIN"
+        },
+        "GND_U30": {
+          "type": "PWRIN"
+        },
+        "GND_U33": {
+          "type": "PWRIN"
+        },
+        "GND_U34": {
+          "type": "PWRIN"
+        },
+        "VCCO_67_U7": {
+          "type": "PWRIN"
+        },
+        "GND_V10": {
+          "type": "PWRIN"
+        },
+        "VCCAUX_IO_V13": {
+          "type": "PWRIN"
+        },
+        "VCCAUX_IO_V14": {
+          "type": "PWRIN"
+        },
+        "GND_V15": {
+          "type": "PWRIN"
+        },
+        "VCCINT_V16": {
+          "type": "PWRIN"
+        },
+        "VREFP": {
+          "type": "PWRIN"
+        },
+        "GND_V19": {
+          "type": "PWRIN"
+        },
+        "VCCINT_V20": {
+          "type": "PWRIN"
+        },
+        "GND_V25": {
+          "type": "PWRIN"
+        },
+        "GND_V26": {
+          "type": "PWRIN"
+        },
+        "GND_V27": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVCC_V28": {
+          "type": "PWRIN"
+        },
+        "GND_V31": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVTT_V32": {
+          "type": "PWRIN"
+        },
+        "GND_V5": {
+          "type": "PWRIN"
+        },
+        "GND_W13": {
+          "type": "PWRIN"
+        },
+        "VCCBRAM_W14": {
+          "type": "PWRIN"
+        },
+        "VCCINT_W15": {
+          "type": "PWRIN"
+        },
+        "GND_W16": {
+          "type": "PWRIN"
+        },
+        "DXN": {
+          "type": "INPUT"
+        },
+        "DXP": {
+          "type": "INPUT"
+        },
+        "VCCINT_W19": {
+          "type": "PWRIN"
+        },
+        "GND_W20": {
+          "type": "PWRIN"
+        },
+        "VCC_PSPLL_W22": {
+          "type": "PWRIN"
+        },
+        "GND_W23": {
+          "type": "PWRIN"
+        },
+        "VCC_PSPLL_W24": {
+          "type": "PWRIN"
+        },
+        "VCC_PSPLL_W25": {
+          "type": "PWRIN"
+        },
+        "GND_W26": {
+          "type": "PWRIN"
+        },
+        "GND_W29": {
+          "type": "PWRIN"
+        },
+        "GND_W3": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVCC_W30": {
+          "type": "PWRIN"
+        },
+        "GND_W33": {
+          "type": "PWRIN"
+        },
+        "GND_W34": {
+          "type": "PWRIN"
+        },
+        "VCCO_66_W8": {
+          "type": "PWRIN"
+        },
+        "VCCO_66_Y11": {
+          "type": "PWRIN"
+        },
+        "VCCINT_IO_Y13": {
+          "type": "PWRIN"
+        },
+        "VCCBRAM_Y14": {
+          "type": "PWRIN"
+        },
+        "GND_Y15": {
+          "type": "PWRIN"
+        },
+        "VCCINT_Y16": {
+          "type": "PWRIN"
+        },
+        "GND_Y17": {
+          "type": "PWRIN"
+        },
+        "VCCINT_Y18": {
+          "type": "PWRIN"
+        },
+        "GND_Y19": {
+          "type": "PWRIN"
+        },
+        "VCCINT_Y20": {
+          "type": "PWRIN"
+        },
+        "GND_Y21": {
+          "type": "PWRIN"
+        },
+        "VCC_PSAUX_Y22": {
+          "type": "PWRIN"
+        },
+        "VCC_PSAUX_Y23": {
+          "type": "PWRIN"
+        },
+        "VCC_PSDDR_PLL_Y24": {
+          "type": "PWRIN"
+        },
+        "VCC_PSDDR_PLL_Y25": {
+          "type": "PWRIN"
+        },
+        "GND_Y26": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVCC_Y27": {
+          "type": "PWRIN"
+        },
+        "GND_Y28": {
+          "type": "PWRIN"
+        },
+        "PS_MGTRAVTT_Y31": {
+          "type": "PWRIN"
+        },
+        "GND_Y32": {
+          "type": "PWRIN"
+        },
+        "GND_Y6": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "FFVB1156": {
+          "allegro": "FFVB1156",
+          "pads": {
+            "V17": "VN",
+            "U18": "VP",
+            "AP14": "IO_L1N_AD11N_44",
+            "AN14": "IO_L1P_AD11P_44",
+            "AN13": "IO_L2N_AD10N_44",
+            "AM14": "IO_L2P_AD10P_44",
+            "AP12": "IO_L3N_AD9N_44",
+            "AN12": "IO_L3P_AD9P_44",
+            "AM13": "IO_L4N_AD8N_44",
+            "AL13": "IO_L4P_AD8P_44",
+            "AK14": "IO_L5N_HDGC_AD7N_44",
+            "AK15": "IO_L5P_HDGC_AD7P_44",
+            "AL12": "IO_L6N_HDGC_AD6N_44",
+            "AK13": "IO_L6P_HDGC_AD6P_44",
+            "AH13": "IO_L7N_HDGC_AD5N_44",
+            "AH14": "IO_L7P_HDGC_AD5P_44",
+            "AJ14": "IO_L8N_HDGC_AD4N_44",
+            "AJ15": "IO_L8P_HDGC_AD4P_44",
+            "AF13": "IO_L9N_AD3N_44",
+            "AE13": "IO_L9P_AD3P_44",
+            "AG13": "IO_L10N_AD2N_44",
+            "AG14": "IO_L10P_AD2P_44",
+            "AG15": "IO_L11N_AD1N_44",
+            "AF15": "IO_L11P_AD1P_44",
+            "AE14": "IO_L12N_AD0N_44",
+            "AE15": "IO_L12P_AD0P_44",
+            "K20": "IO_L1N_AD11N_47",
+            "L20": "IO_L1P_AD11P_47",
+            "K19": "IO_L2N_AD10N_47",
+            "L19": "IO_L2P_AD10P_47",
+            "H21": "IO_L3N_AD9N_47",
+            "J21": "IO_L3P_AD9P_47",
+            "J20": "IO_L4N_AD8N_47",
+            "J19": "IO_L4P_AD8P_47",
+            "F21": "IO_L5N_HDGC_AD7N_47",
+            "G21": "IO_L5P_HDGC_AD7P_47",
+            "F20": "IO_L6N_HDGC_AD6N_47",
+            "G20": "IO_L6P_HDGC_AD6P_47",
+            "D22": "IO_L7N_HDGC_AD5N_47",
+            "E22": "IO_L7P_HDGC_AD5P_47",
+            "D20": "IO_L8N_HDGC_AD4N_47",
+            "E20": "IO_L8P_HDGC_AD4P_47",
+            "C22": "IO_L9N_AD3N_47",
+            "D21": "IO_L9P_AD3P_47",
+            "B21": "IO_L10N_AD2N_47",
+            "C21": "IO_L10P_AD2P_47",
+            "A22": "IO_L11N_AD1N_47",
+            "A21": "IO_L11P_AD1P_47",
+            "A20": "IO_L12N_AD0N_47",
+            "B20": "IO_L12P_AD0P_47",
+            "H19": "IO_L1N_AD15N_48",
+            "H18": "IO_L1P_AD15P_48",
+            "H17": "IO_L2N_AD14N_48",
+            "J17": "IO_L2P_AD14P_48",
+            "K18": "IO_L3N_AD13N_48",
+            "L18": "IO_L3P_AD13P_48",
+            "K17": "IO_L4N_AD12N_48",
+            "L17": "IO_L4P_AD12P_48",
+            "G19": "IO_L5N_HDGC_48",
+            "G18": "IO_L5P_HDGC_48",
+            "F18": "IO_L6N_HDGC_48",
+            "F17": "IO_L6P_HDGC_48",
+            "D19": "IO_L7N_HDGC_48",
+            "E19": "IO_L7P_HDGC_48",
+            "E18": "IO_L8N_HDGC_48",
+            "E17": "IO_L8P_HDGC_48",
+            "C17": "IO_L9N_AD11N_48",
+            "D17": "IO_L9P_AD11P_48",
+            "B19": "IO_L10N_AD10N_48",
+            "B18": "IO_L10P_AD10P_48",
+            "C19": "IO_L11N_AD9N_48",
+            "C18": "IO_L11P_AD9P_48",
+            "A18": "IO_L12N_AD8N_48",
+            "A17": "IO_L12P_AD8P_48",
+            "F15": "IO_L1N_AD15N_49",
+            "F16": "IO_L1P_AD15P_49",
+            "C16": "IO_L2N_AD14N_49",
+            "D16": "IO_L2P_AD14P_49",
+            "A16": "IO_L3N_AD13N_49",
+            "B16": "IO_L3P_AD13P_49",
+            "A15": "IO_L4N_AD12N_49",
+            "B15": "IO_L4P_AD12P_49",
+            "D15": "IO_L5N_HDGC_49",
+            "E15": "IO_L5P_HDGC_49",
+            "D14": "IO_L6N_HDGC_49",
+            "E14": "IO_L6P_HDGC_49",
+            "B14": "IO_L7N_HDGC_49",
+            "C14": "IO_L7P_HDGC_49",
+            "B13": "IO_L8N_HDGC_49",
+            "C13": "IO_L8P_HDGC_49",
+            "A12": "IO_L9N_AD11N_49",
+            "A13": "IO_L9P_AD11P_49",
+            "B12": "IO_L10N_AD10N_49",
+            "C12": "IO_L10P_AD10P_49",
+            "D12": "IO_L11N_AD9N_49",
+            "E12": "IO_L11P_AD9P_49",
+            "E13": "IO_L12N_AD8N_49",
+            "F13": "IO_L12P_AD8P_49",
+            "J10": "IO_L1N_AD15N_50",
+            "J11": "IO_L1P_AD15P_50",
+            "G10": "IO_L2N_AD14N_50",
+            "H10": "IO_L2P_AD14P_50",
+            "E10": "IO_L3N_AD13N_50",
+            "F10": "IO_L3P_AD13P_50",
+            "D10": "IO_L4N_AD12N_50",
+            "D11": "IO_L4P_AD12P_50",
+            "G11": "IO_L5N_HDGC_50",
+            "H11": "IO_L5P_HDGC_50",
+            "F11": "IO_L6N_HDGC_50",
+            "F12": "IO_L6P_HDGC_50",
+            "H12": "IO_L7N_HDGC_50",
+            "J12": "IO_L7P_HDGC_50",
+            "G13": "IO_L8N_HDGC_50",
+            "H13": "IO_L8P_HDGC_50",
+            "G14": "IO_L9N_AD11N_50",
+            "G15": "IO_L9P_AD11P_50",
+            "H14": "IO_L10N_AD10N_50",
+            "J14": "IO_L10P_AD10P_50",
+            "G16": "IO_L11N_AD9N_50",
+            "H16": "IO_L11P_AD9P_50",
+            "J15": "IO_L12N_AD8N_50",
+            "J16": "IO_L12P_AD8P_50",
+            "AN11": "IO_T0U_N12_VRP_64",
+            "AJ7": "IO_T1U_N12_64",
+            "AM3": "IO_T2U_N12_64",
+            "AP1": "IO_T3U_N12_64",
+            "AK12": "IO_L1N_T0L_N1_DBC_64",
+            "AJ12": "IO_L1P_T0L_N0_DBC_64",
+            "AM11": "IO_L2N_T0L_N3_64",
+            "AL11": "IO_L2P_T0L_N2_64",
+            "AM10": "IO_L3N_T0L_N5_AD15N_64",
+            "AL10": "IO_L3P_T0L_N4_AD15P_64",
+            "AP10": "IO_L4N_T0U_N7_DBC_AD7N_64",
+            "AP11": "IO_L4P_T0U_N6_DBC_AD7P_64",
+            "AP9": "IO_L5N_T0U_N9_AD14N_64",
+            "AN9": "IO_L5P_T0U_N8_AD14P_64",
+            "AK10": "IO_L6N_T0U_N11_AD6N_64",
+            "AJ10": "IO_L6P_T0U_N10_AD6P_64",
+            "AP8": "IO_L7N_T1L_N1_QBC_AD13N_64",
+            "AN8": "IO_L7P_T1L_N0_QBC_AD13P_64",
+            "AM8": "IO_L8N_T1L_N3_AD5N_64",
+            "AM9": "IO_L8P_T1L_N2_AD5P_64",
+            "AK9": "IO_L9N_T1L_N5_AD12N_64",
+            "AJ9": "IO_L9P_T1L_N4_AD12P_64",
+            "AP7": "IO_L10N_T1U_N7_QBC_AD4N_64",
+            "AN7": "IO_L10P_T1U_N6_QBC_AD4P_64",
+            "AK7": "IO_L11N_T1U_N9_GC_64",
+            "AK8": "IO_L11P_T1U_N8_GC_64",
+            "AL7": "IO_L12N_T1U_N11_GC_64",
+            "AL8": "IO_L12P_T1U_N10_GC_64",
+            "AL5": "IO_L13N_T2L_N1_GC_QBC_64",
+            "AL6": "IO_L13P_T2L_N0_GC_QBC_64",
+            "AM5": "IO_L14N_T2L_N3_GC_64",
+            "AM6": "IO_L14P_T2L_N2_GC_64",
+            "AP4": "IO_L15N_T2L_N5_AD11N_64",
+            "AP5": "IO_L15P_T2L_N4_AD11P_64",
+            "AP6": "IO_L16N_T2U_N7_QBC_AD3N_64",
+            "AN6": "IO_L16P_T2U_N6_QBC_AD3P_64",
+            "AN4": "IO_L17N_T2U_N9_AD10N_64",
+            "AM4": "IO_L17P_T2U_N8_AD10P_64",
+            "AK4": "IO_L18N_T2U_N11_AD2N_64",
+            "AK5": "IO_L18P_T2U_N10_AD2P_64",
+            "AP2": "IO_L19N_T3L_N1_DBC_AD9N_64",
+            "AN2": "IO_L19P_T3L_N0_DBC_AD9P_64",
+            "AP3": "IO_L20N_T3L_N3_AD1N_64",
+            "AN3": "IO_L20P_T3L_N2_AD1P_64",
+            "AN1": "IO_L21N_T3L_N5_AD8N_64",
+            "AM1": "IO_L21P_T3L_N4_AD8P_64",
+            "AL2": "IO_L22N_T3U_N7_DBC_AD0N_64",
+            "AL3": "IO_L22P_T3U_N6_DBC_AD0P_64",
+            "AL1": "IO_L23N_T3U_N9_64",
+            "AK1": "IO_L23P_T3U_N8_64",
+            "AK2": "IO_L24N_T3U_N11_64",
+            "AK3": "IO_L24P_T3U_N10_64",
+            "AD9": "IO_T0U_N12_VRP_65",
+            "AH9": "IO_T1U_N12_65",
+            "AD5": "IO_T2U_N12_65",
+            "AG1": "IO_T3U_N12_65",
+            "AF10": "IO_L1N_T0L_N1_DBC_65",
+            "AE10": "IO_L1P_T0L_N0_DBC_65",
+            "AH11": "IO_L2N_T0L_N3_65",
+            "AH12": "IO_L2P_T0L_N2_65",
+            "AF12": "IO_L3N_T0L_N5_AD15N_65",
+            "AE12": "IO_L3P_T0L_N4_AD15P_65",
+            "AG11": "IO_L4N_T0U_N7_DBC_AD7N_65",
+            "AF11": "IO_L4P_T0U_N6_DBC_AD7P_SMBALERT_65",
+            "AG9": "IO_L5N_T0U_N9_AD14N_65",
+            "AG10": "IO_L5P_T0U_N8_AD14P_65",
+            "AE9": "IO_L6N_T0U_N11_AD6N_65",
+            "AD10": "IO_L6P_T0U_N10_AD6P_65",
+            "AH6": "IO_L7N_T1L_N1_QBC_AD13N_65",
+            "AH7": "IO_L7P_T1L_N0_QBC_AD13P_65",
+            "AH8": "IO_L8N_T1L_N3_AD5N_65",
+            "AG8": "IO_L8P_T1L_N2_AD5P_65",
+            "AD6": "IO_L9N_T1L_N5_AD12N_65",
+            "AD7": "IO_L9P_T1L_N4_AD12P_65",
+            "AF8": "IO_L10N_T1U_N7_QBC_AD4N_65",
+            "AE8": "IO_L10P_T1U_N6_QBC_AD4P_65",
+            "AG6": "IO_L11N_T1U_N9_GC_65",
+            "AF6": "IO_L11P_T1U_N8_GC_65",
+            "AF7": "IO_L12N_T1U_N11_GC_65",
+            "AE7": "IO_L12P_T1U_N10_GC_65",
+            "AF5": "IO_L13N_T2L_N1_GC_QBC_65",
+            "AE5": "IO_L13P_T2L_N0_GC_QBC_65",
+            "AG4": "IO_L14N_T2L_N3_GC_65",
+            "AG5": "IO_L14P_T2L_N2_GC_65",
+            "AJ4": "IO_L15N_T2L_N5_AD11N_65",
+            "AH4": "IO_L15P_T2L_N4_AD11P_65",
+            "AJ5": "IO_L16N_T2U_N7_QBC_AD3N_65",
+            "AJ6": "IO_L16P_T2U_N6_QBC_AD3P_65",
+            "AF3": "IO_L17N_T2U_N9_AD10N_65",
+            "AE3": "IO_L17P_T2U_N8_AD10P_65",
+            "AE4": "IO_L18N_T2U_N11_AD2N_65",
+            "AD4": "IO_L18P_T2U_N10_AD2P_65",
+            "AJ2": "IO_L19N_T3L_N1_DBC_AD9N_65",
+            "AH2": "IO_L19P_T3L_N0_DBC_AD9P_65",
+            "AH3": "IO_L20N_T3L_N3_AD1N_65",
+            "AG3": "IO_L20P_T3L_N2_AD1P_65",
+            "AF1": "IO_L21N_T3L_N5_AD8N_65",
+            "AF2": "IO_L21P_T3L_N4_AD8P_65",
+            "AJ1": "IO_L22N_T3U_N7_DBC_AD0N_65",
+            "AH1": "IO_L22P_T3U_N6_DBC_AD0P_65",
+            "AD1": "IO_L23N_T3U_N9_65",
+            "AD2": "IO_L23P_T3U_N8_I2C_SCLK_65",
+            "AE1": "IO_L24N_T3U_N11_PERSTN0_65",
+            "AE2": "IO_L24P_T3U_N10_PERSTN1_I2C_SDA_65",
+            "W9": "IO_T0U_N12_VRP_66",
+            "AA8": "IO_T1U_N12_66",
+            "AA3": "IO_T2U_N12_66",
+            "AB1": "IO_T3U_N12_66",
+            "AC11": "IO_L1N_T0L_N1_DBC_66",
+            "AC12": "IO_L1P_T0L_N0_DBC_66",
+            "AB10": "IO_L2N_T0L_N3_66",
+            "AB11": "IO_L2P_T0L_N2_66",
+            "AA10": "IO_L3N_T0L_N5_AD15N_66",
+            "AA11": "IO_L3P_T0L_N4_AD15P_66",
+            "AC9": "IO_L4N_T0U_N7_DBC_AD7N_66",
+            "AB9": "IO_L4P_T0U_N6_DBC_AD7P_66",
+            "AA12": "IO_L5N_T0U_N9_AD14N_66",
+            "Y12": "IO_L5P_T0U_N8_AD14P_66",
+            "Y9": "IO_L6N_T0U_N11_AD6N_66",
+            "Y10": "IO_L6P_T0U_N10_AD6P_66",
+            "AC6": "IO_L7N_T1L_N1_QBC_AD13N_66",
+            "AC7": "IO_L7P_T1L_N0_QBC_AD13P_66",
+            "AC8": "IO_L8N_T1L_N3_AD5N_66",
+            "AB8": "IO_L8P_T1L_N2_AD5P_66",
+            "W6": "IO_L9N_T1L_N5_AD12N_66",
+            "W7": "IO_L9P_T1L_N4_AD12P_66",
+            "AB5": "IO_L10N_T1U_N7_QBC_AD4N_66",
+            "AB6": "IO_L10P_T1U_N6_QBC_AD4P_66",
+            "Y7": "IO_L11N_T1U_N9_GC_66",
+            "Y8": "IO_L11P_T1U_N8_GC_66",
+            "AA6": "IO_L12N_T1U_N11_GC_66",
+            "AA7": "IO_L12P_T1U_N10_GC_66",
+            "Y3": "IO_L13N_T2L_N1_GC_QBC_66",
+            "Y4": "IO_L13P_T2L_N0_GC_QBC_66",
+            "AA5": "IO_L14N_T2L_N3_GC_66",
+            "Y5": "IO_L14P_T2L_N2_GC_66",
+            "W4": "IO_L15N_T2L_N5_AD11N_66",
+            "W5": "IO_L15P_T2L_N4_AD11P_66",
+            "AC4": "IO_L16N_T2U_N7_QBC_AD3N_66",
+            "AB4": "IO_L16P_T2U_N6_QBC_AD3P_66",
+            "V3": "IO_L17N_T2U_N9_AD10N_66",
+            "V4": "IO_L17P_T2U_N8_AD10P_66",
+            "U4": "IO_L18N_T2U_N11_AD2N_66",
+            "U5": "IO_L18P_T2U_N10_AD2P_66",
+            "AC1": "IO_L19N_T3L_N1_DBC_AD9N_66",
+            "AC2": "IO_L19P_T3L_N0_DBC_AD9P_66",
+            "AC3": "IO_L20N_T3L_N3_AD1N_66",
+            "AB3": "IO_L20P_T3L_N2_AD1P_66",
+            "AA1": "IO_L21N_T3L_N5_AD8N_66",
+            "AA2": "IO_L21P_T3L_N4_AD8P_66",
+            "Y1": "IO_L22N_T3U_N7_DBC_AD0N_66",
+            "Y2": "IO_L22P_T3U_N6_DBC_AD0P_66",
+            "V1": "IO_L23N_T3U_N9_66",
+            "V2": "IO_L23P_T3U_N8_66",
+            "W1": "IO_L24N_T3U_N11_66",
+            "W2": "IO_L24P_T3U_N10_66",
+            "W10": "IO_T0U_N12_VRP_67",
+            "V9": "IO_T1U_N12_67",
+            "K10": "IO_T2U_N12_67",
+            "K14": "IO_T3U_N12_67",
+            "W11": "IO_L1N_T0L_N1_DBC_67",
+            "W12": "IO_L1P_T0L_N0_DBC_67",
+            "R13": "IO_L2N_T0L_N3_67",
+            "T13": "IO_L2P_T0L_N2_67",
+            "T10": "IO_L3N_T0L_N5_AD15N_67",
+            "U10": "IO_L3P_T0L_N4_AD15P_67",
+            "R12": "IO_L4N_T0U_N7_DBC_AD7N_67",
+            "T12": "IO_L4P_T0U_N6_DBC_AD7P_67",
+            "V11": "IO_L5N_T0U_N9_AD14N_67",
+            "V12": "IO_L5P_T0U_N8_AD14P_67",
+            "T11": "IO_L6N_T0U_N11_AD6N_67",
+            "U11": "IO_L6P_T0U_N10_AD6P_67",
+            "V7": "IO_L7N_T1L_N1_QBC_AD13N_67",
+            "V8": "IO_L7P_T1L_N0_QBC_AD13P_67",
+            "U6": "IO_L8N_T1L_N3_AD5N_67",
+            "V6": "IO_L8P_T1L_N2_AD5P_67",
+            "U8": "IO_L9N_T1L_N5_AD12N_67",
+            "U9": "IO_L9P_T1L_N4_AD12P_67",
+            "T6": "IO_L10N_T1U_N7_QBC_AD4N_67",
+            "T7": "IO_L10P_T1U_N6_QBC_AD4P_67",
+            "R9": "IO_L11N_T1U_N9_GC_67",
+            "R10": "IO_L11P_T1U_N8_GC_67",
+            "R8": "IO_L12N_T1U_N11_GC_67",
+            "T8": "IO_L12P_T1U_N10_GC_67",
+            "N11": "IO_L13N_T2L_N1_GC_QBC_67",
+            "P11": "IO_L13P_T2L_N0_GC_QBC_67",
+            "P9": "IO_L14N_T2L_N3_GC_67",
+            "P10": "IO_L14P_T2L_N2_GC_67",
+            "L10": "IO_L15N_T2L_N5_AD11N_67",
+            "M10": "IO_L15P_T2L_N4_AD11P_67",
+            "N8": "IO_L16N_T2U_N7_QBC_AD3N_67",
+            "N9": "IO_L16P_T2U_N6_QBC_AD3P_67",
+            "L11": "IO_L17N_T2U_N9_AD10N_67",
+            "M11": "IO_L17P_T2U_N8_AD10P_67",
+            "K12": "IO_L18N_T2U_N11_AD2N_67",
+            "L12": "IO_L18P_T2U_N10_AD2P_67",
+            "K16": "IO_L19N_T3L_N1_DBC_AD9N_67",
+            "L16": "IO_L19P_T3L_N0_DBC_AD9P_67",
+            "M14": "IO_L20N_T3L_N3_AD1N_67",
+            "M15": "IO_L20P_T3L_N2_AD1P_67",
+            "N12": "IO_L21N_T3L_N5_AD8N_67",
+            "P12": "IO_L21P_T3L_N4_AD8P_67",
+            "M13": "IO_L22N_T3U_N7_DBC_AD0N_67",
+            "N13": "IO_L22P_T3U_N6_DBC_AD0P_67",
+            "K13": "IO_L23N_T3U_N9_67",
+            "L13": "IO_L23P_T3U_N8_67",
+            "K15": "IO_L24N_T3U_N11_67",
+            "L15": "IO_L24P_T3U_N10_67",
+            "T34": "MGTHRXN0_128",
+            "T33": "MGTHRXP0_128",
+            "T30": "MGTHTXN0_128",
+            "T29": "MGTHTXP0_128",
+            "R28": "MGTREFCLK0N_128",
+            "R27": "MGTREFCLK0P_128",
+            "P34": "MGTHRXN1_128",
+            "P33": "MGTHRXP1_128",
+            "R32": "MGTHTXN1_128",
+            "R31": "MGTHTXP1_128",
+            "N28": "MGTREFCLK1N_128",
+            "N27": "MGTREFCLK1P_128",
+            "N32": "MGTHRXN2_128",
+            "N31": "MGTHRXP2_128",
+            "P30": "MGTHTXN2_128",
+            "P29": "MGTHTXP2_128",
+            "M34": "MGTHRXN3_128",
+            "M33": "MGTHRXP3_128",
+            "M30": "MGTHTXN3_128",
+            "M29": "MGTHTXP3_128",
+            "L32": "MGTHRXN0_129",
+            "L31": "MGTHRXP0_129",
+            "K30": "MGTHTXN0_129",
+            "K29": "MGTHTXP0_129",
+            "L28": "MGTREFCLK0N_129",
+            "L27": "MGTREFCLK0P_129",
+            "K34": "MGTHRXN1_129",
+            "K33": "MGTHRXP1_129",
+            "J32": "MGTHTXN1_129",
+            "J31": "MGTHTXP1_129",
+            "J28": "MGTREFCLK1N_129",
+            "J27": "MGTREFCLK1P_129",
+            "H34": "MGTHRXN2_129",
+            "H33": "MGTHRXP2_129",
+            "H30": "MGTHTXN2_129",
+            "H29": "MGTHTXP2_129",
+            "F34": "MGTHRXN3_129",
+            "F33": "MGTHRXP3_129",
+            "G32": "MGTHTXN3_129",
+            "G31": "MGTHTXP3_129",
+            "E32": "MGTHRXN0_130",
+            "E31": "MGTHRXP0_130",
+            "F30": "MGTHTXN0_130",
+            "F29": "MGTHTXP0_130",
+            "G28": "MGTREFCLK0N_130",
+            "G27": "MGTREFCLK0P_130",
+            "D34": "MGTHRXN1_130",
+            "D33": "MGTHRXP1_130",
+            "D30": "MGTHTXN1_130",
+            "D29": "MGTHTXP1_130",
+            "E28": "MGTREFCLK1N_130",
+            "E27": "MGTREFCLK1P_130",
+            "C32": "MGTHRXN2_130",
+            "C31": "MGTHRXP2_130",
+            "B30": "MGTHTXN2_130",
+            "B29": "MGTHTXP2_130",
+            "B34": "MGTHRXN3_130",
+            "B33": "MGTHRXP3_130",
+            "A32": "MGTHTXN3_130",
+            "A31": "MGTHTXP3_130",
+            "T1": "MGTHRXN0_228",
+            "T2": "MGTHRXP0_228",
+            "R3": "MGTHTXN0_228",
+            "R4": "MGTHTXP0_228",
+            "L7": "MGTREFCLK0N_228",
+            "L8": "MGTREFCLK0P_228",
+            "P1": "MGTHRXN1_228",
+            "P2": "MGTHRXP1_228",
+            "P5": "MGTHTXN1_228",
+            "P6": "MGTHTXP1_228",
+            "J7": "MGTREFCLK1N_228",
+            "J8": "MGTREFCLK1P_228",
+            "M1": "MGTHRXN2_228",
+            "M2": "MGTHRXP2_228",
+            "N3": "MGTHTXN2_228",
+            "N4": "MGTHTXP2_228",
+            "L3": "MGTHRXN3_228",
+            "L4": "MGTHRXP3_228",
+            "M5": "MGTHTXN3_228",
+            "M6": "MGTHTXP3_228",
+            "K1": "MGTHRXN0_229",
+            "K2": "MGTHRXP0_229",
+            "K5": "MGTHTXN0_229",
+            "K6": "MGTHTXP0_229",
+            "G7": "MGTREFCLK0N_229",
+            "G8": "MGTREFCLK0P_229",
+            "J3": "MGTHRXN1_229",
+            "J4": "MGTHRXP1_229",
+            "H5": "MGTHTXN1_229",
+            "H6": "MGTHTXP1_229",
+            "E7": "MGTREFCLK1N_229",
+            "E8": "MGTREFCLK1P_229",
+            "H1": "MGTHRXN2_229",
+            "H2": "MGTHRXP2_229",
+            "G3": "MGTHTXN2_229",
+            "G4": "MGTHTXP2_229",
+            "F1": "MGTHRXN3_229",
+            "F2": "MGTHRXP3_229",
+            "F5": "MGTHTXN3_229",
+            "F6": "MGTHTXP3_229",
+            "D1": "MGTHRXN0_230",
+            "D2": "MGTHRXP0_230",
+            "E3": "MGTHTXN0_230",
+            "E4": "MGTHTXP0_230",
+            "C7": "MGTREFCLK0N_230",
+            "C8": "MGTREFCLK0P_230",
+            "C3": "MGTHRXN1_230",
+            "C4": "MGTHRXP1_230",
+            "D5": "MGTHTXN1_230",
+            "D6": "MGTHTXP1_230",
+            "B9": "MGTREFCLK1N_230",
+            "B10": "MGTREFCLK1P_230",
+            "B1": "MGTHRXN2_230",
+            "B2": "MGTHRXP2_230",
+            "B5": "MGTHTXN2_230",
+            "B6": "MGTHTXP2_230",
+            "A3": "MGTHRXN3_230",
+            "A4": "MGTHRXP3_230",
+            "A7": "MGTHTXN3_230",
+            "A8": "MGTHTXP3_230",
+            "AF16": "PS_MIO0_500",
+            "AH17": "PS_MIO10_500",
+            "AF17": "PS_MIO11_500",
+            "AJ17": "PS_MIO12_500",
+            "AK17": "PS_MIO13_500",
+            "AL16": "PS_MIO14_500",
+            "AN16": "PS_MIO15_500",
+            "AM16": "PS_MIO16_500",
+            "AP16": "PS_MIO17_500",
+            "AE18": "PS_MIO18_500",
+            "AL17": "PS_MIO19_500",
+            "AJ16": "PS_MIO1_500",
+            "AD18": "PS_MIO20_500",
+            "AF18": "PS_MIO21_500",
+            "AD20": "PS_MIO22_500",
+            "AD19": "PS_MIO23_500",
+            "AE20": "PS_MIO24_500",
+            "AE19": "PS_MIO25_500",
+            "AD16": "PS_MIO2_500",
+            "AG16": "PS_MIO3_500",
+            "AH16": "PS_MIO4_500",
+            "AM15": "PS_MIO5_500",
+            "AL15": "PS_MIO6_500",
+            "AD17": "PS_MIO7_500",
+            "AE17": "PS_MIO8_500",
+            "AP15": "PS_MIO9_500",
+            "P21": "PS_MIO26_501",
+            "M21": "PS_MIO27_501",
+            "N21": "PS_MIO28_501",
+            "K22": "PS_MIO29_501",
+            "L21": "PS_MIO30_501",
+            "J22": "PS_MIO31_501",
+            "H22": "PS_MIO32_501",
+            "H23": "PS_MIO33_501",
+            "L22": "PS_MIO34_501",
+            "P22": "PS_MIO35_501",
+            "K23": "PS_MIO36_501",
+            "N22": "PS_MIO37_501",
+            "L23": "PS_MIO38_501",
+            "N23": "PS_MIO39_501",
+            "M23": "PS_MIO40_501",
+            "J24": "PS_MIO41_501",
+            "M24": "PS_MIO42_501",
+            "K24": "PS_MIO43_501",
+            "N24": "PS_MIO44_501",
+            "P24": "PS_MIO45_501",
+            "J25": "PS_MIO46_501",
+            "L25": "PS_MIO47_501",
+            "M25": "PS_MIO48_501",
+            "K25": "PS_MIO49_501",
+            "P25": "PS_MIO50_501",
+            "N25": "PS_MIO51_501",
+            "F22": "PS_MIO52_502",
+            "E23": "PS_MIO53_502",
+            "F23": "PS_MIO54_502",
+            "B23": "PS_MIO55_502",
+            "C23": "PS_MIO56_502",
+            "A23": "PS_MIO57_502",
+            "G23": "PS_MIO58_502",
+            "B24": "PS_MIO59_502",
+            "E24": "PS_MIO60_502",
+            "C24": "PS_MIO61_502",
+            "G24": "PS_MIO62_502",
+            "D24": "PS_MIO63_502",
+            "A25": "PS_MIO64_502",
+            "A26": "PS_MIO65_502",
+            "A27": "PS_MIO66_502",
+            "B25": "PS_MIO67_502",
+            "B26": "PS_MIO68_502",
+            "B27": "PS_MIO69_502",
+            "C26": "PS_MIO70_502",
+            "C27": "PS_MIO71_502",
+            "E25": "PS_MIO72_502",
+            "H24": "PS_MIO73_502",
+            "G25": "PS_MIO74_502",
+            "D25": "PS_MIO75_502",
+            "H25": "PS_MIO76_502",
+            "F25": "PS_MIO77_502",
+            "W21": "PS_DONE_503",
+            "T21": "PS_ERROR_OUT_503",
+            "R21": "PS_ERROR_STATUS_503",
+            "V24": "PS_INIT_B_503",
+            "R25": "PS_JTAG_TCK_503",
+            "U25": "PS_JTAG_TDI_503",
+            "T25": "PS_JTAG_TDO_503",
+            "R24": "PS_JTAG_TMS_503",
+            "T22": "PS_MODE0_503",
+            "R22": "PS_MODE1_503",
+            "T23": "PS_MODE2_503",
+            "R23": "PS_MODE3_503",
+            "V21": "PS_PADI_503",
+            "V22": "PS_PADO_503",
+            "V23": "PS_POR_B_503",
+            "U21": "PS_PROG_B_503",
+            "U24": "PS_REF_CLK_503",
+            "U23": "PS_SRST_B_503",
+            "AP29": "PS_DDR_A0_504",
+            "AL28": "PS_DDR_A10_504",
+            "AK27": "PS_DDR_A11_504",
+            "AJ25": "PS_DDR_A12_504",
+            "AL25": "PS_DDR_A13_504",
+            "AK25": "PS_DDR_A14_504",
+            "AK24": "PS_DDR_A15_504",
+            "AM24": "PS_DDR_A16_504",
+            "AF25": "PS_DDR_A17_504",
+            "AP30": "PS_DDR_A1_504",
+            "AP26": "PS_DDR_A2_504",
+            "AP27": "PS_DDR_A3_504",
+            "AP25": "PS_DDR_A4_504",
+            "AN24": "PS_DDR_A5_504",
+            "AM29": "PS_DDR_A6_504",
+            "AM28": "PS_DDR_A7_504",
+            "AM26": "PS_DDR_A8_504",
+            "AM25": "PS_DDR_A9_504",
+            "AG25": "PS_DDR_ACT_N_504",
+            "AF22": "PS_DDR_ALERT_N_504",
+            "AH26": "PS_DDR_BA0_504",
+            "AG26": "PS_DDR_BA1_504",
+            "AK28": "PS_DDR_BG0_504",
+            "AH27": "PS_DDR_BG1_504",
+            "AN26": "PS_DDR_CK0_504",
+            "AL26": "PS_DDR_CK1_504",
+            "AN29": "PS_DDR_CKE0_504",
+            "AJ27": "PS_DDR_CKE1_504",
+            "AN27": "PS_DDR_CK_N0_504",
+            "AL27": "PS_DDR_CK_N1_504",
+            "AN28": "PS_DDR_CS_N0_504",
+            "AL30": "PS_DDR_CS_N1_504",
+            "AN17": "PS_DDR_DM0_504",
+            "AM21": "PS_DDR_DM1_504",
+            "AK19": "PS_DDR_DM2_504",
+            "AH24": "PS_DDR_DM3_504",
+            "AH31": "PS_DDR_DM4_504",
+            "AE30": "PS_DDR_DM5_504",
+            "AJ31": "PS_DDR_DM6_504",
+            "AE34": "PS_DDR_DM7_504",
+            "AN34": "PS_DDR_DM8_504",
+            "AP20": "PS_DDR_DQ0_504",
+            "AP24": "PS_DDR_DQ10_504",
+            "AN23": "PS_DDR_DQ11_504",
+            "AL21": "PS_DDR_DQ12_504",
+            "AL22": "PS_DDR_DQ13_504",
+            "AM23": "PS_DDR_DQ14_504",
+            "AL23": "PS_DDR_DQ15_504",
+            "AL20": "PS_DDR_DQ16_504",
+            "AK20": "PS_DDR_DQ17_504",
+            "AJ20": "PS_DDR_DQ18_504",
+            "AK18": "PS_DDR_DQ19_504",
+            "AP18": "PS_DDR_DQ1_504",
+            "AG20": "PS_DDR_DQ20_504",
+            "AH18": "PS_DDR_DQ21_504",
+            "AG19": "PS_DDR_DQ22_504",
+            "AG18": "PS_DDR_DQ23_504",
+            "AG21": "PS_DDR_DQ24_504",
+            "AH21": "PS_DDR_DQ25_504",
+            "AG24": "PS_DDR_DQ26_504",
+            "AG23": "PS_DDR_DQ27_504",
+            "AK22": "PS_DDR_DQ28_504",
+            "AJ21": "PS_DDR_DQ29_504",
+            "AP19": "PS_DDR_DQ2_504",
+            "AJ22": "PS_DDR_DQ30_504",
+            "AK23": "PS_DDR_DQ31_504",
+            "AG31": "PS_DDR_DQ32_504",
+            "AG30": "PS_DDR_DQ33_504",
+            "AG29": "PS_DDR_DQ34_504",
+            "AG28": "PS_DDR_DQ35_504",
+            "AJ30": "PS_DDR_DQ36_504",
+            "AK29": "PS_DDR_DQ37_504",
+            "AK30": "PS_DDR_DQ38_504",
+            "AJ29": "PS_DDR_DQ39_504",
+            "AP17": "PS_DDR_DQ3_504",
+            "AE27": "PS_DDR_DQ40_504",
+            "AF28": "PS_DDR_DQ41_504",
+            "AF30": "PS_DDR_DQ42_504",
+            "AF31": "PS_DDR_DQ43_504",
+            "AD28": "PS_DDR_DQ44_504",
+            "AD27": "PS_DDR_DQ45_504",
+            "AD29": "PS_DDR_DQ46_504",
+            "AD30": "PS_DDR_DQ47_504",
+            "AH33": "PS_DDR_DQ48_504",
+            "AJ34": "PS_DDR_DQ49_504",
+            "AM20": "PS_DDR_DQ4_504",
+            "AH34": "PS_DDR_DQ50_504",
+            "AH32": "PS_DDR_DQ51_504",
+            "AK34": "PS_DDR_DQ52_504",
+            "AK33": "PS_DDR_DQ53_504",
+            "AL32": "PS_DDR_DQ54_504",
+            "AL31": "PS_DDR_DQ55_504",
+            "AG33": "PS_DDR_DQ56_504",
+            "AG34": "PS_DDR_DQ57_504",
+            "AF32": "PS_DDR_DQ58_504",
+            "AF33": "PS_DDR_DQ59_504",
+            "AM19": "PS_DDR_DQ5_504",
+            "AD31": "PS_DDR_DQ60_504",
+            "AD32": "PS_DDR_DQ61_504",
+            "AD34": "PS_DDR_DQ62_504",
+            "AD33": "PS_DDR_DQ63_504",
+            "AN31": "PS_DDR_DQ64_504",
+            "AP31": "PS_DDR_DQ65_504",
+            "AP32": "PS_DDR_DQ66_504",
+            "AP33": "PS_DDR_DQ67_504",
+            "AM31": "PS_DDR_DQ68_504",
+            "AM33": "PS_DDR_DQ69_504",
+            "AM18": "PS_DDR_DQ6_504",
+            "AM34": "PS_DDR_DQ70_504",
+            "AL33": "PS_DDR_DQ71_504",
+            "AL18": "PS_DDR_DQ7_504",
+            "AP22": "PS_DDR_DQ8_504",
+            "AP21": "PS_DDR_DQ9_504",
+            "AN19": "PS_DDR_DQS_N0_504",
+            "AN22": "PS_DDR_DQS_N1_504",
+            "AJ19": "PS_DDR_DQS_N2_504",
+            "AH23": "PS_DDR_DQS_N3_504",
+            "AH29": "PS_DDR_DQS_N4_504",
+            "AE29": "PS_DDR_DQS_N5_504",
+            "AK32": "PS_DDR_DQS_N6_504",
+            "AE33": "PS_DDR_DQS_N7_504",
+            "AN33": "PS_DDR_DQS_N8_504",
+            "AN18": "PS_DDR_DQS_P0_504",
+            "AN21": "PS_DDR_DQS_P1_504",
+            "AH19": "PS_DDR_DQS_P2_504",
+            "AH22": "PS_DDR_DQS_P3_504",
+            "AH28": "PS_DDR_DQS_P4_504",
+            "AE28": "PS_DDR_DQS_P5_504",
+            "AJ32": "PS_DDR_DQS_P6_504",
+            "AE32": "PS_DDR_DQS_P7_504",
+            "AN32": "PS_DDR_DQS_P8_504",
+            "AM30": "PS_DDR_ODT0_504",
+            "AJ26": "PS_DDR_ODT1_504",
+            "AF20": "PS_DDR_PARITY_504",
+            "AF21": "PS_DDR_RAM_RST_N_504",
+            "AF23": "PS_DDR_ZQ_504",
+            "AA28": "PS_MGTREFCLK0N_505",
+            "AA27": "PS_MGTREFCLK0P_505",
+            "AB28": "PS_MGTRREF_505",
+            "AB34": "PS_MGTRRXN0_505",
+            "AB33": "PS_MGTRRXP0_505",
+            "AB30": "PS_MGTRTXN0_505",
+            "AB29": "PS_MGTRTXP0_505",
+            "W28": "PS_MGTREFCLK1N_505",
+            "W27": "PS_MGTREFCLK1P_505",
+            "AA32": "PS_MGTRRXN1_505",
+            "AA31": "PS_MGTRRXP1_505",
+            "Y30": "PS_MGTRTXN1_505",
+            "Y29": "PS_MGTRTXP1_505",
+            "U28": "PS_MGTREFCLK2N_505",
+            "U27": "PS_MGTREFCLK2P_505",
+            "Y34": "PS_MGTRRXN2_505",
+            "Y33": "PS_MGTRRXP2_505",
+            "W32": "PS_MGTRTXN2_505",
+            "W31": "PS_MGTRTXP2_505",
+            "U32": "PS_MGTREFCLK3N_505",
+            "U31": "PS_MGTREFCLK3P_505",
+            "V34": "PS_MGTRRXN3_505",
+            "V33": "PS_MGTRRXP3_505",
+            "V30": "PS_MGTRTXN3_505",
+            "V29": "PS_MGTRTXP3_505",
+            "A1": "GND_A1",
+            "A10": "MGTAVCC_R_A10",
+            "A11": "GND_A11",
+            "A14": "GND_A14",
+            "A19": "GND_A19",
+            "A2": "GND_A2",
+            "A24": "GND_A24",
+            "A28": "GND_A28",
+            "A29": "MGTRREF_L",
+            "A30": "MGTAVTTRCAL_L",
+            "A33": "GND_A33",
+            "A34": "GND_A34",
+            "A5": "MGTAVTTRCAL_R",
+            "A6": "MGTRREF_R",
+            "A9": "GND_A9",
+            "AA13": "VCCINT_IO_AA13",
+            "AA14": "GND_AA14",
+            "AA15": "VCCINT_AA15",
+            "AA16": "GND_AA16",
+            "AA17": "VCCINT_AA17",
+            "AA18": "GND_AA18",
+            "AA19": "VCCINT_AA19",
+            "AA20": "GND_AA20",
+            "AA21": "VCC_PSINTLP_AA21",
+            "AA22": "VCC_PSBATT",
+            "AA23": "VCC_PSAUX_AA23",
+            "AA24": "GND_AA24",
+            "AA25": "VCC_PSAUX_AA25",
+            "AA26": "GND_AA26",
+            "AA29": "PS_MGTRAVCC_AA29",
+            "AA30": "GND_AA30",
+            "AA33": "GND_AA33",
+            "AA34": "GND_AA34",
+            "AA4": "GND_AA4",
+            "AA9": "VCCO_66_AA9",
+            "AB12": "GND_AB12",
+            "AB13": "VCCINT_IO_AB13",
+            "AB14": "VCCBRAM_AB14",
+            "AB15": "GND_AB15",
+            "AB16": "VCCINT_AB16",
+            "AB17": "GND_AB17",
+            "AB18": "VCCINT_AB18",
+            "AB19": "GND_AB19",
+            "AB2": "GND_AB2",
+            "AB20": "VCCINT_AB20",
+            "AB21": "VCC_PSINTLP_AB21",
+            "AB22": "GND_AB22",
+            "AB23": "VCC_PSINTLP_AB23",
+            "AB24": "GND_PSADC_AB24",
+            "AB25": "VCC_PSADC_AB25",
+            "AB26": "GND_AB26",
+            "AB27": "GND_AB27",
+            "AB31": "GND_AB31",
+            "AB32": "PS_MGTRAVTT_AB32",
+            "AB7": "GND_AB7",
+            "AC10": "GND_AC10",
+            "AC13": "VCCINT_IO_AC13",
+            "AC14": "VCCBRAM_AC14",
+            "AC15": "VCCINT_AC15",
+            "AC16": "GND_AC16",
+            "AC17": "VCCINT_AC17",
+            "AC18": "GND_AC18",
+            "AC19": "VCCINT_AC19",
+            "AC20": "GND_AC20",
+            "AC21": "VCC_PSINTLP_AC21",
+            "AC22": "VCC_PSINTLP_AC22",
+            "AC23": "VCC_PSINTLP_AC23",
+            "AC24": "VCC_PSINTFP_AC24",
+            "AC25": "GND_PSADC_AC25",
+            "AC26": "VCC_PSADC_AC26",
+            "AC27": "GND_AC27",
+            "AC28": "GND_AC28",
+            "AC29": "GND_AC29",
+            "AC30": "GND_AC30",
+            "AC31": "GND_AC31",
+            "AC32": "GND_AC32",
+            "AC33": "GND_AC33",
+            "AC34": "GND_AC34",
+            "AC5": "GND_AC5",
+            "AD11": "VREF_65",
+            "AD12": "VREF_66",
+            "AD13": "GND_AD13",
+            "AD14": "POR_OVERRIDE",
+            "AD15": "PUDC_B",
+            "AD21": "VCC_PSINTFP_AD21",
+            "AD22": "VCC_PSINTFP_AD22",
+            "AD23": "GND_AD23",
+            "AD24": "VCC_PSINTFP_DDR_AD24",
+            "AD25": "VCC_PSINTFP_AD25",
+            "AD26": "VCC_PSINTFP_AD26",
+            "AD3": "GND_AD3",
+            "AD8": "VCCO_65_AD8",
+            "AE11": "GND_AE11",
+            "AE16": "VCCO_PSIO0_500_AE16",
+            "AE21": "GND_AE21",
+            "AE22": "VCC_PSINTFP_AE22",
+            "AE23": "VCC_PSINTFP_AE23",
+            "AE24": "VCC_PSINTFP_DDR_AE24",
+            "AE25": "VCC_PSINTFP_DDR_AE25",
+            "AE26": "GND_AE26",
+            "AE31": "GND_AE31",
+            "AE6": "GND_AE6",
+            "AF14": "VCCO_44_AF14",
+            "AF19": "GND_AF19",
+            "AF24": "GND_AF24",
+            "AF26": "NC_AF26",
+            "AF27": "NC_AF27",
+            "AF29": "GND_AF29",
+            "AF34": "GND_AF34",
+            "AF4": "GND_AF4",
+            "AF9": "VCCO_65_AF9",
+            "AG12": "GND_AG12",
+            "AG17": "VCCO_PSIO0_500_AG17",
+            "AG2": "GND_AG2",
+            "AG22": "GND_AG22",
+            "AG27": "VCCO_PSDDR_504_AG27",
+            "AG32": "GND_AG32",
+            "AG7": "VCCO_65_AG7",
+            "AH10": "GND_AH10",
+            "AH15": "GND_AH15",
+            "AH20": "GND_AH20",
+            "AH25": "GND_AH25",
+            "AH30": "GND_AH30",
+            "AH5": "GND_AH5",
+            "AJ11": "VREF_64",
+            "AJ13": "VCCO_44_AJ13",
+            "AJ18": "GND_AJ18",
+            "AJ23": "GND_AJ23",
+            "AJ24": "VCCO_PSDDR_504_AJ24",
+            "AJ28": "VCCO_PSDDR_504_AJ28",
+            "AJ3": "GND_AJ3",
+            "AJ33": "GND_AJ33",
+            "AJ8": "VCCO_64_AJ8",
+            "AK11": "VCCO_64_AK11",
+            "AK16": "VCCO_PSIO0_500_AK16",
+            "AK21": "GND_AK21",
+            "AK26": "GND_AK26",
+            "AK31": "GND_AK31",
+            "AK6": "GND_AK6",
+            "AL14": "GND_AL14",
+            "AL19": "GND_AL19",
+            "AL24": "VCCO_PSDDR_504_AL24",
+            "AL29": "VCCO_PSDDR_504_AL29",
+            "AL34": "GND_AL34",
+            "AL4": "GND_AL4",
+            "AL9": "VCCO_64_AL9",
+            "AM12": "GND_AM12",
+            "AM17": "GND_AM17",
+            "AM2": "GND_AM2",
+            "AM22": "GND_AM22",
+            "AM27": "GND_AM27",
+            "AM32": "GND_AM32",
+            "AM7": "GND_AM7",
+            "AN10": "GND_AN10",
+            "AN15": "GND_AN15",
+            "AN20": "GND_AN20",
+            "AN25": "VCCO_PSDDR_504_AN25",
+            "AN30": "VCCO_PSDDR_504_AN30",
+            "AN5": "GND_AN5",
+            "AP13": "GND_AP13",
+            "AP23": "GND_AP23",
+            "AP28": "GND_AP28",
+            "AP34": "GND_AP34",
+            "B11": "GND_B11",
+            "B17": "GND_B17",
+            "B22": "GND_B22",
+            "B28": "GND_B28",
+            "B3": "MGTAVTT_R_B3",
+            "B31": "MGTAVTT_L_B31",
+            "B32": "GND_B32",
+            "B4": "GND_B4",
+            "B7": "GND_B7",
+            "B8": "MGTAVCC_R_B8",
+            "C1": "GND_C1",
+            "C10": "GND_C10",
+            "C11": "GND_C11",
+            "C15": "GND_C15",
+            "C2": "GND_C2",
+            "C20": "GND_C20",
+            "C25": "GND_C25",
+            "C28": "GND_C28",
+            "C29": "MGTAVTT_L_C29",
+            "C30": "GND_C30",
+            "C33": "GND_C33",
+            "C34": "GND_C34",
+            "C5": "GND_C5",
+            "C6": "MGTAVCC_R_C6",
+            "C9": "GND_C9",
+            "D13": "GND_D13",
+            "D18": "GND_D18",
+            "D23": "VCCO_PSIO2_502_D23",
+            "D26": "GND_D26",
+            "D27": "GND_D27",
+            "D28": "GND_D28",
+            "D3": "GND_D3",
+            "D31": "GND_D31",
+            "D32": "MGTAVTT_L_D32",
+            "D4": "MGTAVTT_R_D4",
+            "D7": "MGTAVCC_R_D7",
+            "D8": "GND_D8",
+            "D9": "GND_D9",
+            "E1": "GND_E1",
+            "E11": "GND_E11",
+            "E16": "VCCO_49_E16",
+            "E2": "GND_E2",
+            "E21": "VCCO_47_E21",
+            "E26": "GND_E26",
+            "E29": "GND_E29",
+            "E30": "MGTAVTT_L_E30",
+            "E33": "GND_E33",
+            "E34": "GND_E34",
+            "E5": "MGTAVCC_R_E5",
+            "E6": "GND_E6",
+            "E9": "GND_E9",
+            "F14": "VCCO_49_F14",
+            "F19": "GND_F19",
+            "F24": "VCCO_PSIO2_502_F24",
+            "F26": "GND_F26",
+            "F27": "GND_F27",
+            "F28": "MGTAVCC_L_F28",
+            "F3": "MGTAVTT_R_F3",
+            "F31": "MGTAVTT_L_F31",
+            "F32": "GND_F32",
+            "F4": "GND_F4",
+            "F7": "GND_F7",
+            "F8": "MGTVCCAUX_R_F8",
+            "F9": "GND_F9",
+            "G1": "GND_G1",
+            "G12": "VCCO_50_G12",
+            "G17": "VCCO_48_G17",
+            "G2": "GND_G2",
+            "G22": "VCCO_PSIO2_502_G22",
+            "G26": "GND_G26",
+            "G29": "MGTAVCC_L_G29",
+            "G30": "GND_G30",
+            "G33": "GND_G33",
+            "G34": "GND_G34",
+            "G5": "GND_G5",
+            "G6": "MGTAVCC_R_G6",
+            "G9": "GND_G9",
+            "H15": "GND_H15",
+            "H20": "VCCO_47_H20",
+            "H26": "GND_H26",
+            "H27": "MGTAVCC_L_H27",
+            "H28": "GND_H28",
+            "H3": "GND_H3",
+            "H31": "GND_H31",
+            "H32": "MGTAVTT_L_H32",
+            "H4": "MGTAVTT_R_H4",
+            "H7": "MGTVCCAUX_R_H7",
+            "H8": "GND_H8",
+            "H9": "GND_H9",
+            "J1": "GND_J1",
+            "J13": "VCCO_50_J13",
+            "J18": "VCCO_48_J18",
+            "J2": "GND_J2",
+            "J23": "GND_J23",
+            "J26": "GND_J26",
+            "J29": "GND_J29",
+            "J30": "MGTAVTT_L_J30",
+            "J33": "GND_J33",
+            "J34": "GND_J34",
+            "J5": "MGTAVTT_R_J5",
+            "J6": "GND_J6",
+            "J9": "GND_J9",
+            "K11": "GND_K11",
+            "K21": "GND_K21",
+            "K26": "GND_K26",
+            "K27": "GND_K27",
+            "K28": "MGTVCCAUX_L_K28",
+            "K3": "MGTAVTT_R_K3",
+            "K31": "MGTAVTT_L_K31",
+            "K32": "GND_K32",
+            "K4": "GND_K4",
+            "K7": "GND_K7",
+            "K8": "MGTAVCC_R_K8",
+            "K9": "GND_K9",
+            "L1": "GND_L1",
+            "L14": "GND_L14",
+            "L2": "GND_L2",
+            "L24": "VCCO_PSIO1_501_L24",
+            "L26": "GND_L26",
+            "L29": "MGTAVCC_L_L29",
+            "L30": "GND_L30",
+            "L33": "GND_L33",
+            "L34": "GND_L34",
+            "L5": "GND_L5",
+            "L6": "MGTAVTT_R_L6",
+            "L9": "GND_L9",
+            "M12": "GND_M12",
+            "M16": "VCCINT_M16",
+            "M17": "GND_M17",
+            "M18": "VCCINT_M18",
+            "M19": "GND_M19",
+            "M20": "VCCINT_M20",
+            "M22": "VCCO_PSIO1_501_M22",
+            "M26": "GND_M26",
+            "M27": "MGTVCCAUX_L_M27",
+            "M28": "GND_M28",
+            "M3": "GND_M3",
+            "M31": "GND_M31",
+            "M32": "MGTAVTT_L_M32",
+            "M4": "MGTAVTT_R_M4",
+            "M7": "GND_M7",
+            "M8": "GND_M8",
+            "M9": "GND_M9",
+            "N1": "GND_N1",
+            "N10": "GND_N10",
+            "N14": "VREF_67",
+            "N15": "VCCINT_N15",
+            "N16": "GND_N16",
+            "N17": "VCCINT_N17",
+            "N18": "GND_N18",
+            "N19": "VCCINT_N19",
+            "N2": "GND_N2",
+            "N20": "GND_N20",
+            "N26": "GND_N26",
+            "N29": "GND_N29",
+            "N30": "MGTAVTT_L_N30",
+            "N33": "GND_N33",
+            "N34": "GND_N34",
+            "N5": "MGTAVTT_R_N5",
+            "N6": "GND_N6",
+            "N7": "GND_N7",
+            "P13": "GND_P13",
+            "P14": "VCCINT_P14",
+            "P15": "GND_P15",
+            "P16": "VCCINT_P16",
+            "P17": "GND_P17",
+            "P18": "VCCINT_P18",
+            "P19": "GND_P19",
+            "P20": "VCCINT_P20",
+            "P23": "GND_P23",
+            "P26": "GND_P26",
+            "P27": "GND_P27",
+            "P28": "MGTAVCC_L_P28",
+            "P3": "MGTAVTT_R_P3",
+            "P31": "MGTAVTT_L_P31",
+            "P32": "GND_P32",
+            "P4": "GND_P4",
+            "P7": "GND_P7",
+            "P8": "VCCO_67_P8",
+            "R1": "GND_R1",
+            "R11": "GND_R11",
+            "R14": "GND_R14",
+            "R15": "VCCINT_R15",
+            "R16": "GND_R16",
+            "R17": "VCCINT_R17",
+            "R18": "GND_R18",
+            "R19": "VCCINT_R19",
+            "R2": "GND_R2",
+            "R20": "GND_R20",
+            "R26": "GND_R26",
+            "R29": "MGTAVCC_L_R29",
+            "R30": "GND_R30",
+            "R33": "GND_R33",
+            "R34": "GND_R34",
+            "R5": "GND_R5",
+            "R6": "GND_R6",
+            "R7": "GND_R7",
+            "T14": "VCCAUX_T14",
+            "T15": "GND_T15",
+            "T16": "VCCINT_T16",
+            "T17": "GNDADC",
+            "T18": "VCCADC",
+            "T19": "GND_T19",
+            "T20": "VCCINT_T20",
+            "T24": "VCCO_PSIO3_503_T24",
+            "T26": "GND_T26",
+            "T27": "GND_T27",
+            "T28": "GND_T28",
+            "T3": "GND_T3",
+            "T31": "GND_T31",
+            "T32": "GND_T32",
+            "T4": "GND_T4",
+            "T5": "GND_T5",
+            "T9": "VCCO_67_T9",
+            "U1": "GND_U1",
+            "U12": "GND_U12",
+            "U13": "VCCAUX_IO_U13",
+            "U14": "VCCAUX_U14",
+            "U15": "VCCINT_U15",
+            "U16": "GND_U16",
+            "U17": "VREFN",
+            "U19": "VCCINT_U19",
+            "U2": "GND_U2",
+            "U20": "GND_U20",
+            "U22": "VCCO_PSIO3_503_U22",
+            "U26": "GND_U26",
+            "U29": "GND_U29",
+            "U3": "GND_U3",
+            "U30": "GND_U30",
+            "U33": "GND_U33",
+            "U34": "GND_U34",
+            "U7": "VCCO_67_U7",
+            "V10": "GND_V10",
+            "V13": "VCCAUX_IO_V13",
+            "V14": "VCCAUX_IO_V14",
+            "V15": "GND_V15",
+            "V16": "VCCINT_V16",
+            "V18": "VREFP",
+            "V19": "GND_V19",
+            "V20": "VCCINT_V20",
+            "V25": "GND_V25",
+            "V26": "GND_V26",
+            "V27": "GND_V27",
+            "V28": "PS_MGTRAVCC_V28",
+            "V31": "GND_V31",
+            "V32": "PS_MGTRAVTT_V32",
+            "V5": "GND_V5",
+            "W13": "GND_W13",
+            "W14": "VCCBRAM_W14",
+            "W15": "VCCINT_W15",
+            "W16": "GND_W16",
+            "W17": "DXN",
+            "W18": "DXP",
+            "W19": "VCCINT_W19",
+            "W20": "GND_W20",
+            "W22": "VCC_PSPLL_W22",
+            "W23": "GND_W23",
+            "W24": "VCC_PSPLL_W24",
+            "W25": "VCC_PSPLL_W25",
+            "W26": "GND_W26",
+            "W29": "GND_W29",
+            "W3": "GND_W3",
+            "W30": "PS_MGTRAVCC_W30",
+            "W33": "GND_W33",
+            "W34": "GND_W34",
+            "W8": "VCCO_66_W8",
+            "Y11": "VCCO_66_Y11",
+            "Y13": "VCCINT_IO_Y13",
+            "Y14": "VCCBRAM_Y14",
+            "Y15": "GND_Y15",
+            "Y16": "VCCINT_Y16",
+            "Y17": "GND_Y17",
+            "Y18": "VCCINT_Y18",
+            "Y19": "GND_Y19",
+            "Y20": "VCCINT_Y20",
+            "Y21": "GND_Y21",
+            "Y22": "VCC_PSAUX_Y22",
+            "Y23": "VCC_PSAUX_Y23",
+            "Y24": "VCC_PSDDR_PLL_Y24",
+            "Y25": "VCC_PSDDR_PLL_Y25",
+            "Y26": "GND_Y26",
+            "Y27": "PS_MGTRAVCC_Y27",
+            "Y28": "GND_Y28",
+            "Y31": "PS_MGTRAVTT_Y31",
+            "Y32": "GND_Y32",
+            "Y6": "GND_Y6"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "AMD",
+        "mpn": "XCZU15EG-2FFVB1156I",
+        "supply_min": "0.825 V",
+        "supply_max": "0.876 V",
+        "rating_conditions": "Core rail only; see POWER.md for separate PS/PL/IO rail requirements."
+      },
+      "source": {
+        "document": "AMD package pinout CSV revision 1.1 and Vivado 2025.2",
+        "device": "xczu15eg-ffvb1156-2-i"
+      }
+    },
+    "micron.ddr4_8g_x16": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "VDDQ_A1": {
+          "type": "PWRIN"
+        },
+        "VSSQ_A2": {
+          "type": "PWRIN"
+        },
+        "DQ8": {
+          "type": "BIDIR"
+        },
+        "UDQS_N": {
+          "type": "BIDIR"
+        },
+        "VSSQ_A8": {
+          "type": "PWRIN"
+        },
+        "VDDQ_A9": {
+          "type": "PWRIN"
+        },
+        "VPP_B1": {
+          "type": "PWRIN"
+        },
+        "VSS_B2": {
+          "type": "PWRIN"
+        },
+        "VDD_B3": {
+          "type": "PWRIN"
+        },
+        "UDQS_P": {
+          "type": "BIDIR"
+        },
+        "DQ9": {
+          "type": "BIDIR"
+        },
+        "VDD_B9": {
+          "type": "PWRIN"
+        },
+        "VDDQ_C1": {
+          "type": "PWRIN"
+        },
+        "DQ12": {
+          "type": "BIDIR"
+        },
+        "DQ10": {
+          "type": "BIDIR"
+        },
+        "DQ11": {
+          "type": "BIDIR"
+        },
+        "DQ13": {
+          "type": "BIDIR"
+        },
+        "VSSQ_C9": {
+          "type": "PWRIN"
+        },
+        "VDD_D1": {
+          "type": "PWRIN"
+        },
+        "VSSQ_D2": {
+          "type": "PWRIN"
+        },
+        "DQ14": {
+          "type": "BIDIR"
+        },
+        "DQ15": {
+          "type": "BIDIR"
+        },
+        "VSSQ_D8": {
+          "type": "PWRIN"
+        },
+        "VDDQ_D9": {
+          "type": "PWRIN"
+        },
+        "VSS_E1": {
+          "type": "PWRIN"
+        },
+        "UDM_N": {
+          "type": "BIDIR"
+        },
+        "VSSQ_E3": {
+          "type": "PWRIN"
+        },
+        "LDM_N": {
+          "type": "BIDIR"
+        },
+        "VSSQ_E8": {
+          "type": "PWRIN"
+        },
+        "VSS_E9": {
+          "type": "PWRIN"
+        },
+        "VSSQ_F1": {
+          "type": "PWRIN"
+        },
+        "VDDQ_F2": {
+          "type": "PWRIN"
+        },
+        "LDQS_N": {
+          "type": "BIDIR"
+        },
+        "DQ1": {
+          "type": "BIDIR"
+        },
+        "VDDQ_F8": {
+          "type": "PWRIN"
+        },
+        "ZQ": {
+          "type": "INPUT"
+        },
+        "VDDQ_G1": {
+          "type": "PWRIN"
+        },
+        "DQ0": {
+          "type": "BIDIR"
+        },
+        "LDQS_P": {
+          "type": "BIDIR"
+        },
+        "VDD_G7": {
+          "type": "PWRIN"
+        },
+        "VSS_G8": {
+          "type": "PWRIN"
+        },
+        "VDDQ_G9": {
+          "type": "PWRIN"
+        },
+        "VSSQ_H1": {
+          "type": "PWRIN"
+        },
+        "DQ4": {
+          "type": "BIDIR"
+        },
+        "DQ2": {
+          "type": "BIDIR"
+        },
+        "DQ3": {
+          "type": "BIDIR"
+        },
+        "DQ5": {
+          "type": "BIDIR"
+        },
+        "VSSQ_H9": {
+          "type": "PWRIN"
+        },
+        "VDD_J1": {
+          "type": "PWRIN"
+        },
+        "VDDQ_J2": {
+          "type": "PWRIN"
+        },
+        "DQ6": {
+          "type": "BIDIR"
+        },
+        "DQ7": {
+          "type": "BIDIR"
+        },
+        "VDDQ_J8": {
+          "type": "PWRIN"
+        },
+        "VDD_J9": {
+          "type": "PWRIN"
+        },
+        "VSS_K1": {
+          "type": "PWRIN"
+        },
+        "CKE": {
+          "type": "INPUT"
+        },
+        "ODT": {
+          "type": "INPUT"
+        },
+        "CK_P": {
+          "type": "INPUT"
+        },
+        "CK_N": {
+          "type": "INPUT"
+        },
+        "VSS_K9": {
+          "type": "PWRIN"
+        },
+        "VDD_L1": {
+          "type": "PWRIN"
+        },
+        "A14": {
+          "type": "INPUT"
+        },
+        "ACT_N": {
+          "type": "INPUT"
+        },
+        "CS_N": {
+          "type": "INPUT"
+        },
+        "A16": {
+          "type": "INPUT"
+        },
+        "VDD_L9": {
+          "type": "PWRIN"
+        },
+        "VREFCA": {
+          "type": "PWRIN"
+        },
+        "BG0": {
+          "type": "INPUT"
+        },
+        "A10": {
+          "type": "INPUT"
+        },
+        "A12": {
+          "type": "INPUT"
+        },
+        "A15": {
+          "type": "INPUT"
+        },
+        "VSS_M9": {
+          "type": "PWRIN"
+        },
+        "VSS_N1": {
+          "type": "PWRIN"
+        },
+        "BA0": {
+          "type": "INPUT"
+        },
+        "A4": {
+          "type": "INPUT"
+        },
+        "A3": {
+          "type": "INPUT"
+        },
+        "BA1": {
+          "type": "INPUT"
+        },
+        "TEN": {
+          "type": "INPUT"
+        },
+        "RESET_N": {
+          "type": "INPUT"
+        },
+        "A6": {
+          "type": "INPUT"
+        },
+        "A0": {
+          "type": "INPUT"
+        },
+        "A1": {
+          "type": "INPUT"
+        },
+        "A5": {
+          "type": "INPUT"
+        },
+        "ALERT_N": {
+          "type": "OPENCOLL"
+        },
+        "VDD_R1": {
+          "type": "PWRIN"
+        },
+        "A8": {
+          "type": "INPUT"
+        },
+        "A2": {
+          "type": "INPUT"
+        },
+        "A9": {
+          "type": "INPUT"
+        },
+        "A7": {
+          "type": "INPUT"
+        },
+        "VPP_R9": {
+          "type": "PWRIN"
+        },
+        "VSS_T1": {
+          "type": "PWRIN"
+        },
+        "A11": {
+          "type": "INPUT"
+        },
+        "PAR": {
+          "type": "INPUT"
+        },
+        "NC": {
+          "type": "NOCONNECT"
+        },
+        "A13": {
+          "type": "INPUT"
+        },
+        "VDD_T9": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "FBGA96_7P5X13P5_P0P8": {
+          "allegro": "FBGA96_7P5X13P5_P0P8",
+          "pads": {
+            "A1": "VDDQ_A1",
+            "A2": "VSSQ_A2",
+            "A3": "DQ8",
+            "A7": "UDQS_N",
+            "A8": "VSSQ_A8",
+            "A9": "VDDQ_A9",
+            "B1": "VPP_B1",
+            "B2": "VSS_B2",
+            "B3": "VDD_B3",
+            "B7": "UDQS_P",
+            "B8": "DQ9",
+            "B9": "VDD_B9",
+            "C1": "VDDQ_C1",
+            "C2": "DQ12",
+            "C3": "DQ10",
+            "C7": "DQ11",
+            "C8": "DQ13",
+            "C9": "VSSQ_C9",
+            "D1": "VDD_D1",
+            "D2": "VSSQ_D2",
+            "D3": "DQ14",
+            "D7": "DQ15",
+            "D8": "VSSQ_D8",
+            "D9": "VDDQ_D9",
+            "E1": "VSS_E1",
+            "E2": "UDM_N",
+            "E3": "VSSQ_E3",
+            "E7": "LDM_N",
+            "E8": "VSSQ_E8",
+            "E9": "VSS_E9",
+            "F1": "VSSQ_F1",
+            "F2": "VDDQ_F2",
+            "F3": "LDQS_N",
+            "F7": "DQ1",
+            "F8": "VDDQ_F8",
+            "F9": "ZQ",
+            "G1": "VDDQ_G1",
+            "G2": "DQ0",
+            "G3": "LDQS_P",
+            "G7": "VDD_G7",
+            "G8": "VSS_G8",
+            "G9": "VDDQ_G9",
+            "H1": "VSSQ_H1",
+            "H2": "DQ4",
+            "H3": "DQ2",
+            "H7": "DQ3",
+            "H8": "DQ5",
+            "H9": "VSSQ_H9",
+            "J1": "VDD_J1",
+            "J2": "VDDQ_J2",
+            "J3": "DQ6",
+            "J7": "DQ7",
+            "J8": "VDDQ_J8",
+            "J9": "VDD_J9",
+            "K1": "VSS_K1",
+            "K2": "CKE",
+            "K3": "ODT",
+            "K7": "CK_P",
+            "K8": "CK_N",
+            "K9": "VSS_K9",
+            "L1": "VDD_L1",
+            "L2": "A14",
+            "L3": "ACT_N",
+            "L7": "CS_N",
+            "L8": "A16",
+            "L9": "VDD_L9",
+            "M1": "VREFCA",
+            "M2": "BG0",
+            "M3": "A10",
+            "M7": "A12",
+            "M8": "A15",
+            "M9": "VSS_M9",
+            "N1": "VSS_N1",
+            "N2": "BA0",
+            "N3": "A4",
+            "N7": "A3",
+            "N8": "BA1",
+            "N9": "TEN",
+            "P1": "RESET_N",
+            "P2": "A6",
+            "P3": "A0",
+            "P7": "A1",
+            "P8": "A5",
+            "P9": "ALERT_N",
+            "R1": "VDD_R1",
+            "R2": "A8",
+            "R3": "A2",
+            "R7": "A9",
+            "R8": "A7",
+            "R9": "VPP_R9",
+            "T1": "VSS_T1",
+            "T2": "A11",
+            "T3": "PAR",
+            "T7": "NC",
+            "T8": "A13",
+            "T9": "VDD_T9"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Micron",
+        "mpn": "MT40A512M16LY-075:E",
+        "supply_min": "1.14 V",
+        "supply_max": "1.26 V",
+        "rating_conditions": "VDD/VDDQ; VPP is 2.5 V. 8 Gbit x16; DDR4-1600 initial configuration."
+      },
+      "source": {
+        "document": "Reference PDF page 11; Micron 8Gb DDR4 x16; Vivado MT40A512M16LY-075 model"
+      }
+    },
+    "micron.emmc8": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "NC_A1": {
+          "type": "NOCONNECT"
+        },
+        "NC_A2": {
+          "type": "NOCONNECT"
+        },
+        "DAT0": {
+          "type": "BIDIR"
+        },
+        "DAT1": {
+          "type": "BIDIR"
+        },
+        "DAT2": {
+          "type": "BIDIR"
+        },
+        "RFU_A6": {
+          "type": "NOCONNECT"
+        },
+        "RFU_A7": {
+          "type": "NOCONNECT"
+        },
+        "NC_A8": {
+          "type": "NOCONNECT"
+        },
+        "NC_A9": {
+          "type": "NOCONNECT"
+        },
+        "NC_A10": {
+          "type": "NOCONNECT"
+        },
+        "NC_A11": {
+          "type": "NOCONNECT"
+        },
+        "NC_A12": {
+          "type": "NOCONNECT"
+        },
+        "NC_A13": {
+          "type": "NOCONNECT"
+        },
+        "NC_A14": {
+          "type": "NOCONNECT"
+        },
+        "NC_B1": {
+          "type": "NOCONNECT"
+        },
+        "DAT3": {
+          "type": "BIDIR"
+        },
+        "DAT4": {
+          "type": "BIDIR"
+        },
+        "DAT5": {
+          "type": "BIDIR"
+        },
+        "DAT6": {
+          "type": "BIDIR"
+        },
+        "DAT7": {
+          "type": "BIDIR"
+        },
+        "NC_B7": {
+          "type": "NOCONNECT"
+        },
+        "NC_B8": {
+          "type": "NOCONNECT"
+        },
+        "NC_B9": {
+          "type": "NOCONNECT"
+        },
+        "NC_B10": {
+          "type": "NOCONNECT"
+        },
+        "NC_B11": {
+          "type": "NOCONNECT"
+        },
+        "NC_B12": {
+          "type": "NOCONNECT"
+        },
+        "NC_B13": {
+          "type": "NOCONNECT"
+        },
+        "NC_B14": {
+          "type": "NOCONNECT"
+        },
+        "NC_C1": {
+          "type": "NOCONNECT"
+        },
+        "VDDIM": {
+          "type": "PWROUT"
+        },
+        "NC_C3": {
+          "type": "NOCONNECT"
+        },
+        "VSSQ_C4": {
+          "type": "PWRIN"
+        },
+        "RFU_C5": {
+          "type": "NOCONNECT"
+        },
+        "VCCQ_C6": {
+          "type": "PWRIN"
+        },
+        "NC_C7": {
+          "type": "NOCONNECT"
+        },
+        "NC_C8": {
+          "type": "NOCONNECT"
+        },
+        "NC_C9": {
+          "type": "NOCONNECT"
+        },
+        "NC_C10": {
+          "type": "NOCONNECT"
+        },
+        "NC_C11": {
+          "type": "NOCONNECT"
+        },
+        "NC_C12": {
+          "type": "NOCONNECT"
+        },
+        "NC_C13": {
+          "type": "NOCONNECT"
+        },
+        "NC_C14": {
+          "type": "NOCONNECT"
+        },
+        "NC_D1": {
+          "type": "NOCONNECT"
+        },
+        "NC_D2": {
+          "type": "NOCONNECT"
+        },
+        "NC_D3": {
+          "type": "NOCONNECT"
+        },
+        "NC_D4": {
+          "type": "NOCONNECT"
+        },
+        "NC_D12": {
+          "type": "NOCONNECT"
+        },
+        "NC_D13": {
+          "type": "NOCONNECT"
+        },
+        "NC_D14": {
+          "type": "NOCONNECT"
+        },
+        "NC_E1": {
+          "type": "NOCONNECT"
+        },
+        "NC_E2": {
+          "type": "NOCONNECT"
+        },
+        "NC_E3": {
+          "type": "NOCONNECT"
+        },
+        "RFU_E5": {
+          "type": "NOCONNECT"
+        },
+        "VCC_E6": {
+          "type": "PWRIN"
+        },
+        "VSS_E7": {
+          "type": "PWRIN"
+        },
+        "RFU_E8": {
+          "type": "NOCONNECT"
+        },
+        "RFU_E9": {
+          "type": "NOCONNECT"
+        },
+        "RFU_E10": {
+          "type": "NOCONNECT"
+        },
+        "NC_E12": {
+          "type": "NOCONNECT"
+        },
+        "NC_E13": {
+          "type": "NOCONNECT"
+        },
+        "NC_E14": {
+          "type": "NOCONNECT"
+        },
+        "NC_F1": {
+          "type": "NOCONNECT"
+        },
+        "NC_F2": {
+          "type": "NOCONNECT"
+        },
+        "NC_F3": {
+          "type": "NOCONNECT"
+        },
+        "VCC_F5": {
+          "type": "PWRIN"
+        },
+        "RFU_F10": {
+          "type": "NOCONNECT"
+        },
+        "NC_F12": {
+          "type": "NOCONNECT"
+        },
+        "NC_F13": {
+          "type": "NOCONNECT"
+        },
+        "NC_F14": {
+          "type": "NOCONNECT"
+        },
+        "NC_G1": {
+          "type": "NOCONNECT"
+        },
+        "NC_G2": {
+          "type": "NOCONNECT"
+        },
+        "RFU_G3": {
+          "type": "NOCONNECT"
+        },
+        "VSS_G5": {
+          "type": "PWRIN"
+        },
+        "RFU_G10": {
+          "type": "NOCONNECT"
+        },
+        "NC_G12": {
+          "type": "NOCONNECT"
+        },
+        "NC_G13": {
+          "type": "NOCONNECT"
+        },
+        "NC_G14": {
+          "type": "NOCONNECT"
+        },
+        "NC_H1": {
+          "type": "NOCONNECT"
+        },
+        "NC_H2": {
+          "type": "NOCONNECT"
+        },
+        "NC_H3": {
+          "type": "NOCONNECT"
+        },
+        "RFU_H5": {
+          "type": "NOCONNECT"
+        },
+        "VSS_H10": {
+          "type": "PWRIN"
+        },
+        "NC_H12": {
+          "type": "NOCONNECT"
+        },
+        "NC_H13": {
+          "type": "NOCONNECT"
+        },
+        "NC_H14": {
+          "type": "NOCONNECT"
+        },
+        "NC_J1": {
+          "type": "NOCONNECT"
+        },
+        "NC_J2": {
+          "type": "NOCONNECT"
+        },
+        "NC_J3": {
+          "type": "NOCONNECT"
+        },
+        "RFU_J5": {
+          "type": "NOCONNECT"
+        },
+        "VCC_J10": {
+          "type": "PWRIN"
+        },
+        "NC_J12": {
+          "type": "NOCONNECT"
+        },
+        "NC_J13": {
+          "type": "NOCONNECT"
+        },
+        "NC_J14": {
+          "type": "NOCONNECT"
+        },
+        "NC_K1": {
+          "type": "NOCONNECT"
+        },
+        "NC_K2": {
+          "type": "NOCONNECT"
+        },
+        "NC_K3": {
+          "type": "NOCONNECT"
+        },
+        "RESET_N": {
+          "type": "INPUT"
+        },
+        "RFU_K6": {
+          "type": "NOCONNECT"
+        },
+        "RFU_K7": {
+          "type": "NOCONNECT"
+        },
+        "VSS_K8": {
+          "type": "PWRIN"
+        },
+        "VCC_K9": {
+          "type": "PWRIN"
+        },
+        "RFU_K10": {
+          "type": "NOCONNECT"
+        },
+        "NC_K12": {
+          "type": "NOCONNECT"
+        },
+        "NC_K13": {
+          "type": "NOCONNECT"
+        },
+        "NC_K14": {
+          "type": "NOCONNECT"
+        },
+        "NC_L1": {
+          "type": "NOCONNECT"
+        },
+        "NC_L2": {
+          "type": "NOCONNECT"
+        },
+        "NC_L3": {
+          "type": "NOCONNECT"
+        },
+        "NC_L12": {
+          "type": "NOCONNECT"
+        },
+        "NC_L13": {
+          "type": "NOCONNECT"
+        },
+        "NC_L14": {
+          "type": "NOCONNECT"
+        },
+        "NC_M1": {
+          "type": "NOCONNECT"
+        },
+        "NC_M2": {
+          "type": "NOCONNECT"
+        },
+        "NC_M3": {
+          "type": "NOCONNECT"
+        },
+        "VCCQ_M4": {
+          "type": "PWRIN"
+        },
+        "CMD": {
+          "type": "BIDIR"
+        },
+        "CLK": {
+          "type": "INPUT"
+        },
+        "NC_M7": {
+          "type": "NOCONNECT"
+        },
+        "NC_M8": {
+          "type": "NOCONNECT"
+        },
+        "NC_M9": {
+          "type": "NOCONNECT"
+        },
+        "NC_M10": {
+          "type": "NOCONNECT"
+        },
+        "NC_M11": {
+          "type": "NOCONNECT"
+        },
+        "NC_M12": {
+          "type": "NOCONNECT"
+        },
+        "NC_M13": {
+          "type": "NOCONNECT"
+        },
+        "NC_M14": {
+          "type": "NOCONNECT"
+        },
+        "NC_N1": {
+          "type": "NOCONNECT"
+        },
+        "VSSQ_N2": {
+          "type": "PWRIN"
+        },
+        "NC_N3": {
+          "type": "NOCONNECT"
+        },
+        "VCCQ_N4": {
+          "type": "PWRIN"
+        },
+        "VSSQ_N5": {
+          "type": "PWRIN"
+        },
+        "NC_N6": {
+          "type": "NOCONNECT"
+        },
+        "NC_N7": {
+          "type": "NOCONNECT"
+        },
+        "NC_N8": {
+          "type": "NOCONNECT"
+        },
+        "NC_N9": {
+          "type": "NOCONNECT"
+        },
+        "NC_N10": {
+          "type": "NOCONNECT"
+        },
+        "NC_N11": {
+          "type": "NOCONNECT"
+        },
+        "NC_N12": {
+          "type": "NOCONNECT"
+        },
+        "NC_N13": {
+          "type": "NOCONNECT"
+        },
+        "NC_N14": {
+          "type": "NOCONNECT"
+        },
+        "NC_P1": {
+          "type": "NOCONNECT"
+        },
+        "NC_P2": {
+          "type": "NOCONNECT"
+        },
+        "VCCQ_P3": {
+          "type": "PWRIN"
+        },
+        "VSSQ_P4": {
+          "type": "PWRIN"
+        },
+        "VCCQ_P5": {
+          "type": "PWRIN"
+        },
+        "VSSQ_P6": {
+          "type": "PWRIN"
+        },
+        "RFU_P7": {
+          "type": "NOCONNECT"
+        },
+        "NC_P8": {
+          "type": "NOCONNECT"
+        },
+        "NC_P9": {
+          "type": "NOCONNECT"
+        },
+        "RFU_P10": {
+          "type": "NOCONNECT"
+        },
+        "NC_P11": {
+          "type": "NOCONNECT"
+        },
+        "NC_P12": {
+          "type": "NOCONNECT"
+        },
+        "NC_P13": {
+          "type": "NOCONNECT"
+        },
+        "NC_P14": {
+          "type": "NOCONNECT"
+        }
+      },
+      "packages": {
+        "VFBGA153_11P5X13_P0P5": {
+          "allegro": "VFBGA153_11P5X13_P0P5",
+          "pads": {
+            "A1": "NC_A1",
+            "A2": "NC_A2",
+            "A3": "DAT0",
+            "A4": "DAT1",
+            "A5": "DAT2",
+            "A6": "RFU_A6",
+            "A7": "RFU_A7",
+            "A8": "NC_A8",
+            "A9": "NC_A9",
+            "A10": "NC_A10",
+            "A11": "NC_A11",
+            "A12": "NC_A12",
+            "A13": "NC_A13",
+            "A14": "NC_A14",
+            "B1": "NC_B1",
+            "B2": "DAT3",
+            "B3": "DAT4",
+            "B4": "DAT5",
+            "B5": "DAT6",
+            "B6": "DAT7",
+            "B7": "NC_B7",
+            "B8": "NC_B8",
+            "B9": "NC_B9",
+            "B10": "NC_B10",
+            "B11": "NC_B11",
+            "B12": "NC_B12",
+            "B13": "NC_B13",
+            "B14": "NC_B14",
+            "C1": "NC_C1",
+            "C2": "VDDIM",
+            "C3": "NC_C3",
+            "C4": "VSSQ_C4",
+            "C5": "RFU_C5",
+            "C6": "VCCQ_C6",
+            "C7": "NC_C7",
+            "C8": "NC_C8",
+            "C9": "NC_C9",
+            "C10": "NC_C10",
+            "C11": "NC_C11",
+            "C12": "NC_C12",
+            "C13": "NC_C13",
+            "C14": "NC_C14",
+            "D1": "NC_D1",
+            "D2": "NC_D2",
+            "D3": "NC_D3",
+            "D4": "NC_D4",
+            "D12": "NC_D12",
+            "D13": "NC_D13",
+            "D14": "NC_D14",
+            "E1": "NC_E1",
+            "E2": "NC_E2",
+            "E3": "NC_E3",
+            "E5": "RFU_E5",
+            "E6": "VCC_E6",
+            "E7": "VSS_E7",
+            "E8": "RFU_E8",
+            "E9": "RFU_E9",
+            "E10": "RFU_E10",
+            "E12": "NC_E12",
+            "E13": "NC_E13",
+            "E14": "NC_E14",
+            "F1": "NC_F1",
+            "F2": "NC_F2",
+            "F3": "NC_F3",
+            "F5": "VCC_F5",
+            "F10": "RFU_F10",
+            "F12": "NC_F12",
+            "F13": "NC_F13",
+            "F14": "NC_F14",
+            "G1": "NC_G1",
+            "G2": "NC_G2",
+            "G3": "RFU_G3",
+            "G5": "VSS_G5",
+            "G10": "RFU_G10",
+            "G12": "NC_G12",
+            "G13": "NC_G13",
+            "G14": "NC_G14",
+            "H1": "NC_H1",
+            "H2": "NC_H2",
+            "H3": "NC_H3",
+            "H5": "RFU_H5",
+            "H10": "VSS_H10",
+            "H12": "NC_H12",
+            "H13": "NC_H13",
+            "H14": "NC_H14",
+            "J1": "NC_J1",
+            "J2": "NC_J2",
+            "J3": "NC_J3",
+            "J5": "RFU_J5",
+            "J10": "VCC_J10",
+            "J12": "NC_J12",
+            "J13": "NC_J13",
+            "J14": "NC_J14",
+            "K1": "NC_K1",
+            "K2": "NC_K2",
+            "K3": "NC_K3",
+            "K5": "RESET_N",
+            "K6": "RFU_K6",
+            "K7": "RFU_K7",
+            "K8": "VSS_K8",
+            "K9": "VCC_K9",
+            "K10": "RFU_K10",
+            "K12": "NC_K12",
+            "K13": "NC_K13",
+            "K14": "NC_K14",
+            "L1": "NC_L1",
+            "L2": "NC_L2",
+            "L3": "NC_L3",
+            "L12": "NC_L12",
+            "L13": "NC_L13",
+            "L14": "NC_L14",
+            "M1": "NC_M1",
+            "M2": "NC_M2",
+            "M3": "NC_M3",
+            "M4": "VCCQ_M4",
+            "M5": "CMD",
+            "M6": "CLK",
+            "M7": "NC_M7",
+            "M8": "NC_M8",
+            "M9": "NC_M9",
+            "M10": "NC_M10",
+            "M11": "NC_M11",
+            "M12": "NC_M12",
+            "M13": "NC_M13",
+            "M14": "NC_M14",
+            "N1": "NC_N1",
+            "N2": "VSSQ_N2",
+            "N3": "NC_N3",
+            "N4": "VCCQ_N4",
+            "N5": "VSSQ_N5",
+            "N6": "NC_N6",
+            "N7": "NC_N7",
+            "N8": "NC_N8",
+            "N9": "NC_N9",
+            "N10": "NC_N10",
+            "N11": "NC_N11",
+            "N12": "NC_N12",
+            "N13": "NC_N13",
+            "N14": "NC_N14",
+            "P1": "NC_P1",
+            "P2": "NC_P2",
+            "P3": "VCCQ_P3",
+            "P4": "VSSQ_P4",
+            "P5": "VCCQ_P5",
+            "P6": "VSSQ_P6",
+            "P7": "RFU_P7",
+            "P8": "NC_P8",
+            "P9": "NC_P9",
+            "P10": "RFU_P10",
+            "P11": "NC_P11",
+            "P12": "NC_P12",
+            "P13": "NC_P13",
+            "P14": "NC_P14"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Micron",
+        "mpn": "MTFC8GACAAAM-4M IT",
+        "supply_min": "2.7 V",
+        "supply_max": "3.6 V",
+        "rating_conditions": "VCC; VCCQ 1.8 V. eMMC 4.51, 8 GB, obsolete part retained for reference compatibility."
+      },
+      "source": {
+        "document": "Micron emmc_ps8210_v451_80s_153b_it.pdf Rev E June 2014, Fig 3; reference page 12"
+      }
+    },
+    "winbond.qspi": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "CS_N": {
+          "type": "INPUT"
+        },
+        "IO1": {
+          "type": "BIDIR"
+        },
+        "IO2": {
+          "type": "BIDIR"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "IO0": {
+          "type": "BIDIR"
+        },
+        "CLK": {
+          "type": "INPUT"
+        },
+        "IO3": {
+          "type": "BIDIR"
+        },
+        "VCC": {
+          "type": "PWRIN"
+        },
+        "EP": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "WSON8_8X6_EP": {
+          "allegro": "WSON8_8X6_EP",
+          "pads": {
+            "1": "CS_N",
+            "2": "IO1",
+            "3": "IO2",
+            "4": "GND",
+            "5": "IO0",
+            "6": "CLK",
+            "7": "IO3",
+            "8": "VCC",
+            "9": "EP"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Winbond",
+        "mpn": "W25Q256JWEIQ",
+        "supply_min": "1.7 V",
+        "supply_max": "1.95 V"
+      },
+      "source": {
+        "document": "Reference page 12 and Winbond W25Q256JW datasheet WSON8 8x6 pinout"
+      }
+    },
+    "resistor_0402": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "RESISTOR_0402": {
+          "allegro": "RESISTOR_0402",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "resistor_0603": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "RESISTOR_0603": {
+          "allegro": "RESISTOR_0603",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "resistor_0805": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "RESISTOR_0805": {
+          "allegro": "RESISTOR_0805",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "resistor_1210": {
+      "category": "resistor",
+      "prefix": "R",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "RESISTOR_1210": {
+          "allegro": "RESISTOR_1210",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "capacitor_0402": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "CAPACITOR_0402": {
+          "allegro": "CAPACITOR_0402",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "capacitor_0603": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "CAPACITOR_0603": {
+          "allegro": "CAPACITOR_0603",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "capacitor_0805": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "CAPACITOR_0805": {
+          "allegro": "CAPACITOR_0805",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "capacitor_1210": {
+      "category": "capacitor",
+      "prefix": "C",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "CAPACITOR_1210": {
+          "allegro": "CAPACITOR_1210",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "inductor_L_10X10": {
+      "category": "inductor",
+      "prefix": "L",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "INDUCTOR_L_10X10": {
+          "allegro": "INDUCTOR_L_10X10",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "inductor_L_15X15": {
+      "category": "inductor",
+      "prefix": "L",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "INDUCTOR_L_15X15": {
+          "allegro": "INDUCTOR_L_15X15",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "generic",
+        "description": "Explicit instance procurement specifications; footprint geometry supplied by PCB library"
+      }
+    },
+    "ti.buck8": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "BOOT": {
+          "type": "PASSIVE"
+        },
+        "VIN_2": {
+          "type": "PWRIN"
+        },
+        "PGND_3": {
+          "type": "PWRIN"
+        },
+        "PGND_4": {
+          "type": "PWRIN"
+        },
+        "PGND_5": {
+          "type": "PWRIN"
+        },
+        "SW_6": {
+          "type": "PASSIVE"
+        },
+        "SW_7": {
+          "type": "PASSIVE"
+        },
+        "PGND_8": {
+          "type": "PWRIN"
+        },
+        "PGND_9": {
+          "type": "PWRIN"
+        },
+        "PGND_10": {
+          "type": "PWRIN"
+        },
+        "VIN_11": {
+          "type": "PWRIN"
+        },
+        "AGND": {
+          "type": "PWRIN"
+        },
+        "FB": {
+          "type": "INPUT"
+        },
+        "SS": {
+          "type": "PASSIVE"
+        },
+        "EN": {
+          "type": "INPUT"
+        },
+        "PGOOD": {
+          "type": "OPENCOLL"
+        },
+        "VREG5": {
+          "type": "PWROUT"
+        },
+        "MODE": {
+          "type": "INPUT"
+        }
+      },
+      "packages": {
+        "VQFN18_RNN_3P5X3P5": {
+          "allegro": "VQFN18_RNN_3P5X3P5",
+          "pads": {
+            "1": "BOOT",
+            "2": "VIN_2",
+            "3": "PGND_3",
+            "4": "PGND_4",
+            "5": "PGND_5",
+            "6": "SW_6",
+            "7": "SW_7",
+            "8": "PGND_8",
+            "9": "PGND_9",
+            "10": "PGND_10",
+            "11": "VIN_11",
+            "12": "AGND",
+            "13": "FB",
+            "14": "SS",
+            "15": "EN",
+            "16": "PGOOD",
+            "17": "VREG5",
+            "18": "MODE"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Texas Instruments",
+        "mpn": "TPS568215RNNR",
+        "supply_min": "4.5 V",
+        "supply_max": "17 V",
+        "current_rating": "8 A"
+      },
+      "source": {
+        "document": "TI TPS568215RNNR datasheet; source hashes in schematics/xczu15eg_minimal/sources.json"
+      }
+    },
+    "ti.buck40": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "RSP": {
+          "type": "PASSIVE"
+        },
+        "RSN": {
+          "type": "PASSIVE"
+        },
+        "NC_3": {
+          "type": "NOCONNECT"
+        },
+        "NC_4": {
+          "type": "NOCONNECT"
+        },
+        "NC_5": {
+          "type": "NOCONNECT"
+        },
+        "NC_6": {
+          "type": "NOCONNECT"
+        },
+        "BOOT": {
+          "type": "PASSIVE"
+        },
+        "SW_8": {
+          "type": "PASSIVE"
+        },
+        "SW_9": {
+          "type": "PASSIVE"
+        },
+        "SW_10": {
+          "type": "PASSIVE"
+        },
+        "SW_11": {
+          "type": "PASSIVE"
+        },
+        "SW_12": {
+          "type": "PASSIVE"
+        },
+        "PGND_13": {
+          "type": "PWRIN"
+        },
+        "PGND_14": {
+          "type": "PWRIN"
+        },
+        "PGND_15": {
+          "type": "PWRIN"
+        },
+        "PGND_16": {
+          "type": "PWRIN"
+        },
+        "PGND_17": {
+          "type": "PWRIN"
+        },
+        "PGND_18": {
+          "type": "PWRIN"
+        },
+        "PGND_19": {
+          "type": "PWRIN"
+        },
+        "PGND_20": {
+          "type": "PWRIN"
+        },
+        "PVIN_21": {
+          "type": "PWRIN"
+        },
+        "PVIN_22": {
+          "type": "PWRIN"
+        },
+        "PVIN_23": {
+          "type": "PWRIN"
+        },
+        "PVIN_24": {
+          "type": "PWRIN"
+        },
+        "PVIN_25": {
+          "type": "PWRIN"
+        },
+        "VDD": {
+          "type": "PWRIN"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "BP": {
+          "type": "PWROUT"
+        },
+        "AGND": {
+          "type": "PWRIN"
+        },
+        "ILIM": {
+          "type": "PASSIVE"
+        },
+        "ISHARE": {
+          "type": "PASSIVE"
+        },
+        "VSHARE": {
+          "type": "PASSIVE"
+        },
+        "EN": {
+          "type": "PASSIVE"
+        },
+        "PGD": {
+          "type": "OPENCOLL"
+        },
+        "SYNC": {
+          "type": "PASSIVE"
+        },
+        "VSEL": {
+          "type": "PASSIVE"
+        },
+        "SS": {
+          "type": "PASSIVE"
+        },
+        "RT": {
+          "type": "PASSIVE"
+        },
+        "MODE": {
+          "type": "PASSIVE"
+        },
+        "RAMP": {
+          "type": "PASSIVE"
+        },
+        "EP": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "LQFN40_RVF_5X7_EP": {
+          "allegro": "LQFN40_RVF_5X7_EP",
+          "pads": {
+            "1": "RSP",
+            "2": "RSN",
+            "3": "NC_3",
+            "4": "NC_4",
+            "5": "NC_5",
+            "6": "NC_6",
+            "7": "BOOT",
+            "8": "SW_8",
+            "9": "SW_9",
+            "10": "SW_10",
+            "11": "SW_11",
+            "12": "SW_12",
+            "13": "PGND_13",
+            "14": "PGND_14",
+            "15": "PGND_15",
+            "16": "PGND_16",
+            "17": "PGND_17",
+            "18": "PGND_18",
+            "19": "PGND_19",
+            "20": "PGND_20",
+            "21": "PVIN_21",
+            "22": "PVIN_22",
+            "23": "PVIN_23",
+            "24": "PVIN_24",
+            "25": "PVIN_25",
+            "26": "VDD",
+            "27": "GND",
+            "28": "BP",
+            "29": "AGND",
+            "30": "ILIM",
+            "31": "ISHARE",
+            "32": "VSHARE",
+            "33": "EN",
+            "34": "PGD",
+            "35": "SYNC",
+            "36": "VSEL",
+            "37": "SS",
+            "38": "RT",
+            "39": "MODE",
+            "40": "RAMP",
+            "41": "EP"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Texas Instruments",
+        "mpn": "TPS543C20ARVFR",
+        "supply_min": "4 V",
+        "supply_max": "16 V",
+        "current_rating": "40 A",
+        "output_voltage": "0.85 V"
+      },
+      "source": {
+        "document": "TI TPS543C20ARVFR datasheet; source hashes in schematics/xczu15eg_minimal/sources.json"
+      }
+    },
+    "ti.vtt": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "REFIN": {
+          "type": "INPUT"
+        },
+        "VLDOIN": {
+          "type": "PWRIN"
+        },
+        "VO": {
+          "type": "PWROUT"
+        },
+        "PGND": {
+          "type": "PWRIN"
+        },
+        "VOSNS": {
+          "type": "INPUT"
+        },
+        "REFOUT": {
+          "type": "PWROUT"
+        },
+        "EN": {
+          "type": "INPUT"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "PGOOD": {
+          "type": "OPENCOLL"
+        },
+        "VIN": {
+          "type": "PWRIN"
+        },
+        "EP": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "VSON10_DRC_3X3_EP": {
+          "allegro": "VSON10_DRC_3X3_EP",
+          "pads": {
+            "1": "REFIN",
+            "2": "VLDOIN",
+            "3": "VO",
+            "4": "PGND",
+            "5": "VOSNS",
+            "6": "REFOUT",
+            "7": "EN",
+            "8": "GND",
+            "9": "PGOOD",
+            "10": "VIN",
+            "11": "EP"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Texas Instruments",
+        "mpn": "TPS51200DRCR",
+        "supply_min": "2.375 V",
+        "supply_max": "3.5 V",
+        "output_voltage": "0.6 V",
+        "current_rating": "3 A",
+        "rating_conditions": "VTT sink/source subject to thermal design; VIN 3.3 V and VLDOIN 1.2 V."
+      },
+      "source": {
+        "document": "TI TPS51200DRCR datasheet; source hashes in schematics/xczu15eg_minimal/sources.json"
+      }
+    },
+    "ti.ldo": {
+      "category": "regulator",
+      "prefix": "U",
+      "pins": {
+        "IN_1": {
+          "type": "PWRIN"
+        },
+        "IN_2": {
+          "type": "PWRIN"
+        },
+        "PG": {
+          "type": "OPENCOLL"
+        },
+        "BIAS": {
+          "type": "PWRIN"
+        },
+        "EN": {
+          "type": "INPUT"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "SS": {
+          "type": "PASSIVE"
+        },
+        "FB": {
+          "type": "INPUT"
+        },
+        "OUT_9": {
+          "type": "PWROUT"
+        },
+        "OUT_10": {
+          "type": "PASSIVE"
+        },
+        "EP": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "VSON10_DRC_3X3_EP": {
+          "allegro": "VSON10_DRC_3X3_EP",
+          "pads": {
+            "1": "IN_1",
+            "2": "IN_2",
+            "3": "PG",
+            "4": "BIAS",
+            "5": "EN",
+            "6": "GND",
+            "7": "SS",
+            "8": "FB",
+            "9": "OUT_9",
+            "10": "OUT_10",
+            "11": "EP"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Texas Instruments",
+        "mpn": "TPS74801DRCR",
+        "supply_min": "0.8 V",
+        "supply_max": "5.5 V",
+        "output_voltage": "1.2 V",
+        "current_rating": "1.5 A",
+        "rating_conditions": "IN 1.8 V, BIAS 5 V; output requires dropout margin."
+      },
+      "source": {
+        "document": "TI TPS74801DRCR datasheet; source hashes in schematics/xczu15eg_minimal/sources.json"
+      }
+    },
+    "ti.reset": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "RESET_N": {
+          "type": "OPENCOLL"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "MR_N": {
+          "type": "INPUT"
+        },
+        "CT": {
+          "type": "PASSIVE"
+        },
+        "SENSE": {
+          "type": "INPUT"
+        },
+        "VDD": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "SOT23_6": {
+          "allegro": "SOT23_6",
+          "pads": {
+            "1": "RESET_N",
+            "2": "GND",
+            "3": "MR_N",
+            "4": "CT",
+            "5": "SENSE",
+            "6": "VDD"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Texas Instruments",
+        "mpn": "TPS3808G01DBVR",
+        "supply_min": "1.7 V",
+        "supply_max": "6.5 V"
+      },
+      "source": {
+        "document": "TI TPS3808G01DBVR datasheet; source hashes in schematics/xczu15eg_minimal/sources.json"
+      }
+    },
+    "schottky": {
+      "category": "diode",
+      "prefix": "D",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "NC": {
+          "type": "NOCONNECT"
+        },
+        "K": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SOT23": {
+          "allegro": "SOT23",
+          "pads": {
+            "1": "A",
+            "2": "NC",
+            "3": "K"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Nexperia",
+        "mpn": "BAT54",
+        "type": "Schottky",
+        "current_rating": "0.2 A",
+        "voltage_rating": "30 V"
+      },
+      "source": {
+        "document": "Nexperia BAT54 pinning: pin1 anode pin2 NC pin3 cathode"
+      }
+    },
+    "led": {
+      "category": "led",
+      "prefix": "DS",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "K": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "LED0603": {
+          "allegro": "LED0603",
+          "pads": {
+            "1": "A",
+            "2": "K"
+          }
+        }
+      },
+      "properties": {
+        "type": "LED",
+        "color": "green",
+        "current_rating": "20 mA",
+        "voltage_rating": "5 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "Green indicator, select forward voltage compatible with 3.3 V and 1 kohm"
+      }
+    },
+    "switch": {
+      "category": "switch",
+      "prefix": "SW",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "SW_SPST_2": {
+          "allegro": "SW_SPST_2",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {
+        "initial_state": "open",
+        "current_rating": "0.05 A",
+        "voltage_rating": "12 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "Normally open momentary pushbutton"
+      }
+    },
+    "header2": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_2_2P54": {
+          "allegro": "HDR_2_2P54",
+          "pads": {
+            "1": "P1",
+            "2": "P2"
+          }
+        }
+      },
+      "properties": {
+        "positions": 2,
+        "pitch": "2.54 mm",
+        "current_rating": "3 A",
+        "voltage_rating": "50 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "Keyed 2x7 JTAG for 14 positions; 1xn elsewhere; exact mating drawing required"
+      }
+    },
+    "header3": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_3_2P54": {
+          "allegro": "HDR_3_2P54",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3"
+          }
+        }
+      },
+      "properties": {
+        "positions": 3,
+        "pitch": "2.54 mm",
+        "current_rating": "3 A",
+        "voltage_rating": "50 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "Keyed 2x7 JTAG for 14 positions; 1xn elsewhere; exact mating drawing required"
+      }
+    },
+    "header4": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_4_2P54": {
+          "allegro": "HDR_4_2P54",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4"
+          }
+        }
+      },
+      "properties": {
+        "positions": 4,
+        "pitch": "2.54 mm",
+        "current_rating": "3 A",
+        "voltage_rating": "50 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "Keyed 2x7 JTAG for 14 positions; 1xn elsewhere; exact mating drawing required"
+      }
+    },
+    "header14": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "P1": {
+          "type": "PASSIVE"
+        },
+        "P2": {
+          "type": "PASSIVE"
+        },
+        "P3": {
+          "type": "PASSIVE"
+        },
+        "P4": {
+          "type": "PASSIVE"
+        },
+        "P5": {
+          "type": "PASSIVE"
+        },
+        "P6": {
+          "type": "PASSIVE"
+        },
+        "P7": {
+          "type": "PASSIVE"
+        },
+        "P8": {
+          "type": "PASSIVE"
+        },
+        "P9": {
+          "type": "PASSIVE"
+        },
+        "P10": {
+          "type": "PASSIVE"
+        },
+        "P11": {
+          "type": "PASSIVE"
+        },
+        "P12": {
+          "type": "PASSIVE"
+        },
+        "P13": {
+          "type": "PASSIVE"
+        },
+        "P14": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "HDR_14_2P00": {
+          "allegro": "HDR_14_2P00",
+          "pads": {
+            "1": "P1",
+            "2": "P2",
+            "3": "P3",
+            "4": "P4",
+            "5": "P5",
+            "6": "P6",
+            "7": "P7",
+            "8": "P8",
+            "9": "P9",
+            "10": "P10",
+            "11": "P11",
+            "12": "P12",
+            "13": "P13",
+            "14": "P14"
+          }
+        }
+      },
+      "properties": {
+        "positions": 14,
+        "pitch": "2 mm",
+        "current_rating": "3 A",
+        "voltage_rating": "50 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "Keyed 2x7 JTAG for 14 positions; 1xn elsewhere; exact mating drawing required"
+      }
+    },
+    "power_terminal": {
+      "category": "connector",
+      "prefix": "J",
+      "pins": {
+        "POS": {
+          "type": "PASSIVE"
+        },
+        "GND": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "TERMINAL_2_5P08": {
+          "allegro": "TERMINAL_2_5P08",
+          "pads": {
+            "1": "POS",
+            "2": "GND"
+          }
+        }
+      },
+      "properties": {
+        "positions": 2,
+        "pitch": "5.08 mm",
+        "current_rating": "10 A",
+        "voltage_rating": "50 V"
+      },
+      "source": {
+        "kind": "generic",
+        "description": "12 V input terminal, minimum 10 A rating"
+      }
+    },
+    "osc33": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "OE": {
+          "type": "INPUT"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "OUT": {
+          "type": "OUTPUT"
+        },
+        "VDD": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "OSC_3P2X2P5_4": {
+          "allegro": "OSC_3P2X2P5_4",
+          "pads": {
+            "1": "OE",
+            "2": "GND",
+            "3": "OUT",
+            "4": "VDD"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Abracon",
+        "mpn": "ASE-33.333MHZ-LC-T",
+        "supply_min": "2.97 V",
+        "supply_max": "3.63 V",
+        "frequency": "33.333 MHz"
+      },
+      "source": {
+        "document": "Abracon ASE series datasheet, CMOS 3.3 V 4-pad"
+      }
+    },
+    "osc200": {
+      "category": "ic",
+      "prefix": "U",
+      "pins": {
+        "OE": {
+          "type": "INPUT"
+        },
+        "NC": {
+          "type": "NOCONNECT"
+        },
+        "GND": {
+          "type": "PWRIN"
+        },
+        "OUT_P": {
+          "type": "OUTPUT"
+        },
+        "OUT_N": {
+          "type": "OUTPUT"
+        },
+        "VDD": {
+          "type": "PWRIN"
+        }
+      },
+      "packages": {
+        "OSC_3P2X2P5_6": {
+          "allegro": "OSC_3P2X2P5_6",
+          "pads": {
+            "1": "OE",
+            "2": "NC",
+            "3": "GND",
+            "4": "OUT_P",
+            "5": "OUT_N",
+            "6": "VDD"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Abracon",
+        "mpn": "AK3ADAF1-200.0000T",
+        "supply_min": "2.97 V",
+        "supply_max": "3.63 V",
+        "frequency": "200 MHz"
+      },
+      "source": {
+        "document": "Abracon AK3A Rev C, 2025-07-18, page 4 ordering and page 10 six-pad Case 1 mapping"
+      }
+    },
+    "rtc": {
+      "category": "crystal",
+      "prefix": "Y",
+      "pins": {
+        "A": {
+          "type": "PASSIVE"
+        },
+        "B": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "XTAL_3P2X1P5": {
+          "allegro": "XTAL_3P2X1P5",
+          "pads": {
+            "1": "A",
+            "2": "B"
+          }
+        }
+      },
+      "properties": {
+        "manufacturer": "Abracon",
+        "mpn": "ABS07-32.768KHZ-9-T",
+        "frequency": "32768 Hz",
+        "load_capacitance": "9 pF",
+        "frequency_tolerance": "20 ppm"
+      },
+      "source": {
+        "document": "Abracon ABS07 datasheet"
+      }
+    },
+    "tp": {
+      "category": "testpoint",
+      "prefix": "TP",
+      "pins": {
+        "P": {
+          "type": "PASSIVE"
+        }
+      },
+      "packages": {
+        "TP_1MM": {
+          "allegro": "TP_1MM",
+          "pads": {
+            "1": "P"
+          }
+        }
+      },
+      "properties": {},
+      "source": {
+        "kind": "physical_testpoint",
+        "description": "Bare copper probe pad; no populated BOM item"
+      }
+    }
+  }
+}

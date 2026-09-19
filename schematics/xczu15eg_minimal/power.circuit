@@ -1,0 +1,1214 @@
+circuit 2;
+
+module power {
+    ports AUX_1V8, AUX_PG, CORE_0V85, CORE_PG, DDR_1V2, DDR_PG, GND, IO18_PG, IO33_PG, IO_1V8, IO_3V3, PL_VREF, PL_VTT, PL_VTT_PG, PSPLL_1V2, PSPLL_PG, PS_VREF, PS_VTT, PS_VTT_PG, UTILITY_PG, VPP_2V5, VPP_PG;
+    part input {
+        id = "input";
+        device = "power_terminal";
+        package = "TERMINAL_2_5P08";
+        assembly = fitted;
+    }
+    part input_bulk {
+        id = "input_bulk";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part input_hf {
+        id = "input_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility {
+        id = "utility";
+        device = "ti.buck8";
+        package = "VQFN18_RNN_3P5X3P5";
+        assembly = fitted;
+        properties { output_voltage = "5 V"; }
+    }
+    part utility_boot {
+        id = "utility_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_vreg {
+        id = "utility_vreg";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_ss {
+        id = "utility_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_mode_hi {
+        id = "utility_mode_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "200 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part utility_mode_lo {
+        id = "utility_mode_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part utility_fb_hi {
+        id = "utility_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "73.4 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part utility_fb_lo {
+        id = "utility_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part utility_inductor {
+        id = "utility_inductor";
+        device = "inductor_L_10X10";
+        package = "INDUCTOR_L_10X10";
+        assembly = fitted;
+        properties { inductance = "3.3 uH"; current_rating = "12 A"; dc_resistance = "5 mohm"; }
+    }
+    part utility_out0 {
+        id = "utility_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_out1 {
+        id = "utility_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_out2 {
+        id = "utility_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_out3 {
+        id = "utility_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_in0 {
+        id = "utility_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_in1 {
+        id = "utility_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_in_hf {
+        id = "utility_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part utility_pg_pull {
+        id = "utility_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part utility_test {
+        id = "utility_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part util_en_top {
+        id = "util_en_top";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "100 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part util_en_bottom {
+        id = "util_en_bottom";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "33 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core {
+        id = "core";
+        device = "ti.buck40";
+        package = "LQFN40_RVF_5X7_EP";
+        assembly = fitted;
+    }
+    part core_vsel {
+        id = "core_vsel";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "34.8 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core_ss {
+        id = "core_ss";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "34.8 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core_rt {
+        id = "core_rt";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core_ramp {
+        id = "core_ramp";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "121 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core_ilim {
+        id = "core_ilim";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "33.2 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core_boot {
+        id = "core_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_bp {
+        id = "core_bp";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_inductor {
+        id = "core_inductor";
+        device = "inductor_L_15X15";
+        package = "INDUCTOR_L_15X15";
+        assembly = fitted;
+        properties { inductance = "0.47 uH"; current_rating = "50 A"; dc_resistance = "0.5 mohm"; }
+    }
+    part core_out0 {
+        id = "core_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out1 {
+        id = "core_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out2 {
+        id = "core_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out3 {
+        id = "core_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out4 {
+        id = "core_out4";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out5 {
+        id = "core_out5";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out6 {
+        id = "core_out6";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_out7 {
+        id = "core_out7";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "100 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_in0 {
+        id = "core_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_in1 {
+        id = "core_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_in2 {
+        id = "core_in2";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_in3 {
+        id = "core_in3";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_in_hf {
+        id = "core_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_pg_pull {
+        id = "core_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part core_test {
+        id = "core_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part aux {
+        id = "aux";
+        device = "ti.buck8";
+        package = "VQFN18_RNN_3P5X3P5";
+        assembly = fitted;
+        properties { output_voltage = "1.8 V"; }
+    }
+    part aux_boot {
+        id = "aux_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_vreg {
+        id = "aux_vreg";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_ss {
+        id = "aux_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_mode_hi {
+        id = "aux_mode_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "200 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part aux_mode_lo {
+        id = "aux_mode_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part aux_fb_hi {
+        id = "aux_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "20 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part aux_fb_lo {
+        id = "aux_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part aux_inductor {
+        id = "aux_inductor";
+        device = "inductor_L_10X10";
+        package = "INDUCTOR_L_10X10";
+        assembly = fitted;
+        properties { inductance = "1.5 uH"; current_rating = "12 A"; dc_resistance = "5 mohm"; }
+    }
+    part aux_out0 {
+        id = "aux_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_out1 {
+        id = "aux_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_out2 {
+        id = "aux_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_out3 {
+        id = "aux_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_in0 {
+        id = "aux_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_in1 {
+        id = "aux_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_in_hf {
+        id = "aux_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_pg_pull {
+        id = "aux_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part aux_test {
+        id = "aux_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part vpp {
+        id = "vpp";
+        device = "ti.buck8";
+        package = "VQFN18_RNN_3P5X3P5";
+        assembly = fitted;
+        properties { output_voltage = "2.5 V"; }
+    }
+    part vpp_boot {
+        id = "vpp_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_vreg {
+        id = "vpp_vreg";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_ss {
+        id = "vpp_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_mode_hi {
+        id = "vpp_mode_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "200 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part vpp_mode_lo {
+        id = "vpp_mode_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part vpp_fb_hi {
+        id = "vpp_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "31.6 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part vpp_fb_lo {
+        id = "vpp_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part vpp_inductor {
+        id = "vpp_inductor";
+        device = "inductor_L_10X10";
+        package = "INDUCTOR_L_10X10";
+        assembly = fitted;
+        properties { inductance = "2.2 uH"; current_rating = "12 A"; dc_resistance = "5 mohm"; }
+    }
+    part vpp_out0 {
+        id = "vpp_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_out1 {
+        id = "vpp_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_out2 {
+        id = "vpp_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_out3 {
+        id = "vpp_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_in0 {
+        id = "vpp_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_in1 {
+        id = "vpp_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_in_hf {
+        id = "vpp_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vpp_pg_pull {
+        id = "vpp_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part vpp_test {
+        id = "vpp_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part pspll {
+        id = "pspll";
+        device = "ti.ldo";
+        package = "VSON10_DRC_3X3_EP";
+        assembly = fitted;
+    }
+    part pspll_fb_hi {
+        id = "pspll_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "5 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pspll_fb_lo {
+        id = "pspll_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pspll_ss {
+        id = "pspll_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_out {
+        id = "pspll_out";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "10 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_in {
+        id = "pspll_in";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_bias {
+        id = "pspll_bias";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_pg_pull {
+        id = "pspll_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_en_pull {
+        id = "ddr_en_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_en_vpp {
+        id = "ddr_en_vpp";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part ddr_en_pll {
+        id = "ddr_en_pll";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part ddr {
+        id = "ddr";
+        device = "ti.buck8";
+        package = "VQFN18_RNN_3P5X3P5";
+        assembly = fitted;
+        properties { output_voltage = "1.2 V"; }
+    }
+    part ddr_boot {
+        id = "ddr_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_vreg {
+        id = "ddr_vreg";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_ss {
+        id = "ddr_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_mode_hi {
+        id = "ddr_mode_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "200 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_mode_lo {
+        id = "ddr_mode_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_fb_hi {
+        id = "ddr_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_fb_lo {
+        id = "ddr_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_inductor {
+        id = "ddr_inductor";
+        device = "inductor_L_10X10";
+        package = "INDUCTOR_L_10X10";
+        assembly = fitted;
+        properties { inductance = "1 uH"; current_rating = "12 A"; dc_resistance = "5 mohm"; }
+    }
+    part ddr_out0 {
+        id = "ddr_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_out1 {
+        id = "ddr_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_out2 {
+        id = "ddr_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_out3 {
+        id = "ddr_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_in0 {
+        id = "ddr_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_in1 {
+        id = "ddr_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_in_hf {
+        id = "ddr_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_pg_pull {
+        id = "ddr_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ddr_test {
+        id = "ddr_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part io18 {
+        id = "io18";
+        device = "ti.buck8";
+        package = "VQFN18_RNN_3P5X3P5";
+        assembly = fitted;
+        properties { output_voltage = "1.8 V"; }
+    }
+    part io18_boot {
+        id = "io18_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_vreg {
+        id = "io18_vreg";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_ss {
+        id = "io18_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_mode_hi {
+        id = "io18_mode_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "200 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io18_mode_lo {
+        id = "io18_mode_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io18_fb_hi {
+        id = "io18_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "20 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io18_fb_lo {
+        id = "io18_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io18_inductor {
+        id = "io18_inductor";
+        device = "inductor_L_10X10";
+        package = "INDUCTOR_L_10X10";
+        assembly = fitted;
+        properties { inductance = "1.5 uH"; current_rating = "12 A"; dc_resistance = "5 mohm"; }
+    }
+    part io18_out0 {
+        id = "io18_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_out1 {
+        id = "io18_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_out2 {
+        id = "io18_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_out3 {
+        id = "io18_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_in0 {
+        id = "io18_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_in1 {
+        id = "io18_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_in_hf {
+        id = "io18_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io18_pg_pull {
+        id = "io18_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io18_test {
+        id = "io18_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part io33 {
+        id = "io33";
+        device = "ti.buck8";
+        package = "VQFN18_RNN_3P5X3P5";
+        assembly = fitted;
+        properties { output_voltage = "3.3 V"; }
+    }
+    part io33_boot {
+        id = "io33_boot";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_vreg {
+        id = "io33_vreg";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_ss {
+        id = "io33_ss";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_mode_hi {
+        id = "io33_mode_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "200 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io33_mode_lo {
+        id = "io33_mode_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io33_fb_hi {
+        id = "io33_fb_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "45.3 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io33_fb_lo {
+        id = "io33_fb_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io33_inductor {
+        id = "io33_inductor";
+        device = "inductor_L_10X10";
+        package = "INDUCTOR_L_10X10";
+        assembly = fitted;
+        properties { inductance = "2.2 uH"; current_rating = "12 A"; dc_resistance = "5 mohm"; }
+    }
+    part io33_out0 {
+        id = "io33_out0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_out1 {
+        id = "io33_out1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_out2 {
+        id = "io33_out2";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_out3 {
+        id = "io33_out3";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_in0 {
+        id = "io33_in0";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_in1 {
+        id = "io33_in1";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "22 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_in_hf {
+        id = "io33_in_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io33_pg_pull {
+        id = "io33_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part io33_test {
+        id = "io33_test";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part ps_vtt {
+        id = "ps_vtt";
+        device = "ti.vtt";
+        package = "VSON10_DRC_3X3_EP";
+        assembly = fitted;
+    }
+    part ps_vtt_refhi {
+        id = "ps_vtt_refhi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_vtt_reflo {
+        id = "ps_vtt_reflo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_vtt_ref {
+        id = "ps_vtt_ref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ps_vref {
+        id = "ps_vref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ps_vtt_vin {
+        id = "ps_vtt_vin";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ps_vtt_ldoin {
+        id = "ps_vtt_ldoin";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "10 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ps_vtt_pg_pull {
+        id = "ps_vtt_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_vtt {
+        id = "pl_vtt";
+        device = "ti.vtt";
+        package = "VSON10_DRC_3X3_EP";
+        assembly = fitted;
+    }
+    part pl_vtt_refhi {
+        id = "pl_vtt_refhi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_vtt_reflo {
+        id = "pl_vtt_reflo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_vtt_ref {
+        id = "pl_vtt_ref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_vref {
+        id = "pl_vref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_vtt_vin {
+        id = "pl_vtt_vin";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_vtt_ldoin {
+        id = "pl_vtt_ldoin";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "10 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_vtt_pg_pull {
+        id = "pl_vtt_pg_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    net AUX_1V8 = aux_fb_hi.A, aux_inductor.B, aux_out0.A, aux_out1.A, aux_out2.A, aux_out3.A, aux_test.P, pspll.IN_1, pspll.IN_2, pspll_in.A, port.AUX_1V8;
+    net AUX_BOOT = aux.BOOT, aux_boot.A;
+    net AUX_FB = aux.FB, aux_fb_hi.B, aux_fb_lo.A;
+    net AUX_MODE = aux.MODE, aux_mode_hi.B, aux_mode_lo.A;
+    net AUX_PG = aux.PGOOD, aux_pg_pull.A, pspll.EN, port.AUX_PG;
+    net AUX_SS = aux.SS, aux_ss.A;
+    net AUX_SW = aux.SW_6, aux.SW_7, aux_boot.B, aux_inductor.A;
+    net AUX_VREG5 = aux.VREG5, aux_vreg.A, aux_mode_hi.A;
+    net CORE_0V85 = core.RSP, core_inductor.B, core_out0.A, core_out1.A, core_out2.A, core_out3.A, core_out4.A, core_out5.A, core_out6.A, core_out7.A, core_test.P, port.CORE_0V85;
+    net CORE_BOOT = core.BOOT, core_boot.A;
+    net CORE_BP = core.BP, core_bp.A;
+    net CORE_ILIM = core.ILIM, core_ilim.A;
+    net CORE_PG = core.PGD, core_pg_pull.A, aux.EN, vpp.EN, port.CORE_PG;
+    net CORE_RAMP = core.RAMP, core_ramp.A;
+    net CORE_RT = core.RT, core_rt.A;
+    net CORE_SS = core.SS, core_ss.A;
+    net CORE_SW = core.SW_8, core.SW_9, core.SW_10, core.SW_11, core.SW_12, core_boot.B, core_inductor.A;
+    net CORE_VSEL = core.VSEL, core_vsel.A;
+    net DDR_1V2 = ddr_fb_hi.A, ddr_inductor.B, ddr_out0.A, ddr_out1.A, ddr_out2.A, ddr_out3.A, ddr_test.P, ps_vtt.VLDOIN, ps_vtt_refhi.A, ps_vtt_ldoin.A, pl_vtt.VLDOIN, pl_vtt_refhi.A, pl_vtt_ldoin.A, port.DDR_1V2;
+    net DDR_BOOT = ddr.BOOT, ddr_boot.A;
+    net DDR_ENABLE = ddr_en_pull.A, ddr_en_vpp.A, ddr_en_pll.A, ddr.EN;
+    net DDR_FB = ddr.FB, ddr_fb_hi.B, ddr_fb_lo.A;
+    net DDR_MODE = ddr.MODE, ddr_mode_hi.B, ddr_mode_lo.A;
+    net DDR_PG = ddr.PGOOD, ddr_pg_pull.A, ps_vtt.EN, pl_vtt.EN, port.DDR_PG;
+    net DDR_SS = ddr.SS, ddr_ss.A;
+    net DDR_SW = ddr.SW_6, ddr.SW_7, ddr_boot.B, ddr_inductor.A;
+    net DDR_VREG5 = ddr.VREG5, ddr_vreg.A, ddr_mode_hi.A;
+    net GND = input.GND, input_bulk.B, input_hf.B, utility.PGND_3, utility.PGND_4, utility.PGND_5, utility.PGND_8, utility.PGND_9, utility.PGND_10, utility.AGND, utility_vreg.B, utility_ss.B, utility_mode_lo.B, utility_fb_lo.B, utility_out0.B, utility_out1.B, utility_out2.B, utility_out3.B, utility_in0.B, utility_in1.B, utility_in_hf.B, util_en_bottom.B, core.RSN, core.PGND_13, core.PGND_14, core.PGND_15, core.PGND_16, core.PGND_17, core.PGND_18, core.PGND_19, core.PGND_20, core.GND, core.AGND, core.SYNC, core.EP, core_vsel.B, core_ss.B, core_rt.B, core_ramp.B, core_ilim.B, core_bp.B, core_out0.B, core_out1.B, core_out2.B, core_out3.B, core_out4.B, core_out5.B, core_out6.B, core_out7.B, core_in0.B, core_in1.B, core_in2.B, core_in3.B, core_in_hf.B, aux.PGND_3, aux.PGND_4, aux.PGND_5, aux.PGND_8, aux.PGND_9, aux.PGND_10, aux.AGND, aux_vreg.B, aux_ss.B, aux_mode_lo.B, aux_fb_lo.B, aux_out0.B, aux_out1.B, aux_out2.B, aux_out3.B, aux_in0.B, aux_in1.B, aux_in_hf.B, vpp.PGND_3, vpp.PGND_4, vpp.PGND_5, vpp.PGND_8, vpp.PGND_9, vpp.PGND_10, vpp.AGND, vpp_vreg.B, vpp_ss.B, vpp_mode_lo.B, vpp_fb_lo.B, vpp_out0.B, vpp_out1.B, vpp_out2.B, vpp_out3.B, vpp_in0.B, vpp_in1.B, vpp_in_hf.B, pspll.GND, pspll.EP, pspll_fb_lo.B, pspll_ss.B, pspll_out.B, pspll_in.B, pspll_bias.B, ddr.PGND_3, ddr.PGND_4, ddr.PGND_5, ddr.PGND_8, ddr.PGND_9, ddr.PGND_10, ddr.AGND, ddr_vreg.B, ddr_ss.B, ddr_mode_lo.B, ddr_fb_lo.B, ddr_out0.B, ddr_out1.B, ddr_out2.B, ddr_out3.B, ddr_in0.B, ddr_in1.B, ddr_in_hf.B, io18.PGND_3, io18.PGND_4, io18.PGND_5, io18.PGND_8, io18.PGND_9, io18.PGND_10, io18.AGND, io18_vreg.B, io18_ss.B, io18_mode_lo.B, io18_fb_lo.B, io18_out0.B, io18_out1.B, io18_out2.B, io18_out3.B, io18_in0.B, io18_in1.B, io18_in_hf.B, io33.PGND_3, io33.PGND_4, io33.PGND_5, io33.PGND_8, io33.PGND_9, io33.PGND_10, io33.AGND, io33_vreg.B, io33_ss.B, io33_mode_lo.B, io33_fb_lo.B, io33_out0.B, io33_out1.B, io33_out2.B, io33_out3.B, io33_in0.B, io33_in1.B, io33_in_hf.B, ps_vtt.PGND, ps_vtt.GND, ps_vtt.EP, ps_vtt_reflo.B, ps_vtt_ref.B, ps_vref.B, ps_vtt_vin.B, ps_vtt_ldoin.B, pl_vtt.PGND, pl_vtt.GND, pl_vtt.EP, pl_vtt_reflo.B, pl_vtt_ref.B, pl_vref.B, pl_vtt_vin.B, pl_vtt_ldoin.B, port.GND;
+    net IO18_BOOT = io18.BOOT, io18_boot.A;
+    net IO18_FB = io18.FB, io18_fb_hi.B, io18_fb_lo.A;
+    net IO18_MODE = io18.MODE, io18_mode_hi.B, io18_mode_lo.A;
+    net IO18_PG = io18.PGOOD, io18_pg_pull.A, port.IO18_PG;
+    net IO18_SS = io18.SS, io18_ss.A;
+    net IO18_SW = io18.SW_6, io18.SW_7, io18_boot.B, io18_inductor.A;
+    net IO18_VREG5 = io18.VREG5, io18_vreg.A, io18_mode_hi.A;
+    net IO33_BOOT = io33.BOOT, io33_boot.A;
+    net IO33_FB = io33.FB, io33_fb_hi.B, io33_fb_lo.A;
+    net IO33_MODE = io33.MODE, io33_mode_hi.B, io33_mode_lo.A;
+    net IO33_PG = io33.PGOOD, io33_pg_pull.A, port.IO33_PG;
+    net IO33_SS = io33.SS, io33_ss.A;
+    net IO33_SW = io33.SW_6, io33.SW_7, io33_boot.B, io33_inductor.A;
+    net IO33_VREG5 = io33.VREG5, io33_vreg.A, io33_mode_hi.A;
+    net IO_1V8 = io18_fb_hi.A, io18_inductor.B, io18_out0.A, io18_out1.A, io18_out2.A, io18_out3.A, io18_test.P, port.IO_1V8;
+    net IO_3V3 = ddr_pg_pull.B, io33_fb_hi.A, io33_inductor.B, io33_out0.A, io33_out1.A, io33_out2.A, io33_out3.A, io33_test.P, ps_vtt.VIN, ps_vtt_vin.A, ps_vtt_pg_pull.B, pl_vtt.VIN, pl_vtt_vin.A, pl_vtt_pg_pull.B, port.IO_3V3;
+    net PL_VREF = pl_vtt.REFOUT, pl_vref.A, port.PL_VREF;
+    net PL_VTT = pl_vtt.VO, pl_vtt.VOSNS, port.PL_VTT;
+    net PL_VTT_PG = pl_vtt.PGOOD, pl_vtt_pg_pull.A, port.PL_VTT_PG;
+    net PL_VTT_REF = pl_vtt.REFIN, pl_vtt_refhi.B, pl_vtt_reflo.A, pl_vtt_ref.A;
+    net PSPLL_1V2 = pspll.OUT_9, pspll.OUT_10, pspll_fb_hi.A, pspll_out.A, port.PSPLL_1V2;
+    net PSPLL_FB = pspll.FB, pspll_fb_hi.B, pspll_fb_lo.A;
+    net PSPLL_PG = pspll.PG, pspll_pg_pull.A, ddr_en_pll.K, io18.EN, io33.EN, port.PSPLL_PG;
+    net PSPLL_SS = pspll.SS, pspll_ss.A;
+    net PS_VREF = ps_vtt.REFOUT, ps_vref.A, port.PS_VREF;
+    net PS_VTT = ps_vtt.VO, ps_vtt.VOSNS, port.PS_VTT;
+    net PS_VTT_PG = ps_vtt.PGOOD, ps_vtt_pg_pull.A, port.PS_VTT_PG;
+    net PS_VTT_REF = ps_vtt.REFIN, ps_vtt_refhi.B, ps_vtt_reflo.A, ps_vtt_ref.A;
+    net UTILITY_BOOT = utility.BOOT, utility_boot.A;
+    net UTILITY_FB = utility.FB, utility_fb_hi.B, utility_fb_lo.A;
+    net UTILITY_MODE = utility.MODE, utility_mode_hi.B, utility_mode_lo.A;
+    net UTILITY_PG = utility.PGOOD, utility_pg_pull.A, core.EN, port.UTILITY_PG;
+    net UTILITY_SS = utility.SS, utility_ss.A;
+    net UTILITY_SW = utility.SW_6, utility.SW_7, utility_boot.B, utility_inductor.A;
+    net UTILITY_VREG5 = utility.VREG5, utility_vreg.A, utility_mode_hi.A;
+    net UTIL_5V = utility_fb_hi.A, utility_inductor.B, utility_out0.A, utility_out1.A, utility_out2.A, utility_out3.A, utility_pg_pull.B, utility_test.P, core_pg_pull.B, aux_pg_pull.B, vpp_pg_pull.B, pspll.BIAS, pspll_bias.A, pspll_pg_pull.B, ddr_en_pull.B, io18_pg_pull.B, io33_pg_pull.B;
+    net UTIL_ENABLE = utility.EN, util_en_top.B, util_en_bottom.A;
+    net VIN_12V = input.POS, input_bulk.A, input_hf.A, utility.VIN_2, utility.VIN_11, utility_in0.A, utility_in1.A, utility_in_hf.A, util_en_top.A, core.PVIN_21, core.PVIN_22, core.PVIN_23, core.PVIN_24, core.PVIN_25, core.VDD, core_in0.A, core_in1.A, core_in2.A, core_in3.A, core_in_hf.A, aux.VIN_2, aux.VIN_11, aux_in0.A, aux_in1.A, aux_in_hf.A, vpp.VIN_2, vpp.VIN_11, vpp_in0.A, vpp_in1.A, vpp_in_hf.A, ddr.VIN_2, ddr.VIN_11, ddr_in0.A, ddr_in1.A, ddr_in_hf.A, io18.VIN_2, io18.VIN_11, io18_in0.A, io18_in1.A, io18_in_hf.A, io33.VIN_2, io33.VIN_11, io33_in0.A, io33_in1.A, io33_in_hf.A;
+    net VPP_2V5 = vpp_fb_hi.A, vpp_inductor.B, vpp_out0.A, vpp_out1.A, vpp_out2.A, vpp_out3.A, vpp_test.P, port.VPP_2V5;
+    net VPP_BOOT = vpp.BOOT, vpp_boot.A;
+    net VPP_FB = vpp.FB, vpp_fb_hi.B, vpp_fb_lo.A;
+    net VPP_MODE = vpp.MODE, vpp_mode_hi.B, vpp_mode_lo.A;
+    net VPP_PG = vpp.PGOOD, vpp_pg_pull.A, ddr_en_vpp.K, port.VPP_PG;
+    net VPP_SS = vpp.SS, vpp_ss.A;
+    net VPP_SW = vpp.SW_6, vpp.SW_7, vpp_boot.B, vpp_inductor.A;
+    net VPP_VREG5 = vpp.VREG5, vpp_vreg.A, vpp_mode_hi.A;
+    nc core.ISHARE, core.MODE, core.NC_3, core.NC_4, core.NC_5, core.NC_6, core.VSHARE, ddr_en_pll.NC, ddr_en_vpp.NC;
+}

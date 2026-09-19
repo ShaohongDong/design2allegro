@@ -1,0 +1,111 @@
+circuit 2;
+
+module debug {
+    ports ALL_GOOD, BOOT_MODE1, GND, IO_1V8, IO_3V3, JTAG_TCK, JTAG_TDI, JTAG_TDO, JTAG_TMS, PS_DONE, PS_INIT_B, PS_PROG_B, PS_SRST_N, UART_RX, UART_TX;
+    part jtag_boot {
+        id = "jtag_boot";
+        device = "header2";
+        package = "HDR_2_2P54";
+        assembly = fitted;
+    }
+    part reset_button {
+        id = "reset_button";
+        device = "switch";
+        package = "SW_SPST_2";
+        assembly = fitted;
+    }
+    part ps_prog_b {
+        id = "ps_prog_b";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part ps_init_b {
+        id = "ps_init_b";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part ps_done {
+        id = "ps_done";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part jtag {
+        id = "jtag";
+        device = "header14";
+        package = "HDR_14_2P00";
+        assembly = fitted;
+    }
+    part srst {
+        id = "srst";
+        device = "tp";
+        package = "TP_1MM";
+        assembly = fitted;
+    }
+    part tms_pull {
+        id = "tms_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part tdi_pull {
+        id = "tdi_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part tck_pull {
+        id = "tck_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part uart {
+        id = "uart";
+        device = "header4";
+        package = "HDR_4_2P54";
+        assembly = fitted;
+    }
+    part uart_rx_pull {
+        id = "uart_rx_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part power_led {
+        id = "power_led";
+        device = "led";
+        package = "LED0603";
+        assembly = fitted;
+    }
+    part power_led_limit {
+        id = "power_led_limit";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    net ALL_GOOD = reset_button.A, port.ALL_GOOD;
+    net BOOT_MODE1 = jtag_boot.P1, port.BOOT_MODE1;
+    net GND = jtag_boot.P2, reset_button.B, jtag.P1, jtag.P3, jtag.P5, jtag.P7, jtag.P9, jtag.P11, jtag.P13, tck_pull.B, uart.P1, power_led.K, port.GND;
+    net IO_1V8 = uart.P4, uart_rx_pull.B, port.IO_1V8;
+    net IO_3V3 = jtag.P2, tms_pull.B, tdi_pull.B, power_led_limit.A, port.IO_3V3;
+    net JTAG_TCK = jtag.P6, tck_pull.A, port.JTAG_TCK;
+    net JTAG_TDI = jtag.P10, tdi_pull.A, port.JTAG_TDI;
+    net JTAG_TDO = jtag.P8, port.JTAG_TDO;
+    net JTAG_TMS = jtag.P4, tms_pull.A, port.JTAG_TMS;
+    net POWER_LED_A = power_led.A, power_led_limit.B;
+    net PS_DONE = ps_done.P, port.PS_DONE;
+    net PS_INIT_B = ps_init_b.P, port.PS_INIT_B;
+    net PS_PROG_B = ps_prog_b.P, port.PS_PROG_B;
+    net PS_SRST_N = srst.P, port.PS_SRST_N;
+    net UART_RX = uart.P3, uart_rx_pull.A, port.UART_RX;
+    net UART_TX = uart.P2, port.UART_TX;
+    nc jtag.P12, jtag.P14;
+}

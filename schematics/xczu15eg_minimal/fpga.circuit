@@ -1,0 +1,1085 @@
+circuit 2;
+
+module fpga {
+    ports AUX_1V8, BOOT_MODE0, BOOT_MODE1, BOOT_MODE2, BOOT_MODE3, CORE_0V85, DDR_1V2, EMMC_CLK, EMMC_CMD, EMMC_DAT0, EMMC_DAT1, EMMC_DAT2, EMMC_DAT3, EMMC_DAT4, EMMC_DAT5, EMMC_DAT6, EMMC_DAT7, EMMC_RESET_N, GND, IO_1V8, IO_3V3, JTAG_TCK, JTAG_TDI, JTAG_TDO, JTAG_TMS, PL_A0, PL_A1, PL_A10, PL_A11, PL_A12, PL_A13, PL_A14, PL_A15, PL_A16, PL_A2, PL_A3, PL_A4, PL_A5, PL_A6, PL_A7, PL_A8, PL_A9, PL_ACT_N, PL_ALERT_N, PL_BA0, PL_BA1, PL_BG0, PL_CKE, PL_CK_N, PL_CK_P, PL_CS_N, PL_DM0, PL_DM1, PL_DM2, PL_DM3, PL_DQ0, PL_DQ1, PL_DQ10, PL_DQ11, PL_DQ12, PL_DQ13, PL_DQ14, PL_DQ15, PL_DQ16, PL_DQ17, PL_DQ18, PL_DQ19, PL_DQ2, PL_DQ20, PL_DQ21, PL_DQ22, PL_DQ23, PL_DQ24, PL_DQ25, PL_DQ26, PL_DQ27, PL_DQ28, PL_DQ29, PL_DQ3, PL_DQ30, PL_DQ31, PL_DQ4, PL_DQ5, PL_DQ6, PL_DQ7, PL_DQ8, PL_DQ9, PL_DQS0_N, PL_DQS0_P, PL_DQS1_N, PL_DQS1_P, PL_DQS2_N, PL_DQS2_P, PL_DQS3_N, PL_DQS3_P, PL_ODT, PL_REF_N, PL_REF_P, PL_RESET_N, PL_SYS_RESET_N, PSPLL_1V2, PS_A0, PS_A1, PS_A10, PS_A11, PS_A12, PS_A13, PS_A14, PS_A15, PS_A16, PS_A2, PS_A3, PS_A4, PS_A5, PS_A6, PS_A7, PS_A8, PS_A9, PS_ACT_N, PS_ALERT_N, PS_BA0, PS_BA1, PS_BG0, PS_CKE, PS_CK_N, PS_CK_P, PS_CS_N, PS_DDR_ZQ, PS_DM0, PS_DM1, PS_DM2, PS_DM3, PS_DM4, PS_DM5, PS_DM6, PS_DM7, PS_DONE, PS_DQ0, PS_DQ1, PS_DQ10, PS_DQ11, PS_DQ12, PS_DQ13, PS_DQ14, PS_DQ15, PS_DQ16, PS_DQ17, PS_DQ18, PS_DQ19, PS_DQ2, PS_DQ20, PS_DQ21, PS_DQ22, PS_DQ23, PS_DQ24, PS_DQ25, PS_DQ26, PS_DQ27, PS_DQ28, PS_DQ29, PS_DQ3, PS_DQ30, PS_DQ31, PS_DQ32, PS_DQ33, PS_DQ34, PS_DQ35, PS_DQ36, PS_DQ37, PS_DQ38, PS_DQ39, PS_DQ4, PS_DQ40, PS_DQ41, PS_DQ42, PS_DQ43, PS_DQ44, PS_DQ45, PS_DQ46, PS_DQ47, PS_DQ48, PS_DQ49, PS_DQ5, PS_DQ50, PS_DQ51, PS_DQ52, PS_DQ53, PS_DQ54, PS_DQ55, PS_DQ56, PS_DQ57, PS_DQ58, PS_DQ59, PS_DQ6, PS_DQ60, PS_DQ61, PS_DQ62, PS_DQ63, PS_DQ7, PS_DQ8, PS_DQ9, PS_DQS0_N, PS_DQS0_P, PS_DQS1_N, PS_DQS1_P, PS_DQS2_N, PS_DQS2_P, PS_DQS3_N, PS_DQS3_P, PS_DQS4_N, PS_DQS4_P, PS_DQS5_N, PS_DQS5_P, PS_DQS6_N, PS_DQS6_P, PS_DQS7_N, PS_DQS7_P, PS_INIT_B, PS_ODT, PS_PADI, PS_PADO, PS_PAR, PS_POR_N, PS_PROG_B, PS_REF_CLK, PS_RESET_N, PS_SRST_N, PUDC_B, QSPI_MIO0, QSPI_MIO1, QSPI_MIO10, QSPI_MIO11, QSPI_MIO12, QSPI_MIO2, QSPI_MIO3, QSPI_MIO4, QSPI_MIO5, QSPI_MIO7, QSPI_MIO8, QSPI_MIO9, UART_RX, UART_TX, VRP_64, VRP_65;
+    part soc {
+        id = "soc";
+        device = "amd.xczu15eg";
+        package = "FFVB1156";
+        assembly = fitted;
+    }
+    part filter_psddr_pll_1v8 {
+        id = "filter_psddr_pll_1v8";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "0 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part decouple_psddr_pll_1v8 {
+        id = "decouple_psddr_pll_1v8";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part hf_psddr_pll_1v8 {
+        id = "hf_psddr_pll_1v8";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part filter_psadc_1v8 {
+        id = "filter_psadc_1v8";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "0 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part decouple_psadc_1v8 {
+        id = "decouple_psadc_1v8";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part hf_psadc_1v8 {
+        id = "hf_psadc_1v8";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part filter_adc_1v8 {
+        id = "filter_adc_1v8";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "0 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part decouple_adc_1v8 {
+        id = "decouple_adc_1v8";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part hf_adc_1v8 {
+        id = "hf_adc_1v8";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf0 {
+        id = "core_0v85_hf0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf1 {
+        id = "core_0v85_hf1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf2 {
+        id = "core_0v85_hf2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf3 {
+        id = "core_0v85_hf3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf4 {
+        id = "core_0v85_hf4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf5 {
+        id = "core_0v85_hf5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf6 {
+        id = "core_0v85_hf6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf7 {
+        id = "core_0v85_hf7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf8 {
+        id = "core_0v85_hf8";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf9 {
+        id = "core_0v85_hf9";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf10 {
+        id = "core_0v85_hf10";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf11 {
+        id = "core_0v85_hf11";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf12 {
+        id = "core_0v85_hf12";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf13 {
+        id = "core_0v85_hf13";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf14 {
+        id = "core_0v85_hf14";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf15 {
+        id = "core_0v85_hf15";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf16 {
+        id = "core_0v85_hf16";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf17 {
+        id = "core_0v85_hf17";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf18 {
+        id = "core_0v85_hf18";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf19 {
+        id = "core_0v85_hf19";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf20 {
+        id = "core_0v85_hf20";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf21 {
+        id = "core_0v85_hf21";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf22 {
+        id = "core_0v85_hf22";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf23 {
+        id = "core_0v85_hf23";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf24 {
+        id = "core_0v85_hf24";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf25 {
+        id = "core_0v85_hf25";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf26 {
+        id = "core_0v85_hf26";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf27 {
+        id = "core_0v85_hf27";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf28 {
+        id = "core_0v85_hf28";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf29 {
+        id = "core_0v85_hf29";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf30 {
+        id = "core_0v85_hf30";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf31 {
+        id = "core_0v85_hf31";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf32 {
+        id = "core_0v85_hf32";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf33 {
+        id = "core_0v85_hf33";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf34 {
+        id = "core_0v85_hf34";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf35 {
+        id = "core_0v85_hf35";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf36 {
+        id = "core_0v85_hf36";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf37 {
+        id = "core_0v85_hf37";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf38 {
+        id = "core_0v85_hf38";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_hf39 {
+        id = "core_0v85_hf39";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_bulk0 {
+        id = "core_0v85_bulk0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_bulk1 {
+        id = "core_0v85_bulk1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_mid0 {
+        id = "core_0v85_mid0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part core_0v85_mid1 {
+        id = "core_0v85_mid1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf0 {
+        id = "aux_1v8_hf0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf1 {
+        id = "aux_1v8_hf1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf2 {
+        id = "aux_1v8_hf2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf3 {
+        id = "aux_1v8_hf3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf4 {
+        id = "aux_1v8_hf4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf5 {
+        id = "aux_1v8_hf5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf6 {
+        id = "aux_1v8_hf6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf7 {
+        id = "aux_1v8_hf7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf8 {
+        id = "aux_1v8_hf8";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf9 {
+        id = "aux_1v8_hf9";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf10 {
+        id = "aux_1v8_hf10";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_hf11 {
+        id = "aux_1v8_hf11";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_bulk0 {
+        id = "aux_1v8_bulk0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_bulk1 {
+        id = "aux_1v8_bulk1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_mid0 {
+        id = "aux_1v8_mid0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part aux_1v8_mid1 {
+        id = "aux_1v8_mid1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_hf0 {
+        id = "pspll_1v2_hf0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_hf1 {
+        id = "pspll_1v2_hf1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_hf2 {
+        id = "pspll_1v2_hf2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_bulk0 {
+        id = "pspll_1v2_bulk0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_bulk1 {
+        id = "pspll_1v2_bulk1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_mid0 {
+        id = "pspll_1v2_mid0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pspll_1v2_mid1 {
+        id = "pspll_1v2_mid1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf0 {
+        id = "io_1v8_hf0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf1 {
+        id = "io_1v8_hf1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf2 {
+        id = "io_1v8_hf2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf3 {
+        id = "io_1v8_hf3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf4 {
+        id = "io_1v8_hf4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf5 {
+        id = "io_1v8_hf5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf6 {
+        id = "io_1v8_hf6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf7 {
+        id = "io_1v8_hf7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf8 {
+        id = "io_1v8_hf8";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf9 {
+        id = "io_1v8_hf9";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf10 {
+        id = "io_1v8_hf10";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf11 {
+        id = "io_1v8_hf11";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf12 {
+        id = "io_1v8_hf12";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf13 {
+        id = "io_1v8_hf13";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf14 {
+        id = "io_1v8_hf14";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_hf15 {
+        id = "io_1v8_hf15";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_bulk0 {
+        id = "io_1v8_bulk0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_bulk1 {
+        id = "io_1v8_bulk1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_mid0 {
+        id = "io_1v8_mid0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_1v8_mid1 {
+        id = "io_1v8_mid1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_3v3_hf0 {
+        id = "io_3v3_hf0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_3v3_hf1 {
+        id = "io_3v3_hf1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_3v3_bulk0 {
+        id = "io_3v3_bulk0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_3v3_bulk1 {
+        id = "io_3v3_bulk1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_3v3_mid0 {
+        id = "io_3v3_mid0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part io_3v3_mid1 {
+        id = "io_3v3_mid1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf0 {
+        id = "ddr_1v2_hf0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf1 {
+        id = "ddr_1v2_hf1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf2 {
+        id = "ddr_1v2_hf2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf3 {
+        id = "ddr_1v2_hf3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf4 {
+        id = "ddr_1v2_hf4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf5 {
+        id = "ddr_1v2_hf5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf6 {
+        id = "ddr_1v2_hf6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf7 {
+        id = "ddr_1v2_hf7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf8 {
+        id = "ddr_1v2_hf8";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf9 {
+        id = "ddr_1v2_hf9";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf10 {
+        id = "ddr_1v2_hf10";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_hf11 {
+        id = "ddr_1v2_hf11";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_bulk0 {
+        id = "ddr_1v2_bulk0";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_bulk1 {
+        id = "ddr_1v2_bulk1";
+        device = "capacitor_1210";
+        package = "CAPACITOR_1210";
+        assembly = fitted;
+        properties { capacitance = "47 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_mid0 {
+        id = "ddr_1v2_mid0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ddr_1v2_mid1 {
+        id = "ddr_1v2_mid1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    net ADC_1V8 = soc.VCCADC, filter_adc_1v8.B, decouple_adc_1v8.A, hf_adc_1v8.A;
+    net AUX_1V8 = soc.VCC_PSBATT, soc.VCC_PSAUX_AA23, soc.VCC_PSAUX_AA25, soc.VCCAUX_T14, soc.VCCAUX_IO_U13, soc.VCCAUX_U14, soc.VCCAUX_IO_V13, soc.VCCAUX_IO_V14, soc.VCC_PSAUX_Y22, soc.VCC_PSAUX_Y23, filter_psddr_pll_1v8.A, filter_psadc_1v8.A, filter_adc_1v8.A, aux_1v8_hf0.A, aux_1v8_hf1.A, aux_1v8_hf2.A, aux_1v8_hf3.A, aux_1v8_hf4.A, aux_1v8_hf5.A, aux_1v8_hf6.A, aux_1v8_hf7.A, aux_1v8_hf8.A, aux_1v8_hf9.A, aux_1v8_hf10.A, aux_1v8_hf11.A, aux_1v8_bulk0.A, aux_1v8_bulk1.A, aux_1v8_mid0.A, aux_1v8_mid1.A, port.AUX_1V8;
+    net BOOT_MODE0 = soc.PS_MODE0_503, port.BOOT_MODE0;
+    net BOOT_MODE1 = soc.PS_MODE1_503, port.BOOT_MODE1;
+    net BOOT_MODE2 = soc.PS_MODE2_503, port.BOOT_MODE2;
+    net BOOT_MODE3 = soc.PS_MODE3_503, port.BOOT_MODE3;
+    net CORE_0V85 = soc.VCCINT_IO_AA13, soc.VCCINT_AA15, soc.VCCINT_AA17, soc.VCCINT_AA19, soc.VCC_PSINTLP_AA21, soc.VCCINT_IO_AB13, soc.VCCBRAM_AB14, soc.VCCINT_AB16, soc.VCCINT_AB18, soc.VCCINT_AB20, soc.VCC_PSINTLP_AB21, soc.VCC_PSINTLP_AB23, soc.VCCINT_IO_AC13, soc.VCCBRAM_AC14, soc.VCCINT_AC15, soc.VCCINT_AC17, soc.VCCINT_AC19, soc.VCC_PSINTLP_AC21, soc.VCC_PSINTLP_AC22, soc.VCC_PSINTLP_AC23, soc.VCC_PSINTFP_AC24, soc.VCC_PSINTFP_AD21, soc.VCC_PSINTFP_AD22, soc.VCC_PSINTFP_DDR_AD24, soc.VCC_PSINTFP_AD25, soc.VCC_PSINTFP_AD26, soc.VCC_PSINTFP_AE22, soc.VCC_PSINTFP_AE23, soc.VCC_PSINTFP_DDR_AE24, soc.VCC_PSINTFP_DDR_AE25, soc.VCCINT_M16, soc.VCCINT_M18, soc.VCCINT_M20, soc.VCCINT_N15, soc.VCCINT_N17, soc.VCCINT_N19, soc.VCCINT_P14, soc.VCCINT_P16, soc.VCCINT_P18, soc.VCCINT_P20, soc.VCCINT_R15, soc.VCCINT_R17, soc.VCCINT_R19, soc.VCCINT_T16, soc.VCCINT_T20, soc.VCCINT_U15, soc.VCCINT_U19, soc.VCCINT_V16, soc.VCCINT_V20, soc.VCCBRAM_W14, soc.VCCINT_W15, soc.VCCINT_W19, soc.VCCINT_IO_Y13, soc.VCCBRAM_Y14, soc.VCCINT_Y16, soc.VCCINT_Y18, soc.VCCINT_Y20, core_0v85_hf0.A, core_0v85_hf1.A, core_0v85_hf2.A, core_0v85_hf3.A, core_0v85_hf4.A, core_0v85_hf5.A, core_0v85_hf6.A, core_0v85_hf7.A, core_0v85_hf8.A, core_0v85_hf9.A, core_0v85_hf10.A, core_0v85_hf11.A, core_0v85_hf12.A, core_0v85_hf13.A, core_0v85_hf14.A, core_0v85_hf15.A, core_0v85_hf16.A, core_0v85_hf17.A, core_0v85_hf18.A, core_0v85_hf19.A, core_0v85_hf20.A, core_0v85_hf21.A, core_0v85_hf22.A, core_0v85_hf23.A, core_0v85_hf24.A, core_0v85_hf25.A, core_0v85_hf26.A, core_0v85_hf27.A, core_0v85_hf28.A, core_0v85_hf29.A, core_0v85_hf30.A, core_0v85_hf31.A, core_0v85_hf32.A, core_0v85_hf33.A, core_0v85_hf34.A, core_0v85_hf35.A, core_0v85_hf36.A, core_0v85_hf37.A, core_0v85_hf38.A, core_0v85_hf39.A, core_0v85_bulk0.A, core_0v85_bulk1.A, core_0v85_mid0.A, core_0v85_mid1.A, port.CORE_0V85;
+    net DDR_1V2 = soc.VCCO_65_AD8, soc.VCCO_65_AF9, soc.VCCO_PSDDR_504_AG27, soc.VCCO_65_AG7, soc.VCCO_PSDDR_504_AJ24, soc.VCCO_PSDDR_504_AJ28, soc.VCCO_64_AJ8, soc.VCCO_64_AK11, soc.VCCO_PSDDR_504_AL24, soc.VCCO_PSDDR_504_AL29, soc.VCCO_64_AL9, soc.VCCO_PSDDR_504_AN25, soc.VCCO_PSDDR_504_AN30, ddr_1v2_hf0.A, ddr_1v2_hf1.A, ddr_1v2_hf2.A, ddr_1v2_hf3.A, ddr_1v2_hf4.A, ddr_1v2_hf5.A, ddr_1v2_hf6.A, ddr_1v2_hf7.A, ddr_1v2_hf8.A, ddr_1v2_hf9.A, ddr_1v2_hf10.A, ddr_1v2_hf11.A, ddr_1v2_bulk0.A, ddr_1v2_bulk1.A, ddr_1v2_mid0.A, ddr_1v2_mid1.A, port.DDR_1V2;
+    net EMMC_CLK = soc.PS_MIO22_500, port.EMMC_CLK;
+    net EMMC_CMD = soc.PS_MIO21_500, port.EMMC_CMD;
+    net EMMC_DAT0 = soc.PS_MIO13_500, port.EMMC_DAT0;
+    net EMMC_DAT1 = soc.PS_MIO14_500, port.EMMC_DAT1;
+    net EMMC_DAT2 = soc.PS_MIO15_500, port.EMMC_DAT2;
+    net EMMC_DAT3 = soc.PS_MIO16_500, port.EMMC_DAT3;
+    net EMMC_DAT4 = soc.PS_MIO17_500, port.EMMC_DAT4;
+    net EMMC_DAT5 = soc.PS_MIO18_500, port.EMMC_DAT5;
+    net EMMC_DAT6 = soc.PS_MIO19_500, port.EMMC_DAT6;
+    net EMMC_DAT7 = soc.PS_MIO20_500, port.EMMC_DAT7;
+    net EMMC_RESET_N = soc.PS_MIO23_500, port.EMMC_RESET_N;
+    net GND = soc.MGTHRXN0_128, soc.MGTHRXP0_128, soc.MGTHRXN1_128, soc.MGTHRXP1_128, soc.MGTHRXN2_128, soc.MGTHRXP2_128, soc.MGTHRXN3_128, soc.MGTHRXP3_128, soc.MGTHRXN0_129, soc.MGTHRXP0_129, soc.MGTHRXN1_129, soc.MGTHRXP1_129, soc.MGTHRXN2_129, soc.MGTHRXP2_129, soc.MGTHRXN3_129, soc.MGTHRXP3_129, soc.MGTHRXN0_130, soc.MGTHRXP0_130, soc.MGTHRXN1_130, soc.MGTHRXP1_130, soc.MGTHRXN2_130, soc.MGTHRXP2_130, soc.MGTHRXN3_130, soc.MGTHRXP3_130, soc.MGTHRXN0_228, soc.MGTHRXP0_228, soc.MGTHRXN1_228, soc.MGTHRXP1_228, soc.MGTHRXN2_228, soc.MGTHRXP2_228, soc.MGTHRXN3_228, soc.MGTHRXP3_228, soc.MGTHRXN0_229, soc.MGTHRXP0_229, soc.MGTHRXN1_229, soc.MGTHRXP1_229, soc.MGTHRXN2_229, soc.MGTHRXP2_229, soc.MGTHRXN3_229, soc.MGTHRXP3_229, soc.MGTHRXN0_230, soc.MGTHRXP0_230, soc.MGTHRXN1_230, soc.MGTHRXP1_230, soc.MGTHRXN2_230, soc.MGTHRXP2_230, soc.MGTHRXN3_230, soc.MGTHRXP3_230, soc.PS_MGTRREF_505, soc.PS_MGTRRXN0_505, soc.PS_MGTRRXP0_505, soc.PS_MGTRRXN1_505, soc.PS_MGTRRXP1_505, soc.PS_MGTRRXN2_505, soc.PS_MGTRRXP2_505, soc.PS_MGTRRXN3_505, soc.PS_MGTRRXP3_505, soc.GND_A1, soc.MGTAVCC_R_A10, soc.GND_A11, soc.GND_A14, soc.GND_A19, soc.GND_A2, soc.GND_A24, soc.GND_A28, soc.MGTRREF_L, soc.MGTAVTTRCAL_L, soc.GND_A33, soc.GND_A34, soc.MGTAVTTRCAL_R, soc.MGTRREF_R, soc.GND_A9, soc.GND_AA14, soc.GND_AA16, soc.GND_AA18, soc.GND_AA20, soc.GND_AA24, soc.GND_AA26, soc.PS_MGTRAVCC_AA29, soc.GND_AA30, soc.GND_AA33, soc.GND_AA34, soc.GND_AA4, soc.GND_AB12, soc.GND_AB15, soc.GND_AB17, soc.GND_AB19, soc.GND_AB2, soc.GND_AB22, soc.GND_PSADC_AB24, soc.GND_AB26, soc.GND_AB27, soc.GND_AB31, soc.PS_MGTRAVTT_AB32, soc.GND_AB7, soc.GND_AC10, soc.GND_AC16, soc.GND_AC18, soc.GND_AC20, soc.GND_PSADC_AC25, soc.GND_AC27, soc.GND_AC28, soc.GND_AC29, soc.GND_AC30, soc.GND_AC31, soc.GND_AC32, soc.GND_AC33, soc.GND_AC34, soc.GND_AC5, soc.GND_AD13, soc.GND_AD23, soc.GND_AD3, soc.GND_AE11, soc.GND_AE21, soc.GND_AE26, soc.GND_AE31, soc.GND_AE6, soc.GND_AF19, soc.GND_AF24, soc.GND_AF29, soc.GND_AF34, soc.GND_AF4, soc.GND_AG12, soc.GND_AG2, soc.GND_AG22, soc.GND_AG32, soc.GND_AH10, soc.GND_AH15, soc.GND_AH20, soc.GND_AH25, soc.GND_AH30, soc.GND_AH5, soc.GND_AJ18, soc.GND_AJ23, soc.GND_AJ3, soc.GND_AJ33, soc.GND_AK21, soc.GND_AK26, soc.GND_AK31, soc.GND_AK6, soc.GND_AL14, soc.GND_AL19, soc.GND_AL34, soc.GND_AL4, soc.GND_AM12, soc.GND_AM17, soc.GND_AM2, soc.GND_AM22, soc.GND_AM27, soc.GND_AM32, soc.GND_AM7, soc.GND_AN10, soc.GND_AN15, soc.GND_AN20, soc.GND_AN5, soc.GND_AP13, soc.GND_AP23, soc.GND_AP28, soc.GND_AP34, soc.GND_B11, soc.GND_B17, soc.GND_B22, soc.GND_B28, soc.MGTAVTT_R_B3, soc.MGTAVTT_L_B31, soc.GND_B32, soc.GND_B4, soc.GND_B7, soc.MGTAVCC_R_B8, soc.GND_C1, soc.GND_C10, soc.GND_C11, soc.GND_C15, soc.GND_C2, soc.GND_C20, soc.GND_C25, soc.GND_C28, soc.MGTAVTT_L_C29, soc.GND_C30, soc.GND_C33, soc.GND_C34, soc.GND_C5, soc.MGTAVCC_R_C6, soc.GND_C9, soc.GND_D13, soc.GND_D18, soc.GND_D26, soc.GND_D27, soc.GND_D28, soc.GND_D3, soc.GND_D31, soc.MGTAVTT_L_D32, soc.MGTAVTT_R_D4, soc.MGTAVCC_R_D7, soc.GND_D8, soc.GND_D9, soc.GND_E1, soc.GND_E11, soc.GND_E2, soc.GND_E26, soc.GND_E29, soc.MGTAVTT_L_E30, soc.GND_E33, soc.GND_E34, soc.MGTAVCC_R_E5, soc.GND_E6, soc.GND_E9, soc.GND_F19, soc.GND_F26, soc.GND_F27, soc.MGTAVCC_L_F28, soc.MGTAVTT_R_F3, soc.MGTAVTT_L_F31, soc.GND_F32, soc.GND_F4, soc.GND_F7, soc.MGTVCCAUX_R_F8, soc.GND_F9, soc.GND_G1, soc.GND_G2, soc.GND_G26, soc.MGTAVCC_L_G29, soc.GND_G30, soc.GND_G33, soc.GND_G34, soc.GND_G5, soc.MGTAVCC_R_G6, soc.GND_G9, soc.GND_H15, soc.GND_H26, soc.MGTAVCC_L_H27, soc.GND_H28, soc.GND_H3, soc.GND_H31, soc.MGTAVTT_L_H32, soc.MGTAVTT_R_H4, soc.MGTVCCAUX_R_H7, soc.GND_H8, soc.GND_H9, soc.GND_J1, soc.GND_J2, soc.GND_J23, soc.GND_J26, soc.GND_J29, soc.MGTAVTT_L_J30, soc.GND_J33, soc.GND_J34, soc.MGTAVTT_R_J5, soc.GND_J6, soc.GND_J9, soc.GND_K11, soc.GND_K21, soc.GND_K26, soc.GND_K27, soc.MGTVCCAUX_L_K28, soc.MGTAVTT_R_K3, soc.MGTAVTT_L_K31, soc.GND_K32, soc.GND_K4, soc.GND_K7, soc.MGTAVCC_R_K8, soc.GND_K9, soc.GND_L1, soc.GND_L14, soc.GND_L2, soc.GND_L26, soc.MGTAVCC_L_L29, soc.GND_L30, soc.GND_L33, soc.GND_L34, soc.GND_L5, soc.MGTAVTT_R_L6, soc.GND_L9, soc.GND_M12, soc.GND_M17, soc.GND_M19, soc.GND_M26, soc.MGTVCCAUX_L_M27, soc.GND_M28, soc.GND_M3, soc.GND_M31, soc.MGTAVTT_L_M32, soc.MGTAVTT_R_M4, soc.GND_M7, soc.GND_M8, soc.GND_M9, soc.GND_N1, soc.GND_N10, soc.GND_N16, soc.GND_N18, soc.GND_N2, soc.GND_N20, soc.GND_N26, soc.GND_N29, soc.MGTAVTT_L_N30, soc.GND_N33, soc.GND_N34, soc.MGTAVTT_R_N5, soc.GND_N6, soc.GND_N7, soc.GND_P13, soc.GND_P15, soc.GND_P17, soc.GND_P19, soc.GND_P23, soc.GND_P26, soc.GND_P27, soc.MGTAVCC_L_P28, soc.MGTAVTT_R_P3, soc.MGTAVTT_L_P31, soc.GND_P32, soc.GND_P4, soc.GND_P7, soc.GND_R1, soc.GND_R11, soc.GND_R14, soc.GND_R16, soc.GND_R18, soc.GND_R2, soc.GND_R20, soc.GND_R26, soc.MGTAVCC_L_R29, soc.GND_R30, soc.GND_R33, soc.GND_R34, soc.GND_R5, soc.GND_R6, soc.GND_R7, soc.GND_T15, soc.GNDADC, soc.GND_T19, soc.GND_T26, soc.GND_T27, soc.GND_T28, soc.GND_T3, soc.GND_T31, soc.GND_T32, soc.GND_T4, soc.GND_T5, soc.GND_U1, soc.GND_U12, soc.GND_U16, soc.GND_U2, soc.GND_U20, soc.GND_U26, soc.GND_U29, soc.GND_U3, soc.GND_U30, soc.GND_U33, soc.GND_U34, soc.GND_V10, soc.GND_V15, soc.GND_V19, soc.GND_V25, soc.GND_V26, soc.GND_V27, soc.PS_MGTRAVCC_V28, soc.GND_V31, soc.PS_MGTRAVTT_V32, soc.GND_V5, soc.GND_W13, soc.GND_W16, soc.GND_W20, soc.GND_W23, soc.GND_W26, soc.GND_W29, soc.GND_W3, soc.PS_MGTRAVCC_W30, soc.GND_W33, soc.GND_W34, soc.GND_Y15, soc.GND_Y17, soc.GND_Y19, soc.GND_Y21, soc.GND_Y26, soc.PS_MGTRAVCC_Y27, soc.GND_Y28, soc.PS_MGTRAVTT_Y31, soc.GND_Y32, soc.GND_Y6, decouple_psddr_pll_1v8.B, hf_psddr_pll_1v8.B, decouple_psadc_1v8.B, hf_psadc_1v8.B, decouple_adc_1v8.B, hf_adc_1v8.B, core_0v85_hf0.B, core_0v85_hf1.B, core_0v85_hf2.B, core_0v85_hf3.B, core_0v85_hf4.B, core_0v85_hf5.B, core_0v85_hf6.B, core_0v85_hf7.B, core_0v85_hf8.B, core_0v85_hf9.B, core_0v85_hf10.B, core_0v85_hf11.B, core_0v85_hf12.B, core_0v85_hf13.B, core_0v85_hf14.B, core_0v85_hf15.B, core_0v85_hf16.B, core_0v85_hf17.B, core_0v85_hf18.B, core_0v85_hf19.B, core_0v85_hf20.B, core_0v85_hf21.B, core_0v85_hf22.B, core_0v85_hf23.B, core_0v85_hf24.B, core_0v85_hf25.B, core_0v85_hf26.B, core_0v85_hf27.B, core_0v85_hf28.B, core_0v85_hf29.B, core_0v85_hf30.B, core_0v85_hf31.B, core_0v85_hf32.B, core_0v85_hf33.B, core_0v85_hf34.B, core_0v85_hf35.B, core_0v85_hf36.B, core_0v85_hf37.B, core_0v85_hf38.B, core_0v85_hf39.B, core_0v85_bulk0.B, core_0v85_bulk1.B, core_0v85_mid0.B, core_0v85_mid1.B, aux_1v8_hf0.B, aux_1v8_hf1.B, aux_1v8_hf2.B, aux_1v8_hf3.B, aux_1v8_hf4.B, aux_1v8_hf5.B, aux_1v8_hf6.B, aux_1v8_hf7.B, aux_1v8_hf8.B, aux_1v8_hf9.B, aux_1v8_hf10.B, aux_1v8_hf11.B, aux_1v8_bulk0.B, aux_1v8_bulk1.B, aux_1v8_mid0.B, aux_1v8_mid1.B, pspll_1v2_hf0.B, pspll_1v2_hf1.B, pspll_1v2_hf2.B, pspll_1v2_bulk0.B, pspll_1v2_bulk1.B, pspll_1v2_mid0.B, pspll_1v2_mid1.B, io_1v8_hf0.B, io_1v8_hf1.B, io_1v8_hf2.B, io_1v8_hf3.B, io_1v8_hf4.B, io_1v8_hf5.B, io_1v8_hf6.B, io_1v8_hf7.B, io_1v8_hf8.B, io_1v8_hf9.B, io_1v8_hf10.B, io_1v8_hf11.B, io_1v8_hf12.B, io_1v8_hf13.B, io_1v8_hf14.B, io_1v8_hf15.B, io_1v8_bulk0.B, io_1v8_bulk1.B, io_1v8_mid0.B, io_1v8_mid1.B, io_3v3_hf0.B, io_3v3_hf1.B, io_3v3_bulk0.B, io_3v3_bulk1.B, io_3v3_mid0.B, io_3v3_mid1.B, ddr_1v2_hf0.B, ddr_1v2_hf1.B, ddr_1v2_hf2.B, ddr_1v2_hf3.B, ddr_1v2_hf4.B, ddr_1v2_hf5.B, ddr_1v2_hf6.B, ddr_1v2_hf7.B, ddr_1v2_hf8.B, ddr_1v2_hf9.B, ddr_1v2_hf10.B, ddr_1v2_hf11.B, ddr_1v2_bulk0.B, ddr_1v2_bulk1.B, ddr_1v2_mid0.B, ddr_1v2_mid1.B, soc.VREFP, soc.VREFN, soc.VP, soc.VN, soc.POR_OVERRIDE, port.GND;
+    net IO_1V8 = soc.VCCO_66_AA9, soc.VCCO_PSIO0_500_AE16, soc.VCCO_44_AF14, soc.VCCO_PSIO0_500_AG17, soc.VCCO_44_AJ13, soc.VCCO_PSIO0_500_AK16, soc.VCCO_PSIO2_502_D23, soc.VCCO_49_E16, soc.VCCO_47_E21, soc.VCCO_49_F14, soc.VCCO_PSIO2_502_F24, soc.VCCO_50_G12, soc.VCCO_48_G17, soc.VCCO_PSIO2_502_G22, soc.VCCO_47_H20, soc.VCCO_50_J13, soc.VCCO_48_J18, soc.VCCO_PSIO1_501_L24, soc.VCCO_PSIO1_501_M22, soc.VCCO_67_P8, soc.VCCO_67_T9, soc.VCCO_67_U7, soc.VCCO_66_W8, soc.VCCO_66_Y11, io_1v8_hf0.A, io_1v8_hf1.A, io_1v8_hf2.A, io_1v8_hf3.A, io_1v8_hf4.A, io_1v8_hf5.A, io_1v8_hf6.A, io_1v8_hf7.A, io_1v8_hf8.A, io_1v8_hf9.A, io_1v8_hf10.A, io_1v8_hf11.A, io_1v8_hf12.A, io_1v8_hf13.A, io_1v8_hf14.A, io_1v8_hf15.A, io_1v8_bulk0.A, io_1v8_bulk1.A, io_1v8_mid0.A, io_1v8_mid1.A, port.IO_1V8;
+    net IO_3V3 = soc.VCCO_PSIO3_503_T24, soc.VCCO_PSIO3_503_U22, io_3v3_hf0.A, io_3v3_hf1.A, io_3v3_bulk0.A, io_3v3_bulk1.A, io_3v3_mid0.A, io_3v3_mid1.A, port.IO_3V3;
+    net JTAG_TCK = soc.PS_JTAG_TCK_503, port.JTAG_TCK;
+    net JTAG_TDI = soc.PS_JTAG_TDI_503, port.JTAG_TDI;
+    net JTAG_TDO = soc.PS_JTAG_TDO_503, port.JTAG_TDO;
+    net JTAG_TMS = soc.PS_JTAG_TMS_503, port.JTAG_TMS;
+    net PL_A0 = soc.IO_L11N_T1U_N9_GC_64, port.PL_A0;
+    net PL_A1 = soc.IO_L10P_T1U_N6_QBC_AD4P_64, port.PL_A1;
+    net PL_A10 = soc.IO_L11P_T1U_N8_GC_64, port.PL_A10;
+    net PL_A11 = soc.IO_L6P_T0U_N10_AD6P_64, port.PL_A11;
+    net PL_A12 = soc.IO_L5P_T0U_N8_AD14P_64, port.PL_A12;
+    net PL_A13 = soc.IO_L3N_T0L_N5_AD15N_64, port.PL_A13;
+    net PL_A14 = soc.IO_L14P_T2L_N2_GC_64, port.PL_A14;
+    net PL_A15 = soc.IO_L7P_T1L_N0_QBC_AD13P_64, port.PL_A15;
+    net PL_A16 = soc.IO_L5N_T0U_N9_AD14N_64, port.PL_A16;
+    net PL_A2 = soc.IO_L9P_T1L_N4_AD12P_64, port.PL_A2;
+    net PL_A3 = soc.IO_L10N_T1U_N7_QBC_AD4N_64, port.PL_A3;
+    net PL_A4 = soc.IO_L14N_T2L_N3_GC_64, port.PL_A4;
+    net PL_A5 = soc.IO_L4P_T0U_N6_DBC_AD7P_64, port.PL_A5;
+    net PL_A6 = soc.IO_L1P_T0L_N0_DBC_64, port.PL_A6;
+    net PL_A7 = soc.IO_L8P_T1L_N2_AD5P_64, port.PL_A7;
+    net PL_A8 = soc.IO_L2N_T0L_N3_64, port.PL_A8;
+    net PL_A9 = soc.IO_L3P_T0L_N4_AD15P_64, port.PL_A9;
+    net PL_ACT_N = soc.IO_T1U_N12_64, port.PL_ACT_N;
+    net PL_ALERT_N = soc.IO_L8N_T1L_N3_AD5N_64, port.PL_ALERT_N;
+    net PL_BA0 = soc.IO_T3U_N12_64, port.PL_BA0;
+    net PL_BA1 = soc.IO_L4N_T0U_N7_DBC_AD7N_64, port.PL_BA1;
+    net PL_BG0 = soc.IO_L6N_T0U_N11_AD6N_64, port.PL_BG0;
+    net PL_CKE = soc.IO_T2U_N12_64, port.PL_CKE;
+    net PL_CK_N = soc.IO_L12N_T1U_N11_GC_64, port.PL_CK_N;
+    net PL_CK_P = soc.IO_L12P_T1U_N10_GC_64, port.PL_CK_P;
+    net PL_CS_N = soc.IO_L7N_T1L_N1_QBC_AD13N_64, port.PL_CS_N;
+    net PL_DM0 = soc.IO_L7P_T1L_N0_QBC_AD13P_65, port.PL_DM0;
+    net PL_DM1 = soc.IO_L1P_T0L_N0_DBC_65, port.PL_DM1;
+    net PL_DM2 = soc.IO_L19P_T3L_N0_DBC_AD9P_65, port.PL_DM2;
+    net PL_DM3 = soc.IO_L13P_T2L_N0_GC_QBC_65, port.PL_DM3;
+    net PL_DQ0 = soc.IO_L9P_T1L_N4_AD12P_65, port.PL_DQ0;
+    net PL_DQ1 = soc.IO_L8N_T1L_N3_AD5N_65, port.PL_DQ1;
+    net PL_DQ10 = soc.IO_L6P_T0U_N10_AD6P_65, port.PL_DQ10;
+    net PL_DQ11 = soc.IO_L2N_T0L_N3_65, port.PL_DQ11;
+    net PL_DQ12 = soc.IO_L6N_T0U_N11_AD6N_65, port.PL_DQ12;
+    net PL_DQ13 = soc.IO_L3N_T0L_N5_AD15N_65, port.PL_DQ13;
+    net PL_DQ14 = soc.IO_L5P_T0U_N8_AD14P_65, port.PL_DQ14;
+    net PL_DQ15 = soc.IO_L3P_T0L_N4_AD15P_65, port.PL_DQ15;
+    net PL_DQ16 = soc.IO_L23P_T3U_N8_I2C_SCLK_65, port.PL_DQ16;
+    net PL_DQ17 = soc.IO_L21N_T3L_N5_AD8N_65, port.PL_DQ17;
+    net PL_DQ18 = soc.IO_L24N_T3U_N11_PERSTN0_65, port.PL_DQ18;
+    net PL_DQ19 = soc.IO_L21P_T3L_N4_AD8P_65, port.PL_DQ19;
+    net PL_DQ2 = soc.IO_L11P_T1U_N8_GC_65, port.PL_DQ2;
+    net PL_DQ20 = soc.IO_L23N_T3U_N9_65, port.PL_DQ20;
+    net PL_DQ21 = soc.IO_L20N_T3L_N3_AD1N_65, port.PL_DQ21;
+    net PL_DQ22 = soc.IO_L24P_T3U_N10_PERSTN1_I2C_SDA_65, port.PL_DQ22;
+    net PL_DQ23 = soc.IO_L20P_T3L_N2_AD1P_65, port.PL_DQ23;
+    net PL_DQ24 = soc.IO_L17N_T2U_N9_AD10N_65, port.PL_DQ24;
+    net PL_DQ25 = soc.IO_L14P_T2L_N2_GC_65, port.PL_DQ25;
+    net PL_DQ26 = soc.IO_L18N_T2U_N11_AD2N_65, port.PL_DQ26;
+    net PL_DQ27 = soc.IO_L15P_T2L_N4_AD11P_65, port.PL_DQ27;
+    net PL_DQ28 = soc.IO_L17P_T2U_N8_AD10P_65, port.PL_DQ28;
+    net PL_DQ29 = soc.IO_L18P_T2U_N10_AD2P_65, port.PL_DQ29;
+    net PL_DQ3 = soc.IO_L8P_T1L_N2_AD5P_65, port.PL_DQ3;
+    net PL_DQ30 = soc.IO_L15N_T2L_N5_AD11N_65, port.PL_DQ30;
+    net PL_DQ31 = soc.IO_L14N_T2L_N3_GC_65, port.PL_DQ31;
+    net PL_DQ4 = soc.IO_L9N_T1L_N5_AD12N_65, port.PL_DQ4;
+    net PL_DQ5 = soc.IO_L12P_T1U_N10_GC_65, port.PL_DQ5;
+    net PL_DQ6 = soc.IO_L11N_T1U_N9_GC_65, port.PL_DQ6;
+    net PL_DQ7 = soc.IO_L12N_T1U_N11_GC_65, port.PL_DQ7;
+    net PL_DQ8 = soc.IO_L5N_T0U_N9_AD14N_65, port.PL_DQ8;
+    net PL_DQ9 = soc.IO_L2P_T0L_N2_65, port.PL_DQ9;
+    net PL_DQS0_N = soc.IO_L10N_T1U_N7_QBC_AD4N_65, port.PL_DQS0_N;
+    net PL_DQS0_P = soc.IO_L10P_T1U_N6_QBC_AD4P_65, port.PL_DQS0_P;
+    net PL_DQS1_N = soc.IO_L4N_T0U_N7_DBC_AD7N_65, port.PL_DQS1_N;
+    net PL_DQS1_P = soc.IO_L4P_T0U_N6_DBC_AD7P_SMBALERT_65, port.PL_DQS1_P;
+    net PL_DQS2_N = soc.IO_L22N_T3U_N7_DBC_AD0N_65, port.PL_DQS2_N;
+    net PL_DQS2_P = soc.IO_L22P_T3U_N6_DBC_AD0P_65, port.PL_DQS2_P;
+    net PL_DQS3_N = soc.IO_L16N_T2U_N7_QBC_AD3N_65, port.PL_DQS3_N;
+    net PL_DQS3_P = soc.IO_L16P_T2U_N6_QBC_AD3P_65, port.PL_DQS3_P;
+    net PL_ODT = soc.IO_L9N_T1L_N5_AD12N_64, port.PL_ODT;
+    net PL_REF_N = soc.IO_L13N_T2L_N1_GC_QBC_64, port.PL_REF_N;
+    net PL_REF_P = soc.IO_L13P_T2L_N0_GC_QBC_64, port.PL_REF_P;
+    net PL_RESET_N = soc.IO_L1N_T0L_N1_DBC_64, port.PL_RESET_N;
+    net PL_SYS_RESET_N = soc.IO_T2U_N12_65, port.PL_SYS_RESET_N;
+    net PSADC_1V8 = soc.VCC_PSADC_AB25, soc.VCC_PSADC_AC26, filter_psadc_1v8.B, decouple_psadc_1v8.A, hf_psadc_1v8.A;
+    net PSDDR_PLL_1V8 = soc.VCC_PSDDR_PLL_Y24, soc.VCC_PSDDR_PLL_Y25, filter_psddr_pll_1v8.B, decouple_psddr_pll_1v8.A, hf_psddr_pll_1v8.A;
+    net PSPLL_1V2 = soc.VCC_PSPLL_W22, soc.VCC_PSPLL_W24, soc.VCC_PSPLL_W25, pspll_1v2_hf0.A, pspll_1v2_hf1.A, pspll_1v2_hf2.A, pspll_1v2_bulk0.A, pspll_1v2_bulk1.A, pspll_1v2_mid0.A, pspll_1v2_mid1.A, port.PSPLL_1V2;
+    net PS_A0 = soc.PS_DDR_A0_504, port.PS_A0;
+    net PS_A1 = soc.PS_DDR_A1_504, port.PS_A1;
+    net PS_A10 = soc.PS_DDR_A10_504, port.PS_A10;
+    net PS_A11 = soc.PS_DDR_A11_504, port.PS_A11;
+    net PS_A12 = soc.PS_DDR_A12_504, port.PS_A12;
+    net PS_A13 = soc.PS_DDR_A13_504, port.PS_A13;
+    net PS_A14 = soc.PS_DDR_A14_504, port.PS_A14;
+    net PS_A15 = soc.PS_DDR_A15_504, port.PS_A15;
+    net PS_A16 = soc.PS_DDR_A16_504, port.PS_A16;
+    net PS_A2 = soc.PS_DDR_A2_504, port.PS_A2;
+    net PS_A3 = soc.PS_DDR_A3_504, port.PS_A3;
+    net PS_A4 = soc.PS_DDR_A4_504, port.PS_A4;
+    net PS_A5 = soc.PS_DDR_A5_504, port.PS_A5;
+    net PS_A6 = soc.PS_DDR_A6_504, port.PS_A6;
+    net PS_A7 = soc.PS_DDR_A7_504, port.PS_A7;
+    net PS_A8 = soc.PS_DDR_A8_504, port.PS_A8;
+    net PS_A9 = soc.PS_DDR_A9_504, port.PS_A9;
+    net PS_ACT_N = soc.PS_DDR_ACT_N_504, port.PS_ACT_N;
+    net PS_ALERT_N = soc.PS_DDR_ALERT_N_504, port.PS_ALERT_N;
+    net PS_BA0 = soc.PS_DDR_BA0_504, port.PS_BA0;
+    net PS_BA1 = soc.PS_DDR_BA1_504, port.PS_BA1;
+    net PS_BG0 = soc.PS_DDR_BG0_504, port.PS_BG0;
+    net PS_CKE = soc.PS_DDR_CKE0_504, port.PS_CKE;
+    net PS_CK_N = soc.PS_DDR_CK_N0_504, port.PS_CK_N;
+    net PS_CK_P = soc.PS_DDR_CK0_504, port.PS_CK_P;
+    net PS_CS_N = soc.PS_DDR_CS_N0_504, port.PS_CS_N;
+    net PS_DDR_ZQ = soc.PS_DDR_ZQ_504, port.PS_DDR_ZQ;
+    net PS_DM0 = soc.PS_DDR_DM0_504, port.PS_DM0;
+    net PS_DM1 = soc.PS_DDR_DM1_504, port.PS_DM1;
+    net PS_DM2 = soc.PS_DDR_DM2_504, port.PS_DM2;
+    net PS_DM3 = soc.PS_DDR_DM3_504, port.PS_DM3;
+    net PS_DM4 = soc.PS_DDR_DM4_504, port.PS_DM4;
+    net PS_DM5 = soc.PS_DDR_DM5_504, port.PS_DM5;
+    net PS_DM6 = soc.PS_DDR_DM6_504, port.PS_DM6;
+    net PS_DM7 = soc.PS_DDR_DM7_504, port.PS_DM7;
+    net PS_DONE = soc.PS_DONE_503, port.PS_DONE;
+    net PS_DQ0 = soc.PS_DDR_DQ0_504, port.PS_DQ0;
+    net PS_DQ1 = soc.PS_DDR_DQ1_504, port.PS_DQ1;
+    net PS_DQ10 = soc.PS_DDR_DQ10_504, port.PS_DQ10;
+    net PS_DQ11 = soc.PS_DDR_DQ11_504, port.PS_DQ11;
+    net PS_DQ12 = soc.PS_DDR_DQ12_504, port.PS_DQ12;
+    net PS_DQ13 = soc.PS_DDR_DQ13_504, port.PS_DQ13;
+    net PS_DQ14 = soc.PS_DDR_DQ14_504, port.PS_DQ14;
+    net PS_DQ15 = soc.PS_DDR_DQ15_504, port.PS_DQ15;
+    net PS_DQ16 = soc.PS_DDR_DQ16_504, port.PS_DQ16;
+    net PS_DQ17 = soc.PS_DDR_DQ17_504, port.PS_DQ17;
+    net PS_DQ18 = soc.PS_DDR_DQ18_504, port.PS_DQ18;
+    net PS_DQ19 = soc.PS_DDR_DQ19_504, port.PS_DQ19;
+    net PS_DQ2 = soc.PS_DDR_DQ2_504, port.PS_DQ2;
+    net PS_DQ20 = soc.PS_DDR_DQ20_504, port.PS_DQ20;
+    net PS_DQ21 = soc.PS_DDR_DQ21_504, port.PS_DQ21;
+    net PS_DQ22 = soc.PS_DDR_DQ22_504, port.PS_DQ22;
+    net PS_DQ23 = soc.PS_DDR_DQ23_504, port.PS_DQ23;
+    net PS_DQ24 = soc.PS_DDR_DQ24_504, port.PS_DQ24;
+    net PS_DQ25 = soc.PS_DDR_DQ25_504, port.PS_DQ25;
+    net PS_DQ26 = soc.PS_DDR_DQ26_504, port.PS_DQ26;
+    net PS_DQ27 = soc.PS_DDR_DQ27_504, port.PS_DQ27;
+    net PS_DQ28 = soc.PS_DDR_DQ28_504, port.PS_DQ28;
+    net PS_DQ29 = soc.PS_DDR_DQ29_504, port.PS_DQ29;
+    net PS_DQ3 = soc.PS_DDR_DQ3_504, port.PS_DQ3;
+    net PS_DQ30 = soc.PS_DDR_DQ30_504, port.PS_DQ30;
+    net PS_DQ31 = soc.PS_DDR_DQ31_504, port.PS_DQ31;
+    net PS_DQ32 = soc.PS_DDR_DQ32_504, port.PS_DQ32;
+    net PS_DQ33 = soc.PS_DDR_DQ33_504, port.PS_DQ33;
+    net PS_DQ34 = soc.PS_DDR_DQ34_504, port.PS_DQ34;
+    net PS_DQ35 = soc.PS_DDR_DQ35_504, port.PS_DQ35;
+    net PS_DQ36 = soc.PS_DDR_DQ36_504, port.PS_DQ36;
+    net PS_DQ37 = soc.PS_DDR_DQ37_504, port.PS_DQ37;
+    net PS_DQ38 = soc.PS_DDR_DQ38_504, port.PS_DQ38;
+    net PS_DQ39 = soc.PS_DDR_DQ39_504, port.PS_DQ39;
+    net PS_DQ4 = soc.PS_DDR_DQ4_504, port.PS_DQ4;
+    net PS_DQ40 = soc.PS_DDR_DQ40_504, port.PS_DQ40;
+    net PS_DQ41 = soc.PS_DDR_DQ41_504, port.PS_DQ41;
+    net PS_DQ42 = soc.PS_DDR_DQ42_504, port.PS_DQ42;
+    net PS_DQ43 = soc.PS_DDR_DQ43_504, port.PS_DQ43;
+    net PS_DQ44 = soc.PS_DDR_DQ44_504, port.PS_DQ44;
+    net PS_DQ45 = soc.PS_DDR_DQ45_504, port.PS_DQ45;
+    net PS_DQ46 = soc.PS_DDR_DQ46_504, port.PS_DQ46;
+    net PS_DQ47 = soc.PS_DDR_DQ47_504, port.PS_DQ47;
+    net PS_DQ48 = soc.PS_DDR_DQ48_504, port.PS_DQ48;
+    net PS_DQ49 = soc.PS_DDR_DQ49_504, port.PS_DQ49;
+    net PS_DQ5 = soc.PS_DDR_DQ5_504, port.PS_DQ5;
+    net PS_DQ50 = soc.PS_DDR_DQ50_504, port.PS_DQ50;
+    net PS_DQ51 = soc.PS_DDR_DQ51_504, port.PS_DQ51;
+    net PS_DQ52 = soc.PS_DDR_DQ52_504, port.PS_DQ52;
+    net PS_DQ53 = soc.PS_DDR_DQ53_504, port.PS_DQ53;
+    net PS_DQ54 = soc.PS_DDR_DQ54_504, port.PS_DQ54;
+    net PS_DQ55 = soc.PS_DDR_DQ55_504, port.PS_DQ55;
+    net PS_DQ56 = soc.PS_DDR_DQ56_504, port.PS_DQ56;
+    net PS_DQ57 = soc.PS_DDR_DQ57_504, port.PS_DQ57;
+    net PS_DQ58 = soc.PS_DDR_DQ58_504, port.PS_DQ58;
+    net PS_DQ59 = soc.PS_DDR_DQ59_504, port.PS_DQ59;
+    net PS_DQ6 = soc.PS_DDR_DQ6_504, port.PS_DQ6;
+    net PS_DQ60 = soc.PS_DDR_DQ60_504, port.PS_DQ60;
+    net PS_DQ61 = soc.PS_DDR_DQ61_504, port.PS_DQ61;
+    net PS_DQ62 = soc.PS_DDR_DQ62_504, port.PS_DQ62;
+    net PS_DQ63 = soc.PS_DDR_DQ63_504, port.PS_DQ63;
+    net PS_DQ7 = soc.PS_DDR_DQ7_504, port.PS_DQ7;
+    net PS_DQ8 = soc.PS_DDR_DQ8_504, port.PS_DQ8;
+    net PS_DQ9 = soc.PS_DDR_DQ9_504, port.PS_DQ9;
+    net PS_DQS0_N = soc.PS_DDR_DQS_N0_504, port.PS_DQS0_N;
+    net PS_DQS0_P = soc.PS_DDR_DQS_P0_504, port.PS_DQS0_P;
+    net PS_DQS1_N = soc.PS_DDR_DQS_N1_504, port.PS_DQS1_N;
+    net PS_DQS1_P = soc.PS_DDR_DQS_P1_504, port.PS_DQS1_P;
+    net PS_DQS2_N = soc.PS_DDR_DQS_N2_504, port.PS_DQS2_N;
+    net PS_DQS2_P = soc.PS_DDR_DQS_P2_504, port.PS_DQS2_P;
+    net PS_DQS3_N = soc.PS_DDR_DQS_N3_504, port.PS_DQS3_N;
+    net PS_DQS3_P = soc.PS_DDR_DQS_P3_504, port.PS_DQS3_P;
+    net PS_DQS4_N = soc.PS_DDR_DQS_N4_504, port.PS_DQS4_N;
+    net PS_DQS4_P = soc.PS_DDR_DQS_P4_504, port.PS_DQS4_P;
+    net PS_DQS5_N = soc.PS_DDR_DQS_N5_504, port.PS_DQS5_N;
+    net PS_DQS5_P = soc.PS_DDR_DQS_P5_504, port.PS_DQS5_P;
+    net PS_DQS6_N = soc.PS_DDR_DQS_N6_504, port.PS_DQS6_N;
+    net PS_DQS6_P = soc.PS_DDR_DQS_P6_504, port.PS_DQS6_P;
+    net PS_DQS7_N = soc.PS_DDR_DQS_N7_504, port.PS_DQS7_N;
+    net PS_DQS7_P = soc.PS_DDR_DQS_P7_504, port.PS_DQS7_P;
+    net PS_INIT_B = soc.PS_INIT_B_503, port.PS_INIT_B;
+    net PS_ODT = soc.PS_DDR_ODT0_504, port.PS_ODT;
+    net PS_PADI = soc.PS_PADI_503, port.PS_PADI;
+    net PS_PADO = soc.PS_PADO_503, port.PS_PADO;
+    net PS_PAR = soc.PS_DDR_PARITY_504, port.PS_PAR;
+    net PS_POR_N = soc.PS_POR_B_503, port.PS_POR_N;
+    net PS_PROG_B = soc.PS_PROG_B_503, port.PS_PROG_B;
+    net PS_REF_CLK = soc.PS_REF_CLK_503, port.PS_REF_CLK;
+    net PS_RESET_N = soc.PS_DDR_RAM_RST_N_504, port.PS_RESET_N;
+    net PS_SRST_N = soc.PS_SRST_B_503, port.PS_SRST_N;
+    net PUDC_B = soc.PUDC_B, port.PUDC_B;
+    net QSPI_MIO0 = soc.PS_MIO0_500, port.QSPI_MIO0;
+    net QSPI_MIO1 = soc.PS_MIO1_500, port.QSPI_MIO1;
+    net QSPI_MIO10 = soc.PS_MIO10_500, port.QSPI_MIO10;
+    net QSPI_MIO11 = soc.PS_MIO11_500, port.QSPI_MIO11;
+    net QSPI_MIO12 = soc.PS_MIO12_500, port.QSPI_MIO12;
+    net QSPI_MIO2 = soc.PS_MIO2_500, port.QSPI_MIO2;
+    net QSPI_MIO3 = soc.PS_MIO3_500, port.QSPI_MIO3;
+    net QSPI_MIO4 = soc.PS_MIO4_500, port.QSPI_MIO4;
+    net QSPI_MIO5 = soc.PS_MIO5_500, port.QSPI_MIO5;
+    net QSPI_MIO7 = soc.PS_MIO7_500, port.QSPI_MIO7;
+    net QSPI_MIO8 = soc.PS_MIO8_500, port.QSPI_MIO8;
+    net QSPI_MIO9 = soc.PS_MIO9_500, port.QSPI_MIO9;
+    net UART_RX = soc.PS_MIO42_501, port.UART_RX;
+    net UART_TX = soc.PS_MIO43_501, port.UART_TX;
+    net VRP_64 = soc.IO_T0U_N12_VRP_64, port.VRP_64;
+    net VRP_65 = soc.IO_T0U_N12_VRP_65, port.VRP_65;
+    nc soc.DXN, soc.DXP, soc.IO_L10N_AD10N_48, soc.IO_L10N_AD10N_49, soc.IO_L10N_AD10N_50, soc.IO_L10N_AD2N_44, soc.IO_L10N_AD2N_47, soc.IO_L10N_T1U_N7_QBC_AD4N_66, soc.IO_L10N_T1U_N7_QBC_AD4N_67, soc.IO_L10P_AD10P_48, soc.IO_L10P_AD10P_49, soc.IO_L10P_AD10P_50, soc.IO_L10P_AD2P_44, soc.IO_L10P_AD2P_47, soc.IO_L10P_T1U_N6_QBC_AD4P_66, soc.IO_L10P_T1U_N6_QBC_AD4P_67, soc.IO_L11N_AD1N_44, soc.IO_L11N_AD1N_47, soc.IO_L11N_AD9N_48, soc.IO_L11N_AD9N_49, soc.IO_L11N_AD9N_50, soc.IO_L11N_T1U_N9_GC_66, soc.IO_L11N_T1U_N9_GC_67, soc.IO_L11P_AD1P_44, soc.IO_L11P_AD1P_47, soc.IO_L11P_AD9P_48, soc.IO_L11P_AD9P_49, soc.IO_L11P_AD9P_50, soc.IO_L11P_T1U_N8_GC_66, soc.IO_L11P_T1U_N8_GC_67, soc.IO_L12N_AD0N_44, soc.IO_L12N_AD0N_47, soc.IO_L12N_AD8N_48, soc.IO_L12N_AD8N_49, soc.IO_L12N_AD8N_50, soc.IO_L12N_T1U_N11_GC_66, soc.IO_L12N_T1U_N11_GC_67, soc.IO_L12P_AD0P_44, soc.IO_L12P_AD0P_47, soc.IO_L12P_AD8P_48, soc.IO_L12P_AD8P_49, soc.IO_L12P_AD8P_50, soc.IO_L12P_T1U_N10_GC_66, soc.IO_L12P_T1U_N10_GC_67, soc.IO_L13N_T2L_N1_GC_QBC_65, soc.IO_L13N_T2L_N1_GC_QBC_66, soc.IO_L13N_T2L_N1_GC_QBC_67, soc.IO_L13P_T2L_N0_GC_QBC_66, soc.IO_L13P_T2L_N0_GC_QBC_67, soc.IO_L14N_T2L_N3_GC_66, soc.IO_L14N_T2L_N3_GC_67, soc.IO_L14P_T2L_N2_GC_66, soc.IO_L14P_T2L_N2_GC_67, soc.IO_L15N_T2L_N5_AD11N_64, soc.IO_L15N_T2L_N5_AD11N_66, soc.IO_L15N_T2L_N5_AD11N_67, soc.IO_L15P_T2L_N4_AD11P_64, soc.IO_L15P_T2L_N4_AD11P_66, soc.IO_L15P_T2L_N4_AD11P_67, soc.IO_L16N_T2U_N7_QBC_AD3N_64, soc.IO_L16N_T2U_N7_QBC_AD3N_66, soc.IO_L16N_T2U_N7_QBC_AD3N_67, soc.IO_L16P_T2U_N6_QBC_AD3P_64, soc.IO_L16P_T2U_N6_QBC_AD3P_66, soc.IO_L16P_T2U_N6_QBC_AD3P_67, soc.IO_L17N_T2U_N9_AD10N_64, soc.IO_L17N_T2U_N9_AD10N_66, soc.IO_L17N_T2U_N9_AD10N_67, soc.IO_L17P_T2U_N8_AD10P_64, soc.IO_L17P_T2U_N8_AD10P_66, soc.IO_L17P_T2U_N8_AD10P_67, soc.IO_L18N_T2U_N11_AD2N_64, soc.IO_L18N_T2U_N11_AD2N_66, soc.IO_L18N_T2U_N11_AD2N_67, soc.IO_L18P_T2U_N10_AD2P_64, soc.IO_L18P_T2U_N10_AD2P_66, soc.IO_L18P_T2U_N10_AD2P_67, soc.IO_L19N_T3L_N1_DBC_AD9N_64, soc.IO_L19N_T3L_N1_DBC_AD9N_65, soc.IO_L19N_T3L_N1_DBC_AD9N_66, soc.IO_L19N_T3L_N1_DBC_AD9N_67, soc.IO_L19P_T3L_N0_DBC_AD9P_64, soc.IO_L19P_T3L_N0_DBC_AD9P_66, soc.IO_L19P_T3L_N0_DBC_AD9P_67, soc.IO_L1N_AD11N_44, soc.IO_L1N_AD11N_47, soc.IO_L1N_AD15N_48, soc.IO_L1N_AD15N_49, soc.IO_L1N_AD15N_50, soc.IO_L1N_T0L_N1_DBC_65, soc.IO_L1N_T0L_N1_DBC_66, soc.IO_L1N_T0L_N1_DBC_67, soc.IO_L1P_AD11P_44, soc.IO_L1P_AD11P_47, soc.IO_L1P_AD15P_48, soc.IO_L1P_AD15P_49, soc.IO_L1P_AD15P_50, soc.IO_L1P_T0L_N0_DBC_66, soc.IO_L1P_T0L_N0_DBC_67, soc.IO_L20N_T3L_N3_AD1N_64, soc.IO_L20N_T3L_N3_AD1N_66, soc.IO_L20N_T3L_N3_AD1N_67, soc.IO_L20P_T3L_N2_AD1P_64, soc.IO_L20P_T3L_N2_AD1P_66, soc.IO_L20P_T3L_N2_AD1P_67, soc.IO_L21N_T3L_N5_AD8N_64, soc.IO_L21N_T3L_N5_AD8N_66, soc.IO_L21N_T3L_N5_AD8N_67, soc.IO_L21P_T3L_N4_AD8P_64, soc.IO_L21P_T3L_N4_AD8P_66, soc.IO_L21P_T3L_N4_AD8P_67, soc.IO_L22N_T3U_N7_DBC_AD0N_64, soc.IO_L22N_T3U_N7_DBC_AD0N_66, soc.IO_L22N_T3U_N7_DBC_AD0N_67, soc.IO_L22P_T3U_N6_DBC_AD0P_64, soc.IO_L22P_T3U_N6_DBC_AD0P_66, soc.IO_L22P_T3U_N6_DBC_AD0P_67, soc.IO_L23N_T3U_N9_64, soc.IO_L23N_T3U_N9_66, soc.IO_L23N_T3U_N9_67, soc.IO_L23P_T3U_N8_64, soc.IO_L23P_T3U_N8_66, soc.IO_L23P_T3U_N8_67, soc.IO_L24N_T3U_N11_64, soc.IO_L24N_T3U_N11_66, soc.IO_L24N_T3U_N11_67, soc.IO_L24P_T3U_N10_64, soc.IO_L24P_T3U_N10_66, soc.IO_L24P_T3U_N10_67, soc.IO_L2N_AD10N_44, soc.IO_L2N_AD10N_47, soc.IO_L2N_AD14N_48, soc.IO_L2N_AD14N_49, soc.IO_L2N_AD14N_50, soc.IO_L2N_T0L_N3_66, soc.IO_L2N_T0L_N3_67, soc.IO_L2P_AD10P_44, soc.IO_L2P_AD10P_47, soc.IO_L2P_AD14P_48, soc.IO_L2P_AD14P_49, soc.IO_L2P_AD14P_50, soc.IO_L2P_T0L_N2_64, soc.IO_L2P_T0L_N2_66, soc.IO_L2P_T0L_N2_67, soc.IO_L3N_AD13N_48, soc.IO_L3N_AD13N_49, soc.IO_L3N_AD13N_50, soc.IO_L3N_AD9N_44, soc.IO_L3N_AD9N_47, soc.IO_L3N_T0L_N5_AD15N_66, soc.IO_L3N_T0L_N5_AD15N_67, soc.IO_L3P_AD13P_48, soc.IO_L3P_AD13P_49, soc.IO_L3P_AD13P_50, soc.IO_L3P_AD9P_44, soc.IO_L3P_AD9P_47, soc.IO_L3P_T0L_N4_AD15P_66, soc.IO_L3P_T0L_N4_AD15P_67, soc.IO_L4N_AD12N_48, soc.IO_L4N_AD12N_49, soc.IO_L4N_AD12N_50, soc.IO_L4N_AD8N_44, soc.IO_L4N_AD8N_47, soc.IO_L4N_T0U_N7_DBC_AD7N_66, soc.IO_L4N_T0U_N7_DBC_AD7N_67, soc.IO_L4P_AD12P_48, soc.IO_L4P_AD12P_49, soc.IO_L4P_AD12P_50, soc.IO_L4P_AD8P_44, soc.IO_L4P_AD8P_47, soc.IO_L4P_T0U_N6_DBC_AD7P_66, soc.IO_L4P_T0U_N6_DBC_AD7P_67, soc.IO_L5N_HDGC_48, soc.IO_L5N_HDGC_49, soc.IO_L5N_HDGC_50, soc.IO_L5N_HDGC_AD7N_44, soc.IO_L5N_HDGC_AD7N_47, soc.IO_L5N_T0U_N9_AD14N_66, soc.IO_L5N_T0U_N9_AD14N_67, soc.IO_L5P_HDGC_48, soc.IO_L5P_HDGC_49, soc.IO_L5P_HDGC_50, soc.IO_L5P_HDGC_AD7P_44, soc.IO_L5P_HDGC_AD7P_47, soc.IO_L5P_T0U_N8_AD14P_66, soc.IO_L5P_T0U_N8_AD14P_67, soc.IO_L6N_HDGC_48, soc.IO_L6N_HDGC_49, soc.IO_L6N_HDGC_50, soc.IO_L6N_HDGC_AD6N_44, soc.IO_L6N_HDGC_AD6N_47, soc.IO_L6N_T0U_N11_AD6N_66, soc.IO_L6N_T0U_N11_AD6N_67, soc.IO_L6P_HDGC_48, soc.IO_L6P_HDGC_49, soc.IO_L6P_HDGC_50, soc.IO_L6P_HDGC_AD6P_44, soc.IO_L6P_HDGC_AD6P_47, soc.IO_L6P_T0U_N10_AD6P_66, soc.IO_L6P_T0U_N10_AD6P_67, soc.IO_L7N_HDGC_48, soc.IO_L7N_HDGC_49, soc.IO_L7N_HDGC_50, soc.IO_L7N_HDGC_AD5N_44, soc.IO_L7N_HDGC_AD5N_47, soc.IO_L7N_T1L_N1_QBC_AD13N_65, soc.IO_L7N_T1L_N1_QBC_AD13N_66, soc.IO_L7N_T1L_N1_QBC_AD13N_67, soc.IO_L7P_HDGC_48, soc.IO_L7P_HDGC_49, soc.IO_L7P_HDGC_50, soc.IO_L7P_HDGC_AD5P_44, soc.IO_L7P_HDGC_AD5P_47, soc.IO_L7P_T1L_N0_QBC_AD13P_66, soc.IO_L7P_T1L_N0_QBC_AD13P_67, soc.IO_L8N_HDGC_48, soc.IO_L8N_HDGC_49, soc.IO_L8N_HDGC_50, soc.IO_L8N_HDGC_AD4N_44, soc.IO_L8N_HDGC_AD4N_47, soc.IO_L8N_T1L_N3_AD5N_66, soc.IO_L8N_T1L_N3_AD5N_67, soc.IO_L8P_HDGC_48, soc.IO_L8P_HDGC_49, soc.IO_L8P_HDGC_50, soc.IO_L8P_HDGC_AD4P_44, soc.IO_L8P_HDGC_AD4P_47, soc.IO_L8P_T1L_N2_AD5P_66, soc.IO_L8P_T1L_N2_AD5P_67, soc.IO_L9N_AD11N_48, soc.IO_L9N_AD11N_49, soc.IO_L9N_AD11N_50, soc.IO_L9N_AD3N_44, soc.IO_L9N_AD3N_47, soc.IO_L9N_T1L_N5_AD12N_66, soc.IO_L9N_T1L_N5_AD12N_67, soc.IO_L9P_AD11P_48, soc.IO_L9P_AD11P_49, soc.IO_L9P_AD11P_50, soc.IO_L9P_AD3P_44, soc.IO_L9P_AD3P_47, soc.IO_L9P_T1L_N4_AD12P_66, soc.IO_L9P_T1L_N4_AD12P_67, soc.IO_T0U_N12_VRP_66, soc.IO_T0U_N12_VRP_67, soc.IO_T1U_N12_65, soc.IO_T1U_N12_66, soc.IO_T1U_N12_67, soc.IO_T2U_N12_66, soc.IO_T2U_N12_67, soc.IO_T3U_N12_65, soc.IO_T3U_N12_66, soc.IO_T3U_N12_67, soc.MGTHTXN0_128, soc.MGTHTXN0_129, soc.MGTHTXN0_130, soc.MGTHTXN0_228, soc.MGTHTXN0_229, soc.MGTHTXN0_230, soc.MGTHTXN1_128, soc.MGTHTXN1_129, soc.MGTHTXN1_130, soc.MGTHTXN1_228, soc.MGTHTXN1_229, soc.MGTHTXN1_230, soc.MGTHTXN2_128, soc.MGTHTXN2_129, soc.MGTHTXN2_130, soc.MGTHTXN2_228, soc.MGTHTXN2_229, soc.MGTHTXN2_230, soc.MGTHTXN3_128, soc.MGTHTXN3_129, soc.MGTHTXN3_130, soc.MGTHTXN3_228, soc.MGTHTXN3_229, soc.MGTHTXN3_230, soc.MGTHTXP0_128, soc.MGTHTXP0_129, soc.MGTHTXP0_130, soc.MGTHTXP0_228, soc.MGTHTXP0_229, soc.MGTHTXP0_230, soc.MGTHTXP1_128, soc.MGTHTXP1_129, soc.MGTHTXP1_130, soc.MGTHTXP1_228, soc.MGTHTXP1_229, soc.MGTHTXP1_230, soc.MGTHTXP2_128, soc.MGTHTXP2_129, soc.MGTHTXP2_130, soc.MGTHTXP2_228, soc.MGTHTXP2_229, soc.MGTHTXP2_230, soc.MGTHTXP3_128, soc.MGTHTXP3_129, soc.MGTHTXP3_130, soc.MGTHTXP3_228, soc.MGTHTXP3_229, soc.MGTHTXP3_230, soc.MGTREFCLK0N_128, soc.MGTREFCLK0N_129, soc.MGTREFCLK0N_130, soc.MGTREFCLK0N_228, soc.MGTREFCLK0N_229, soc.MGTREFCLK0N_230, soc.MGTREFCLK0P_128, soc.MGTREFCLK0P_129, soc.MGTREFCLK0P_130, soc.MGTREFCLK0P_228, soc.MGTREFCLK0P_229, soc.MGTREFCLK0P_230, soc.MGTREFCLK1N_128, soc.MGTREFCLK1N_129, soc.MGTREFCLK1N_130, soc.MGTREFCLK1N_228, soc.MGTREFCLK1N_229, soc.MGTREFCLK1N_230, soc.MGTREFCLK1P_128, soc.MGTREFCLK1P_129, soc.MGTREFCLK1P_130, soc.MGTREFCLK1P_228, soc.MGTREFCLK1P_229, soc.MGTREFCLK1P_230, soc.NC_AF26, soc.NC_AF27, soc.PS_DDR_A17_504, soc.PS_DDR_BG1_504, soc.PS_DDR_CK1_504, soc.PS_DDR_CKE1_504, soc.PS_DDR_CK_N1_504, soc.PS_DDR_CS_N1_504, soc.PS_DDR_DM8_504, soc.PS_DDR_DQ64_504, soc.PS_DDR_DQ65_504, soc.PS_DDR_DQ66_504, soc.PS_DDR_DQ67_504, soc.PS_DDR_DQ68_504, soc.PS_DDR_DQ69_504, soc.PS_DDR_DQ70_504, soc.PS_DDR_DQ71_504, soc.PS_DDR_DQS_N8_504, soc.PS_DDR_DQS_P8_504, soc.PS_DDR_ODT1_504, soc.PS_ERROR_OUT_503, soc.PS_ERROR_STATUS_503, soc.PS_MGTREFCLK0N_505, soc.PS_MGTREFCLK0P_505, soc.PS_MGTREFCLK1N_505, soc.PS_MGTREFCLK1P_505, soc.PS_MGTREFCLK2N_505, soc.PS_MGTREFCLK2P_505, soc.PS_MGTREFCLK3N_505, soc.PS_MGTREFCLK3P_505, soc.PS_MGTRTXN0_505, soc.PS_MGTRTXN1_505, soc.PS_MGTRTXN2_505, soc.PS_MGTRTXN3_505, soc.PS_MGTRTXP0_505, soc.PS_MGTRTXP1_505, soc.PS_MGTRTXP2_505, soc.PS_MGTRTXP3_505, soc.PS_MIO24_500, soc.PS_MIO25_500, soc.PS_MIO26_501, soc.PS_MIO27_501, soc.PS_MIO28_501, soc.PS_MIO29_501, soc.PS_MIO30_501, soc.PS_MIO31_501, soc.PS_MIO32_501, soc.PS_MIO33_501, soc.PS_MIO34_501, soc.PS_MIO35_501, soc.PS_MIO36_501, soc.PS_MIO37_501, soc.PS_MIO38_501, soc.PS_MIO39_501, soc.PS_MIO40_501, soc.PS_MIO41_501, soc.PS_MIO44_501, soc.PS_MIO45_501, soc.PS_MIO46_501, soc.PS_MIO47_501, soc.PS_MIO48_501, soc.PS_MIO49_501, soc.PS_MIO50_501, soc.PS_MIO51_501, soc.PS_MIO52_502, soc.PS_MIO53_502, soc.PS_MIO54_502, soc.PS_MIO55_502, soc.PS_MIO56_502, soc.PS_MIO57_502, soc.PS_MIO58_502, soc.PS_MIO59_502, soc.PS_MIO60_502, soc.PS_MIO61_502, soc.PS_MIO62_502, soc.PS_MIO63_502, soc.PS_MIO64_502, soc.PS_MIO65_502, soc.PS_MIO66_502, soc.PS_MIO67_502, soc.PS_MIO68_502, soc.PS_MIO69_502, soc.PS_MIO6_500, soc.PS_MIO70_502, soc.PS_MIO71_502, soc.PS_MIO72_502, soc.PS_MIO73_502, soc.PS_MIO74_502, soc.PS_MIO75_502, soc.PS_MIO76_502, soc.PS_MIO77_502, soc.VREF_64, soc.VREF_65, soc.VREF_66, soc.VREF_67;
+}

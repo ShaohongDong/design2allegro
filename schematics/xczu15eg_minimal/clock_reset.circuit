@@ -1,0 +1,364 @@
+circuit 2;
+
+module clock_reset {
+    ports ALL_GOOD, AUX_1V8, AUX_PG, BOOT_MODE0, BOOT_MODE1, BOOT_MODE2, BOOT_MODE3, CORE_PG, DDR_1V2, DDR_PG, GND, IO18_PG, IO33_PG, IO_3V3, PL_REF_N, PL_REF_P, PL_SYS_RESET_N, PL_VTT_PG, PSPLL_PG, PS_DONE, PS_INIT_B, PS_PADI, PS_PADO, PS_POR_N, PS_PROG_B, PS_REF_CLK, PS_SRST_N, PS_VTT_PG, PUDC_B, UTILITY_PG, VPP_PG;
+    part pudc_pull {
+        id = "pudc_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_osc {
+        id = "ps_osc";
+        device = "osc33";
+        package = "OSC_3P2X2P5_4";
+        assembly = fitted;
+    }
+    part ps_clk_series {
+        id = "ps_clk_series";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "33 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_osc_hf {
+        id = "ps_osc_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ps_osc_bulk {
+        id = "ps_osc_bulk";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_osc {
+        id = "pl_osc";
+        device = "osc200";
+        package = "OSC_3P2X2P5_6";
+        assembly = fitted;
+    }
+    part pl_osc_hf {
+        id = "pl_osc_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_osc_bulk {
+        id = "pl_osc_bulk";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_clk_ac_p {
+        id = "pl_clk_ac_p";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_clk_bias_hi_p {
+        id = "pl_clk_bias_hi_p";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_clk_bias_lo_p {
+        id = "pl_clk_bias_lo_p";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_clk_ac_n {
+        id = "pl_clk_ac_n";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_clk_bias_hi_n {
+        id = "pl_clk_bias_hi_n";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_clk_bias_lo_n {
+        id = "pl_clk_bias_lo_n";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_clk_term {
+        id = "pl_clk_term";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "100 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part rtc {
+        id = "rtc";
+        device = "rtc";
+        package = "XTAL_3P2X1P5";
+        assembly = fitted;
+    }
+    part rtc_feedback {
+        id = "rtc_feedback";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "1 Mohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part rtc_load_p {
+        id = "rtc_load_p";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "12 pF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "C0G"; polarized = false; }
+    }
+    part rtc_load_n {
+        id = "rtc_load_n";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "12 pF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "C0G"; polarized = false; }
+    }
+    part boot_mode0 {
+        id = "boot_mode0";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part boot_mode2 {
+        id = "boot_mode2";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part boot_mode3 {
+        id = "boot_mode3";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part boot_mode1_pull {
+        id = "boot_mode1_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_supervisor {
+        id = "ps_supervisor";
+        device = "ti.reset";
+        package = "SOT23_6";
+        assembly = fitted;
+    }
+    part ps_reset_pull {
+        id = "ps_reset_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_reset_delay {
+        id = "ps_reset_delay";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "47 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part ps_reset_hf {
+        id = "ps_reset_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_supervisor {
+        id = "pl_supervisor";
+        device = "ti.reset";
+        package = "SOT23_6";
+        assembly = fitted;
+    }
+    part pl_reset_pull {
+        id = "pl_reset_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part pl_reset_delay {
+        id = "pl_reset_delay";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "47 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part pl_reset_hf {
+        id = "pl_reset_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part sense_hi {
+        id = "sense_hi";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "64.9 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part sense_lo {
+        id = "sense_lo";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part all_good_pull {
+        id = "all_good_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part srst_pull {
+        id = "srst_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_prog_b_pull {
+        id = "ps_prog_b_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_init_b_pull {
+        id = "ps_init_b_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ps_done_pull {
+        id = "ps_done_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part good_utility_pg {
+        id = "good_utility_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_core_pg {
+        id = "good_core_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_aux_pg {
+        id = "good_aux_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_vpp_pg {
+        id = "good_vpp_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_pspll_pg {
+        id = "good_pspll_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_ddr_pg {
+        id = "good_ddr_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_io18_pg {
+        id = "good_io18_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_io33_pg {
+        id = "good_io33_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_ps_vtt_pg {
+        id = "good_ps_vtt_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    part good_pl_vtt_pg {
+        id = "good_pl_vtt_pg";
+        device = "schottky";
+        package = "SOT23";
+        assembly = fitted;
+    }
+    net ALL_GOOD = ps_supervisor.MR_N, pl_supervisor.MR_N, all_good_pull.A, good_utility_pg.A, good_core_pg.A, good_aux_pg.A, good_vpp_pg.A, good_pspll_pg.A, good_ddr_pg.A, good_io18_pg.A, good_io33_pg.A, good_ps_vtt_pg.A, good_pl_vtt_pg.A, port.ALL_GOOD;
+    net AUX_1V8 = pudc_pull.B, port.AUX_1V8;
+    net AUX_PG = good_aux_pg.K, port.AUX_PG;
+    net BOOT_MODE0 = boot_mode0.A, port.BOOT_MODE0;
+    net BOOT_MODE1 = boot_mode1_pull.A, port.BOOT_MODE1;
+    net BOOT_MODE2 = boot_mode2.A, port.BOOT_MODE2;
+    net BOOT_MODE3 = boot_mode3.A, port.BOOT_MODE3;
+    net CORE_PG = good_core_pg.K, port.CORE_PG;
+    net DDR_1V2 = pl_clk_bias_hi_p.A, pl_clk_bias_hi_n.A, pl_reset_pull.B, port.DDR_1V2;
+    net DDR_PG = good_ddr_pg.K, port.DDR_PG;
+    net GND = ps_osc.GND, ps_osc_hf.B, ps_osc_bulk.B, pl_osc.GND, pl_osc_hf.B, pl_osc_bulk.B, pl_clk_bias_lo_p.B, pl_clk_bias_lo_n.B, rtc_load_p.B, rtc_load_n.B, boot_mode0.B, boot_mode2.B, boot_mode3.B, ps_supervisor.GND, ps_reset_delay.B, ps_reset_hf.B, pl_supervisor.GND, pl_reset_delay.B, pl_reset_hf.B, sense_lo.B, port.GND;
+    net IO18_PG = good_io18_pg.K, port.IO18_PG;
+    net IO33_PG = good_io33_pg.K, port.IO33_PG;
+    net IO_3V3 = ps_osc.VDD, ps_osc.OE, ps_osc_hf.A, ps_osc_bulk.A, pl_osc.VDD, pl_osc.OE, pl_osc_hf.A, pl_osc_bulk.A, boot_mode1_pull.B, ps_supervisor.VDD, ps_reset_pull.B, ps_reset_hf.A, pl_supervisor.VDD, pl_reset_hf.A, sense_hi.A, all_good_pull.B, srst_pull.B, ps_prog_b_pull.B, ps_init_b_pull.B, ps_done_pull.B, port.IO_3V3;
+    net PL_REF_N = pl_clk_ac_n.B, pl_clk_bias_hi_n.B, pl_clk_bias_lo_n.A, pl_clk_term.B, port.PL_REF_N;
+    net PL_REF_P = pl_clk_ac_p.B, pl_clk_bias_hi_p.B, pl_clk_bias_lo_p.A, pl_clk_term.A, port.PL_REF_P;
+    net PL_REF_SRC_N = pl_osc.OUT_N, pl_clk_ac_n.A;
+    net PL_REF_SRC_P = pl_osc.OUT_P, pl_clk_ac_p.A;
+    net PL_RESET_CT = pl_supervisor.CT, pl_reset_delay.A;
+    net PL_SYS_RESET_N = pl_supervisor.RESET_N, pl_reset_pull.A, port.PL_SYS_RESET_N;
+    net PL_VTT_PG = good_pl_vtt_pg.K, port.PL_VTT_PG;
+    net PSPLL_PG = good_pspll_pg.K, port.PSPLL_PG;
+    net PS_CLK_SRC = ps_osc.OUT, ps_clk_series.A;
+    net PS_DONE = ps_done_pull.A, port.PS_DONE;
+    net PS_INIT_B = ps_init_b_pull.A, port.PS_INIT_B;
+    net PS_PADI = rtc.A, rtc_feedback.A, rtc_load_p.A, port.PS_PADI;
+    net PS_PADO = rtc.B, rtc_feedback.B, rtc_load_n.A, port.PS_PADO;
+    net PS_POR_N = ps_supervisor.RESET_N, ps_reset_pull.A, port.PS_POR_N;
+    net PS_PROG_B = ps_prog_b_pull.A, port.PS_PROG_B;
+    net PS_REF_CLK = ps_clk_series.B, port.PS_REF_CLK;
+    net PS_RESET_CT = ps_supervisor.CT, ps_reset_delay.A;
+    net PS_SRST_N = srst_pull.A, port.PS_SRST_N;
+    net PS_VTT_PG = good_ps_vtt_pg.K, port.PS_VTT_PG;
+    net PUDC_B = pudc_pull.A, port.PUDC_B;
+    net SENSE_3V3 = ps_supervisor.SENSE, pl_supervisor.SENSE, sense_hi.B, sense_lo.A;
+    net UTILITY_PG = good_utility_pg.K, port.UTILITY_PG;
+    net VPP_PG = good_vpp_pg.K, port.VPP_PG;
+    nc good_aux_pg.NC, good_core_pg.NC, good_ddr_pg.NC, good_io18_pg.NC, good_io33_pg.NC, good_pl_vtt_pg.NC, good_ps_vtt_pg.NC, good_pspll_pg.NC, good_utility_pg.NC, good_vpp_pg.NC, pl_osc.NC;
+}

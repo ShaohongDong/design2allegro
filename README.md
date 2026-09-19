@@ -44,6 +44,8 @@ Allegro 进行 PCB 布局布线，缩短硬件开发周期，并推动开发流�
 | 独立回读验证 | 解析导出的网表和器件文件，对照交付快照检查一致性 |
 | 浏览器人工审查 | 查看元件、网络、物理引脚、规格和诊断，保存人工状态与批注 |
 
+新增 [XCZU15EG 最小系统工程](schematics/xczu15eg_minimal/README.md)：板载 PS/PL DDR4、QSPI/eMMC、电源与调试，附物理网表契约和 Vivado 引脚验证脚本。
+
 当前输入为 Circuit 1/2，YAML 输入已退役。Allegro Telesis 是唯一支持的导出格式。
 人工审查记录保存在交付包之外，不改变电路或自动检查结论。
 

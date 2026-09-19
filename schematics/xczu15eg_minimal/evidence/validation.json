@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-19",
+  "vivado": "2025.2",
+  "board_statistics": {
+    "nets": 332,
+    "parts": 538,
+    "pins": 3150
+  },
+  "artifacts": {
+    "schematics/xczu15eg_minimal/fpga.circuit": "4b26ee7767a5107954369fe0a79c55f30bfca0d6b922d49e577125934c9ce7ca",
+    "schematics/xczu15eg_minimal/storage.circuit": "9701ef40caf8f93130881ee47c915239b433432ad43dba2621de18c7f601cacd",
+    "schematics/xczu15eg_minimal/clock_reset.circuit": "014072444e3056d588b9cd8d9d06ae5c40e654dafa1af5769a59aa2c7f16cb53",
+    "schematics/xczu15eg_minimal/power.circuit": "99e6eb8a787e5d4e9ba1a4486bbb6a8242c7b8673cdf34fbf41bd615ff5e52bf",
+    "schematics/xczu15eg_minimal/pl_ddr4.circuit": "84d08e2d9fdca09a81625b3387b467539446265d6c7c739d9805ea57586b1d5f",
+    "schematics/xczu15eg_minimal/board.circuit": "b238b917e406ac78bda14e75f78a5eb3b6a4d4be7d082eb3fc960255cac9972b",
+    "schematics/xczu15eg_minimal/debug.circuit": "337430eb8777d1a86d963429ec24f4846a3274597b1979b5b5e0f7146eec542d",
+    "schematics/xczu15eg_minimal/ps_ddr4.circuit": "338e51ee5f0cf9a51094b6a8306ff8efa379298f46e5d64ed96d408d52ddd249",
+    "schematics/xczu15eg_minimal/rules.circuit": "b8d22bee9f9ee17a72dec3cfa6d878e44cbeffaa6fc85c1c7557e7a364d6c2bb",
+    "schematics/xczu15eg_minimal/tools/pl_ddr4.xdc": "c060860a9202c45373c73b2d3e6afda480f9783c18a235504d04b6cf38f9905c",
+    "schematics/xczu15eg_minimal/tools/ddr_pin_check.v": "d918f4e25448a5b7c6989a5a0619662a3c88b5fa63eccf9fb483bc4246861b2d",
+    "schematics/xczu15eg_minimal/tools/validate_vivado.tcl": "41b29680da67fec7e7aa2acd88eeef7f8be2144c7e0cc736e82df994e6ba4160",
+    "schematics/xczu15eg_minimal/design.lock.json": "dfde278c80228f29d802a89462f83b2307aa1c3d72d1ba8bcb33b5d3b3e882d4",
+    "schematics/xczu15eg_minimal/netlist.expected.json": "41db43ee1a8a73ac43b3ff3bcded4be2e7cba02f1d453bb7e2c019951a2f96c0",
+    "src/design2allegro/libraries/xczu15eg/1.json": "33e7e35271f2fe16efd3a38006b7c02ba43d7790834c8819826071f3cbe2dcea",
+    "build/parser/xczu15eg_minimal/manifest.json": "1d60ed62bf0674966b4fb2b39e8db0b2f5f75b5d50768c3f2eee4b9ae007ab56",
+    "build/parser/xczu15eg_vivado/run.log": "86c38eb0923db28efa5b5bab49ffcc44459cc86f2d79a0cfc1bc1e933d308222",
+    "build/parser/xczu15eg_vivado/placed_drc.rpt": "a9e5d3770799bfdc2cb35e3302fdb79fdf5bb18f88878aa82e13903505f92b44",
+    "build/parser/xczu15eg_vivado/placed_io.rpt": "edcbb7045d2a6ee9cbfd184e9b3713e16dbf24e9214921a75f7f32e96906e084",
+    "tests/boards/test_xczu15eg.py": "1424a34e00351e7a5e815cc19faa67f3374d97e155c86a634a3dcb086a07d5ce",
+    "build/parser/xczu15eg_research/make-verify-package.log": "26d67a12bb93f2faaedaba598d17939b623c932f32f209eda6c987f784aa388e",
+    "build/parser/xczu15eg_research/make-example.log": "8ac843aa3ab96d8395e8b4b015ac8e66ce0300f544094104b21d2085ff71c19f"
+  },
+  "checks": {
+    "board_tests": 10,
+    "parser_tests": 185,
+    "make_example": "pass",
+    "make_verify_package": "pass",
+    "review_http_and_package_api": "pass",
+    "vivado_ps_validate": "pass",
+    "vivado_pl_synthesis_placement": "pass; zero errors, 1 critical warning (unrouted), 3 debug hub LUT warnings",
+    "routed_timing": "not performed",
+    "actual_allegro_import": "not performed",
+    "board_tests_on_hardware": "not performed"
+  }
+}

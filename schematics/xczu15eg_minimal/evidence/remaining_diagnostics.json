@@ -1,0 +1,86 @@
+[
+  {
+    "rule": "ERC.CONFLICT",
+    "object": "PL_ALERT_N",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.CONFLICT",
+    "object": "PL_SYS_RESET_N",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "AUX_1V8",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "CORE_0V85",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "DDR_1V2",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "GND",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "IO_1V8",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "IO_3V3",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "VPP_2V5",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "fpga/ADC_1V8",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "fpga/PSADC_1V8",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "fpga/PSDDR_PLL_1V8",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "power/UTIL_5V",
+    "status": "FAIL",
+    "severity": "WARNING"
+  },
+  {
+    "rule": "ERC.DRIVE",
+    "object": "power/VIN_12V",
+    "status": "FAIL",
+    "severity": "WARNING"
+  }
+]

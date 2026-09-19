@@ -205,6 +205,25 @@ def verify():
             env=env,
             cwd=work,
         )
+        shutil.copytree(ROOT / "schematics/xczu15eg_minimal", work / "xczu15eg_minimal")
+        run(
+            [
+                entry,
+                "build",
+                work / "xczu15eg_minimal/board.circuit",
+                "-o",
+                work / "xczu15eg-output",
+            ],
+            "package-xczu15eg-build",
+            env=env,
+            cwd=work,
+        )
+        run(
+            [entry, "verify", work / "xczu15eg-output"],
+            "package-xczu15eg-verify",
+            env=env,
+            cwd=work,
+        )
         shutil.copytree(ROOT / "tests/fixtures/parameterized", work / "parameterized")
         run(
             [
@@ -286,6 +305,7 @@ def main():
         for name, project in (
             ("fpga_soc", ROOT / "tests/fixtures/fpga_soc"),
             ("nucleo_l432kc", ROOT / "schematics/nucleo_l432kc"),
+            ("xczu15eg_minimal", ROOT / "schematics/xczu15eg_minimal"),
         ):
             run(
                 [

@@ -1,0 +1,788 @@
+circuit 2;
+
+module ps_ddr4 {
+    ports DDR_1V2, GND, PS_A0, PS_A1, PS_A10, PS_A11, PS_A12, PS_A13, PS_A14, PS_A15, PS_A16, PS_A2, PS_A3, PS_A4, PS_A5, PS_A6, PS_A7, PS_A8, PS_A9, PS_ACT_N, PS_ALERT_N, PS_BA0, PS_BA1, PS_BG0, PS_CKE, PS_CK_N, PS_CK_P, PS_CS_N, PS_DDR_ZQ, PS_DM0, PS_DM1, PS_DM2, PS_DM3, PS_DM4, PS_DM5, PS_DM6, PS_DM7, PS_DQ0, PS_DQ1, PS_DQ10, PS_DQ11, PS_DQ12, PS_DQ13, PS_DQ14, PS_DQ15, PS_DQ16, PS_DQ17, PS_DQ18, PS_DQ19, PS_DQ2, PS_DQ20, PS_DQ21, PS_DQ22, PS_DQ23, PS_DQ24, PS_DQ25, PS_DQ26, PS_DQ27, PS_DQ28, PS_DQ29, PS_DQ3, PS_DQ30, PS_DQ31, PS_DQ32, PS_DQ33, PS_DQ34, PS_DQ35, PS_DQ36, PS_DQ37, PS_DQ38, PS_DQ39, PS_DQ4, PS_DQ40, PS_DQ41, PS_DQ42, PS_DQ43, PS_DQ44, PS_DQ45, PS_DQ46, PS_DQ47, PS_DQ48, PS_DQ49, PS_DQ5, PS_DQ50, PS_DQ51, PS_DQ52, PS_DQ53, PS_DQ54, PS_DQ55, PS_DQ56, PS_DQ57, PS_DQ58, PS_DQ59, PS_DQ6, PS_DQ60, PS_DQ61, PS_DQ62, PS_DQ63, PS_DQ7, PS_DQ8, PS_DQ9, PS_DQS0_N, PS_DQS0_P, PS_DQS1_N, PS_DQS1_P, PS_DQS2_N, PS_DQS2_P, PS_DQS3_N, PS_DQS3_P, PS_DQS4_N, PS_DQS4_P, PS_DQS5_N, PS_DQS5_P, PS_DQS6_N, PS_DQS6_P, PS_DQS7_N, PS_DQS7_P, PS_ODT, PS_PAR, PS_RESET_N, PS_VREF, PS_VTT, VPP_2V5;
+    part memory0 {
+        id = "memory0";
+        device = "micron.ddr4_8g_x16";
+        package = "FBGA96_7P5X13P5_P0P8";
+        assembly = fitted;
+    }
+    part memory1 {
+        id = "memory1";
+        device = "micron.ddr4_8g_x16";
+        package = "FBGA96_7P5X13P5_P0P8";
+        assembly = fitted;
+    }
+    part memory2 {
+        id = "memory2";
+        device = "micron.ddr4_8g_x16";
+        package = "FBGA96_7P5X13P5_P0P8";
+        assembly = fitted;
+    }
+    part memory3 {
+        id = "memory3";
+        device = "micron.ddr4_8g_x16";
+        package = "FBGA96_7P5X13P5_P0P8";
+        assembly = fitted;
+    }
+    part zq0 {
+        id = "zq0";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "240 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part mem0_vdd0 {
+        id = "mem0_vdd0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd1 {
+        id = "mem0_vdd1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd2 {
+        id = "mem0_vdd2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd3 {
+        id = "mem0_vdd3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd4 {
+        id = "mem0_vdd4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd5 {
+        id = "mem0_vdd5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd6 {
+        id = "mem0_vdd6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vdd7 {
+        id = "mem0_vdd7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_bulk0 {
+        id = "mem0_bulk0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_bulk1 {
+        id = "mem0_bulk1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vpp {
+        id = "mem0_vpp";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vpp_hf {
+        id = "mem0_vpp_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem0_vref {
+        id = "mem0_vref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.047 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part zq1 {
+        id = "zq1";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "240 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part mem1_vdd0 {
+        id = "mem1_vdd0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd1 {
+        id = "mem1_vdd1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd2 {
+        id = "mem1_vdd2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd3 {
+        id = "mem1_vdd3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd4 {
+        id = "mem1_vdd4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd5 {
+        id = "mem1_vdd5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd6 {
+        id = "mem1_vdd6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vdd7 {
+        id = "mem1_vdd7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_bulk0 {
+        id = "mem1_bulk0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_bulk1 {
+        id = "mem1_bulk1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vpp {
+        id = "mem1_vpp";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vpp_hf {
+        id = "mem1_vpp_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem1_vref {
+        id = "mem1_vref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.047 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part zq2 {
+        id = "zq2";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "240 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part mem2_vdd0 {
+        id = "mem2_vdd0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd1 {
+        id = "mem2_vdd1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd2 {
+        id = "mem2_vdd2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd3 {
+        id = "mem2_vdd3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd4 {
+        id = "mem2_vdd4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd5 {
+        id = "mem2_vdd5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd6 {
+        id = "mem2_vdd6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vdd7 {
+        id = "mem2_vdd7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_bulk0 {
+        id = "mem2_bulk0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_bulk1 {
+        id = "mem2_bulk1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vpp {
+        id = "mem2_vpp";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vpp_hf {
+        id = "mem2_vpp_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem2_vref {
+        id = "mem2_vref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.047 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part zq3 {
+        id = "zq3";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "240 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part mem3_vdd0 {
+        id = "mem3_vdd0";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd1 {
+        id = "mem3_vdd1";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd2 {
+        id = "mem3_vdd2";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd3 {
+        id = "mem3_vdd3";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd4 {
+        id = "mem3_vdd4";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd5 {
+        id = "mem3_vdd5";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd6 {
+        id = "mem3_vdd6";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vdd7 {
+        id = "mem3_vdd7";
+        device = "capacitor_0402";
+        package = "CAPACITOR_0402";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_bulk0 {
+        id = "mem3_bulk0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_bulk1 {
+        id = "mem3_bulk1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vpp {
+        id = "mem3_vpp";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vpp_hf {
+        id = "mem3_vpp_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part mem3_vref {
+        id = "mem3_vref";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.047 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part term_a0 {
+        id = "term_a0";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a1 {
+        id = "term_a1";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a2 {
+        id = "term_a2";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a3 {
+        id = "term_a3";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a4 {
+        id = "term_a4";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a5 {
+        id = "term_a5";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a6 {
+        id = "term_a6";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a7 {
+        id = "term_a7";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a8 {
+        id = "term_a8";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a9 {
+        id = "term_a9";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a10 {
+        id = "term_a10";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a11 {
+        id = "term_a11";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a12 {
+        id = "term_a12";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a13 {
+        id = "term_a13";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a14 {
+        id = "term_a14";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a15 {
+        id = "term_a15";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_a16 {
+        id = "term_a16";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_ba0 {
+        id = "term_ba0";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_ba1 {
+        id = "term_ba1";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_bg0 {
+        id = "term_bg0";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_cke {
+        id = "term_cke";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_cs_n {
+        id = "term_cs_n";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_odt {
+        id = "term_odt";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_act_n {
+        id = "term_act_n";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part term_par {
+        id = "term_par";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "39.2 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ck_p_term {
+        id = "ck_p_term";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "36 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ck_n_term {
+        id = "ck_n_term";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "36 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part ck_term_ac {
+        id = "ck_term_ac";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "10 nF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part reset_pull {
+        id = "reset_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part alert_pull {
+        id = "alert_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part vtt_bulk0 {
+        id = "vtt_bulk0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vtt_bulk1 {
+        id = "vtt_bulk1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part vtt_bulk2 {
+        id = "vtt_bulk2";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "4.7 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part controller_zq {
+        id = "controller_zq";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "240 ohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    net DDR_1V2 = memory0.VDDQ_A1, memory0.VDDQ_A9, memory0.VDD_B3, memory0.VDD_B9, memory0.VDDQ_C1, memory0.VDD_D1, memory0.VDDQ_D9, memory0.VDDQ_F2, memory0.VDDQ_F8, memory0.VDDQ_G1, memory0.VDD_G7, memory0.VDDQ_G9, memory0.VDD_J1, memory0.VDDQ_J2, memory0.VDDQ_J8, memory0.VDD_J9, memory0.VDD_L1, memory0.VDD_L9, memory0.VDD_R1, memory0.VDD_T9, mem0_vdd0.A, mem0_vdd1.A, mem0_vdd2.A, mem0_vdd3.A, mem0_vdd4.A, mem0_vdd5.A, mem0_vdd6.A, mem0_vdd7.A, mem0_bulk0.A, mem0_bulk1.A, memory1.VDDQ_A1, memory1.VDDQ_A9, memory1.VDD_B3, memory1.VDD_B9, memory1.VDDQ_C1, memory1.VDD_D1, memory1.VDDQ_D9, memory1.VDDQ_F2, memory1.VDDQ_F8, memory1.VDDQ_G1, memory1.VDD_G7, memory1.VDDQ_G9, memory1.VDD_J1, memory1.VDDQ_J2, memory1.VDDQ_J8, memory1.VDD_J9, memory1.VDD_L1, memory1.VDD_L9, memory1.VDD_R1, memory1.VDD_T9, mem1_vdd0.A, mem1_vdd1.A, mem1_vdd2.A, mem1_vdd3.A, mem1_vdd4.A, mem1_vdd5.A, mem1_vdd6.A, mem1_vdd7.A, mem1_bulk0.A, mem1_bulk1.A, memory2.VDDQ_A1, memory2.VDDQ_A9, memory2.VDD_B3, memory2.VDD_B9, memory2.VDDQ_C1, memory2.VDD_D1, memory2.VDDQ_D9, memory2.VDDQ_F2, memory2.VDDQ_F8, memory2.VDDQ_G1, memory2.VDD_G7, memory2.VDDQ_G9, memory2.VDD_J1, memory2.VDDQ_J2, memory2.VDDQ_J8, memory2.VDD_J9, memory2.VDD_L1, memory2.VDD_L9, memory2.VDD_R1, memory2.VDD_T9, mem2_vdd0.A, mem2_vdd1.A, mem2_vdd2.A, mem2_vdd3.A, mem2_vdd4.A, mem2_vdd5.A, mem2_vdd6.A, mem2_vdd7.A, mem2_bulk0.A, mem2_bulk1.A, memory3.VDDQ_A1, memory3.VDDQ_A9, memory3.VDD_B3, memory3.VDD_B9, memory3.VDDQ_C1, memory3.VDD_D1, memory3.VDDQ_D9, memory3.VDDQ_F2, memory3.VDDQ_F8, memory3.VDDQ_G1, memory3.VDD_G7, memory3.VDDQ_G9, memory3.VDD_J1, memory3.VDDQ_J2, memory3.VDDQ_J8, memory3.VDD_J9, memory3.VDD_L1, memory3.VDD_L9, memory3.VDD_R1, memory3.VDD_T9, mem3_vdd0.A, mem3_vdd1.A, mem3_vdd2.A, mem3_vdd3.A, mem3_vdd4.A, mem3_vdd5.A, mem3_vdd6.A, mem3_vdd7.A, mem3_bulk0.A, mem3_bulk1.A, ck_term_ac.B, alert_pull.B, port.DDR_1V2;
+    net GND = memory0.VSSQ_A2, memory0.VSSQ_A8, memory0.VSS_B2, memory0.VSSQ_C9, memory0.VSSQ_D2, memory0.VSSQ_D8, memory0.VSS_E1, memory0.VSSQ_E3, memory0.VSSQ_E8, memory0.VSS_E9, memory0.VSSQ_F1, memory0.VSS_G8, memory0.VSSQ_H1, memory0.VSSQ_H9, memory0.VSS_K1, memory0.VSS_K9, memory0.VSS_M9, memory0.VSS_N1, memory0.VSS_T1, zq0.B, memory0.TEN, mem0_vdd0.B, mem0_vdd1.B, mem0_vdd2.B, mem0_vdd3.B, mem0_vdd4.B, mem0_vdd5.B, mem0_vdd6.B, mem0_vdd7.B, mem0_bulk0.B, mem0_bulk1.B, mem0_vpp.B, mem0_vpp_hf.B, mem0_vref.B, memory1.VSSQ_A2, memory1.VSSQ_A8, memory1.VSS_B2, memory1.VSSQ_C9, memory1.VSSQ_D2, memory1.VSSQ_D8, memory1.VSS_E1, memory1.VSSQ_E3, memory1.VSSQ_E8, memory1.VSS_E9, memory1.VSSQ_F1, memory1.VSS_G8, memory1.VSSQ_H1, memory1.VSSQ_H9, memory1.VSS_K1, memory1.VSS_K9, memory1.VSS_M9, memory1.VSS_N1, memory1.VSS_T1, zq1.B, memory1.TEN, mem1_vdd0.B, mem1_vdd1.B, mem1_vdd2.B, mem1_vdd3.B, mem1_vdd4.B, mem1_vdd5.B, mem1_vdd6.B, mem1_vdd7.B, mem1_bulk0.B, mem1_bulk1.B, mem1_vpp.B, mem1_vpp_hf.B, mem1_vref.B, memory2.VSSQ_A2, memory2.VSSQ_A8, memory2.VSS_B2, memory2.VSSQ_C9, memory2.VSSQ_D2, memory2.VSSQ_D8, memory2.VSS_E1, memory2.VSSQ_E3, memory2.VSSQ_E8, memory2.VSS_E9, memory2.VSSQ_F1, memory2.VSS_G8, memory2.VSSQ_H1, memory2.VSSQ_H9, memory2.VSS_K1, memory2.VSS_K9, memory2.VSS_M9, memory2.VSS_N1, memory2.VSS_T1, zq2.B, memory2.TEN, mem2_vdd0.B, mem2_vdd1.B, mem2_vdd2.B, mem2_vdd3.B, mem2_vdd4.B, mem2_vdd5.B, mem2_vdd6.B, mem2_vdd7.B, mem2_bulk0.B, mem2_bulk1.B, mem2_vpp.B, mem2_vpp_hf.B, mem2_vref.B, memory3.VSSQ_A2, memory3.VSSQ_A8, memory3.VSS_B2, memory3.VSSQ_C9, memory3.VSSQ_D2, memory3.VSSQ_D8, memory3.VSS_E1, memory3.VSSQ_E3, memory3.VSSQ_E8, memory3.VSS_E9, memory3.VSSQ_F1, memory3.VSS_G8, memory3.VSSQ_H1, memory3.VSSQ_H9, memory3.VSS_K1, memory3.VSS_K9, memory3.VSS_M9, memory3.VSS_N1, memory3.VSS_T1, zq3.B, memory3.TEN, mem3_vdd0.B, mem3_vdd1.B, mem3_vdd2.B, mem3_vdd3.B, mem3_vdd4.B, mem3_vdd5.B, mem3_vdd6.B, mem3_vdd7.B, mem3_bulk0.B, mem3_bulk1.B, mem3_vpp.B, mem3_vpp_hf.B, mem3_vref.B, reset_pull.B, vtt_bulk0.B, vtt_bulk1.B, vtt_bulk2.B, controller_zq.B, port.GND;
+    net PS_A0 = memory0.A0, memory1.A0, memory2.A0, memory3.A0, term_a0.A, port.PS_A0;
+    net PS_A1 = memory0.A1, memory1.A1, memory2.A1, memory3.A1, term_a1.A, port.PS_A1;
+    net PS_A10 = memory0.A10, memory1.A10, memory2.A10, memory3.A10, term_a10.A, port.PS_A10;
+    net PS_A11 = memory0.A11, memory1.A11, memory2.A11, memory3.A11, term_a11.A, port.PS_A11;
+    net PS_A12 = memory0.A12, memory1.A12, memory2.A12, memory3.A12, term_a12.A, port.PS_A12;
+    net PS_A13 = memory0.A13, memory1.A13, memory2.A13, memory3.A13, term_a13.A, port.PS_A13;
+    net PS_A14 = memory0.A14, memory1.A14, memory2.A14, memory3.A14, term_a14.A, port.PS_A14;
+    net PS_A15 = memory0.A15, memory1.A15, memory2.A15, memory3.A15, term_a15.A, port.PS_A15;
+    net PS_A16 = memory0.A16, memory1.A16, memory2.A16, memory3.A16, term_a16.A, port.PS_A16;
+    net PS_A2 = memory0.A2, memory1.A2, memory2.A2, memory3.A2, term_a2.A, port.PS_A2;
+    net PS_A3 = memory0.A3, memory1.A3, memory2.A3, memory3.A3, term_a3.A, port.PS_A3;
+    net PS_A4 = memory0.A4, memory1.A4, memory2.A4, memory3.A4, term_a4.A, port.PS_A4;
+    net PS_A5 = memory0.A5, memory1.A5, memory2.A5, memory3.A5, term_a5.A, port.PS_A5;
+    net PS_A6 = memory0.A6, memory1.A6, memory2.A6, memory3.A6, term_a6.A, port.PS_A6;
+    net PS_A7 = memory0.A7, memory1.A7, memory2.A7, memory3.A7, term_a7.A, port.PS_A7;
+    net PS_A8 = memory0.A8, memory1.A8, memory2.A8, memory3.A8, term_a8.A, port.PS_A8;
+    net PS_A9 = memory0.A9, memory1.A9, memory2.A9, memory3.A9, term_a9.A, port.PS_A9;
+    net PS_ACT_N = memory0.ACT_N, memory1.ACT_N, memory2.ACT_N, memory3.ACT_N, term_act_n.A, port.PS_ACT_N;
+    net PS_ALERT_N = memory0.ALERT_N, memory1.ALERT_N, memory2.ALERT_N, memory3.ALERT_N, alert_pull.A, port.PS_ALERT_N;
+    net PS_BA0 = memory0.BA0, memory1.BA0, memory2.BA0, memory3.BA0, term_ba0.A, port.PS_BA0;
+    net PS_BA1 = memory0.BA1, memory1.BA1, memory2.BA1, memory3.BA1, term_ba1.A, port.PS_BA1;
+    net PS_BG0 = memory0.BG0, memory1.BG0, memory2.BG0, memory3.BG0, term_bg0.A, port.PS_BG0;
+    net PS_CKE = memory0.CKE, memory1.CKE, memory2.CKE, memory3.CKE, term_cke.A, port.PS_CKE;
+    net PS_CK_N = memory0.CK_N, memory1.CK_N, memory2.CK_N, memory3.CK_N, ck_n_term.A, port.PS_CK_N;
+    net PS_CK_P = memory0.CK_P, memory1.CK_P, memory2.CK_P, memory3.CK_P, ck_p_term.A, port.PS_CK_P;
+    net PS_CK_TERM = ck_p_term.B, ck_n_term.B, ck_term_ac.A;
+    net PS_CS_N = memory0.CS_N, memory1.CS_N, memory2.CS_N, memory3.CS_N, term_cs_n.A, port.PS_CS_N;
+    net PS_DDR_ZQ = controller_zq.A, port.PS_DDR_ZQ;
+    net PS_DM0 = memory0.LDM_N, port.PS_DM0;
+    net PS_DM1 = memory0.UDM_N, port.PS_DM1;
+    net PS_DM2 = memory1.LDM_N, port.PS_DM2;
+    net PS_DM3 = memory1.UDM_N, port.PS_DM3;
+    net PS_DM4 = memory2.LDM_N, port.PS_DM4;
+    net PS_DM5 = memory2.UDM_N, port.PS_DM5;
+    net PS_DM6 = memory3.LDM_N, port.PS_DM6;
+    net PS_DM7 = memory3.UDM_N, port.PS_DM7;
+    net PS_DQ0 = memory0.DQ0, port.PS_DQ0;
+    net PS_DQ1 = memory0.DQ1, port.PS_DQ1;
+    net PS_DQ10 = memory0.DQ10, port.PS_DQ10;
+    net PS_DQ11 = memory0.DQ11, port.PS_DQ11;
+    net PS_DQ12 = memory0.DQ12, port.PS_DQ12;
+    net PS_DQ13 = memory0.DQ13, port.PS_DQ13;
+    net PS_DQ14 = memory0.DQ14, port.PS_DQ14;
+    net PS_DQ15 = memory0.DQ15, port.PS_DQ15;
+    net PS_DQ16 = memory1.DQ0, port.PS_DQ16;
+    net PS_DQ17 = memory1.DQ1, port.PS_DQ17;
+    net PS_DQ18 = memory1.DQ2, port.PS_DQ18;
+    net PS_DQ19 = memory1.DQ3, port.PS_DQ19;
+    net PS_DQ2 = memory0.DQ2, port.PS_DQ2;
+    net PS_DQ20 = memory1.DQ4, port.PS_DQ20;
+    net PS_DQ21 = memory1.DQ5, port.PS_DQ21;
+    net PS_DQ22 = memory1.DQ6, port.PS_DQ22;
+    net PS_DQ23 = memory1.DQ7, port.PS_DQ23;
+    net PS_DQ24 = memory1.DQ8, port.PS_DQ24;
+    net PS_DQ25 = memory1.DQ9, port.PS_DQ25;
+    net PS_DQ26 = memory1.DQ10, port.PS_DQ26;
+    net PS_DQ27 = memory1.DQ11, port.PS_DQ27;
+    net PS_DQ28 = memory1.DQ12, port.PS_DQ28;
+    net PS_DQ29 = memory1.DQ13, port.PS_DQ29;
+    net PS_DQ3 = memory0.DQ3, port.PS_DQ3;
+    net PS_DQ30 = memory1.DQ14, port.PS_DQ30;
+    net PS_DQ31 = memory1.DQ15, port.PS_DQ31;
+    net PS_DQ32 = memory2.DQ0, port.PS_DQ32;
+    net PS_DQ33 = memory2.DQ1, port.PS_DQ33;
+    net PS_DQ34 = memory2.DQ2, port.PS_DQ34;
+    net PS_DQ35 = memory2.DQ3, port.PS_DQ35;
+    net PS_DQ36 = memory2.DQ4, port.PS_DQ36;
+    net PS_DQ37 = memory2.DQ5, port.PS_DQ37;
+    net PS_DQ38 = memory2.DQ6, port.PS_DQ38;
+    net PS_DQ39 = memory2.DQ7, port.PS_DQ39;
+    net PS_DQ4 = memory0.DQ4, port.PS_DQ4;
+    net PS_DQ40 = memory2.DQ8, port.PS_DQ40;
+    net PS_DQ41 = memory2.DQ9, port.PS_DQ41;
+    net PS_DQ42 = memory2.DQ10, port.PS_DQ42;
+    net PS_DQ43 = memory2.DQ11, port.PS_DQ43;
+    net PS_DQ44 = memory2.DQ12, port.PS_DQ44;
+    net PS_DQ45 = memory2.DQ13, port.PS_DQ45;
+    net PS_DQ46 = memory2.DQ14, port.PS_DQ46;
+    net PS_DQ47 = memory2.DQ15, port.PS_DQ47;
+    net PS_DQ48 = memory3.DQ0, port.PS_DQ48;
+    net PS_DQ49 = memory3.DQ1, port.PS_DQ49;
+    net PS_DQ5 = memory0.DQ5, port.PS_DQ5;
+    net PS_DQ50 = memory3.DQ2, port.PS_DQ50;
+    net PS_DQ51 = memory3.DQ3, port.PS_DQ51;
+    net PS_DQ52 = memory3.DQ4, port.PS_DQ52;
+    net PS_DQ53 = memory3.DQ5, port.PS_DQ53;
+    net PS_DQ54 = memory3.DQ6, port.PS_DQ54;
+    net PS_DQ55 = memory3.DQ7, port.PS_DQ55;
+    net PS_DQ56 = memory3.DQ8, port.PS_DQ56;
+    net PS_DQ57 = memory3.DQ9, port.PS_DQ57;
+    net PS_DQ58 = memory3.DQ10, port.PS_DQ58;
+    net PS_DQ59 = memory3.DQ11, port.PS_DQ59;
+    net PS_DQ6 = memory0.DQ6, port.PS_DQ6;
+    net PS_DQ60 = memory3.DQ12, port.PS_DQ60;
+    net PS_DQ61 = memory3.DQ13, port.PS_DQ61;
+    net PS_DQ62 = memory3.DQ14, port.PS_DQ62;
+    net PS_DQ63 = memory3.DQ15, port.PS_DQ63;
+    net PS_DQ7 = memory0.DQ7, port.PS_DQ7;
+    net PS_DQ8 = memory0.DQ8, port.PS_DQ8;
+    net PS_DQ9 = memory0.DQ9, port.PS_DQ9;
+    net PS_DQS0_N = memory0.LDQS_N, port.PS_DQS0_N;
+    net PS_DQS0_P = memory0.LDQS_P, port.PS_DQS0_P;
+    net PS_DQS1_N = memory0.UDQS_N, port.PS_DQS1_N;
+    net PS_DQS1_P = memory0.UDQS_P, port.PS_DQS1_P;
+    net PS_DQS2_N = memory1.LDQS_N, port.PS_DQS2_N;
+    net PS_DQS2_P = memory1.LDQS_P, port.PS_DQS2_P;
+    net PS_DQS3_N = memory1.UDQS_N, port.PS_DQS3_N;
+    net PS_DQS3_P = memory1.UDQS_P, port.PS_DQS3_P;
+    net PS_DQS4_N = memory2.LDQS_N, port.PS_DQS4_N;
+    net PS_DQS4_P = memory2.LDQS_P, port.PS_DQS4_P;
+    net PS_DQS5_N = memory2.UDQS_N, port.PS_DQS5_N;
+    net PS_DQS5_P = memory2.UDQS_P, port.PS_DQS5_P;
+    net PS_DQS6_N = memory3.LDQS_N, port.PS_DQS6_N;
+    net PS_DQS6_P = memory3.LDQS_P, port.PS_DQS6_P;
+    net PS_DQS7_N = memory3.UDQS_N, port.PS_DQS7_N;
+    net PS_DQS7_P = memory3.UDQS_P, port.PS_DQS7_P;
+    net PS_ODT = memory0.ODT, memory1.ODT, memory2.ODT, memory3.ODT, term_odt.A, port.PS_ODT;
+    net PS_PAR = memory0.PAR, memory1.PAR, memory2.PAR, memory3.PAR, term_par.A, port.PS_PAR;
+    net PS_RESET_N = memory0.RESET_N, memory1.RESET_N, memory2.RESET_N, memory3.RESET_N, reset_pull.A, port.PS_RESET_N;
+    net PS_VREF = memory0.VREFCA, mem0_vref.A, memory1.VREFCA, mem1_vref.A, memory2.VREFCA, mem2_vref.A, memory3.VREFCA, mem3_vref.A, port.PS_VREF;
+    net PS_VTT = term_a0.B, term_a1.B, term_a2.B, term_a3.B, term_a4.B, term_a5.B, term_a6.B, term_a7.B, term_a8.B, term_a9.B, term_a10.B, term_a11.B, term_a12.B, term_a13.B, term_a14.B, term_a15.B, term_a16.B, term_ba0.B, term_ba1.B, term_bg0.B, term_cke.B, term_cs_n.B, term_odt.B, term_act_n.B, term_par.B, vtt_bulk0.A, vtt_bulk1.A, vtt_bulk2.A, port.PS_VTT;
+    net PS_ZQ0 = memory0.ZQ, zq0.A;
+    net PS_ZQ1 = memory1.ZQ, zq1.A;
+    net PS_ZQ2 = memory2.ZQ, zq2.A;
+    net PS_ZQ3 = memory3.ZQ, zq3.A;
+    net VPP_2V5 = memory0.VPP_B1, memory0.VPP_R9, mem0_vpp.A, mem0_vpp_hf.A, memory1.VPP_B1, memory1.VPP_R9, mem1_vpp.A, mem1_vpp_hf.A, memory2.VPP_B1, memory2.VPP_R9, mem2_vpp.A, mem2_vpp_hf.A, memory3.VPP_B1, memory3.VPP_R9, mem3_vpp.A, mem3_vpp_hf.A, port.VPP_2V5;
+    nc memory0.NC, memory1.NC, memory2.NC, memory3.NC;
+}

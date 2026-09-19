@@ -1,0 +1,71 @@
+{
+  "checked_at": "2026-09-19",
+  "files": [
+    {
+      "path": "docs/ZW_XCZU15EG_SCH_V2.0.pdf",
+      "sha256": "e3dbced5876959bd9aea77bad79c429a28811e349042d6f6c025812a0139ec43",
+      "bytes": 1623238
+    },
+    {
+      "path": "schematics/xczu15eg_minimal/evidence/xczu15egffvb1156pkg.csv",
+      "sha256": "8f42c8a98b3393f8f0bcae9af09794a8fc4db8d64a1afd8c80f27f1a98e5ad50",
+      "bytes": 37337
+    },
+    {
+      "path": "schematics/xczu15eg_minimal/evidence/unused_fpga_pins.tsv",
+      "sha256": "9787994684f55fa931ea81bad5d89ee47978e24e004188077bca0760226b82df",
+      "bytes": 29789
+    },
+    {
+      "path": "schematics/xczu15eg_minimal/evidence/xczu15eg_ffvb1156_vivado.tsv",
+      "sha256": "ceb90d79043fdf37b49aff3af58b53ecfd8d0a1c5bb168d92f4eb97b0437fd6e",
+      "bytes": 22894
+    },
+    {
+      "path": "schematics/xczu15eg_minimal/evidence/xczu15egffvb1156pkg.txt",
+      "sha256": "fcafbdcf53d50e21e721c95f6bf4bcd8b68e01a8eee7ab448471b2c4cd05f14e",
+      "bytes": 116836
+    },
+    {
+      "path": "build/parser/xczu15eg_research/ug1075.pdf",
+      "sha256": "2361241d80aae59015f4416ca9f39dc078c0396e935fc9620ce3251ab4270bbb",
+      "bytes": 15240366
+    },
+    {
+      "path": "build/parser/xczu15eg_research/ug578.pdf",
+      "sha256": "4515734de1e627480ed38e1a0b97596312e548730a18ccd0bfe8188b97c9fc26",
+      "bytes": 5987571
+    },
+    {
+      "path": "build/parser/xczu15eg_research/emmc_old.pdf",
+      "sha256": "c7feb7b95a609a3f35fb70f459de1fdf62155691fe393d01bcb6284bce3b669c",
+      "bytes": 515058
+    },
+    {
+      "path": "build/parser/xczu15eg_research/tps543c20a.pdf",
+      "sha256": "3f8af9472dec91591d909436dd1af522e4b40eb7df40941ffecbb06f9ba5b448",
+      "bytes": 6022437
+    },
+    {
+      "path": "build/parser/xczu15eg_research/tps568215.pdf",
+      "sha256": "08a8a700e55a12cdd6c9a23109d02c09f732c16324f005f2ef3f6acbad513e99",
+      "bytes": 1557053
+    },
+    {
+      "path": "build/parser/xczu15eg_research/tps51200.pdf",
+      "sha256": "7982058d8c1e2dd154521015d4558ab0d11ed1cdd671648cf51c765a18281976",
+      "bytes": 1801211
+    },
+    {
+      "path": "build/parser/xczu15eg_research/tps74801.pdf",
+      "sha256": "d84ecc96353e5d17dfac2bf979be2aca15a87690e132e5bb39ee86dd8f29f596",
+      "bytes": 3370834
+    },
+    {
+      "path": "build/parser/xczu15eg_research/tps3808.pdf",
+      "sha256": "74d889c0f68af88032f1633c26381817cc03e10d9fd3b4c177a044ad3ed86eed",
+      "bytes": 2046179
+    }
+  ],
+  "note": "Source interpretation, unavailable exact-MPN PDFs and mirrors are documented in SOURCES.md."
+}

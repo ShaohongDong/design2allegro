@@ -1,0 +1,9 @@
+# Preserve byte-identical vendor inputs and tool reports referenced by SHA-256.
+xczu15egffvb1156pkg.csv -text -whitespace
+xczu15egffvb1156pkg.txt -text -whitespace
+pl_configuration.txt -text -whitespace
+ps_configuration.txt -text -whitespace
+placed_drc.rpt -text -whitespace
+placed_io.rpt -text -whitespace
+# Final TSV fields may intentionally be empty.
+xczu15eg_ffvb1156_vivado.tsv -text -whitespace

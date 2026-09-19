@@ -1,0 +1,268 @@
+circuit 2;
+
+module storage {
+    ports EMMC_CLK, EMMC_CMD, EMMC_DAT0, EMMC_DAT1, EMMC_DAT2, EMMC_DAT3, EMMC_DAT4, EMMC_DAT5, EMMC_DAT6, EMMC_DAT7, EMMC_RESET_N, GND, IO_1V8, IO_3V3, QSPI_MIO0, QSPI_MIO1, QSPI_MIO10, QSPI_MIO11, QSPI_MIO12, QSPI_MIO2, QSPI_MIO3, QSPI_MIO4, QSPI_MIO5, QSPI_MIO7, QSPI_MIO8, QSPI_MIO9;
+    part qspi0 {
+        id = "qspi0";
+        device = "winbond.qspi";
+        package = "WSON8_8X6_EP";
+        assembly = fitted;
+    }
+    part qspi0_cs_n_pull {
+        id = "qspi0_cs_n_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part qspi0_io2_pull {
+        id = "qspi0_io2_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part qspi0_io3_pull {
+        id = "qspi0_io3_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part qspi0_hf {
+        id = "qspi0_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part qspi0_bulk {
+        id = "qspi0_bulk";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part qspi1 {
+        id = "qspi1";
+        device = "winbond.qspi";
+        package = "WSON8_8X6_EP";
+        assembly = fitted;
+    }
+    part qspi1_cs_n_pull {
+        id = "qspi1_cs_n_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part qspi1_io2_pull {
+        id = "qspi1_io2_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part qspi1_io3_pull {
+        id = "qspi1_io3_pull";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "4.7 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part qspi1_hf {
+        id = "qspi1_hf";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part qspi1_bulk {
+        id = "qspi1_bulk";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc {
+        id = "emmc";
+        device = "micron.emmc8";
+        package = "VFBGA153_11P5X13_P0P5";
+        assembly = fitted;
+    }
+    part emmc_pull_dat0 {
+        id = "emmc_pull_dat0";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat1 {
+        id = "emmc_pull_dat1";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat2 {
+        id = "emmc_pull_dat2";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat3 {
+        id = "emmc_pull_dat3";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat4 {
+        id = "emmc_pull_dat4";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat5 {
+        id = "emmc_pull_dat5";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat6 {
+        id = "emmc_pull_dat6";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_dat7 {
+        id = "emmc_pull_dat7";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_vddim {
+        id = "emmc_vddim";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_pull_reset_n {
+        id = "emmc_pull_reset_n";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_pull_cmd {
+        id = "emmc_pull_cmd";
+        device = "resistor_0603";
+        package = "RESISTOR_0603";
+        assembly = fitted;
+        properties { resistance = "10 kohm"; tolerance = "1 %"; power_rating = "0.1 W"; }
+    }
+    part emmc_io_1v8_bulk {
+        id = "emmc_io_1v8_bulk";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "10 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_1v8_hf0 {
+        id = "emmc_io_1v8_hf0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_1v8_hf1 {
+        id = "emmc_io_1v8_hf1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_1v8_hf2 {
+        id = "emmc_io_1v8_hf2";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_1v8_hf3 {
+        id = "emmc_io_1v8_hf3";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_3v3_bulk {
+        id = "emmc_io_3v3_bulk";
+        device = "capacitor_0805";
+        package = "CAPACITOR_0805";
+        assembly = fitted;
+        properties { capacitance = "10 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_3v3_hf0 {
+        id = "emmc_io_3v3_hf0";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_3v3_hf1 {
+        id = "emmc_io_3v3_hf1";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_3v3_hf2 {
+        id = "emmc_io_3v3_hf2";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    part emmc_io_3v3_hf3 {
+        id = "emmc_io_3v3_hf3";
+        device = "capacitor_0603";
+        package = "CAPACITOR_0603";
+        assembly = fitted;
+        properties { capacitance = "0.1 uF"; voltage_rating = "25 V"; tolerance = "10 %"; dielectric = "X7R"; polarized = false; }
+    }
+    net EMMC_CLK = emmc.CLK, port.EMMC_CLK;
+    net EMMC_CMD = emmc.CMD, emmc_pull_cmd.A, port.EMMC_CMD;
+    net EMMC_DAT0 = emmc.DAT0, emmc_pull_dat0.A, port.EMMC_DAT0;
+    net EMMC_DAT1 = emmc.DAT1, emmc_pull_dat1.A, port.EMMC_DAT1;
+    net EMMC_DAT2 = emmc.DAT2, emmc_pull_dat2.A, port.EMMC_DAT2;
+    net EMMC_DAT3 = emmc.DAT3, emmc_pull_dat3.A, port.EMMC_DAT3;
+    net EMMC_DAT4 = emmc.DAT4, emmc_pull_dat4.A, port.EMMC_DAT4;
+    net EMMC_DAT5 = emmc.DAT5, emmc_pull_dat5.A, port.EMMC_DAT5;
+    net EMMC_DAT6 = emmc.DAT6, emmc_pull_dat6.A, port.EMMC_DAT6;
+    net EMMC_DAT7 = emmc.DAT7, emmc_pull_dat7.A, port.EMMC_DAT7;
+    net EMMC_RESET_N = emmc.RESET_N, emmc_pull_reset_n.A, port.EMMC_RESET_N;
+    net EMMC_VDDIM = emmc.VDDIM, emmc_vddim.A;
+    net GND = qspi0.GND, qspi0.EP, qspi0_hf.B, qspi0_bulk.B, qspi1.GND, qspi1.EP, qspi1_hf.B, qspi1_bulk.B, emmc_vddim.B, emmc.VSSQ_C4, emmc.VSS_E7, emmc.VSS_G5, emmc.VSS_H10, emmc.VSS_K8, emmc.VSSQ_N2, emmc.VSSQ_N5, emmc.VSSQ_P4, emmc.VSSQ_P6, emmc_io_1v8_bulk.B, emmc_io_1v8_hf0.B, emmc_io_1v8_hf1.B, emmc_io_1v8_hf2.B, emmc_io_1v8_hf3.B, emmc_io_3v3_bulk.B, emmc_io_3v3_hf0.B, emmc_io_3v3_hf1.B, emmc_io_3v3_hf2.B, emmc_io_3v3_hf3.B, port.GND;
+    net IO_1V8 = qspi0.VCC, qspi0_cs_n_pull.B, qspi0_io2_pull.B, qspi0_io3_pull.B, qspi0_hf.A, qspi0_bulk.A, qspi1.VCC, qspi1_cs_n_pull.B, qspi1_io2_pull.B, qspi1_io3_pull.B, qspi1_hf.A, qspi1_bulk.A, emmc_pull_dat0.B, emmc_pull_dat1.B, emmc_pull_dat2.B, emmc_pull_dat3.B, emmc_pull_dat4.B, emmc_pull_dat5.B, emmc_pull_dat6.B, emmc_pull_dat7.B, emmc.VCCQ_C6, emmc_pull_reset_n.B, emmc.VCCQ_M4, emmc_pull_cmd.B, emmc.VCCQ_N4, emmc.VCCQ_P3, emmc.VCCQ_P5, emmc_io_1v8_bulk.A, emmc_io_1v8_hf0.A, emmc_io_1v8_hf1.A, emmc_io_1v8_hf2.A, emmc_io_1v8_hf3.A, port.IO_1V8;
+    net IO_3V3 = emmc.VCC_E6, emmc.VCC_F5, emmc.VCC_J10, emmc.VCC_K9, emmc_io_3v3_bulk.A, emmc_io_3v3_hf0.A, emmc_io_3v3_hf1.A, emmc_io_3v3_hf2.A, emmc_io_3v3_hf3.A, port.IO_3V3;
+    net QSPI_MIO0 = qspi0.CLK, port.QSPI_MIO0;
+    net QSPI_MIO1 = qspi0.IO1, port.QSPI_MIO1;
+    net QSPI_MIO10 = qspi1.IO2, qspi1_io2_pull.A, port.QSPI_MIO10;
+    net QSPI_MIO11 = qspi1.IO3, qspi1_io3_pull.A, port.QSPI_MIO11;
+    net QSPI_MIO12 = qspi1.CLK, port.QSPI_MIO12;
+    net QSPI_MIO2 = qspi0.IO2, qspi0_io2_pull.A, port.QSPI_MIO2;
+    net QSPI_MIO3 = qspi0.IO3, qspi0_io3_pull.A, port.QSPI_MIO3;
+    net QSPI_MIO4 = qspi0.IO0, port.QSPI_MIO4;
+    net QSPI_MIO5 = qspi0.CS_N, qspi0_cs_n_pull.A, port.QSPI_MIO5;
+    net QSPI_MIO7 = qspi1.CS_N, qspi1_cs_n_pull.A, port.QSPI_MIO7;
+    net QSPI_MIO8 = qspi1.IO0, port.QSPI_MIO8;
+    net QSPI_MIO9 = qspi1.IO1, port.QSPI_MIO9;
+    nc emmc.NC_A1, emmc.NC_A10, emmc.NC_A11, emmc.NC_A12, emmc.NC_A13, emmc.NC_A14, emmc.NC_A2, emmc.NC_A8, emmc.NC_A9, emmc.NC_B1, emmc.NC_B10, emmc.NC_B11, emmc.NC_B12, emmc.NC_B13, emmc.NC_B14, emmc.NC_B7, emmc.NC_B8, emmc.NC_B9, emmc.NC_C1, emmc.NC_C10, emmc.NC_C11, emmc.NC_C12, emmc.NC_C13, emmc.NC_C14, emmc.NC_C3, emmc.NC_C7, emmc.NC_C8, emmc.NC_C9, emmc.NC_D1, emmc.NC_D12, emmc.NC_D13, emmc.NC_D14, emmc.NC_D2, emmc.NC_D3, emmc.NC_D4, emmc.NC_E1, emmc.NC_E12, emmc.NC_E13, emmc.NC_E14, emmc.NC_E2, emmc.NC_E3, emmc.NC_F1, emmc.NC_F12, emmc.NC_F13, emmc.NC_F14, emmc.NC_F2, emmc.NC_F3, emmc.NC_G1, emmc.NC_G12, emmc.NC_G13, emmc.NC_G14, emmc.NC_G2, emmc.NC_H1, emmc.NC_H12, emmc.NC_H13, emmc.NC_H14, emmc.NC_H2, emmc.NC_H3, emmc.NC_J1, emmc.NC_J12, emmc.NC_J13, emmc.NC_J14, emmc.NC_J2, emmc.NC_J3, emmc.NC_K1, emmc.NC_K12, emmc.NC_K13, emmc.NC_K14, emmc.NC_K2, emmc.NC_K3, emmc.NC_L1, emmc.NC_L12, emmc.NC_L13, emmc.NC_L14, emmc.NC_L2, emmc.NC_L3, emmc.NC_M1, emmc.NC_M10, emmc.NC_M11, emmc.NC_M12, emmc.NC_M13, emmc.NC_M14, emmc.NC_M2, emmc.NC_M3, emmc.NC_M7, emmc.NC_M8, emmc.NC_M9, emmc.NC_N1, emmc.NC_N10, emmc.NC_N11, emmc.NC_N12, emmc.NC_N13, emmc.NC_N14, emmc.NC_N3, emmc.NC_N6, emmc.NC_N7, emmc.NC_N8, emmc.NC_N9, emmc.NC_P1, emmc.NC_P11, emmc.NC_P12, emmc.NC_P13, emmc.NC_P14, emmc.NC_P2, emmc.NC_P8, emmc.NC_P9, emmc.RFU_A6, emmc.RFU_A7, emmc.RFU_C5, emmc.RFU_E10, emmc.RFU_E5, emmc.RFU_E8, emmc.RFU_E9, emmc.RFU_F10, emmc.RFU_G10, emmc.RFU_G3, emmc.RFU_H5, emmc.RFU_J5, emmc.RFU_K10, emmc.RFU_K6, emmc.RFU_K7, emmc.RFU_P10, emmc.RFU_P7;
+}
